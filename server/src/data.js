@@ -1,4 +1,4 @@
-export const productsData = [
+module.exports = productsData = [
     {
       id: 1,
       name: 'Auriculares Apple Earpods Con Conector 3.5mm Original Caja',
