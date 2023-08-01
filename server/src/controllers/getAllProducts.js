@@ -5,6 +5,7 @@ const getAllProducts = async() =>
     productsData.map((product) => {
         return {
             id: product.id,
+            name: product.name,
             href: product.href,
             imageSrc: product.imageSrc,
             imageAlt: product.imageAlt,
