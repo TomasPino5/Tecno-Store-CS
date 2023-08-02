@@ -14,7 +14,7 @@ const initialState = {
   allProductsCopy: [],
   allProducts: [],
   productDetail: [],
-  brands: ["Motorola", "Samsung", "Xiomi", "Iphone"],
+  filteredProducts: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +24,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProductsCopy: action.payload,
         allProducts: action.payload, //esto es para q los filtros siempre empiecen sobre todos y no sobre el filtro aplicado
+        filteredProducts: action.payload,
       };
       
     case GET_PRODUCT_NAME:
@@ -65,80 +66,61 @@ const reducer = (state = initialState, action) => {
         allProductsCopy: filterCreated,
       };
 
-    case FILTER_BY_BRAND:
-      let filterBrand;
-
-      if (action.payload === "All") {
-        filterBrand = state.allProducts;
-      } else if (action.payload === "Motorola") {
-        filterBrand = state.allProducts.filter((el) => el.brand === "Motorola");
-      } else if (action.payload === "Apple") {
-        filterBrand = state.allProducts.filter((el) => el.brand === "Apple");
-      } else if (action.payload === "Samsung") {
-        filterBrand = state.allProducts.filter((el) => el.brand === "Samsung");
-      } else if (action.payload === "Xiaomi") {
-        filterBrand = state.allProducts.filter((el) => el.brand === "Xiaomi");
-      }
-
-      return {
-        ...state,
-        allProductsCopy: filterBrand,
-      };
+      case FILTER_BY_BRAND:
+        let filterBrand;
+  
+        if (action.payload === "") {
+          filterBrand = state.allProducts;
+        } else if (action.payload === "Motorola") {
+          filterBrand = state.allProducts.filter((el) => el.brand === "Motorola");
+        } else if (action.payload === "Apple") {
+          filterBrand = state.allProducts.filter((el) => el.brand === "Apple");
+        } else if (action.payload === "Samsung") {
+          filterBrand = state.allProducts.filter((el) => el.brand === "Samsung");
+        } else if (action.payload === "Xiaomi") {
+          filterBrand = state.allProducts.filter((el) => el.brand === "Xiaomi");
+        }
+  
+        return {
+          ...state,
+          allProductsCopy: filterBrand,
+        };
+  
 
     case FILTER_BY_CATEGORY:
-      let filterCategory;
-
-      if (action.payload === "All") {
-        filterCategory = state.allProducts;
-      } else if (action.payload === "Auricular") {
-        filterCategory = state.allProducts.filter(
-          (el) => el.category === "Auricular"
-        );
-      } else if (action.payload === "Celulares") {
-        filterCategory = state.allProducts.filter(
-          (el) => el.category === "Celulares"
-        );
+      if (action.payload === "") {
+        return {
+            ...state,
+            allProducts: state.allProductsCopy,
+            filteredProducts: state.allProductsCopy,
+        };
       }
-
       return {
         ...state,
-        allProductsCopy: filterCategory,
+        allProducts: state.allProductsCopy.filter((product) => product.category.includes(action.payload)),
+        filteredProducts: state.allProductsCopy.filter((product) => product.category.includes(action.payload)), 
       };
-
 
 
       case ORDER_BY_PRICE: //orden asc y desc
-            let sortPrice = action.payload === 'Asc' ?
-                state.allProductsCopy.sort(function (a, b) {
-                    if (a.price > b.price) {
-                        return 1;
-                    }
-                    if (b.price > a.price) {
-                        return -1;
-                    }
-                    return 0; // si son iguales los deja como esta
-                })
-                : state.allProductsCopy.sort(function (a, b) {
-                    if (a.price > b.price) {
-                        return -1;
-                    }
-                    if (b.price > a.price) {
-                        return 1;
-                    }
-                    return 0;
-                })
-            return {
-                ...state,
-                allProductsCopy: sortPrice,
-            };
-
-
-
-
+      let priceProducts = [...state.filteredProducts];
+      if (action.payload === "-+") {
+        priceProducts.sort((a, b) => a.price - b.price);
+      } else if (action.payload === "+-") {
+        priceProducts.sort((a, b) => b.price - a.price);
+      } else if (action.payload === "") {
+        priceProducts = [...state.filteredProducts];
+      }
+      return {
+        ...state,
+        allProducts: priceProducts,
+      };
 
 
     default:
-      return state;
+      return {
+        ...state
+      };
   }
 };
 

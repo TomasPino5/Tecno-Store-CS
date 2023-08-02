@@ -49,25 +49,25 @@ export function getProductDetails(id) {
 };
 
 // Filtro para seleccionar productos por marca
-export function filterProductsByBrand(payload) { 
+export function filterByBrand(brand) { 
     return {
         type: FILTER_BY_BRAND,
-        payload
+        payload: brand
     }
 }
 // Filtro para seleccionar productos por CATEGORY/ CELULARES O ACCESORIOS
-export function filterProductsByCategory(payload) { 
+export function filterByCategory(category) { 
     return {
         type: FILTER_BY_CATEGORY,
-        payload
+        payload: category
     }
 }
 
 // Ordena por precio
-export function orderByPrice(payload) {
+export function orderByPrice(price) {
     return {
         type: ORDER_BY_PRICE,
-        payload
+        payload: price
     }
 }
 
