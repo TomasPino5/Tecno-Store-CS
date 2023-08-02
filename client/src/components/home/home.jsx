@@ -1,14 +1,14 @@
+import Paginado from "../paginado/paginado.jsx";
 import Cards from "../cards/cards.jsx";
-import Nav from "../nav/nav.jsx";
 
-const Home = () => {
+
+const Home = ({startIndex, endIndex, products}) => {
+  const currentProducts = products.slice(startIndex, endIndex);
   return (
-    <div>
       <div>
-        <Nav />
-        <Cards />
+        <Cards products={currentProducts}/>
+        <Paginado products={products} />
       </div>
-    </div>
   );
 };
 
