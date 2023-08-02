@@ -1,10 +1,6 @@
 import Card from "../card/card.jsx";
-import axios from 'axios';
 
-function Cards() {
-
-  const products = [];
-  console.log(products)
+function Cards({products}) {
   return (
     <div>
       {products.map(({ id, name, href, imageSrc, imageAlt, price, stock, brand, category, description }) => (
