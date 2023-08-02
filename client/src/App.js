@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom"; 
 
 import Home from "./components/home/home";
 import Detail from "./components/detail/detail";
@@ -7,10 +7,13 @@ import Error from "./components/error/error";
 import "./App.css";
 
 function App() {
-  const location = useLocation();
+  const { pathname } = useLocation()
   return (
     <div className="App">
-      {location.pathname !== "/" ? <Nav /> : null}
+      {/* {location.pathname !== "/" ? <Nav /> : null} */}
+      {pathname === "/" && <Nav/>}
+      {pathname === "/:id" && <Nav/>}
+      {pathname === "/:Error" && <Nav/>}
       <h1>Hello world</h1>
       <Routes>
         <Route path="/" element={<Home />} />

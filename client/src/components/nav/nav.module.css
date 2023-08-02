@@ -1,39 +1,76 @@
-.mainContainer{
-    background: rgba(66, 31, 130, 0.227);
-    box-shadow: 0 1px 10px 0 rgba(10, 20, 38, 0.523);
-    height: 40px;
-    
-    display: flex;
-    justify-content :space-between;
-    align-items: center;
+.navContainer {
+  position: fixed; /* Agregamos position: fixed para que ocupe todo el ancho */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 58px;
+  background-color: rgb(11, 11, 11);
+  display: flex;
+  z-index: 999;
+}
+/* #08ef56 */
+/* === removing default button style ===*/
+.button {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
 }
 
-
-.home {
-    width: 100px;
-    height: 40px;
-    background: none;
-    border: none;
-    color: rgb(9, 9, 9);
-    font-size: 25px;
-    
-    cursor: pointer;
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255, 255, 255, 0.6);
+  --animation-color: #08ef56;
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
 }
-.home:hover {
-    background: black;
-    transition: 1s;
-    color: black;
-    border-radius: 0px 5px 5px 0px;
-    color: #fff;
+/* this is the text, when you hover on button */
+.hovertext {
+  position: absolute;
+  box-sizing: border-box;
+
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/*! hover */
+.button:hover .hovertext {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color));
 }
 
-.newProduct{
-    width: 150px;
-    height: 40px;
-    background: none;
-    border: none;
-    color: black;
-    font-size: 25px;
-    cursor: pointer;
+.buttonHome {
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
 
+.container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5px;
+  justify-content: flex-end; /* Ancla los elementos al lado derecho */
+  margin-left: auto;
+  padding-right: 10px; /* Empuja los elementos hacia la derecha */
+  z-index: 213123;
+}
+.SearchBarPosition {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Cambiado a 'center' */
+  text-align: center;
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
 }

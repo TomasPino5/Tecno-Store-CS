@@ -1,0 +1,6 @@
+.ordenador {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Cambiamos a 3 columnas */
+  grid-gap: 60px;
+  grid-auto-rows: minmax(200px, auto); /* Establecemos la altura de las filas */
+}
