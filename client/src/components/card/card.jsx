@@ -14,8 +14,7 @@ export default function Card({ id, name, href, imageSrc, imageAlt, price, stock,
     <div className='card'>
         <h1>{name}</h1>
         <p>{href}</p>
-        <p>{imageSrc}</p>
-        <p>{imageAlt}</p>
+        <img src={imageSrc} alt={imageAlt} />
         <p>{price}</p>
         <p>{stock}</p>
         <p>{brand}</p>
