@@ -10,7 +10,7 @@ const Nav = () => {
     <nav className={style.navContainer}>
       <div className={style.mainContainer}>
         <div className={style.buttonHome}>
-          <NavLink to="/Home">
+          <NavLink to="/">
             <button className={style.button}>
               <span className={style.actualtext}>&nbsp;Tecno/Store&nbsp;</span>
               <span className={style.hovertext} aria-hidden="true">
