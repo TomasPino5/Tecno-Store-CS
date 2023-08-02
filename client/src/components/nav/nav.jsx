@@ -1,28 +1,36 @@
 import SearchBar from "../searchbar/searchbar";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import style from '../nav/nav.module.css';
+import style from "../nav/nav.module.css";
 
 const Nav = () => {
   const location = useLocation();
 
   return (
-    <nav>
+    <nav className={style.navContainer}>
       <div className={style.mainContainer}>
-        <NavLink to="/home">
-          <span aria-hidden="true">tecno-store-cs</span>
-          <button className={style.home}>Home</button>
-        </NavLink>
+        <div className={style.buttonHome}>
+          <NavLink to="/">
+            <button className={style.button}>
+              <span className={style.actualtext}>&nbsp;Tecno/Store&nbsp;</span>
+              <span className={style.hovertext} aria-hidden="true">
+                &nbsp;Tecno/Store&nbsp;
+              </span>
+            </button>
+          </NavLink>
+        </div>
       </div>
-      {location.pathname !== "*" && location.pathname !== "/Mygames" ? (
-        <SearchBar />
-      ) : null}
-      <div>
-      <NavLink to="/form">
-      <button className={style.newProduct}>New Product</button>
+      <div className={style.SearchBarPosition}>
+        {location.pathname !== "*" && location.pathname !== "/Mygames" ? (
+          <SearchBar />
+        ) : null}
+      </div>
+      <div className={style.container}>
+        <NavLink to="/form">
+          <button className={style.newProduct}>New Product</button>
         </NavLink>
         <NavLink to="/Error">
-          <span aria-hidden="">Error</span>
+          <span aria-hidden="true">Error</span>
         </NavLink>
       </div>
     </nav>
