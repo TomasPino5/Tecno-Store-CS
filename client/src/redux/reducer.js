@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
         allProductsCopy: action.payload,
         allProducts: action.payload, //esto es para q los filtros siempre empiecen sobre todos y no sobre el filtro aplicado
       };
-
+      
     case GET_PRODUCT_NAME:
       return {
         ...state,

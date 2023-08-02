@@ -7,6 +7,7 @@ const getProductDetail = async (id) => {
     if (findProduct) {
         return {
             id: findProduct.id,
+            name: findProduct.name,
             href: findProduct.href,
             imageSrc: findProduct.imageSrc,
             imageAlt: findProduct.imageAlt,

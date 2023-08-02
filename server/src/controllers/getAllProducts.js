@@ -1,6 +1,6 @@
 const productsData = require('../data')
 
-const getAllProducts = async() => 
+const getAllProducts = async () =>
 
     productsData.map((product) => {
         return {
@@ -17,4 +17,25 @@ const getAllProducts = async() =>
         };
     })
 
-module.exports = getAllProducts;
+const getProductByName = async (name) => {
+
+    let findProduct = productsData.find(product => product.name === name);
+
+    if (findProduct) {
+        return {
+            id: findProduct.id,
+            name: findProduct.name,
+            href: findProduct.href,
+            imageSrc: findProduct.imageSrc,
+            imageAlt: findProduct.imageAlt,
+            price: findProduct.price,
+            stock: findProduct.stock,
+            brand: findProduct.brand,
+            category: findProduct.category,
+            description: findProduct.description
+        };
+    }
+    return null;
+}
+
+module.exports = { getAllProducts, getProductByName };
