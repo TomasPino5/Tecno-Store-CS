@@ -10,5 +10,4 @@ const sequelize = new Sequelize('Store', DB_USER, DB_PASSWORD,{
   logging: false
 });
 
-
 module.exports = sequelize;
