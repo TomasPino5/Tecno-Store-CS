@@ -5,7 +5,7 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/YXrDx0v/APPLE1.webp',
       imageAlt: "Auriculares Apple Earpods Con Conector 3.5mm Original Caja",
-      price: 35.000,
+      price: 35.999,
       stock: 10,
       brand: 'Apple',
       category: "Auricular",
@@ -29,7 +29,7 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/Mp3yNSq/APPLE3.webp',
       imageAlt: "Apple AirPods (3ª generación) con estuche de carga MagSafe",
-      price: 116.830,
+      price: 116.839,
       stock: 10,
       brand: 'Apple',
       category: "Auricular",
@@ -41,7 +41,7 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/KbGHXdV/APPLE4.webp',
       imageAlt: "Apple AirPods (segunda Generacion) Con Estuche De Carga Orig.",
-      price: 78.450,
+      price: 78.459,
       stock: 10,
       brand: 'Apple',
       category: "Auricular",
@@ -65,7 +65,7 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/Phd98yS/APPLE6.webp',
       imageAlt: "Apple EarPods con conector Lightning - Blanco",
-      price: 16.600,
+      price: 16.699,
       stock: 10,
       brand: 'Apple',
       category: "Auricular",
@@ -149,7 +149,7 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/MNhXgK3/SAMSUNG13.webp',
       imageAlt: "Auriculares Samsung Origina",
-      price: 3.150,
+      price: 3.159,
       stock: 10,
       brand: 'Samsung',
       category: "Auricular",
@@ -173,7 +173,7 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/2Y7pnGN/SAMSUNG15.webp',
       imageAlt: "Auriculares in-ear inalámbricos Samsung Galaxy Buds Live SM-R180NZ mystic black",
-      price: 10.449,
+      price: 11.449,
       stock: 10,
       brand: 'Samsung',
       category: "Auricular",
@@ -219,7 +219,7 @@ module.exports = productsData = [
       id: 19,
       name: 'Auriculares Deportivos Xiaomi Bt 5.2 Batería 12hs Pcreg',
       href: '#',
-      imageSrc: 'https://i.ibb.co/FnxLrmc/XIAOMI19.webp',
+      imageSrc: 'https://i.ibb.co/kmZL3NM/XIAOMI19.jpg',
       imageAlt: "Auriculares Deportivos Xiaomi Bt 5.2 Batería 12hs Pcreg",
       price: 88.549,
       stock: 10,
@@ -305,11 +305,11 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/4Pg8rYN/Apple-i-Phone-11.webp',
       imageAlt: "Apple iPhone 11 (128 GB) ",
-      price: 403.899,
+      price: 413.899,
       brand: 'Apple',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Graba videos 4K y captura retratos espectaculares y paisajes increíbles con el sistema de dos cámaras. Toma grandes fotos con poca luz gracias al modo Noche. Disfruta colores reales en las fotos, videos y juegos con la pantalla Liquid Retina de 6.1 pulgadas (3). Aprovecha un rendimiento sin precedentes en los juegos, la realidad aumentada y la fotografía con el chip A13 Bionic. Haz mucho más sin necesidad de volver a cargar el teléfono gracias a su batería de larga duración (2). Y no te preocupes si se moja, el iPhone 11 tiene una resistencia al agua de hasta 30 minutos a una profundidad máxima de 2 metros (1)."
     },
     {
@@ -322,7 +322,7 @@ module.exports = productsData = [
       brand: 'Apple',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "El sistema de dos cámaras más avanzado en un iPhone. El superrápido chip A15 Bionic. Un gran salto en duración de batería. Un diseño resistente. Y una pantalla Super Retina XDR más brillante."
     },
     {
@@ -331,11 +331,11 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/R4X4CBY/Apple-i-Phone-12-PRO-MAX.webp',
       imageAlt: "Apple iPhone 12 Pro Max (256 GB)",
-      price: 829.990,
+      price: 829.999,
       brand: 'Apple',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "El iPhone 12 Pro Max tiene una pantalla Super Retina XDR más grande, de 6.7 pulgadas (1). Con el nuevo Ceramic Shield, es cuatro veces más resistente a las caídas (2). Y te permite tomar fotos increíbles con poca luz gracias al mejor sistema de cámaras Pro de un iPhone y al rango de zoom óptico de 5x. También puedes grabar, editar y reproducir video en Dolby Vision con calidad cinematográfica, tomar retratos con modo Noche y disfrutar experiencias de realidad aumentada de última generación con el escáner LiDAR. El iPhone 12 Pro Max viene con el potente chip A14 Bionic y es compatible con los nuevos accesorios MagSafe, que se adhieren magnéticamente a tu iPhone y brindan una carga inalámbrica más rápida (3). Una infinidad de posibilidades que no dejarán de sorprenderte."
     },
     {
@@ -348,7 +348,7 @@ module.exports = productsData = [
       brand: 'Apple',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "El iPhone 14 Pro Max te permite captar detalles increíbles gracias a su cámara gran angular de 48 MP. Además, trae la Dynamic Island y una pantalla siempre activa, para que puedas interactuar con tu iPhone de una forma completamente nueva. Y viene con Detección de Choques(1), una funcionalidad de seguridad que pide ayuda cuando no estás en condiciones de hacerlo."
     },
     {
@@ -361,7 +361,7 @@ module.exports = productsData = [
       brand: 'Apple',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Chip A15 Bionic superrápido. Una increíble duración de batería y una cámara que es una superestrella. Y además, el vidrio más resistente en un smartphone y botón de inicio con la seguridad de Touch ID."
     },
     {
@@ -374,7 +374,7 @@ module.exports = productsData = [
       brand: 'Apple',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "El Apple iPhone X es una demostración de fuerza de Apple, mostrando lo que es capaz de hacer y para celebrar los 10 años del iPhone. El iPhone X cuenta con una pantalla de 5.8 pulgadas que abarca todo el frente del teléfono, dejando un espacio arriba para acomodar todos los sensores que contribuyen a Face ID, el nuevo método de desbloqueo por rostro, ya que el botón Touch ID desaparece. Con una atípica resolución de 2436 x 1125 pixels, acomoda 458ppi. Por dentro, el iPhone X tiene el nuevo procesador A11 Bionic. La cámara es dual de 12 MP similar a la del iPhone 8, es resistente al agua y corre iOS 11."
     },
     {
@@ -387,7 +387,7 @@ module.exports = productsData = [
       brand: 'Xiaomi',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Compatible con redes 5G. Pantalla AMOLED de 6.67. Tiene 3 cámaras traseras de 64Mpx/8Mpx/2Mpx. Cámara delantera de 16Mpx. Procesador Snapdragon 7+ Gen 2 Octa-Core de 2.91GHz con 12GB de RAM. Batería de 5000mAh. Memoria interna de 256GB. Resistente a las salpicaduras. Con reconocimiento facial y sensor de huella dactilar. Resistente al polvo."
     },
     {
@@ -400,7 +400,7 @@ module.exports = productsData = [
       brand: 'Xiaomi',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla AMOLED de 6.43. Tiene 3 cámaras traseras de 64Mpx/8Mpx/2Mpx. Cámara delantera de 16Mpx. Procesador MediaTek Helio G96 Octa-Core de 2.05GHz con 6GB de RAM. Batería de 5000mAh. Memoria interna de 128GB. Resistente a las salpicaduras. Con reconocimiento facial y sensor de huella dactilar. Resistente al polvo."
     },
     {
@@ -413,7 +413,7 @@ module.exports = productsData = [
       brand: 'Xiaomi',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla IPS de 6.53. Cámaras delanteras de 5Mpx. Procesador MediaTek MT6762G Helio G25 Octa-Core de 2GHz con 2GB de RAM. Batería de 5000mAh. Memoria interna de 32GB. Con reconocimiento facial."
     },
     {
@@ -426,7 +426,7 @@ module.exports = productsData = [
       brand: 'Xiaomi',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Dispositivo liberado para que elijas la compañía telefónica que prefieras. 3 cámaras traseras de 13 Mpx, 2 Mpx y 2 Mpx con inteligencia artificial. Lente macro y sensor de profundidad. Cámara frontal de 5 Mpx con modo belleza. Procesador con tecnología HyperEngine para una experiencia de juego fluida y con gráficos realistas. Batería de larga duración para que disfrutes de más de 20 h de reproducción de video. Pantalla HD+ que brinda una visión envolvente y evita el cansancio visual."
     },
     {
@@ -439,7 +439,7 @@ module.exports = productsData = [
       brand: 'Xiaomi',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla IPS de 6.71. Tiene 2 cámaras traseras de 50Mpx/2Mpx. Cámara delantera de 5Mpx. Procesador Snapdragon 680 Octa-Core de 2.4GHz con 4GB de RAM. Batería de 5000mAh. Memoria interna de 128GB. Con reconocimiento facial y sensor de huella dactilar."
     },
     {
@@ -448,7 +448,7 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/MVZkPkt/XIAOMI-REDMI-NOTE-11-PRO-5-G.webp',
       imageAlt: "Xiaomi Redmi Note 11 Pro 5G ",
-      price: 280.999,
+      price: 281.999,
       brand: 'Xiaomi',
       min: 1,
       stock: 10,
@@ -465,7 +465,7 @@ module.exports = productsData = [
       brand: 'Xiaomi',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla AMOLED de 6.43. Tiene 4 cámaras traseras de 108Mpx/8Mpx/2Mpx/2Mpx. Cámara delantera de 16Mpx. Procesador MediaTek Helio G96 Octa-Core de 2.05GHz con 6GB de RAM. Batería de 5000mAh. Memoria interna de 128GB. Con reconocimiento facial y sensor de huella dactilar. Resistente al polvo."
     },
     {
@@ -546,7 +546,7 @@ module.exports = productsData = [
       href: '#',
       imageSrc: 'https://i.ibb.co/gtnZqMv/SM-A04-DUAL-SIM.jpg',
       imageAlt: "Samsung Galaxy A34 5G 5G 128 GB awesome lime 6 GB RAM",
-      price: 104.599,
+      price: 114.599,
       stock: 10,
       brand: 'Samsung',
       category: "Celular",
