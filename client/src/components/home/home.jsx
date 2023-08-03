@@ -12,26 +12,27 @@ const Home = () => {
     
   const dispatch = useDispatch()
 
+
   //paginado
-  const productsPerPage = 6;
+  const productsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-      dispatch(getProducts())
-  }, [dispatch])
+    dispatch(getProducts());
+  }, [dispatch]);
 
   const handleNextPage = () => {
-      setCurrentPage((nextPage) => nextPage + 1);
+    setCurrentPage((nextPage) => nextPage + 1);
   };
 
-    const handlePreviousPage = () => {
-        setCurrentPage((previousPage) => previousPage - 1);
-    };
+  const handlePreviousPage = () => {
+    setCurrentPage((previousPage) => previousPage - 1);
+  };
 
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
 
-    const recipesToDisplay = products.slice(startIndex, endIndex);
+  const recipesToDisplay = products.slice(startIndex, endIndex);
 
     //filtros
     const handleOrderByPrice = (event) => {
@@ -77,14 +78,22 @@ const Home = () => {
             <div>
                 <Cards products={recipesToDisplay}/>
             </div>
+  
 
-            <div>
-                {currentPage > 1 && <button onClick={handlePreviousPage}>Previous</button>}
-                {endIndex < products.length && <button onClick={handleNextPage}>Next</button>}
-            </div>
+      <div>
+        <Cards products={recipesToDisplay} />
+      </div>
 
-        </div>
-    )
+      <div>
+        {currentPage > 1 && (
+          <button onClick={handlePreviousPage}>Previous</button>
+        )}
+        {endIndex < products.length && (
+          <button onClick={handleNextPage}>Next</button>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Home;

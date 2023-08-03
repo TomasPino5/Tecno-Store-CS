@@ -5,7 +5,7 @@ const getDbProducts = async(req, res)=>{
     try{
         productsData.map((product)=>{
             Products.create({
-                id: product.id,
+                //id: product.id,
                 name: product.name,
                 href: product.href,
                 imageSrc: product.imageSrc,

@@ -19,10 +19,10 @@ function App() {
       <h1>Hello world</h1>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:id" element={<Detail />} />
+        <Route path="/product/:id" element={<Detail />} />
         <Route path="/Error" element={<Error />} />
         <Route path="/form" element={<Form />} />
-        <Route path="/login" element={<Login></Login>} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

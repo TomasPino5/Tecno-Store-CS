@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postProduct } from "../../redux/actions";
-import "./form.css";
+import style from "./form.module.css";
 
 const Form = () => {
   //HOOKS
@@ -87,106 +87,125 @@ const Form = () => {
 
   return (
     <div>
-      <div className="buttonReturn">
+      <div className={style.buttonReturn}>
         <Link to="/home">
-          <button className="button">Return</button>
+          <button className={style.button}>Return</button>
         </Link>
       </div>
+      <div className={style.card}>
+        <span className={style.card__title} id="title">
+          Create your own Product !
+        </span>
 
-      <h1 id="title">Create your own Product !</h1>
-
-      <form onSubmit={(e) => submitHandler(e)} className="Formulario">
-        <div>
-          <label>Product Name: </label>
-          <input
-            type="text"
-            value={form.name}
-            onChange={(e) => changeHandler(e)}
-            name="name"
-            placeholder="Write Product name..."
-          />
-          {errors.name && <strong>{errors.name}</strong>}
-        </div>
-        <div>
-          <label>Image Product: </label>
-          <input
-            type="url"
-            value={form.imageSrc}
-            onChange={(e) => changeHandler(e)}
-            name="image"
-            placeholder="Put image..."
-          />
-          {/* {errors.image && <strong>{errors.image}</strong>} */}
-        </div>
-        <div>
-          <label> Price: </label>
-          <input
-            type="text"
-            value={form.price}
-            onChange={(e) => changeHandler(e)}
-            name="price"
-            placeholder="Write Product price..."
-          />
-          {errors.price && <strong>{errors.price}</strong>}
-        </div>
-        <div>
-          <label> Stock: </label>
-          <input
-            type="text"
-            value={form.stock}
-            onChange={(e) => changeHandler(e)}
-            name="stock"
-            placeholder="Write Product stock..."
-          />
-          {errors.stock && <strong>{errors.stock}</strong>}
-        </div>
-        <div>
-          <label> Brand: </label>
-          <input
-            type="text"
-            value={form.brand}
-            onChange={(e) => changeHandler(e)}
-            name="brand"
-            placeholder="Write Product brand..."
-          />
-          {errors.brand && <strong>{errors.brand}</strong>}
-        </div>
-        <div>
-          <label> Category: </label>
-          <input
-            type="text"
-            value={form.category}
-            onChange={(e) => changeHandler(e)}
-            name="category"
-            placeholder="Write Product category..."
-          />
-          {errors.category && <strong>{errors.category}</strong>}
-        </div>
-        <div>
-          <label> Description : </label>
-          <input
-            type="text"
-            value={form.description}
-            onChange={(e) => changeHandler(e)}
-            name="description"
-            placeholder="Write Product description..."
-          />
-          {errors.description && <strong>{errors.description}</strong>}
-        </div>
-        <button
-          disabled={
-            errors.name ||
-            errors.price ||
-            errors.category ||
-            errors.brand ||
-            errors.description
-          }
-          type="submit"
-          className="button"
-        >
-          Create Product
-        </button>
-      </form>
+        <form onSubmit={(e) => submitHandler(e)} className={style.Formulario}>
+          <div className={style.card__form}>
+            <label className={style.label__form}>Product Name: </label>
+            <input
+              type="text"
+              value={form.name}
+              onChange={(e) => changeHandler(e)}
+              name="name"
+              placeholder="Write Product name..."
+            />
+            {errors.name && (
+              <strong className={style.card__content}>{errors.name}</strong>
+            )}
+          </div>
+          <div className={style.card__form}>
+            <label className={style.label__form}>Image Product: </label>
+            <input
+              type="url"
+              value={form.imageSrc}
+              onChange={(e) => changeHandler(e)}
+              name="image"
+              placeholder="Put image..."
+            />
+            {/* {errors.image && <strong className={style.card__content}>{errors.image}</strong} */}
+          </div>
+          <div className={style.card__form}>
+            <label className={style.label__form}> Price: </label>
+            <input
+              type="text"
+              value={form.price}
+              onChange={(e) => changeHandler(e)}
+              name="price"
+              placeholder="Write Product price..."
+            />
+            {errors.price && (
+              <strong className={style.card__content}>{errors.price}</strong>
+            )}
+          </div>
+          <div className={style.card__form}>
+            <label className={style.label__form}> Stock: </label>
+            <input
+              type="text"
+              value={form.stock}
+              onChange={(e) => changeHandler(e)}
+              name="stock"
+              placeholder="Write Product stock..."
+            />
+            {errors.stock && (
+              <strong className={style.card__content}>{errors.stock}</strong>
+            )}
+          </div>
+          <div className={style.card__form}>
+            <label className={style.label__form}> Brand: </label>
+            <input
+              type="text"
+              value={form.brand}
+              onChange={(e) => changeHandler(e)}
+              name="brand"
+              placeholder="Write Product brand..."
+            />
+            {errors.brand && (
+              <strong className={style.card__content}>{errors.brand}</strong>
+            )}
+          </div>
+          <div className={style.card__form}>
+            <label className={style.label__form}> Category: </label>
+            <input
+              type="text"
+              value={form.category}
+              onChange={(e) => changeHandler(e)}
+              name="category"
+              placeholder="Write Product category..."
+            />
+            {errors.category && (
+              <strong className={style.card__content}>{errors.category}</strong>
+            )}
+          </div>
+          <div className={style.card__form}>
+            <label className={style.label__form}> Description : </label>
+            <input
+              type="text"
+              value={form.description}
+              onChange={(e) => changeHandler(e)}
+              name="description"
+              placeholder="Write Product description..."
+            />
+            {errors.description && (
+              <strong className={style.card__content}>
+                {errors.description}
+              </strong>
+            )}
+          </div>
+          <div calssName={style.btn}>
+            <button
+              disabled={
+                errors.name ||
+                errors.price ||
+                errors.category ||
+                errors.brand ||
+                errors.description
+              }
+              type="submit"
+              className={style.btn}
+            >
+              Create Product
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
