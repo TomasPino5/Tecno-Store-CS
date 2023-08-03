@@ -1,13 +1,17 @@
 import Cards from "../cards/cards";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, orderByPrice, filterByBrand } from "../../redux/actions";
+import { getProducts, orderByPrice, filterByBrand, filterByCategory, clearFilter } from "../../redux/actions";
 // import styles from "./home.module.css"
 
 const Home = () => {
-  const products = useSelector((state) => state.allProducts);
 
-  const dispatch = useDispatch();
+  const products = useSelector((state) => state.filteredProducts);
+  const brands = useSelector((state) => state.brands);
+  const categories = useSelector((state) => state.categories);
+    
+  const dispatch = useDispatch()
+
 
   //paginado
   const productsPerPage = 8;
@@ -30,32 +34,51 @@ const Home = () => {
 
   const recipesToDisplay = products.slice(startIndex, endIndex);
 
-  //filtros
-  const HandlerOrderByPrice = (event) => {
-    dispatch(orderByPrice(event.target.value));
-  };
+    //filtros
+    const handleOrderByPrice = (event) => {
+        dispatch(orderByPrice(event.target.value));
+      };
+    
+      const handleBrandFilter = (event) => {
+        dispatch(filterByBrand(event.target.value));
+      };
+    
+      const handleCategoryFilter = (event) => {
+        dispatch(filterByCategory(event.target.value));
+      };
 
-  const handleBrandFilter = (event) => {
-    const selectedBrand = event.target.value;
-    dispatch(filterByBrand(selectedBrand));
-  };
+    const handleClearFilters = () => {
+        dispatch(clearFilter());
+    };
 
-  return (
-    <div>
-      <div>
-        <select onChange={HandlerOrderByPrice}>
-          <option value="">Price</option>
-          <option value="-+">Menor a Mayor</option>
-          <option value="+-">Mayor a Menor</option>
-        </select>
-        <select onChange={handleBrandFilter}>
-          <option value="">Brand</option>
-          <option value="Apple">Apple</option>
-          <option value="Motorola">Motorola</option>
-          <option value="Samsung">Samsung</option>
-          <option value="xiaomi">xiaomi</option>
-        </select>
-      </div>
+    return (
+        <div>
+            
+            <div>
+                <select onChange={handleOrderByPrice}>
+                    <option value="">Price</option>
+                    <option value="-+">Menor a Mayor</option>
+                    <option value="+-">Mayor a Menor</option>
+                </select>
+                <select onChange={handleBrandFilter}>
+                <option value="">Brands</option>
+                    {brands.map((brand) => (
+                        <option key={brand} value={brand}>{brand}</option>
+                    ))}
+                </select>
+                <select onChange={handleCategoryFilter}>
+                <option value="">Categories</option>
+                    {categories.map((category) => (
+                        <option key={category} value={category}>{category}</option>
+                    ))}
+                </select>
+                <button onClick={handleClearFilters}>Limpiar</button>
+            </div>
+
+            <div>
+                <Cards products={recipesToDisplay}/>
+            </div>
+  
 
       <div>
         <Cards products={recipesToDisplay} />
