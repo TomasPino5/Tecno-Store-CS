@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
     GET_PRODUCTS, GET_PRODUCT_NAME,GET_DETAILS,
     FILTER_BY_BRAND, FILTER_CREATED, FILTER_BY_CATEGORY,
-    ORDER_BY_PRICE, CLEAR_DETAIL,
+    ORDER_BY_PRICE, CLEAR_DETAIL, CLEAR_FILTER,
 } from "./action-types";
 
 // Obtener los productos desde la API 
@@ -88,9 +88,15 @@ export function filterCreated(payload) { //db
     
 }
 // Para limpiar el detalle
-export function clearDetail(payload) { //db
+export function clearDetail() { //db
     return {
         type: CLEAR_DETAIL,
     }
+}
     
+
+export function clearFilter() {
+    return {
+        type: CLEAR_FILTER,
+    }
 }
