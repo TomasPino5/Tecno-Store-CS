@@ -1,8 +1,7 @@
 .ordenador {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Cambiamos a 3 columnas */
-  grid-gap: 60px;
-  margin-left: 80px;
-  padding-bottom: 80px;
-  grid-auto-rows: minmax(200px, auto); /* Establecemos la altura de las filas */
+  grid-template-columns: repeat(4, 1fr); /* Cambiamos a 3 columnas */
+  grid-gap: 50px;
+  margin-left: 35px;
+  padding-bottom: 40px;
 }
