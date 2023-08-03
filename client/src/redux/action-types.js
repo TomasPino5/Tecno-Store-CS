@@ -7,5 +7,6 @@ export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
+export const CLEAR_FILTER = "CLEAR_FILTER";
 
 
