@@ -1,4 +1,13 @@
 const productsData = require('../data')
+//const Products = require('../models/product')
+
+// const getProductDetail = async (id) => {
+
+//     let findProduct = await Products.findOne({
+//         where: { id: id }
+//     })
+//     return findProduct
+// }
 
 const getProductDetail = async (id) => {
 
@@ -19,38 +28,6 @@ const getProductDetail = async (id) => {
         };
     }
     return null;
-
-
-    // let productId = productsData.find((product) => {
-    //     if (product.id === id) {
-    //         return {
-    //             id: product.id,
-    //             href: product.href,
-    //             imageSrc: product.imageSrc,
-    //             imageAlt: product.imageAlt,
-    //             price: product.price,
-    //             stock: product.stock,
-    //             brand: product.brand,
-    //             category: product.category,
-    //             description: product.description
-    //         };
-    //     }
-
-    // })
-    // return productId
 }
-// {
-//     return {
-//         id: product.id,
-//         href: product.href,
-//         imageSrc: product.imageSrc,
-//         imageAlt: product.imageAlt,
-//         price: product.price,
-//         stock: product.stock,
-//         brand: product.brand,
-//         category: product.category,
-//         description: product.description
-//     };
-// })
 
 module.exports = getProductDetail;

@@ -1,5 +1,5 @@
 const server = require('./src/app');
-//const sequelize = require('./src/db')
+const sequelize = require('./src/db')
 
 // sequelize.sync({ force: false }).then(() => { //true
 //   server.listen(3001, () => {
