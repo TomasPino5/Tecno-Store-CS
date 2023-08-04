@@ -6,8 +6,7 @@ import { getProducts, orderByPrice, filterByBrand, filterByCategory, clearFilter
 
 const Home = () => {
 
-  const products = useSelector((state) => state.filteredProducts);
-  //const products = useSelector((state) => state.allProducts);
+  const products = useSelector((state) => state.allProducts);
   const brands = useSelector((state) => state.brands);
   const categories = useSelector((state) => state.categories);
     
@@ -39,19 +38,19 @@ const Home = () => {
 
     //filtros
     const handleOrderByPrice = (event) => {
-        dispatch(orderByPrice(event.target.value));
-      };
+      dispatch(orderByPrice(event.target.value));
+    };
     
-      const handleBrandFilter = (event) => {
-        dispatch(filterByBrand(event.target.value));
-      };
+    const handleBrandFilter = (event) => {
+      dispatch(filterByBrand(event.target.value));
+    };
     
-      const handleCategoryFilter = (event) => {
-        dispatch(filterByCategory(event.target.value));
-      };
+    const handleCategoryFilter = (event) => {
+      dispatch(filterByCategory(event.target.value));
+    };
 
     const handleClearFilters = () => {
-        dispatch(clearFilter());
+      dispatch(clearFilter());
     };
 
     return (
@@ -64,13 +63,13 @@ const Home = () => {
                     <option value="+-">Mayor a Menor</option>
                 </select>
                 <select onChange={handleBrandFilter}>
-                <option value="All">Brands</option>
+                <option value="">Brands</option>
                     {brands.map((brand) => (
                         <option key={brand} value={brand}>{brand}</option>
                     ))}
                 </select>
                 <select onChange={handleCategoryFilter}>
-                <option value="All">Categories</option>
+                <option value="">Categories</option>
                     {categories.map((category) => (
                         <option key={category} value={category}>{category}</option>
                     ))}
@@ -82,11 +81,6 @@ const Home = () => {
                 <Cards products={recipesToDisplay}/>
             </div>
   
-
-      <div>
-        <Cards products={recipesToDisplay} />
-      </div>
-
       <div>
         {currentPage > 1 && (
           <button onClick={handlePreviousPage}>Previous</button>
