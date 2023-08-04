@@ -4,7 +4,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize('store', DB_USER, DB_PASSWORD, {
+const sequelize = new Sequelize('Store', DB_USER, DB_PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
   logging: false
