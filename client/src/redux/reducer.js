@@ -3,7 +3,6 @@ import {
   GET_PRODUCT_NAME,
   GET_DETAILS,
   FILTER_BY_BRAND,
-  FILTER_CREATED,
   FILTER_BY_CATEGORY,
   ORDER_BY_PRICE,
   POST_PRODUCT,
@@ -16,6 +15,7 @@ const initialState = {
   allProducts: [],
   productDetail: [],
   filteredProducts: [],
+  filteredProductsCopy: [],
   brands: [],
   categories: []
 };
@@ -57,63 +57,73 @@ const reducer = (state = initialState, action) => {
         ...state,
       };
 
-    case FILTER_CREATED:
-      let filterCreated;
-
-      if (action.payload === "All") {
-        filterCreated = state.allProducts;
-      } else {
-        filterCreated =
-          action.payload === "Created"
-            ? state.allProducts.filter((el) => el.createdInDB)
-            : state.allProducts.filter((el) => !el.createdInDB);
-      }
-      return {
-        ...state,
-        allProductsCopy: filterCreated,
-      };
-
-
-
 
     case FILTER_BY_BRAND:
-      let brandProducts = [...state.filteredProducts];
-      if (action.payload === "") {
-        return {
-          ...state,
-          filteredProducts: brandProducts,
-        };
+
+      // let filteredByBrand
+
+      // if (action.payload === 'Motorola') {
+      //   filteredByBrand = state.filteredProducts.filter(product => product.brand === action.payload)
+      // }
+      // else if (action.payload === 'Xiaomi') {
+      //   filteredByBrand = state.filteredProducts.filter(product => product.brand === action.payload)
+      // }
+      // else if (action.payload === 'Apple') {
+      //   filteredByBrand = state.filteredProducts.filter(product => product.brand === action.payload)
+      // }
+      // else if (action.payload === 'Samsung') {
+      //   filteredByBrand = state.filteredProducts.filter(product => product.brand === action.payload)
+      // }
+      // else {
+      //   filteredByBrand = state.filteredProducts
+      // }
+
+      // return {
+      //   ...state,
+      //   filteredProducts: filteredByBrand
+      // }
+
+      const brandProducts = [...state.allProductsCopy];
+
+      let filteredByBrand
+
+      if (action.payload === "All") {
+        filteredByBrand = brandProducts
+      }
+      else {
+        filteredByBrand = state.allProductsCopy.filter((product) => product.brand.includes(action.payload))
       }
       return {
         ...state,
+        filteredProducts: filteredByBrand
         // allProducts: state.allProductsCopy.filter((product) =>
         //   product.brand.includes(action.payload)
         // ),
-        filteredProducts: brandProducts.filter((product) =>
-          product.brand.includes(action.payload)
-        ),
       };
 
+
     case FILTER_BY_CATEGORY:
-      let categoryProducts = [...state.filteredProducts];
-      if (action.payload === "") {
-        return {
-          ...state,
-          filteredProducts: categoryProducts,
-        };
+      
+      const categoryProducts = [...state.allProductsCopy];
+
+      let filteredByCategory
+
+      if (action.payload === "All") {
+        filteredByCategory = categoryProducts
+      }
+      else {
+        filteredByCategory = state.allProductsCopy.filter((product) => product.category.includes(action.payload))
       }
       return {
         ...state,
+        filteredProducts: filteredByCategory
         // allProducts: state.allProductsCopy.filter((product) =>
         //   product.category.includes(action.payload)
         // ),
-        filteredProducts: categoryProducts.filter((product) =>
-          product.category.includes(action.payload)
-        ),
+        // filteredProducts: state.allProductsCopy.filter((product) =>
+        //   product.category.includes(action.payload)
+        // ),
       };
-
-
-
 
 
     case ORDER_BY_PRICE: //orden asc y desc
@@ -130,11 +140,13 @@ const reducer = (state = initialState, action) => {
         filteredProducts: priceProducts,
       };
 
-      case CLEAR_FILTER:
-        return {
+
+    case CLEAR_FILTER:
+      return {
         ...state,
         filteredProducts: state.allProductsCopy,
       };
+
 
     default:
       return {
