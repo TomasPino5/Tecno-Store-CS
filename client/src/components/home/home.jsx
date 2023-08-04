@@ -7,9 +7,12 @@ import { getProducts, orderByPrice, filterByBrand, filterByCategory, clearFilter
 const Home = () => {
 
   const products = useSelector((state) => state.filteredProducts);
+  //const products = useSelector((state) => state.allProducts);
   const brands = useSelector((state) => state.brands);
   const categories = useSelector((state) => state.categories);
     
+  console.log(products)
+
   const dispatch = useDispatch()
 
 
@@ -61,13 +64,13 @@ const Home = () => {
                     <option value="+-">Mayor a Menor</option>
                 </select>
                 <select onChange={handleBrandFilter}>
-                <option value="">Brands</option>
+                <option value="All">Brands</option>
                     {brands.map((brand) => (
                         <option key={brand} value={brand}>{brand}</option>
                     ))}
                 </select>
                 <select onChange={handleCategoryFilter}>
-                <option value="">Categories</option>
+                <option value="All">Categories</option>
                     {categories.map((category) => (
                         <option key={category} value={category}>{category}</option>
                     ))}
