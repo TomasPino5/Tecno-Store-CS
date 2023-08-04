@@ -452,7 +452,7 @@ module.exports = productsData = [
       brand: 'Xiaomi',
       min: 1,
       stock: 10,
-      category: "Celulares",
+      category: "Celular",
       description: "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Compatible con redes 5G. Pantalla AMOLED de 6.67. Tiene 3 cámaras traseras de 108Mpx/8Mpx/2Mpx. Cámara delantera de 16Mpx. Procesador Snapdragon 695 Octa-Core de 2.2GHz con 6GB de RAM. Batería de 5000mAh. Memoria interna de 128GB. Resistente a las salpicaduras. Con reconocimiento facial y sensor de huella dactilar. Resistente al polvo."
     },
     {

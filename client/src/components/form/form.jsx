@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postProduct } from "../../redux/actions";
@@ -20,53 +19,103 @@ const Form = () => {
     category: "",
     description: "",
   });
-  const [errors, setErrors] = useState({
-    name: "The name is required",
-    imageSrc: "",
-    price: "The price is required",
-    stock: "The stock is required",
-    brand: "The brand is required",
-    category: "The category is required",
-    description: "The description is required",
-  });
+  
+  //Declaraciones de estados
+  const [nameError, setNameError] = useState("The name is required");
+  const [priceError, setPriceError] = useState("The price is required");
+  const [stockError, setStockError] = useState("The stock is required");
+  const [brandError, setBrandError] = useState("The brand is required");
+  const [categoryError, setCategoryError] = useState("The category is required");
+  const [descriptionError, setDescriptionError] = useState("The description is required");
 
-  function validate(form) {
-    const error = {};
+//Validacion de nombre
+  const validateName = (name) => {
+    if (name.trim() === "") {
+      setNameError("The name is required!");
+    } else {
+      setNameError("");
+    }
+  };
 
-    if (form.name.length < 1) {
-      error.name = "The name is required!";
+//Validacion de precio
+  const validatePrice = (price) => {
+    if (price.trim() === "" || isNaN(price) || Number(price) <= 0) {
+      setPriceError("Please enter a valid price!");
+    } else {
+      setPriceError("");
     }
-    if (form.price < 1) {
-      error.price = "The price is required!";
+  };
+
+  //Validacion de stock
+  const validateStock = (stock) => {
+    if (stock.trim() === "" || isNaN(stock) || Number(stock) < 0) {
+      setStockError("Please enter a valid stock quantity!");
+    } else {
+      setStockError("");
     }
-    if (form.stock < 0) {
-      error.stock = "The stock is required!";
+  };
+
+  //Validacion de marcas
+  const validateBrand = (brand) => {
+    if (brand.trim() === "") {
+      setBrandError("The brand is required!");
+    } else {
+      setBrandError("");
     }
-    if (form.brand.length < 1) {
-      error.brand = "The brand is required!";
+  };
+
+  //Validacion de categoria
+  const validateCategory = (category) => {
+    if (category.trim() === "") {
+      setCategoryError("The category is required!");
+    } else {
+      setCategoryError("");
     }
-    if (form.category.length < 1) {
-      error.category = "The category is required!";
+  };
+  
+  //Validacion de descripcion
+  const validateDescription = (description) => {
+    if (description.trim() === "") {
+      setDescriptionError("The description is required!");
+    } else {
+      setDescriptionError("");
     }
-    if (form.description.length < 1) {
-      error.description = "The description is required!";
-    }
-    return error;
-  }
+  };
+
+  //Se extrae el nombre del campo y el valor del evento
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-
-    setErrors(
-      validate({
-        ...form,
-        [property]: value,
-      })
-    );
-    setForm({
+    
+    //Actualiza el estado del form
+    setForm({  
       ...form,
       [property]: value,
     });
+    
+    //Realiza acciones segun el campo que ha cambiado
+    switch (property) {
+      case "name":
+        validateName(value);
+        break;
+      case "price":
+        validatePrice(value);
+        break;
+      case "stock":
+        validateStock(value);
+        break;
+      case "brand":
+        validateBrand(value);
+        break;
+      case "category":
+        validateCategory(value);
+        break;
+      case "description":
+        validateDescription(value);
+        break;
+      default:
+        break;
+    }
   };
 
   const submitHandler = (event) => {
@@ -107,8 +156,8 @@ const Form = () => {
               name="name"
               placeholder="Write Product name..."
             />
-            {errors.name && (
-              <strong className={style.card__content}>{errors.name}</strong>
+            {nameError && (
+              <strong className={style.card__content}>{nameError}</strong>
             )}
           </div>
           <div className={style.card__form}>
@@ -120,7 +169,6 @@ const Form = () => {
               name="image"
               placeholder="Put image..."
             />
-            {/* {errors.image && <strong className={style.card__content}>{errors.image}</strong} */}
           </div>
           <div className={style.card__form}>
             <label className={style.label__form}> Price: </label>
@@ -131,8 +179,8 @@ const Form = () => {
               name="price"
               placeholder="Write Product price..."
             />
-            {errors.price && (
-              <strong className={style.card__content}>{errors.price}</strong>
+            {priceError && (
+              <strong className={style.card__content}>{priceError}</strong>
             )}
           </div>
           <div className={style.card__form}>
@@ -144,8 +192,8 @@ const Form = () => {
               name="stock"
               placeholder="Write Product stock..."
             />
-            {errors.stock && (
-              <strong className={style.card__content}>{errors.stock}</strong>
+            {stockError && (
+              <strong className={style.card__content}>{stockError}</strong>
             )}
           </div>
           <div className={style.card__form}>
@@ -157,8 +205,8 @@ const Form = () => {
               name="brand"
               placeholder="Write Product brand..."
             />
-            {errors.brand && (
-              <strong className={style.card__content}>{errors.brand}</strong>
+            {brandError && (
+              <strong className={style.card__content}>{brandError}</strong>
             )}
           </div>
           <div className={style.card__form}>
@@ -170,8 +218,8 @@ const Form = () => {
               name="category"
               placeholder="Write Product category..."
             />
-            {errors.category && (
-              <strong className={style.card__content}>{errors.category}</strong>
+            {categoryError && (
+              <strong className={style.card__content}>{categoryError}</strong>
             )}
           </div>
           <div className={style.card__form}>
@@ -183,20 +231,20 @@ const Form = () => {
               name="description"
               placeholder="Write Product description..."
             />
-            {errors.description && (
+            {descriptionError && (
               <strong className={style.card__content}>
-                {errors.description}
+                {descriptionError}
               </strong>
             )}
           </div>
           <div calssName={style.btn}>
             <button
               disabled={
-                errors.name ||
-                errors.price ||
-                errors.category ||
-                errors.brand ||
-                errors.description
+                nameError ||
+                priceError ||
+                categoryError ||
+                brandError ||
+                descriptionError
               }
               type="submit"
               className={style.btn}
@@ -209,4 +257,5 @@ const Form = () => {
     </div>
   );
 };
+
 export default Form;
