@@ -10,10 +10,13 @@ const Form = () => {
 
   const [form, setForm] = useState({
     name: "",
+    href: "", //agregado
     imageSrc: "",
+    imageAlt: "", //agregado
     price: "",
-    stock: "",
     brand: "",
+    min: "", //agregado
+    stock: "",
     category: "",
     description: "",
   });
@@ -22,8 +25,12 @@ const Form = () => {
   const [priceError, setPriceError] = useState("");
   const [stockError, setStockError] = useState("");
   const [brandError, setBrandError] = useState("");
+  const [imageSrc, setImageSrcError] = useState("")
   const [categoryError, setCategoryError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
+  const [imageAltError, setImageAltError] = useState("")
+  const [hrefError, setHrefError] = useState("")
+  const [minError, setMinError] = useState("")
 
   const validateName = (name) => {
     setNameError(name.trim() === "" ? "¡Se requiere el nombre!" : "");
@@ -48,6 +55,13 @@ const Form = () => {
   const validateBrand = (brand) => {
     setBrandError(brand.trim() === "" ? "¡Se requiere la marca!" : "");
   };
+
+  const validateImg = (imageSrc) => {
+    setImageSrcError(
+      /^.*\.(jpg|jpeg|png|gif)$/.test(imageSrc) ?
+        "" : "¡Por favor ingresa una img válida!"
+    )
+  }
 
   const validateCategory = (category) => {
     setCategoryError(category.trim() === "" ? "¡Se requiere la categoría!" : "");
@@ -85,6 +99,9 @@ const Form = () => {
       case "description":
         validateDescription(value);
         break;
+      case "imageSrc":
+        validateImg(value)
+        break;
       default:
         break;
     }
@@ -96,14 +113,17 @@ const Form = () => {
     alert("Has creado un nuevo producto");
     setForm({
       name: "",
+      href: "",
       imageSrc: "",
+      imageAlt: "",
       price: "",
-      stock: "",
       brand: "",
+      min: "",
+      stock: "",
       category: "",
       description: "",
     });
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -133,12 +153,13 @@ const Form = () => {
           <div className={style.card__form}>
             <label className={style.label__form}>Imagen del Producto: </label>
             <input
-              type="url"
+              type="text"
               value={form.imageSrc}
               onChange={(e) => changeHandler(e)}
-              name="image"
+              name="imageSrc"
               placeholder="Ingresa la URL de la imagen..."
             />
+            {imageSrc && <strong className={style.card__content}>{imageSrc}</strong>}
           </div>
           <div className={style.card__form}>
             <label className={style.label__form}>Precio: </label>
