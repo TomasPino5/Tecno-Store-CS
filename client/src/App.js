@@ -12,15 +12,12 @@ function App() {
   const { pathname } = useLocation();
   return (
     <div className="App">
-      {/* {location.pathname !== "/" ? <Nav /> : null} */}
-      {pathname === "/" && <Nav />}
-      {pathname === "/:id" && <Nav />}
-      {pathname === "/:Error" && <Nav />}
-      <h1>Hello world</h1>
+      {pathname !== "*" && <Nav />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<Detail />} />
-        <Route path="/Error" element={<Error />} />
+        <Route path="*" element={<Error />} />
         <Route path="/form" element={<Form />} />
         <Route path="/login" element={<Login />} />
       </Routes>
