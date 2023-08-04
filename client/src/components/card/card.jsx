@@ -19,6 +19,11 @@ export default function Card({
   // aca va let dispatch = useDispatch();
 
   // aca va const handleClose = () => { dispatch(deleteProductsById(id))}
+
+  const formatPriceWithDots = (price) => {
+    return price.toLocaleString();
+  };
+
   return (
     <div className={style.card}>
       <NavLink
@@ -32,7 +37,8 @@ export default function Card({
           <p className={style.ht}>{name}</p>
         </div>
         <div className={style.container_data}>
-          <span className={style.price}>${price}</span>
+          {/* <span className={style.price}>${price}</span> */}
+          <span className={style.price}>${formatPriceWithDots(price)}</span>
           <p className={style.texts}>{brand}</p>
           <p className={style.texts}>{category}</p>
         </div>

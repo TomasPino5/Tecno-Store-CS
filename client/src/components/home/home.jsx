@@ -43,6 +43,7 @@ const Home = () => {
     
     const handleBrandFilter = (event) => {
       dispatch(filterByBrand(event.target.value));
+      document.getElementById("categoryFilter").value = "";
     };
     
     const handleCategoryFilter = (event) => {
@@ -51,24 +52,28 @@ const Home = () => {
 
     const handleClearFilters = () => {
       dispatch(clearFilter());
+      // Devuelve el valor de los select al origen 
+      document.getElementById("orderByPrice").value = "";
+      document.getElementById("brandFilter").value = "";
+      document.getElementById("categoryFilter").value = "";
     };
 
     return (
         <div>
             
             <div>
-                <select onChange={handleOrderByPrice}>
+                <select id="orderByPrice" onChange={handleOrderByPrice}>
                     <option value="">Price</option>
                     <option value="-+">Menor a Mayor</option>
                     <option value="+-">Mayor a Menor</option>
                 </select>
-                <select onChange={handleBrandFilter}>
+                <select id="brandFilter" onChange={handleBrandFilter}>
                 <option value="">Brands</option>
                     {brands.map((brand) => (
                         <option key={brand} value={brand}>{brand}</option>
                     ))}
                 </select>
-                <select onChange={handleCategoryFilter}>
+                <select  id="categoryFilter" onChange={handleCategoryFilter}>
                 <option value="">Categories</option>
                     {categories.map((category) => (
                         <option key={category} value={category}>{category}</option>
