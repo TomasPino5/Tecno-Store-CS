@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearDetail } from "../../redux/actions";
 import { useEffect } from "react";
@@ -28,14 +28,22 @@ const Detail = () => {
       dispatch(clearDetail());
     };
   }, [dispatch, id]);
+  const { price } = myProduct;
+  const formatPriceWithDots = (price) => {
+    return price.toLocaleString();
+  };
 
   return (
-    <div className="Detail">
+    <div className={style.detail}>
       {!loading ? (
         <>
           <div className={style.detailContainer}>
-            <div className={style.img__container}>
-              <img src={myProduct?.imageSrc} alt="img not found" />
+            <div className={style.img__c}>
+              <img
+                className={style.imgDetail}
+                src={myProduct?.imageSrc}
+                alt="img not found"
+              />
             </div>
             <div className={style.text__container}>
               <p className={style.N__p}>Nuevo | +1000 vendidos</p>
@@ -47,7 +55,12 @@ const Detail = () => {
                 )}
               </div>
 
-              <h4 className={style.N__Pr}>Price: ${myProduct?.price}</h4>
+              <h4 className={style.N__Pr}>
+                Price:{" "}
+                {price
+                  ? `$${formatPriceWithDots(price)}`
+                  : "Price not available"}
+              </h4>
               <p className={style.N__p}>Ver los medios de pago</p>
               <div className={style.N__C}>
                 <p className={style.nc}>Brand: {myProduct?.brand}</p>
@@ -105,6 +118,10 @@ const Detail = () => {
           <Link to="/">
             <button id="buttonReturn">Return</button>
           </Link>
+          <div className={style.btn__pro}>
+            <NavLink to={`/product/${id - 1}`}> back</NavLink>
+            <NavLink to={`/product/${parseInt(id) + 1}`}> next</NavLink>
+          </div>
         </>
       ) : (
         <div>

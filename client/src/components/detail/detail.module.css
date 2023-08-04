@@ -1,3 +1,6 @@
+.detail {
+  margin-top: 80px;
+}
 .detailContainer {
   height: auto;
   width: auto;
@@ -230,4 +233,25 @@
 .btn__c {
   margin-left: 140px;
   margin-bottom: 20px;
+}
+.img__c {
+  height: 600px;
+  margin-top: 20px;
+  margin-left: 80px;
+  margin-right: -50px;
+  border: 1.3px solid rgb(151, 204, 248);
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+  overflow: hidden;
+}
+.imgDetail {
+  object-fit: cover;
+  height: 100%;
+  width: auto;
+  position: relative;
+}
+.btn__pro {
+  position: absolute;
+  top: 800px;
+  left: 200px;
 }

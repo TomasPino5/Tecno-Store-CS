@@ -70,9 +70,7 @@
   overflow: hidden;
   text-decoration: none;
 }
-.card:hover {
-  height: auto;
-}
+
 .img_container {
   height: 200px;
   width: 250px;

@@ -1,20 +1,24 @@
 import Cards from "../cards/cards";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, orderByPrice, filterByBrand, filterByCategory, clearFilter } from "../../redux/actions";
-import style from './home.module.css'
-// import styles from "./home.module.css"
+
+import {
+  getProducts,
+  orderByPrice,
+  filterByBrand,
+  filterByCategory,
+  clearFilter,
+} from "../../redux/actions";
+import style from "./home.module.css";
 
 const Home = () => {
-
   const products = useSelector((state) => state.allProducts);
   const brands = useSelector((state) => state.brands);
   const categories = useSelector((state) => state.categories);
 
-  console.log(products)
+  console.log(products);
 
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   //paginado
   const productsPerPage = 8;
@@ -53,7 +57,9 @@ const Home = () => {
 
   const handleClearFilters = () => {
     dispatch(clearFilter());
-    // Devuelve el valor de los select al origen 
+
+    // Devuelve el valor de los select al origen
+    
     document.getElementById("orderByPrice").value = "";
     document.getElementById("brandFilter").value = "";
     document.getElementById("categoryFilter").value = "";
@@ -62,7 +68,9 @@ const Home = () => {
   return (
     <div>
 
+
       <div className={style.filtros}>
+
         <select id="orderByPrice" onChange={handleOrderByPrice}>
           <option value="">Price</option>
           <option value="-+">Menor a Mayor</option>
