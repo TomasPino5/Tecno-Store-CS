@@ -137,7 +137,7 @@ const Form = () => {
   return (
     <div>
       <div className={style.buttonReturn}>
-        <Link to="/home">
+        <Link to="/">
           <button className={style.button}>Return</button>
         </Link>
       </div>
