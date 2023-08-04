@@ -59,7 +59,7 @@ const Home = () => {
     dispatch(clearFilter());
 
     // Devuelve el valor de los select al origen
-    
+
     document.getElementById("orderByPrice").value = "";
     document.getElementById("brandFilter").value = "";
     document.getElementById("categoryFilter").value = "";
@@ -71,24 +71,28 @@ const Home = () => {
 
       <div className={style.filtros}>
 
-        <select id="orderByPrice" onChange={handleOrderByPrice}>
-          <option value="">Price</option>
-          <option value="-+">Menor a Mayor</option>
-          <option value="+-">Mayor a Menor</option>
-        </select>
-        <select id="brandFilter" onChange={handleBrandFilter}>
-          <option value="">Brands</option>
-          {brands.map((brand) => (
-            <option key={brand} value={brand}>{brand}</option>
-          ))}
-        </select>
-        <select id="categoryFilter" onChange={handleCategoryFilter}>
-          <option value="">Categories</option>
-          {categories.map((category) => (
-            <option key={category} value={category}>{category}</option>
-          ))}
-        </select>
-        <button onClick={handleClearFilters}>Limpiar</button>
+        <div className={style.content}>
+          <select id="orderByPrice" onChange={handleOrderByPrice}>
+            <option  value="">Price</option>
+            <option value="-+">Menor a Mayor</option>
+            <option value="+-">Mayor a Menor</option>
+          </select>
+
+
+          <select id="brandFilter" onChange={handleBrandFilter}>
+            <option value="">Brands</option>
+            {brands.map((brand) => (
+              <option key={brand} value={brand}>{brand}</option>
+            ))}
+          </select>
+          <select id="categoryFilter" onChange={handleCategoryFilter}>
+            <option value="">Categories</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
+        </div>
+        <button className={style.limpiarF} onClick={handleClearFilters}>Limpiar Filtros</button>
       </div>
 
       <div>
@@ -97,8 +101,8 @@ const Home = () => {
 
       <div>
 
-      <button disabled={currentPage === 1} className={style.btnPrevious} onClick={handlePreviousPage}>Prev</button>
-      <button disabled={endIndex > products.length} className={style.btnNext} onClick={handleNextPage}>Next</button>
+        <button disabled={currentPage === 1} className={style.btnNextPrev} onClick={handlePreviousPage}>Prev</button>
+        <button disabled={endIndex > products.length} className={style.btnNextPrev} onClick={handleNextPage}>Next</button>
         {/* {currentPage > 1 && (
           <button className={style.btnPrevious} onClick={handlePreviousPage}>Prev</button>
         )}
