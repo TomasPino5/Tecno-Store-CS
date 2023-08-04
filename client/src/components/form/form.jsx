@@ -5,11 +5,9 @@ import { postProduct } from "../../redux/actions";
 import style from "./form.module.css";
 
 const Form = () => {
-  //HOOKS
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  //STATES
   const [form, setForm] = useState({
     name: "",
     imageSrc: "",
@@ -19,81 +17,55 @@ const Form = () => {
     category: "",
     description: "",
   });
-  
-  //Declaraciones de estados
-  const [nameError, setNameError] = useState("The name is required");
-  const [priceError, setPriceError] = useState("The price is required");
-  const [stockError, setStockError] = useState("The stock is required");
-  const [brandError, setBrandError] = useState("The brand is required");
-  const [categoryError, setCategoryError] = useState("The category is required");
-  const [descriptionError, setDescriptionError] = useState("The description is required");
 
-//Validacion de nombre
+  const [nameError, setNameError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const [stockError, setStockError] = useState("");
+  const [brandError, setBrandError] = useState("");
+  const [categoryError, setCategoryError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+
   const validateName = (name) => {
-    if (name.trim() === "") {
-      setNameError("The name is required!");
-    } else {
-      setNameError("");
-    }
+    setNameError(name.trim() === "" ? "¡Se requiere el nombre!" : "");
   };
 
-//Validacion de precio
   const validatePrice = (price) => {
-    if (price.trim() === "" || isNaN(price) || Number(price) <= 0) {
-      setPriceError("Please enter a valid price!");
-    } else {
-      setPriceError("");
-    }
+    setPriceError(
+      price.trim() === "" || isNaN(price) || Number(price) <= 0
+        ? "¡Por favor ingresa un precio válido!"
+        : ""
+    );
   };
 
-  //Validacion de stock
   const validateStock = (stock) => {
-    if (stock.trim() === "" || isNaN(stock) || Number(stock) < 0) {
-      setStockError("Please enter a valid stock quantity!");
-    } else {
-      setStockError("");
-    }
+    setStockError(
+      stock.trim() === "" || isNaN(stock) || Number(stock) < 0
+        ? "¡Por favor ingresa una cantidad de stock válida!"
+        : ""
+    );
   };
 
-  //Validacion de marcas
   const validateBrand = (brand) => {
-    if (brand.trim() === "") {
-      setBrandError("The brand is required!");
-    } else {
-      setBrandError("");
-    }
+    setBrandError(brand.trim() === "" ? "¡Se requiere la marca!" : "");
   };
 
-  //Validacion de categoria
   const validateCategory = (category) => {
-    if (category.trim() === "") {
-      setCategoryError("The category is required!");
-    } else {
-      setCategoryError("");
-    }
-  };
-  
-  //Validacion de descripcion
-  const validateDescription = (description) => {
-    if (description.trim() === "") {
-      setDescriptionError("The description is required!");
-    } else {
-      setDescriptionError("");
-    }
+    setCategoryError(category.trim() === "" ? "¡Se requiere la categoría!" : "");
   };
 
-  //Se extrae el nombre del campo y el valor del evento
+  const validateDescription = (description) => {
+    setDescriptionError(description.trim() === "" ? "¡Se requiere la descripción!" : "");
+  };
+
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
     
-    //Actualiza el estado del form
     setForm({  
       ...form,
       [property]: value,
     });
     
-    //Realiza acciones segun el campo que ha cambiado
     switch (property) {
       case "name":
         validateName(value);
@@ -121,7 +93,7 @@ const Form = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     dispatch(postProduct(form));
-    alert("You just set the new Product");
+    alert("Has creado un nuevo producto");
     setForm({
       name: "",
       imageSrc: "",
@@ -138,104 +110,90 @@ const Form = () => {
     <div>
       <div className={style.buttonReturn}>
         <Link to="/">
-          <button className={style.button}>Return</button>
+          <button className={style.button}>Volver</button>
         </Link>
       </div>
       <div className={style.card}>
         <span className={style.card__title} id="title">
-          Create your own Product !
+          ¡Crea tu propio producto!
         </span>
 
         <form onSubmit={(e) => submitHandler(e)} className={style.Formulario}>
           <div className={style.card__form}>
-            <label className={style.label__form}>Product Name: </label>
+            <label className={style.label__form}>Nombre del Producto: </label>
             <input
               type="text"
               value={form.name}
               onChange={(e) => changeHandler(e)}
               name="name"
-              placeholder="Write Product name..."
+              placeholder="Escribe el nombre del producto..."
             />
-            {nameError && (
-              <strong className={style.card__content}>{nameError}</strong>
-            )}
+            {nameError && <strong className={style.card__content}>{nameError}</strong>}
           </div>
           <div className={style.card__form}>
-            <label className={style.label__form}>Image Product: </label>
+            <label className={style.label__form}>Imagen del Producto: </label>
             <input
               type="url"
               value={form.imageSrc}
               onChange={(e) => changeHandler(e)}
               name="image"
-              placeholder="Put image..."
+              placeholder="Ingresa la URL de la imagen..."
             />
           </div>
           <div className={style.card__form}>
-            <label className={style.label__form}> Price: </label>
+            <label className={style.label__form}>Precio: </label>
             <input
               type="text"
               value={form.price}
               onChange={(e) => changeHandler(e)}
               name="price"
-              placeholder="Write Product price..."
+              placeholder="Escribe el precio del producto..."
             />
-            {priceError && (
-              <strong className={style.card__content}>{priceError}</strong>
-            )}
+            {priceError && <strong className={style.card__content}>{priceError}</strong>}
           </div>
           <div className={style.card__form}>
-            <label className={style.label__form}> Stock: </label>
+            <label className={style.label__form}>Stock: </label>
             <input
               type="text"
               value={form.stock}
               onChange={(e) => changeHandler(e)}
               name="stock"
-              placeholder="Write Product stock..."
+              placeholder="Escribe la cantidad de stock..."
             />
-            {stockError && (
-              <strong className={style.card__content}>{stockError}</strong>
-            )}
+            {stockError && <strong className={style.card__content}>{stockError}</strong>}
           </div>
           <div className={style.card__form}>
-            <label className={style.label__form}> Brand: </label>
+            <label className={style.label__form}>Marca: </label>
             <input
               type="text"
               value={form.brand}
               onChange={(e) => changeHandler(e)}
               name="brand"
-              placeholder="Write Product brand..."
+              placeholder="Escribe la marca del producto..."
             />
-            {brandError && (
-              <strong className={style.card__content}>{brandError}</strong>
-            )}
+            {brandError && <strong className={style.card__content}>{brandError}</strong>}
           </div>
           <div className={style.card__form}>
-            <label className={style.label__form}> Category: </label>
+            <label className={style.label__form}>Categoría: </label>
             <input
               type="text"
               value={form.category}
               onChange={(e) => changeHandler(e)}
               name="category"
-              placeholder="Write Product category..."
+              placeholder="Escribe la categoría del producto..."
             />
-            {categoryError && (
-              <strong className={style.card__content}>{categoryError}</strong>
-            )}
+            {categoryError && <strong className={style.card__content}>{categoryError}</strong>}
           </div>
           <div className={style.card__form}>
-            <label className={style.label__form}> Description : </label>
+            <label className={style.label__form}>Descripción: </label>
             <input
               type="text"
               value={form.description}
               onChange={(e) => changeHandler(e)}
               name="description"
-              placeholder="Write Product description..."
+              placeholder="Escribe la descripción del producto..."
             />
-            {descriptionError && (
-              <strong className={style.card__content}>
-                {descriptionError}
-              </strong>
-            )}
+            {descriptionError && <strong className={style.card__content}>{descriptionError}</strong>}
           </div>
           <div calssName={style.btn}>
             <button
@@ -249,7 +207,7 @@ const Form = () => {
               type="submit"
               className={style.btn}
             >
-              Create Product
+              Crear Producto
             </button>
           </div>
         </form>
