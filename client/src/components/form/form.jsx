@@ -155,12 +155,7 @@ const Form = () => {
   };
 
   return (
-    <div>
-      <div className={style.buttonReturn}>
-        <Link to="/">
-          <button className={style.button}>Return</button>
-        </Link>
-      </div>
+    <div className={style.form__C}>
       <div className={style.card}>
         <span className={style.card__title} id="title">
           Create your own product
@@ -326,6 +321,11 @@ const Form = () => {
             </button>
           </div>
         </form>
+      </div>
+      <div className={style.buttonReturn}>
+        <Link to="/">
+          <button className={style.button}>Return</button>
+        </Link>
       </div>
     </div>
   );

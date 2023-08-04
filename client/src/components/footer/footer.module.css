@@ -1,0 +1,48 @@
+footer {
+  width: 100%;
+  background-color: rgb(30, 30, 30);
+  color: white;
+}
+.Footer {
+  width: 100%;
+  max-width: 1200px;
+}
+.container_foot {
+  display: flex;
+}
+
+.colum1 {
+  max-width: 400px;
+}
+.colum1_p {
+  font-size: 22px;
+}
+.colum1_span {
+  font-size: 14px;
+  color: #c7c7c7;
+  margin-top: 20px;
+}
+.colum2 {
+  max-width: 400px;
+}
+.row {
+  margin-top: 20px;
+  display: flex;
+}
+
+.row img {
+  width: 36px;
+  height: 36px;
+}
+
+.colum3 {
+  max-width: 400px;
+}
+
+.row2 {
+  margin-top: 20px;
+}
+.row2 img {
+  width: 36px;
+  height: 36px;
+}
