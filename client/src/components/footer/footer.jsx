@@ -1,3 +1,4 @@
+import style from "./footer.module.css";
 const Footer = () => {
   return (
     <footer className={style.Footer}>
@@ -13,39 +14,50 @@ const Footer = () => {
         </div>
         <div className={style.column3}>
           <p className={style.colum1_p}>Informacion de contactos</p>
-          <p className={style.row2}>Direccion</p>
-          <p className={style.row2}>Num</p>
-          <p className={style.row2}>Gmail</p>
+          <div className={style.row2}>
+            <img src="" alt="" />
+            <p>Calle Av. America 888</p>
+          </div>
+          <div className={style.row2}>
+            <img src="" alt="" />
+            <p>+54 343 531-4078</p>
+          </div>
+          <div className={style.row2}>
+            <img src="" alt="" />
+            <p>TecnoStoreCS@gmail.com</p>
+          </div>
         </div>
         <div className={style.column2}>
           <p className={style.colum1_p}>Redes Sociales</p>
-
-          <div className={style.row}>
-            <a href="#">Salta</a>
-          </div>
-          <div className={style.row}>
-            <img src="" alt="" />
-            <a href="#">Pino</a>
-          </div>
-          <div className={style.row}>
-            <img src="" alt="" />
-            <a href="#">Clua</a>
-          </div>
-          <div className={style.row}>
-            <img src="" alt="" />
-            <a href="#">Sol</a>
-          </div>
-          <div className={style.row}>
-            <img src="" alt="" />
-            <a href="#">Aldo</a>
-          </div>
-          <div className={style.row}>
-            <img src="" alt="" />
-            <a href="#">Mariano</a>
-          </div>
-          <div className={style.row}>
-            <img src="" alt="" />
-            <a href="#">Seba</a>
+          <div className={style.gd}>
+            <div className={style.row}>
+              <img src="" alt="" />
+              <a href="https://github.com/TomiB98">Salta</a>
+            </div>
+            <div className={style.row}>
+              <img src="" alt="" />
+              <a href="https://github.com/TomasPino5">Pino</a>
+            </div>
+            <div className={style.row}>
+              <img src="" alt="" />
+              <a href="https://github.com/KayitaC2024">Clua</a>
+            </div>
+            <div className={style.row}>
+              <img src="" alt="" />
+              <a href="https://github.com/cottier55">Sol</a>
+            </div>
+            <div className={style.row}>
+              <img src="" alt="" />
+              <a href="https://github.com/AldoTorrez">Aldo</a>
+            </div>
+            <div className={style.row}>
+              <img src="" alt="" />
+              <a href="https://github.com/MarianoMenseguez">Mariano</a>
+            </div>
+            <div className={style.row}>
+              <img src="" alt="" />
+              <a href="https://github.com/SebastianBeltzer">Seba</a>
+            </div>
           </div>
         </div>
       </div>

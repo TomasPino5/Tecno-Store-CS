@@ -1,14 +1,16 @@
 footer {
+  margin-top: 5px;
+  bottom: 0px;
   width: 100%;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(17, 17, 17);
   color: white;
 }
 .Footer {
   width: 100%;
-  max-width: 1200px;
 }
 .container_foot {
   display: flex;
+  justify-content: space-around;
 }
 
 .colum1 {
@@ -22,8 +24,11 @@ footer {
   color: #c7c7c7;
   margin-top: 20px;
 }
-.colum2 {
-  max-width: 400px;
+
+.gd {
+  margin-top: -20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .row {
   margin-top: 20px;
@@ -34,6 +39,12 @@ footer {
   width: 36px;
   height: 36px;
 }
+.row a {
+  margin-top: 10px;
+  margin-left: 10px;
+  text-decoration: none;
+  color: #c7c7c7;
+}
 
 .colum3 {
   max-width: 400px;
@@ -41,8 +52,31 @@ footer {
 
 .row2 {
   margin-top: 20px;
+  display: flex;
 }
+
 .row2 img {
   width: 36px;
   height: 36px;
+}
+
+.row2 p {
+  margin-left: 20px;
+}
+
+.container_footer {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 3px;
+  background-color: rgb(12, 12, 12);
+}
+.copy a {
+  text-decoration: none;
+  color: white;
+}
+.info a {
+  text-decoration: none;
+  color: white;
 }
