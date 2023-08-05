@@ -118,10 +118,10 @@ const Detail = () => {
           <Link to="/">
             <button id="buttonReturn">Return</button>
           </Link>
-          <div className={style.btn__pro}>
+          {/* <div className={style.btn__pro}>
             <NavLink to={`/product/${id - 1}`}> back</NavLink>
             <NavLink to={`/product/${parseInt(id) + 1}`}> next</NavLink>
-          </div>
+          </div> */}
         </>
       ) : (
         <div>

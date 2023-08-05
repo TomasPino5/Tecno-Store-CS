@@ -6,6 +6,7 @@ import Nav from "./components/nav/nav";
 import Error from "./components/error/error";
 import Form from "./components/form/form";
 import Login from "./components/loginForm/loginForm";
+import Footer from "./components/footer/footer";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
