@@ -68,33 +68,35 @@ const Home = () => {
   return (
     <div>
 
+        <div className={style.filtros}>
 
-      <div className={style.filtros}>
-
-        <div className={style.content}>
-          <select id="orderByPrice" onChange={handleOrderByPrice}>
-            <option  value="">Price</option>
-            <option value="-+">Menor a Mayor</option>
-            <option value="+-">Mayor a Menor</option>
-          </select>
+          <div className={style.content}>
+            <select id="orderByPrice" onChange={handleOrderByPrice}>
+              <option value="">Price</option>
+              <option value="-+">Menor a Mayor</option>
+              <option value="+-">Mayor a Menor</option>
+            </select>
 
 
-          <select id="brandFilter" onChange={handleBrandFilter}>
-            <option value="">Brands</option>
-            {brands.map((brand) => (
-              <option key={brand} value={brand}>{brand}</option>
-            ))}
-          </select>
-          <select id="categoryFilter" onChange={handleCategoryFilter}>
-            <option value="">Categories</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>{category}</option>
-            ))}
-          </select>
+            <select id="brandFilter" onChange={handleBrandFilter}>
+              <option value="">Brands</option>
+              {brands.map((brand) => (
+                <option key={brand} value={brand}>{brand}</option>
+              ))}
+            </select>
+            <select id="categoryFilter" onChange={handleCategoryFilter}>
+              <option value="">Categories</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+
+          </div>
+
+          <button className={style.limpiarF} onClick={handleClearFilters}>Limpiar Filtros</button>
+          
         </div>
-        <button className={style.limpiarF} onClick={handleClearFilters}>Limpiar Filtros</button>
-      </div>
-
+      
       <div>
         <Cards products={recipesToDisplay} />
       </div>
