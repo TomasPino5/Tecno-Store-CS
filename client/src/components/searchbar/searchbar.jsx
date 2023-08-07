@@ -15,6 +15,7 @@ export default function SearchBar() {
 
   const handleSubmit = () => {
     dispatch(getProductName(name));
+    setName("");
   };
 
   return (
@@ -23,6 +24,7 @@ export default function SearchBar() {
         className={style.search__input}
         type="text"
         placeholder="Find your product"
+        value={name}
         onChange={(e) => handleInputChange(e)}
       />
       <button
