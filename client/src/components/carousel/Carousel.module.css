@@ -1,0 +1,78 @@
+.slider{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .carrusel {
+      background-image: linear-gradient(#d5beb0, #D99152);
+  }
+  .img {
+      width: 100px;
+      height: 100px; 
+      border-style:double;
+      border-width: 5px ;
+      border-color: #9f897b; 
+      border-radius: 2px;  
+      margin-bottom: 3rem;
+      margin-top: 2rem;;
+  }
+  h1 {
+      padding-top: 2rem;
+      display: flex;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 400;
+      color:#703a13;
+  }
+  .slick-dots {
+      display: block;
+      text-align: center;
+      margin: 20px;
+      padding: 1px;
+      list-style: none;
+      margin-bottom: 2rem;
+  }
+  .slick-dots li {
+    display: inline-block;
+    margin: 5px 5px;
+  }
+  .slick-dots li button:before {
+    content: "•"; 
+    color: #593825; 
+    font-size: 12px;
+    line-height: 1;
+    opacity: 0.5;
+    margin-top: 2px;
+  }
+  .slick-dots li.slick-active button:before {
+    opacity: 1;
+  }
+  
+@media only screen and (min-width: 768px) {  
+  .slider{
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .img {
+    width: 200px;
+    height: 200px;
+  }
+  .carrousel {
+    margin-bottom: 3px;
+  }
+  }
+@media only screen and (min-width: 992px) { 
+  .slider{
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+  .img {
+    width: 180px;
+    height: 180px; 
+    border-style:double;
+    border-width: 10px ;
+    border-color: #9f897b; 
+    border-radius: 5px;  
+    margin-bottom: 3rem;
+    margin-top: 2rem;;
+  }
+}
