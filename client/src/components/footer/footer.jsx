@@ -20,6 +20,7 @@ const Footer = () => {
             <a
               className={style.link}
               href="https://www.google.com/maps?output=search&q=rosario+santa+fe&source=lnms&entry=mc&sa=X&ved=2ahUKEwiGpfv9tMqAAxUOuZUCHa2WAlIQ0pQJegQIDRAB"
+              target="_blank"
             >
               Rosario-Santa Fe-Argentina
             </a>
@@ -29,6 +30,7 @@ const Footer = () => {
             <a
               className={style.link}
               href="https://wa.me/message/KEAE2GLG7GLQD1 "
+              target="_blank"
             >
               +54 341 658-6272
             </a>
@@ -38,6 +40,7 @@ const Footer = () => {
             <a
               className={style.link}
               href="https://mail.google.com/mail/u/1/#inbox"
+              target="_blank"
             >
               tecnostorecs55@gmail.com
             </a>
@@ -48,33 +51,45 @@ const Footer = () => {
           <div className={style.gd}>
             <div className={style.row}>
               <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
-              <a href="https://github.com/TomiB98">Tomas-Baldi</a>
-            </div>
-            <div className={style.row}>
-              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
-              <a href="https://github.com/TomasPino5">Tomas-Pino</a>
-            </div>
-            <div className={style.row}>
-              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
-              <a href="https://github.com/KayitaC2024">Claudia-Torres</a>
-            </div>
-            <div className={style.row}>
-              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
-              <a href="https://github.com/cottier55">Solange-Cottier</a>
-            </div>
-            <div className={style.row}>
-              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
-              <a href="https://github.com/AldoTorrez">Aldo-Torres</a>
-            </div>
-            <div className={style.row}>
-              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
-              <a href="https://github.com/MarianoMenseguez">
-                Mariano-Mesenguez
+              <a href="https://github.com/TomiB98" target="_blank">
+                Tomas Baldi
               </a>
             </div>
             <div className={style.row}>
               <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
-              <a href="https://github.com/SebastianBeltzer">Sebastian-Ramos</a>
+              <a href="https://github.com/TomasPino5" target="_blank">
+                Tomas Pino
+              </a>
+            </div>
+            <div className={style.row}>
+              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
+              <a href="https://github.com/KayitaC2024" target="_blank">
+                Claudia Torres
+              </a>
+            </div>
+            <div className={style.row}>
+              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
+              <a href="https://github.com/cottier55" target="_blank">
+                Solange Cottier
+              </a>
+            </div>
+            <div className={style.row}>
+              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
+              <a href="https://github.com/AldoTorrez" target="_blank">
+                Aldo Torrez
+              </a>
+            </div>
+            <div className={style.row}>
+              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
+              <a href="https://github.com/MarianoMenseguez" target="_blank">
+                Mariano Menseguez
+              </a>
+            </div>
+            <div className={style.row}>
+              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
+              <a href="https://github.com/SebastianBeltzer" target="_blank">
+                Sebastián Ramos
+              </a>
             </div>
           </div>
         </div>
