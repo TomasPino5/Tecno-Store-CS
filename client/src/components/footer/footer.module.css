@@ -64,10 +64,6 @@ footer {
   margin-left: 20px;
 }
 
-.row2 a {
-  text-decoration: none;
-}
-
 .container_footer {
   display: flex;
   justify-content: space-between;
@@ -83,4 +79,13 @@ footer {
 .info a {
   text-decoration: none;
   color: white;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.link {
+  text-decoration: none;
 }
