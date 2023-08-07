@@ -142,3 +142,20 @@
   background-color: black;
   border: 1px solid black;
 }
+
+.login {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+  margin-bottom: 5px;
+  font-size: medium;
+  cursor: pointer;
+}
+.login:active {
+  background-color: black;
+  border: 1px solid black;
+  color: #08ef56;
+  margin-bottom: 5px;
+  font-size: medium;
+  cursor: pointer;
+}

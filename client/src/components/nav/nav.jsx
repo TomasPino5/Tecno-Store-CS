@@ -1,11 +1,18 @@
 import SearchBar from "../searchbar/searchbar";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Login from "../loginForm/loginForm";
 import style from "../nav/nav.module.css";
 
 const Nav = ({ handleClearFilters }) => {
-  
   const location = useLocation();
+
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
+  const handleLoginButtonClick = () => {
+    setShowLoginForm(!showLoginForm);
+  };
 
   return (
     <nav className={style.navContainer}>
@@ -44,7 +51,12 @@ const Nav = ({ handleClearFilters }) => {
             </div>
           </button>
         </NavLink>
+        <button className={style.login} onClick={handleLoginButtonClick}>
+          Login
+        </button>
       </div>
+      {showLoginForm && <Login />}{" "}
+      {/* Mostrar el formulario de inicio de sesión si showLoginForm es verdadero */}
     </nav>
   );
 };
