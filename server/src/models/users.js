@@ -11,36 +11,8 @@ const Users = sequelize.define('users',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    href:{
+    email:{
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    imageSrc:{
-        type: DataTypes.STRING,
-        allowNull:false
-    },
-    imageAlt:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    price:{
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    stock:{
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    brand:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    category:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    description:{
-        type: DataTypes.TEXT,
         allowNull: false
     }
 },{

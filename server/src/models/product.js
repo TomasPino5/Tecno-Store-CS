@@ -1,5 +1,6 @@
 const sequelize = require('../db.js');
 const { DataTypes } = require('sequelize');
+const Users = require('./users.js')
 
 const Products = sequelize.define('products', {
 
@@ -48,5 +49,7 @@ const Products = sequelize.define('products', {
         timestamps: false
     });
 
+    Users.belongsToMany(Products, { through:{ model: 'user_products', timestamps: false }});
+    Products.belongsToMany(Users, { through:{ model: 'user_products', timestamps: false }});
 
-   module.exports = Products;
+    module.exports = Products;
