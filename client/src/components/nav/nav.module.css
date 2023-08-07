@@ -146,7 +146,7 @@
 .login {
   background-color: black;
   border: 1px solid black;
-  color: white;
+  color: #08ef56;
   margin-bottom: 5px;
   font-size: medium;
   cursor: pointer;
@@ -154,8 +154,17 @@
 .login:active {
   background-color: black;
   border: 1px solid black;
-  color: #08ef56;
+  color: #01832c;
   margin-bottom: 5px;
   font-size: medium;
   cursor: pointer;
+}
+
+.img__logo {
+  margin-top: -8px;
+  height: 55px;
+  margin-left: 10px;
+}
+.ordenador {
+  display: flex;
 }
