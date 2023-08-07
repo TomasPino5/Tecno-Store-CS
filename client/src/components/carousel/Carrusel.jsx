@@ -10,6 +10,8 @@ const Carrusel = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 100
   };
 
   return (
@@ -21,21 +23,21 @@ const Carrusel = () => {
             alt="logo motorola "
           />
         </div>
-        <div className="img2">
+        <div className="img22">
           <img
             className="img"
             src="https://i.ibb.co/HnsDxxz/logo-samsung.jpg"
             alt="logo samsung"
           />
         </div>
-        <div className="img2">
+        <div className="img33">
           <img
             className="img"
             src="https://i.ibb.co/yhbJ59d/logo-iphone.jpg"
             alt="logo apple"
           />
         </div>
-        <div className="img2">
+        <div className="img44">
           <img
             className="img"
             src="https://i.ibb.co/hFpkCwp/logo-xiaomi.jpg"
