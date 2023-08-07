@@ -18,6 +18,12 @@ export default function SearchBar() {
     setName("");
   };
 
+  const onKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <div className={style.search}>
       <input
@@ -26,6 +32,7 @@ export default function SearchBar() {
         placeholder="Find your product"
         value={name}
         onChange={(e) => handleInputChange(e)}
+        onKeyDown={(event) => onKeyDown(event)}
       />
       <button
         className={style.search__button}
