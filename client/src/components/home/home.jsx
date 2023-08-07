@@ -10,23 +10,23 @@ import {
   clearFilter,
 } from "../../redux/actions";
 import style from "./home.module.css";
+import Nav from "../nav/nav";
 
 const Home = () => {
   const products = useSelector((state) => state.allProducts);
   const brands = useSelector((state) => state.brands);
   const categories = useSelector((state) => state.categories);
 
-  console.log(products);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
   //paginado
   const productsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
 
   const handleNextPage = () => {
     setCurrentPage((nextPage) => nextPage + 1);
@@ -39,7 +39,7 @@ const Home = () => {
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
 
-  const recipesToDisplay = products.slice(startIndex, endIndex);
+  const productsToDisplay = products.slice(startIndex, endIndex);
 
   //filtros
   const handleOrderByPrice = (event) => {
@@ -49,10 +49,12 @@ const Home = () => {
   const handleBrandFilter = (event) => {
     dispatch(filterByBrand(event.target.value));
     document.getElementById("categoryFilter").value = "";
+    document.getElementById("orderByPrice").value = "";
   };
 
   const handleCategoryFilter = (event) => {
     dispatch(filterByCategory(event.target.value));
+    document.getElementById("orderByPrice").value = "";
   };
 
   const handleClearFilters = () => {
@@ -69,6 +71,8 @@ const Home = () => {
     <div>
 
         <div className={style.filtros}>
+
+          <Nav handleClearFilters={handleClearFilters}/>
 
           <div className={style.content}>
             <select id="orderByPrice" onChange={handleOrderByPrice}>
@@ -98,7 +102,7 @@ const Home = () => {
         </div>
       
       <div>
-        <Cards products={recipesToDisplay} />
+        <Cards products={productsToDisplay} />
       </div>
 
       <div>

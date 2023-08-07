@@ -8,6 +8,7 @@ import Form from "./components/form/form";
 import Login from "./components/loginForm/loginForm";
 import Footer from "./components/footer/footer";
 import "./App.css";
+import Carousel from "./components/carousel/Carouseel.jsx";
 
 function App() {
   const { pathname } = useLocation();
@@ -21,6 +22,7 @@ function App() {
         <Route path="*" element={<Error />} />
         <Route path="/form" element={<Form />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/carousel" element={<Carousel />} />
       </Routes>
       <Footer />
     </div>

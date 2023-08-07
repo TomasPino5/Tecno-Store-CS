@@ -31,7 +31,8 @@ footer {
   grid-template-columns: 1fr 1fr;
 }
 .row {
-  margin-top: 20px;
+  margin-top: 10px;
+
   display: flex;
 }
 
@@ -88,4 +89,8 @@ footer {
 
 .link {
   text-decoration: none;
+}
+
+.column2 {
+  margin-bottom: 10px;
 }
