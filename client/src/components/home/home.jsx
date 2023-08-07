@@ -10,6 +10,7 @@ import {
   clearFilter,
 } from "../../redux/actions";
 import style from "./home.module.css";
+import Nav from "../nav/nav";
 
 const Home = () => {
   const products = useSelector((state) => state.allProducts);
@@ -69,6 +70,8 @@ const Home = () => {
     <div>
 
         <div className={style.filtros}>
+
+          <Nav handleClearFilters={handleClearFilters}/>
 
           <div className={style.content}>
             <select id="orderByPrice" onChange={handleOrderByPrice}>

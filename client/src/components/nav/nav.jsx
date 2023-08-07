@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import style from "../nav/nav.module.css";
 
-const Nav = () => {
+const Nav = ({ handleClearFilters }) => {
   
   const location = useLocation();
 
@@ -15,6 +15,7 @@ const Nav = () => {
             <button className={style.button}>
               <span className={style.actualtext}>&nbsp;Tecno/Store&nbsp;</span>
               <span
+                onClick={handleClearFilters}
                 className={style.hovertext}
                 aria-hidden="true"
               >
