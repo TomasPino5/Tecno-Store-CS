@@ -2,10 +2,11 @@ const Products = require('../models/product.js');
 const Users = require('../models/users.js');
 
 const postFavProducts = async(req, res)=>{
-    const {id} = req.body;
+    const {productId, userId} = req.body;
     try{
-        const product = await Products.findAll({where:{id: id}});
-        await Users.addProducts(product);
+        const product = await Products.findByPk(productId);
+        const user = await Users.findByPk(userId);
+        await user.addProducts(product);
         res.status(200).json({message: 'Se añadio a favoritos con exito...'});
     }
     catch(error){

@@ -7,7 +7,7 @@ const postUser = async(req, res)=>{
             res.status(400).send('Faltan datos');
         }
         else{
-            const user = await Users.findOrCreate({where: {email, name}});
+            const user = await Users.create({name, email});
             res.status(200).json(user);
         }
     }
