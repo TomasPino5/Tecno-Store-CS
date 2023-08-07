@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearDetail } from "../../redux/actions";
 import { useEffect } from "react";
@@ -116,7 +116,7 @@ const Detail = () => {
             </div>
           </div>
           <Link to="/">
-            <button id="buttonReturn">Return</button>
+            <button className={style.btnReturn} id="buttonReturn">Return</button>
           </Link>
           {/* <div className={style.btn__pro}>
             <NavLink to={`/product/${id - 1}`}> back</NavLink>
