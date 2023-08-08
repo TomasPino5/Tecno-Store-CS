@@ -6,7 +6,6 @@ import "./Carousel.module.css";
 const Carousel = () => {
   return (
     <div className="carrusel">
-      <h1>Visitá nuestra tienda</h1>
       <Carrusel />
     </div>
   );

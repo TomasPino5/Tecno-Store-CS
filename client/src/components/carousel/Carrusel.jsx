@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,41 +8,54 @@ const Carrusel = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1200,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 100
   };
 
   return (
       <Slider className="slider" {...settings}>
-        <div className="img2">
+        <Link to="/products">
+               <div className="img2">
           <img
             className="img"
-            src="https://i.ibb.co/F3g9G0j/logo-motorola.jpg"
+            src="https://i.ibb.co/Z89607V/logo-motorola.jpg"
             alt="logo motorola "
           />
         </div>
+        </Link>
+
+        <Link to = "/products">
         <div className="img2">
           <img
             className="img"
-            src="https://i.ibb.co/HnsDxxz/logo-samsung.jpg"
+            src="https://i.ibb.co/bgptHWh/logo-samsung.jpg"
             alt="logo samsung"
           />
         </div>
+        </Link>
+
+        <Link to = "/products">
         <div className="img2">
           <img
             className="img"
-            src="https://i.ibb.co/yhbJ59d/logo-iphone.jpg"
+            src="https://i.ibb.co/FVv7FRZ/logo-iphone.jpg"
             alt="logo apple"
           />
         </div>
+        </Link>
+
+        <Link to = "/products">
         <div className="img2">
           <img
             className="img"
-            src="https://i.ibb.co/hFpkCwp/logo-xiaomi.jpg"
+            src="https://i.ibb.co/KGJtsS0/logo-xiaomi.jpg"
             alt="logo xiaomi"
           />
         </div>
+        </Link>
        
       </Slider>
   );
