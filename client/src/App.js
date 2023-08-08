@@ -17,12 +17,13 @@ function App() {
       {pathname !== "*" && <Nav />}
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Home />} />
         <Route path="/product/:id" element={<Detail />} />
         <Route path="*" element={<Error />} />
         <Route path="/form" element={<Form />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/carousel" element={<Carousel />} />
+        <Route path="/" element={<Carousel />} />
+
       </Routes>
       <Footer />
     </div>

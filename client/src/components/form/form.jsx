@@ -310,7 +310,7 @@ const Form = () => {
       category: "",
       description: "",
     });
-    navigate("/");
+    navigate("/products");
   };
 
   return (
@@ -552,7 +552,7 @@ const Form = () => {
         </form>
       </div>
       <div className={style.buttonReturn}>
-        <Link to="/">
+        <Link to="/products">
           <button className={style.btnReturn}>Return</button>
         </Link>
       </div>

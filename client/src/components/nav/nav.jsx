@@ -37,8 +37,13 @@ const Nav = ({ handleClearFilters }) => {
         </div>
       </div>
       <div className={style.SearchBarPosition}>
-        {location.pathname === "/" ? <SearchBar /> : null}
+        {location.pathname === "/products" ? <SearchBar /> : null}
       </div>
+      <div className={style.container}>
+        <NavLink to="/products">
+      <button className={style.login}>Nuestros productos</button>
+        </NavLink>
+        </div>
       <div className={style.container}>
         <button className={style.login} onClick={handleLoginButtonClick}>
           Login
