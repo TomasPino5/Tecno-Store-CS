@@ -25,7 +25,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Carousel />} />
         <Route path="/cart" element={<Cart />} />
-
       </Routes>
       <Footer />
     </div>
