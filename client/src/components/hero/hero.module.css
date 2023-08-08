@@ -1,28 +1,9 @@
 /* styles.css */
 
-/* Clases generales */
+Clases generales
 .bgGray50 {
   background-color: #f9fafb;
-  width: 100%;
-}
-
-.mxAuto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.maxW7xl {
-  max-width: 80rem; /* 1280px */
-}
-
-.py12 {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-.px4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+ 
 }
 
 .smPx6 {
