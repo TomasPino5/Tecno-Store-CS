@@ -14,6 +14,24 @@ const Detail = () => {
 
   //STATE
   let [loading, setLoading] = React.useState(false);
+  const [cartQuantity, setCartQuantity] = React.useState(1); // Estado para la cantidad en el carrito
+
+  function decrementCartQuantity() {
+    if (cartQuantity > 1) {
+      setCartQuantity(cartQuantity - 1);
+    }
+  }
+
+  function incrementCartQuantity() {
+    if (cartQuantity < myProduct.stock) {
+      setCartQuantity(cartQuantity + 1);
+    }
+  }
+  function buyNow() {
+    const totalQuantity = cartQuantity; // Obtén la cantidad actual del carrito
+    alert(`¡Compraste ${totalQuantity} unidades!`);
+    // Aquí podrías agregar lógica adicional relacionada con la compra ahora
+  }
 
   //useEffect
   useEffect(() => {
@@ -77,6 +95,21 @@ const Detail = () => {
                 </p>
                 <p className={style.N__ST}>Stock: {myProduct?.stock}</p>
               </div>
+              <div className={style.cart__controls}>
+                <button
+                  className={style.decrement__button}
+                  onClick={decrementCartQuantity}
+                >
+                  -
+                </button>
+                {cartQuantity}
+                <button
+                  className={style.increment__button}
+                  onClick={incrementCartQuantity}
+                >
+                  +
+                </button>
+              </div>
               <div className={style.color__container}>
                 <p className={style.N__cp}>Color:</p>
                 <button className={style.btn1}></button>
@@ -89,13 +122,13 @@ const Detail = () => {
                   Description {myProduct?.description}
                 </p>
               </div>
-              <div>
-                <div className={style.btn__c}>
-                  <div
-                    data-tooltip={`$${myProduct?.price}`}
-                    className={style.button}
-                  >
-                    <div className={style.button_wrapper}>
+              <div className={style.btn__c}>
+                <div
+                  data-tooltip={`$${myProduct?.price}`}
+                  className={style.button}
+                >
+                  <div className={style.button_wrapper}>
+                    <button className={style.buy__button} onClick={buyNow}>
                       <div className={style.text}>Buy Now</div>
                       <span className={style.icon}>
                         <svg
@@ -106,17 +139,25 @@ const Detail = () => {
                           width="16"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+                          {/* ... (código del ícono) */}
                         </svg>
                       </span>
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+<<<<<<< HEAD
           <Link to="/products">
             <button className={style.btnReturn} id="buttonReturn">Return</button>
+=======
+
+          <Link to="/">
+            <button className={style.btnReturn} id="buttonReturn">
+              Return
+            </button>
+>>>>>>> 438259f26ce3b440d01007d369f4013d7f336872
           </Link>
           {/* <div className={style.btn__pro}>
             <NavLink to={`/product/${id - 1}`}> back</NavLink>
