@@ -115,7 +115,7 @@ const Detail = () => {
               </div>
             </div>
           </div>
-          <Link to="/">
+          <Link to="/products">
             <button className={style.btnReturn} id="buttonReturn">Return</button>
           </Link>
           {/* <div className={style.btn__pro}>

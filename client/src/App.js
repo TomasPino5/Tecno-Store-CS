@@ -23,6 +23,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Carousel />} />
+
       </Routes>
       <Footer />
     </div>
