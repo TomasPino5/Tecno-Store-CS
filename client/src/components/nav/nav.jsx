@@ -41,13 +41,15 @@ const Nav = ({ handleClearFilters }) => {
       </div>
       <div className={style.container}>
         <NavLink to="/products">
-      <button className={style.login}>Nuestros productos</button>
+          <button className={style.login}>Nuestros productos</button>
         </NavLink>
-        </div>
+      </div>
       <div className={style.container}>
-        <button className={style.login} onClick={handleLoginButtonClick}>
-          Login
-        </button>
+        <NavLink to="/login">
+          <button className={style.login} onClick={handleLoginButtonClick}>
+            Login
+          </button>
+        </NavLink>
         <NavLink to="/form">
           <button className={style.newProduct}>
             <div tabIndex={0} className={style.plusButton}>

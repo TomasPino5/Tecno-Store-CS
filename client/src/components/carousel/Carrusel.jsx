@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Hero from "../hero/hero";
 
 const Carrusel = () => {
   const settings = {
@@ -16,6 +17,13 @@ const Carrusel = () => {
   };
 
   return (
+    <div className="div-construction pt-0 flex flex-col justify-start items-center">
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <Hero />
       <Slider className="slider" {...settings}>
         <Link to="/products">
                <div className="img2">
@@ -63,6 +71,7 @@ const Carrusel = () => {
         </Link>
        
       </Slider>
+      </div>
   );
 };
 
