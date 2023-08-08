@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postProduct } from "../../redux/actions";
 import style from "./form.module.css";
 //
@@ -142,11 +142,11 @@ import axios from 'axios';
 // };
 
 // const submitHandler = (event) => {
-//   event.preventDefault();
-//   dispatch(postProduct(form));
-//   alert("Has creado un nuevo producto");
+  //   event.preventDefault();
+  //   dispatch(postProduct(form));
+  //   alert("Has creado un nuevo producto");
 //   setForm({
-//     name: "",
+  //     name: "",
 //     href: "",
 //     imageSrc: "",
 //     imageAlt: "",
@@ -161,9 +161,11 @@ import axios from 'axios';
 // };
 
 const Form = () => {
+
   const dispatch = useDispatch();
   let navigate = useNavigate();
-
+  
+  
   const [form, setForm] = useState({
     name: "",
     href: "", //agregado
@@ -176,7 +178,7 @@ const Form = () => {
     category: "",
     description: "",
   });
-
+  
   const [error, setError] = useState({
     name: "¡Se requiere el nombre!",
     href: "¡Se requiere #!",
@@ -190,7 +192,7 @@ const Form = () => {
     description: "¡Por favor ingresa una description!"
   })
 
-
+  
   function validate(form) {
     const error = {}
     if (form.name.length < 5) {
@@ -202,7 +204,7 @@ const Form = () => {
     if (form.href.length < 0) {
       error.href = '¡Se requiere el href!'
     }
-
+    
     if (form.imageAlt !== form.name) {
       error.imageAlt = 'Debe ser igual al name!'
     }
@@ -226,16 +228,16 @@ const Form = () => {
     }
     return error
   }
-
-
-
+  
+  
+  
   // Carga imagen ibb
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
     formData.append("key", "ccc0eb65a71efd80b4352eda77e05470"); // Replace with your ImgBB API key
-
+    
     try {
       const response = await axios.post("https://api.imgbb.com/1/upload", formData);
       const imageUrl = response.data.data.url;
@@ -252,10 +254,10 @@ const Form = () => {
     } catch (error) {
       // console.error("Error uploading image:", error);
       //setImageSrcError("Failed to upload image. Please try again.");
-
+      
     }
   };
-
+  
   // funcion select brand
   const handleSelectBrand = (event) => {
     setForm({
@@ -267,7 +269,7 @@ const Form = () => {
       brand: event.target.value
     }));
   }
-
+  
   // funcion select category
   const handleSelectCategory = (event) => {
     setForm({
@@ -279,12 +281,12 @@ const Form = () => {
       category: event.target.value
     }));
   }
-
+  
   const changeHandler = (event) => {
     setForm({
       ...form,
       [event.target.name]: event.target.value
-
+      
     })
     setError(validate({
       ...form,
@@ -292,8 +294,8 @@ const Form = () => {
     }))
   }
   console.log(form.imageSrc)
-
-
+  
+  
   const submitHandler = (event) => {
     event.preventDefault();
     dispatch(postProduct(form));
@@ -312,6 +314,20 @@ const Form = () => {
     });
     navigate("/products");
   };
+
+  const brands = useSelector((state) => state.brands);
+  const categories = useSelector((state) => state.categories);
+
+  const [newbrand, setNewbrand] = useState(false);
+  const [newcategory, setNewCategory] = useState(false);
+
+  const handleInputBrand = ()=>{
+    setNewbrand(true);
+  }
+
+  const handleInputCategory = ()=>{
+    setNewCategory(true);
+  }
 
   return (
     <div className={style.form__C}>
@@ -421,11 +437,13 @@ const Form = () => {
             <label className={style.label__form}>Brand: </label>
             <select onChange={handleSelectBrand}>
               <option value="">Brands</option>
-              <option value="Apple">Apple</option>
-              <option value="Motorola">Motorola</option>
-              <option value="Samsung">Samsung</option>
-              <option value="Xiaomi">Xiaomi</option>
+              {brands.map(brand=>(<option value={brand}>{brand}</option>))}
             </select>
+              <div onClick={handleInputBrand}>New Brand</div>
+            {
+              newbrand === true?<input type="text" name="brand" value={form.value}
+              onChange={(e) => changeHandler(e)} placeholder="add new brand"/>:null
+            }
             {error.brand && (
               <strong className={style.card__content}>{error.brand}</strong>
             )}
@@ -453,9 +471,13 @@ const Form = () => {
             <label className={style.label__form}>Category: </label>
             <select onChange={handleSelectCategory}>
               <option value="">Category</option>
-              <option value="Celular">Celular</option>
-              <option value="Auricular">Auricular</option>
+              {categories.map(category=>(<option value={category}>{category}</option>))}
             </select>
+            <div onClick={handleInputCategory}>New Category</div>
+            {
+              newcategory=== true?<input type="text" name="category" value={form.value}
+              onChange={(e) => changeHandler(e)} placeholder="add new Category"/>:null
+            }
             {error.category && (
               <strong className={style.card__content}>{error.category}</strong>
             )}
