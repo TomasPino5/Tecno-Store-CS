@@ -209,7 +209,7 @@ const Form = () => {
     if (form.price < 1) {
       error.price = '¡Por favor ingresa un precio válido!'
     }
-    if (form.brand === 'brand') {
+    if (form.brand === "" || form.brand === null) {
       error.brand = '¡Se requiere el brand!'
     }
     if (form.min < 1) {
@@ -218,7 +218,7 @@ const Form = () => {
     if (form.stock < 1) {
       error.stock = 'No puede ser menor a 1!'
     }
-    if (form.category === 'category') {
+    if (form.category === "" || form.brand === null) {
       error.category = '¡Por favor ingresa una category!'
     }
     if (form.description.length < 10) {
@@ -419,8 +419,8 @@ const Form = () => {
 
           <div >
             <label className={style.label__form}>Brand: </label>
-            <select onChange={handleSelectBrand} defaultValue='brand'>
-              <option disabled>Brands</option>
+            <select onChange={handleSelectBrand}>
+              <option value="">Brands</option>
               <option value="Apple">Apple</option>
               <option value="Motorola">Motorola</option>
               <option value="Samsung">Samsung</option>
@@ -451,8 +451,8 @@ const Form = () => {
 
           <div >
             <label className={style.label__form}>Category: </label>
-            <select onChange={handleSelectCategory} defaultValue='category'>
-              <option disabled>Category</option>
+            <select onChange={handleSelectCategory}>
+              <option value="">Category</option>
               <option value="Celular">Celular</option>
               <option value="Auricular">Auricular</option>
             </select>
