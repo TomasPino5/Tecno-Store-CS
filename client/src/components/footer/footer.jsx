@@ -1,8 +1,15 @@
 import style from "./footer.module.css";
+import image from "../../imag/Home/Logo_arquitectura_corporativo_verde_mostaza.png";
+
 const Footer = () => {
   return (
     <footer className={style.Footer}>
       <div className={style.container_foot}>
+
+        <div className={style.ordenador}>
+          <img src={image} alt="tecnoStore" className={style.img__logo} />
+        </div>
+
         <div className={style.colum1}>
           <p className={style.colum1_p}>Mas informacion sobre Tecno Store SC</p>
           <span className={style.colum1_spn}>
