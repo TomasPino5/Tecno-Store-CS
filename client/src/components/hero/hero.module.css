@@ -2,104 +2,135 @@
 
 /* Clases generales */
 .bgGray50 {
-    background-color: #f9fafb;
-    width: 100%;
+  background-color: #f9fafb;
+  width: 100%;
+}
+
+.mxAuto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.maxW7xl {
+  max-width: 80rem; /* 1280px */
+}
+
+.py12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.px4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.smPx6 {
+  @media (min-width: 640px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
-  
-  .mxAuto {
-    margin-left: auto;
-    margin-right: auto;
+}
+
+.lgFlex {
+  display: flex;
+}
+
+.lgItemsCenter {
+  align-items: center;
+}
+
+.lgJustifyBetween {
+  justify-content: space-between;
+}
+
+.lgPy16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.lgPx8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.text3xl {
+  font-size: 1.875rem; /* 30px */
+}
+
+.fontBold {
+  font-weight: 700;
+}
+
+.trackingTight {
+  letter-spacing: -0.025em;
+}
+
+.textGray900 {
+  color: #374151;
+}
+
+.smText4xl {
+  @media (min-width: 640px) {
+    font-size: 2.25rem; /* 36px */
   }
-  
-  .maxW7xl {
-    max-width: 80rem; /* 1280px */
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.mt8 {
+  margin-top: 2rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.lgMt0 {
+  @media (min-width: 1024px) {
+    margin-top: 0;
   }
-  
-  .py12 {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+}
+
+.lgFlexShrink0 {
+  @media (min-width: 1024px) {
+    flex-shrink: 0;
   }
-  
-  .px4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  .smPx6 {
-    @media (min-width: 640px) {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-  
-  .lgFlex {
-    display: flex;
-  }
-  
-  .lgItemsCenter {
-    align-items: center;
-  }
-  
-  .lgJustifyBetween {
-    justify-content: space-between;
-  }
-  
-  .lgPy16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-  
-  .lgPx8 {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  
-  .text3xl {
-    font-size: 1.875rem; /* 30px */
-  }
-  
-  .fontBold {
-    font-weight: 700;
-  }
-  
-  .trackingTight {
-    letter-spacing: -0.025em;
-  }
-  
-  .textGray900 {
-    color: #374151;
-  }
-  
-  .smText4xl {
-    @media (min-width: 640px) {
-      font-size: 2.25rem; /* 36px */
-    }
-  }
-  
-  .textLeft {
-    text-align: left;
-  }
-  
-  .mt8 {
-    margin-top: 2rem;
-  }
-  
-  .flex {
-    display: flex;
-  }
-  
-  .lgMt0 {
-    @media (min-width: 1024px) {
-      margin-top: 0;
-    }
-  }
-  
-  .lgFlexShrink0 {
-    @media (min-width: 1024px) {
-      flex-shrink: 0;
-    }
-  }
-  
-  .textGreen600 {
-    color: #10b981;
-  }
+}
+
+.textGreen600 {
+  color: #10b981;
+}
+
+/* Botones y estilos relacionados */
+.btnNextPrev {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btnNextPrev:hover {
+  background-color: #4338ca;
+}
+
+.limpiarF {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.limpiarF:hover {
+  background-color: #e5e7eb;
+}
+
+/* Otros estilos específicos */
+/* Agrega tus estilos específicos aquí */

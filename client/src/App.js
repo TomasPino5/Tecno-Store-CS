@@ -7,6 +7,7 @@ import Error from "./components/error/error";
 import Form from "./components/form/form";
 import Login from "./components/loginForm/loginForm";
 import Footer from "./components/footer/footer";
+import Cart from "./components/cart/cart";
 import "./App.css";
 import Carousel from "./components/carousel/Carouseel.jsx";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Carousel />} />
+        <Route path="/cart" element={<Cart />} />
 
       </Routes>
       <Footer />
