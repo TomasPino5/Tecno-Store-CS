@@ -151,6 +151,13 @@
   font-size: medium;
   cursor: pointer;
 }
+.carrito {
+  background-color: black;
+  border: 1px solid black;
+  color: #08ef56;
+  font-size: small;
+  cursor: pointer;
+}
 .login:active {
   background-color: black;
   border: 1px solid black;
