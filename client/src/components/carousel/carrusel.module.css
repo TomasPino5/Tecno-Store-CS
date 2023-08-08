@@ -1,0 +1,84 @@
+.marg {
+  margin-top: 30px;
+}
+.img_carrucel {
+  width: 100%;
+  max-height: 550px; /* Ajusta la altura máxima según tus preferencias */
+  overflow: hidden;
+  margin-bottom: 20px;
+  margin: 0 auto; /* Para centrar el carrusel horizontalmente */
+}
+
+.img_carrucel ul {
+  display: flex;
+  padding: 0px;
+  width: 500%;
+  animation: slide 10s infinite alternate ease-in-out;
+}
+
+.img_carrucel li {
+  width: 100%;
+  list-style: none;
+  position: relative;
+  display: flex; /* Agregado */
+  justify-content: center; /* Agregado */
+  align-items: center; /* Agregado */
+}
+
+.img_carrucel img {
+  width: 100%;
+  height: auto; /* Esto mantendrá la proporción original de la imagen */
+}
+
+@keyframes slide {
+  0% {
+    margin-left: 0;
+  }
+  20% {
+    margin-left: 0;
+  }
+  25% {
+    margin-left: -100%;
+  }
+  40% {
+    margin-left: -100%;
+  }
+  45% {
+    margin-left: -200%;
+  }
+  60% {
+    margin-left: -200%;
+  }
+  65% {
+    margin-left: -300%;
+  }
+  80% {
+    margin-left: -300%;
+  }
+  85% {
+    margin-left: -400%;
+  }
+  100% {
+    margin-left: -400%;
+  }
+}
+.img_carrucel_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button_filter {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.button_filter button {
+  height: 200px;
+  border: 0px;
+}
+
+.button_filter img {
+  height: 100%;
+}
