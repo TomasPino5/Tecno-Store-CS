@@ -148,11 +148,16 @@ const Detail = () => {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
+          <Link to="/products">
+            <button className={style.btnReturn} id="buttonReturn">Return</button>
+=======
 
           <Link to="/">
             <button className={style.btnReturn} id="buttonReturn">
               Return
             </button>
+>>>>>>> 438259f26ce3b440d01007d369f4013d7f336872
           </Link>
           {/* <div className={style.btn__pro}>
             <NavLink to={`/product/${id - 1}`}> back</NavLink>

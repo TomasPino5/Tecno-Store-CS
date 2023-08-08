@@ -1,6 +1,7 @@
 import Cards from "../cards/cards";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// import { NavLink } from "react-router-dom";
 
 import {
   getProducts,
@@ -94,7 +95,10 @@ const Home = () => {
                 <option key={category} value={category}>{category}</option>
               ))}
             </select>
-
+            {/* <NavLink to="/filter/brandfilter/Motorola" className={style.filterLink}>Filter by Motorola</NavLink> */}
+            {/* <NavLink to="/filter/brandfilter/Samsung" className={style.filterLink}>Filter by Samsung</NavLink>
+            <NavLink to="/filter/brandfilter/Apple" className={style.filterLink}>Filter by Apple</NavLink>
+            <NavLink to="/filter/brandfilter/Xiaomi" className={style.filterLink}>Filter by Xiaomi</NavLink> */}
           </div>
 
           <button className={style.limpiarF} onClick={handleClearFilters}>Limpiar Filtros</button>
