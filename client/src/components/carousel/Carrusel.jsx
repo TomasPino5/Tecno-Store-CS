@@ -25,10 +25,12 @@ const Carrusel = () => {
             alt="logo motorola "
           />
         </div>
+
         </Link>
 
         <Link to = "/products">
         <div className="img2">
+
           <img
             className="img"
             src="https://i.ibb.co/bgptHWh/logo-samsung.jpg"
@@ -39,16 +41,19 @@ const Carrusel = () => {
 
         <Link to = "/products">
         <div className="img2">
+
           <img
             className="img"
             src="https://i.ibb.co/FVv7FRZ/logo-iphone.jpg"
             alt="logo apple"
           />
         </div>
+
         </Link>
 
         <Link to = "/products">
         <div className="img2">
+
           <img
             className="img"
             src="https://i.ibb.co/KGJtsS0/logo-xiaomi.jpg"
