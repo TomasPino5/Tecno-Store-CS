@@ -21,7 +21,7 @@ const Nav = () => {
         <button className={style.button}>
           <span className={style.actualtext}>&nbsp;Tecno/Store&nbsp;</span>
           <span
-            onClick={handleClearFilters}
+            // onClick={handleClearFilters}
             className={style.hovertext}
             aria-hidden="true"
           >
