@@ -7,7 +7,10 @@ import {
   ORDER_BY_PRICE,
   POST_PRODUCT,
   CLEAR_DETAIL,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  ADD_TO_CART, 
+  REMOVE_FROM_CART, 
+  CLEAR_CART,
 } from "./action-types";
 
 const initialState = {
@@ -17,7 +20,8 @@ const initialState = {
   filteredProducts: [],
   filteredProductsCopy: [],
   brands: [],
-  categories: []
+  categories: [],
+  items: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -107,6 +111,54 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: state.allProductsCopy,
+      };
+    
+
+    case ADD_TO_CART:
+      const { id } = action.payload;
+      const productInCartIndex = state.items.findIndex(
+        (item) => item.id === id
+      );
+
+      if (productInCartIndex >= 0) {
+        const newState = [
+          ...state.items.slice(0, productInCartIndex),
+          {
+            ...state.items[productInCartIndex],
+            quantity: state.items[productInCartIndex].quantity + 1,
+          },
+          ...state.items.slice(productInCartIndex + 1),
+        ];
+
+        return {
+          ...state,
+          items: newState,
+        };
+        // updateLocalStorage(newState)
+      }
+
+      const newProduct = {
+        ...action.payload, // product
+        quantity: 1,
+      };
+
+      return {
+        ...state,
+        items: [...state.items, newProduct],
+      };
+      // updateLocalStorage(newState)
+
+
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        items: state.items.filter(item => item.id !== id)
+      };
+
+    case CLEAR_CART:
+      return {
+        ...state,
+        items: []
       };
 
 
