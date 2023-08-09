@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, clearDetail } from "../../redux/actions";
+import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
@@ -9,6 +9,7 @@ import style from "./detail.module.css";
 const Detail = () => {
   //HOOKS
   const myProduct = useSelector((state) => state.productDetail);
+  // const items = useSelector((state) => state.items)
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -28,8 +29,8 @@ const Detail = () => {
   //   }
   // }
   function buyNow() {
+    dispatch(addToCart(myProduct))
     alert(`¡Producto añadido al carrito!`);
-    // Aquí podrías agregar lógica adicional relacionada con la compra ahora
   }
 
   //useEffect
