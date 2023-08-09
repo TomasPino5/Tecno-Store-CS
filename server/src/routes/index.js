@@ -24,7 +24,7 @@ router.get("/dbproducts", getDbProducts);
 
 
 //Ruta para traer un usuario
-router.get('/getuser', getUser);
+router.get('/getuser/:email', getUser);
 
 //Ruta para almacenar un nuevo producto al db
 router.post("/productos", postCreateProduct);

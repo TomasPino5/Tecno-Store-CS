@@ -2,18 +2,20 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
+import { getUser } from "../../redux/actions";
 
 const UserProfile = ()=>{
 
     const { user, isAuthenticated} = useAuth0();
 
     const dispatch = useDispatch();
-    const dataUser = useSelector((state)=>state.user);
+    //const dataUser = useSelector((state)=>state.user);
+    const email = user.email
 
     useEffect(()=>{
-        // dispatch(user);
-    },[dispatch, user]);
-    console.log(user);
+        dispatch(getUser(email));
+    },[dispatch, email]);
+    console.log(email);
 
     return(
         <div>

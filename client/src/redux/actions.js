@@ -50,9 +50,9 @@ export function getProductDetails(id) {
 };
 
 //action que trae el usuario
-export function getUser(user) { 
+export function getUser(email) { 
     return async function (dispatch) {
-        const json = await axios.get('http://localhost:3001/getuser', user);
+        const json = await axios.get(`http://localhost:3001/getuser/${email}`);
         const data = json.data;
         dispatch({
             type: GET_USER,
