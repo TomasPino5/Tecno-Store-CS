@@ -22,7 +22,6 @@ function App() {
         <Route path="*" element={<Error />} />
         <Route path="/form" element={<Form />} />
         <Route path="/" element={<Carousel />} />
-        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </div>
