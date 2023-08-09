@@ -3,11 +3,12 @@ const { getAllProductsHandler } = require("../handlers/getAllProductsHandler");
 const { getDetailHandler } = require("../handlers/getProductDetailHandler");
 const getDbProducts = require("../controllers/getDbProducts.js");
 const postCreateProduct = require("../controllers/postCreateProduct");
-const postUser = require('../controllers/postUser.js');
-const postFavProducts = require('../controllers/postFavProducts');
-const stripe = require ("stripe")(
-    "sk_test_51NcvqGCNUAoI7WlfYdjceaTV47v9U1dGeTSVFPqhmgJ1fJF6vWO84ER7VQater3g88Xx4Gs4TayyCGDff2Au0h7T00nAgIEDyr"
-    );
+const postUser = require("../controllers/postUser.js");
+const Stripe = require("stripe");
+const postFavProducts = require("../controllers/postFavProducts");
+const stripe = require("stripe")(
+  "sk_test_51NcvqGCNUAoI7WlfYdjceaTV47v9U1dGeTSVFPqhmgJ1fJF6vWO84ER7VQater3g88Xx4Gs4TayyCGDff2Au0h7T00nAgIEDyr"
+);
 
 const router = Router();
 
@@ -24,23 +25,20 @@ router.get("/dbproducts", getDbProducts);
 router.post("/productos", postCreateProduct);
 
 //Ruta para crear un nuevo usuario (no funciona todavia)
-router.post('/login', postUser);
+router.post("/login", postUser);
 
 //Ruta para agregar producto favorito (no funciona todavia)
-router.post('/productfav', postFavProducts);
-
-
+router.post("/productfav", postFavProducts);
 
 router.post("/checkout", async (req, res) => {
-    const items = req.body.items;
-    let arrayItems = [];
-    items.forEach((item) => {
-      arrayItems.push({
-        price: item.id,
-        quantity: item.quantity,
-      });
+  const items = req.body.items;
+  let arrayItems = [];
+  items.forEach((item) => {
+    arrayItems.push({
+      price: item.id,
+      quantity: item.quantity,
     });
-    
+  });
 
   const session = await stripe.checkout.sessions.create({
     line_items: arrayItems,
@@ -55,6 +53,5 @@ router.post("/checkout", async (req, res) => {
     })
   );
 });
-
 
 module.exports = router;
