@@ -6,7 +6,7 @@ const postUser = async(req, res)=>{
         const userEmail = await Users.findOne({where:{email}});
         const userName = await Users.findOne({where:{name}});
         if(userEmail || userName){
-            res.status(409).json({message:'Ya existe un usuario con esos datos'});
+            res.status(200).json({message:'Ya existe un usuario con esos datos'});
         }
         else{
             await Users.create({name, email, email_verified, picture});

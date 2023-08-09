@@ -1,11 +1,19 @@
 // import { Link } from "react-router-dom";
-// import { useAuth0 } from "@auth0/auth0-react";
-
-
+import { useAuth0 } from "@auth0/auth0-react";
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect} from 'react';
 
 const UserProfile = ()=>{
 
-    // const { user, isAuthenticated} = useAuth0();
+    const { user, isAuthenticated} = useAuth0();
+
+    const dispatch = useDispatch();
+    const dataUser = useSelector((state)=>state.user);
+
+    useEffect(()=>{
+        // dispatch(user);
+    },[dispatch, user]);
+    console.log(user);
 
     return(
         <div>
