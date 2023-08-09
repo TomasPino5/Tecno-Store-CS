@@ -52,19 +52,61 @@ const Carrusel = () => {
         </div>
       </div>
       <div className={style.button_filter}>
-        <button>
-          <img src="https://i.ibb.co/Z89607V/logo-motorola.jpg" alt="" />
-        </button>
-        <button>
-          <img src="https://i.ibb.co/bgptHWh/logo-samsung.jpg" alt="" />
-        </button>
-        <button>
-          <img src="https://i.ibb.co/FVv7FRZ/logo-iphone.jpg" alt="" />
-        </button>
-        <button>
-          <img src="https://i.ibb.co/KGJtsS0/logo-xiaomi.jpg" alt="" />
-        </button>
+        <Link to={{ pathname: "/products" }}>
+          <button>
+            <img src="https://i.ibb.co/Z89607V/logo-motorola.jpg" alt="" />
+          </button>
+        </Link>
+
+        <Link to={{ pathname: "/products" }}>
+          <button>
+            <img src="https://i.ibb.co/bgptHWh/logo-samsung.jpg" alt="" />
+          </button>
+        </Link>
+
+        <Link to={{ pathname: "/products" }}>
+          <button>
+            <img src="https://i.ibb.co/FVv7FRZ/logo-iphone.jpg" alt="" />
+          </button>
+        </Link>
+
+        <Link to={{ pathname: "/products" }}>
+          <button>
+            <img src="https://i.ibb.co/KGJtsS0/logo-xiaomi.jpg" alt="" />
+          </button>
+        </Link>
       </div>
+      <div>
+        <Link
+          style={{ textDecoration: "none", color: "blue" }}
+          to={{ pathname: "/products" }}
+          className={style.linkWrapper}
+        >
+          <p className={style.pp}>Mira todos nuestros productos</p>
+        </Link>
+      </div>
+      <div className={style.aboutSection}>
+        <p className={style.aboutText}>
+          Somos una empresa comprometida con la calidad y excelencia en la
+          industria de la tecnología. Ofrecemos una amplia gama de productos de
+          alta calidad que satisfacen las necesidades de nuestros clientes.
+        </p>
+      </div>
+      <div className={style.aboutSectionDer}>
+        <p className={style.aboutText}>
+          Además, contamos con un equipo de profesionales capacitados que se
+          dedican a brindar un servicio excepcional en la reparación y
+          mantenimiento de dispositivos móviles.
+        </p>
+      </div>
+      <div className={style.aboutSection}>
+        <p className={style.aboutText}>
+          En Tecno Store CS, nos esforzamos por ser líderes en la industria y
+          proporcionar soluciones confiables y eficientes para todos nuestros
+          clientes.
+        </p>
+      </div>
+
       <Slider className="slider" {...settings}>
         <Link to="/products">
           <div className="img2">

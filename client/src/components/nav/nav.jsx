@@ -1,5 +1,5 @@
 import SearchBar from "../searchbar/searchbar";
-import React from "react"; //{ useState } 
+import React from "react"; //{ useState }
 import { Profile } from "../profile/profile";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -16,7 +16,6 @@ const Nav = () => {
 
   return (
     <nav className={style.navContainer}>
-
       <NavLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
         <button className={style.button}>
           <span className={style.actualtext}>&nbsp;Tecno/Store&nbsp;</span>
@@ -43,8 +42,6 @@ const Nav = () => {
       <div className={style.SearchBarPosition}>
         {location.pathname === "/products" ? <SearchBar /> : null}
       </div>
-
-      <Cart />
 
       {/* <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <NavLink to="/cart">
@@ -77,23 +74,12 @@ const Nav = () => {
         </NavLink>
       </div>
 
-
       <div className={style.login}>
         {/* <button className={style.login} onClick={handleLoginButtonClick}>
             Login
           </button> */}
 
-        {isAuthenticated ? (
-          <>
-            <Profile />
-            <LogoutButton />
-          </>
-        ) : (
-          <LoginButton />
-        )}
-
-
-        {location.pathname === "/products" ?
+        {location.pathname === "/products" ? (
           <NavLink to="/form">
             <button className={style.newProduct}>
               <div tabIndex={0} className={style.plusButton}>
@@ -109,7 +95,15 @@ const Nav = () => {
               </div>
             </button>
           </NavLink>
-          : null}
+        ) : null}
+        {isAuthenticated ? (
+          <>
+            <Profile />
+            <LogoutButton />
+          </>
+        ) : (
+          <LoginButton />
+        )}
       </div>
     </nav>
   );
