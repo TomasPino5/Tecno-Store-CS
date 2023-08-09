@@ -1,19 +1,73 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, clearDetail } from "../../redux/actions";
+
+import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
 import { useEffect, useState } from "react";
+
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
 
+const stripePromise = loadStripe(
+  "sk_test_51NcvqGCNUAoI7WlfYdjceaTV47v9U1dGeTSVFPqhmgJ1fJF6vWO84ER7VQater3g88Xx4Gs4TayyCGDff2Au0h7T00nAgIEDyr"
+);
+
+const useHandleBuyNow = (product) => {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleBuyNow = async () => {
+    if (!stripe || !elements) return;
+
+    console.log("Initiating payment process...");
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
+    });
+
+    if (!error) {
+      const { id } = paymentMethod;
+      try {
+        console.log("Creating payment intent...");
+
+        const { data } = await axios.post(
+          "http://localhost:3001/api/checkout",
+          {
+            id,
+            amount: product.price * 100, // Convertir el precio a centavos
+          }
+        );
+        console.log("Payment successful:", data);
+
+        elements.getElement(CardElement).clear();
+      } catch (error) {
+        console.log("Payment error:", error);
+      }
+    }
+  };
+
+  return handleBuyNow;
+};
+
 const Detail = () => {
-  //HOOKS
   const myProduct = useSelector((state) => state.productDetail);
+  // const items = useSelector((state) => state.items)
   const dispatch = useDispatch();
   const { id } = useParams();
+  const handleBuyNow = useHandleBuyNow(myProduct);
 
-  //STATE
+  // STATE
   const [loading, setLoading] = useState(false);
+
   // const [cartQuantity, setCartQuantity] = useState(1); // Estado para la cantidad en el carrito
 
   // function decrementCartQuantity() {
@@ -28,11 +82,12 @@ const Detail = () => {
   //   }
   // }
   function buyNow() {
+    dispatch(addToCart(myProduct))
     alert(`¡Producto añadido al carrito!`);
-    // Aquí podrías agregar lógica adicional relacionada con la compra ahora
   }
 
   //useEffect
+
   useEffect(() => {
     setLoading(true);
 
@@ -40,20 +95,17 @@ const Detail = () => {
       setLoading(false);
     }, 1200);
     dispatch(getProductDetails(id));
-    //cuando se desmonta
+
     return () => {
       dispatch(clearDetail());
     };
   }, [dispatch, id]);
-  const { price } = myProduct;
-  const formatPriceWithDots = (price) => {
-    return price.toLocaleString();
-  };
 
+  // RENDER
   return (
-    <div className={style.detail}>
-      {!loading ? (
-        <>
+    <Elements stripe={stripePromise}>
+      <div className={style.detail}>
+        {!loading ? (
           <div className={style.detailContainer}>
             <div className={style.img__c}>
               <img
@@ -71,11 +123,10 @@ const Detail = () => {
                   <h3 className={style.N__t}>{myProduct.name}</h3>
                 )}
               </div>
-
               <h4 className={style.N__Pr}>
                 Price:{" "}
-                {price
-                  ? `$${formatPriceWithDots(price)}`
+                {myProduct.price
+                  ? `$${myProduct.price.toLocaleString()}`
                   : "Price not available"}
               </h4>
               <p className={style.N__p}>Ver los medios de pago</p>
@@ -94,21 +145,6 @@ const Detail = () => {
                 </p>
                 <p className={style.N__ST}>Stock: {myProduct?.stock}</p>
               </div>
-              {/* <div className={style.cart__controls}>
-                <button
-                  className={style.decrement__button}
-                  onClick={decrementCartQuantity}
-                >
-                  -
-                </button>
-                {cartQuantity}
-                <button
-                  className={style.increment__button}
-                  onClick={incrementCartQuantity}
-                >
-                  +
-                </button>
-              </div> */}
               <div className={style.color__container}>
                 <p className={style.N__cp}>Color:</p>
                 <button className={style.btn1}></button>
@@ -118,52 +154,51 @@ const Detail = () => {
               </div>
               <div>
                 <p className={style.N__D}>
-                  Description {myProduct?.description}
+                  Description: {myProduct?.description}
                 </p>
               </div>
-              <div className={style.btn__c}>
-                <div
-                  data-tooltip={`$${myProduct?.price}`}
-                  className={style.button}
-                >
-                  <div className={style.button_wrapper}>
-                    <button className={style.buy__button} onClick={buyNow}>
-                      <div className={style.text}>Buy Now</div>
-                      <span className={style.icon}>
-                        <svg
-                          viewBox="0 0 16 16"
-                          className={style.bi_cart2}
-                          fill="currentColor"
-                          height="16"
-                          width="16"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          {/* ... (código del ícono) */}
-                        </svg>
-                      </span>
-                    </button>
+              {myProduct?.price && (
+                <div className={style.btn__c}>
+                  <div
+                    data-tooltip={`$${myProduct.price}`}
+                    className={style.button}
+                  >
+                    <div className={style.button_wrapper}>
+                      <button
+                        className={style.buy__button}
+                        onClick={handleBuyNow}
+                      >
+                        <div className={style.text}>Buy Now</div>
+                        <span className={style.icon}>
+                          <svg
+                            viewBox="0 0 16 16"
+                            className={style.bi_cart2}
+                            fill="currentColor"
+                            height="16"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          ></svg>
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
+        ) : (
+          <div>
+            <Loading />
+          </div>
+        )}
 
-          <Link to="/products">
-            <button className={style.btnReturn} id="buttonReturn">Return</button>
-          </Link>
-
-      
-          {/* <div className={style.btn__pro}>
-            <NavLink to={`/product/${id - 1}`}> back</NavLink>
-            <NavLink to={`/product/${parseInt(id) + 1}`}> next</NavLink>
-          </div> */}
-        </>
-      ) : (
-        <div>
-          <Loading />
-        </div>
-      )}
-    </div>
+        <Link to="/products">
+          <button className={style.btnReturn} id="buttonReturn">
+            Return
+          </button>
+        </Link>
+      </div>
+    </Elements>
   );
 };
 

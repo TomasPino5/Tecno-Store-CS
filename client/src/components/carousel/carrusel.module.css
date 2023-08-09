@@ -82,3 +82,25 @@
 .button_filter img {
   height: 100%;
 }
+
+.p_p {
+  font-size: 20px; /* Ajusta el valor según tu preferencia */
+}
+/* En tu archivo CSS o módulo de estilos */
+.linkWrapper {
+  display: inline-block;
+}
+
+.linkWrapper p {
+  margin: 0; /* Elimina el margen del párrafo para ajustar el área sensible */
+  margin-top: -20px;
+  margin-bottom: 20px;
+  font-size: 20px; /* Ajusta el valor según tu preferencia */
+}
+
+.aboutSection {
+  height: 200px;
+}
+.aboutSectionDer {
+  height: 200px;
+}
