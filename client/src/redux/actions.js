@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
     GET_PRODUCTS, GET_PRODUCT_NAME,GET_DETAILS,
     FILTER_BY_BRAND, FILTER_CREATED, FILTER_BY_CATEGORY,
-    ORDER_BY_PRICE, CLEAR_DETAIL, CLEAR_FILTER,
+    ORDER_BY_PRICE, CLEAR_DETAIL, CLEAR_FILTER, ADD_TO_CART, 
+    REMOVE_FROM_CART, CLEAR_CART,
 } from "./action-types";
 
 // Obtener los productos desde la API 
@@ -100,3 +101,24 @@ export function clearFilter() {
         type: CLEAR_FILTER,
     }
 }
+
+//Cart
+export function addToCart(product) {
+    return {
+        type: ADD_TO_CART,
+        payload: product
+    }
+};
+    
+export function removeFromCart(product) {
+    return {
+        type: REMOVE_FROM_CART,
+        payload: product
+    }
+};
+    
+export function clearCart() {
+    return {
+        type: CLEAR_CART
+    }
+};

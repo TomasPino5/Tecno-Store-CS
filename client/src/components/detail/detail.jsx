@@ -9,7 +9,10 @@ import {
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, clearDetail } from "../../redux/actions";
+
+import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
+import { useEffect, useState } from "react";
+
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
 
@@ -57,6 +60,7 @@ const useHandleBuyNow = (product) => {
 
 const Detail = () => {
   const myProduct = useSelector((state) => state.productDetail);
+  // const items = useSelector((state) => state.items)
   const dispatch = useDispatch();
   const { id } = useParams();
   const handleBuyNow = useHandleBuyNow(myProduct);
@@ -64,7 +68,26 @@ const Detail = () => {
   // STATE
   const [loading, setLoading] = useState(false);
 
-  // EFFECT
+  // const [cartQuantity, setCartQuantity] = useState(1); // Estado para la cantidad en el carrito
+
+  // function decrementCartQuantity() {
+  //   if (cartQuantity > 1) {
+  //     setCartQuantity(cartQuantity - 1);
+  //   }
+  // }
+
+  // function incrementCartQuantity() {
+  //   if (cartQuantity < myProduct.stock) {
+  //     setCartQuantity(cartQuantity + 1);
+  //   }
+  // }
+  function buyNow() {
+    dispatch(addToCart(myProduct))
+    alert(`¡Producto añadido al carrito!`);
+  }
+
+  //useEffect
+
   useEffect(() => {
     setLoading(true);
 
