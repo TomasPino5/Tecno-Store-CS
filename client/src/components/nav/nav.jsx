@@ -1,5 +1,4 @@
 import SearchBar from "../searchbar/searchbar";
-import React, { useState } from "react";
 import { Profile } from "../profile/profile";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -8,8 +7,9 @@ import { LogoutButton } from "../logout/logout";
 import { useAuth0 } from "@auth0/auth0-react";
 import image from "../../imag/Home/Logo_arquitectura_corporativo_verde_mostaza.png";
 import style from "../nav/nav.module.css";
+import Cart from "../cart/cart";
 
-const Nav = ({ handleClearFilters }) => {
+const Nav = () => {
   const location = useLocation();
   const { isAuthenticated } = useAuth0();
 
@@ -37,7 +37,8 @@ const Nav = ({ handleClearFilters }) => {
       <div className={style.SearchBarPosition}>
         {location.pathname === "/products" ? <SearchBar /> : null}
       </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <Cart />
+      {/* <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <NavLink to="/cart">
           <a href="/cart">
             <button type="button" class={style.carrito}>
@@ -60,7 +61,7 @@ const Nav = ({ handleClearFilters }) => {
           </a>
           <span class="text-gray-400 text-xs mb-6 ml-[-4px]">1</span>
         </NavLink>
-      </div>
+      </div> */}
 
       <div className={style.container}>
         <NavLink to="/products">
