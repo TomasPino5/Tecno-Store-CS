@@ -8,8 +8,9 @@ import { LogoutButton } from "../logout/logout";
 import { useAuth0 } from "@auth0/auth0-react";
 //import image from "../../imag/Home/Logo_arquitectura_corporativo_verde_mostaza.png";
 import style from "../nav/nav.module.css";
+import Cart from "../cart/cart";
 
-const Nav = ({ handleClearFilters }) => {
+const Nav = () => {
   const location = useLocation();
   const { isAuthenticated } = useAuth0();
 
@@ -43,6 +44,7 @@ const Nav = ({ handleClearFilters }) => {
         {location.pathname === "/products" ? <SearchBar /> : null}
       </div>
 
+      <Cart />
 
       {/* <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <NavLink to="/cart">
