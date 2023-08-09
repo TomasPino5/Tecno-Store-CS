@@ -94,3 +94,12 @@ footer {
 .column2 {
   margin-bottom: 10px;
 }
+
+.img__logo {
+  margin-top: 20px;
+  height: 180px;
+  margin-left: 10px;
+}
+.ordenador {
+  display: flex;
+}
