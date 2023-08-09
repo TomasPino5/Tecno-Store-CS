@@ -23,7 +23,7 @@ router.get("/dbproducts", getDbProducts);
 //Ruta para almacenar un nuevo producto al db
 router.post("/productos", postCreateProduct);
 
-//Ruta para crear un nuevo usuario (no funciona todavia)
+//Ruta para crear un nuevo usuario
 router.post('/login', postUser);
 
 //Ruta para agregar producto favorito (no funciona todavia)

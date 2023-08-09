@@ -1,3 +1,4 @@
+const data = require('../data.js');
 const sequelize = require('../db.js');
 const {DataTypes} = require('sequelize');
 
@@ -14,6 +15,22 @@ const Users = sequelize.define('users',{
     email:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    direction:{
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    telefone:{
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    email_verified:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    picture:{
+        type: DataTypes.TEXT,
+        allowNull: true
     }
 },{
     timestamps: false

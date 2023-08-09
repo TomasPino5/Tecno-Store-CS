@@ -1,19 +1,21 @@
 const Users = require('../models/users.js');
 
 const postUser = async(req, res)=>{
-    const {name, email} = req.body;
+    const {name, email, email_verified, picture} = req.body;
     try{
-        if(!name || !email){
-            res.status(400).send('Faltan datos');
+        const userEmail = await Users.findOne({where:{email}});
+        const userName = await Users.findOne({where:{name}});
+        if(userEmail || userName){
+            res.status(409).json({message:'Ya existe un usuario con esos datos'});
         }
         else{
-            const user = await Users.create({name, email});
-            res.status(200).json(user);
+            await Users.create({name, email, email_verified, picture});
+            res.status(200).json({ message: 'Usuario creado...'});
         }
     }
     catch(error){
-        res.status(500).json({message: error.message});
-    }
+        res.status(500).json({message: error.message})
+   }
 }
 
 module.exports = postUser;
