@@ -1,26 +1,36 @@
 import './cart.css'
 import { ClearCartIcon, CartIcon } from './icons'
-import { useSelector } from 'react-redux'
-import { addToCart } from '../../redux/actions'
-
-function CartItem({ imageSrc, imageAlt, price, name, quantity }) {
-    return (
-        <li>
-            <img src={imageSrc} alt={imageAlt} />
-            <div>
-                <strong>{name}</strong> - ${price}
-            </div>
-            <footer>
-                <small>Cant. {quantity}</small>
-                <button onClick={addToCart}>+</button>
-            </footer>
-        </li>
-    )
-}
+import { useSelector, useDispatch } from 'react-redux'
+import { addToCart, clearCart } from '../../redux/actions'
 
 export default function Cart() {
 
     const items = useSelector((state) => state.items)
+
+    const dispatch = useDispatch()
+
+    const addToCartHandler = (product) => {
+        dispatch(addToCart(product))
+    }
+
+    const clearCartHandler = () => {
+        dispatch(clearCart(items))
+    }
+
+    function CartItem({ id, imageSrc, imageAlt, price, name, quantity }) {
+        return (
+            <li>
+                <img src={imageSrc} alt={imageAlt} />
+                <div>
+                    <strong>{name}</strong> - ${price}
+                </div>
+                <footer>
+                    <small>Cant. {quantity}</small>
+                    <button onClick={() => addToCartHandler({ id, imageSrc, imageAlt, price, name, quantity })}>+</button>
+                </footer>
+            </li>
+        )
+    }
 
     return (
         <>
@@ -33,12 +43,12 @@ export default function Cart() {
                     {items.map(product => (
                         <CartItem 
                             key={product.id}
-                            addToCart={() => addToCart(product)}
+                            value={() => addToCart(product)}
                             {...product}
                         />
                     ))}
                 </ul>
-                <button> <ClearCartIcon /> </button>
+                <button onClick={clearCartHandler}> <ClearCartIcon /> </button>
             </aside>
         </>
     )
