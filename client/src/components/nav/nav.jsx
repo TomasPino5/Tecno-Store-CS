@@ -8,8 +8,9 @@ import { LogoutButton } from "../logout/logout";
 import { useAuth0 } from "@auth0/auth0-react";
 //import image from "../../imag/Home/Logo_arquitectura_corporativo_verde_mostaza.png";
 import style from "../nav/nav.module.css";
+import Cart from "../cart/cart";
 
-const Nav = ({ handleClearFilters }) => {
+const Nav = () => {
   const location = useLocation();
   const { isAuthenticated } = useAuth0();
 
@@ -19,7 +20,7 @@ const Nav = ({ handleClearFilters }) => {
         <button className={style.button}>
           <span className={style.actualtext}>&nbsp;Tecno/Store&nbsp;</span>
           <span
-            onClick={handleClearFilters}
+            // onClick={handleClearFilters}
             className={style.hovertext}
             aria-hidden="true"
           >

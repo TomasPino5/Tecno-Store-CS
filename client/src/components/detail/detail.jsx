@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearDetail } from "../../redux/actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
 
@@ -13,23 +13,22 @@ const Detail = () => {
   const { id } = useParams();
 
   //STATE
-  let [loading, setLoading] = React.useState(false);
-  const [cartQuantity, setCartQuantity] = React.useState(1); // Estado para la cantidad en el carrito
+  const [loading, setLoading] = useState(false);
+  // const [cartQuantity, setCartQuantity] = useState(1); // Estado para la cantidad en el carrito
 
-  function decrementCartQuantity() {
-    if (cartQuantity > 1) {
-      setCartQuantity(cartQuantity - 1);
-    }
-  }
+  // function decrementCartQuantity() {
+  //   if (cartQuantity > 1) {
+  //     setCartQuantity(cartQuantity - 1);
+  //   }
+  // }
 
-  function incrementCartQuantity() {
-    if (cartQuantity < myProduct.stock) {
-      setCartQuantity(cartQuantity + 1);
-    }
-  }
+  // function incrementCartQuantity() {
+  //   if (cartQuantity < myProduct.stock) {
+  //     setCartQuantity(cartQuantity + 1);
+  //   }
+  // }
   function buyNow() {
-    const totalQuantity = cartQuantity; // Obtén la cantidad actual del carrito
-    alert(`¡Compraste ${totalQuantity} unidades!`);
+    alert(`¡Producto añadido al carrito!`);
     // Aquí podrías agregar lógica adicional relacionada con la compra ahora
   }
 
@@ -95,7 +94,7 @@ const Detail = () => {
                 </p>
                 <p className={style.N__ST}>Stock: {myProduct?.stock}</p>
               </div>
-              <div className={style.cart__controls}>
+              {/* <div className={style.cart__controls}>
                 <button
                   className={style.decrement__button}
                   onClick={decrementCartQuantity}
@@ -109,7 +108,7 @@ const Detail = () => {
                 >
                   +
                 </button>
-              </div>
+              </div> */}
               <div className={style.color__container}>
                 <p className={style.N__cp}>Color:</p>
                 <button className={style.btn1}></button>
