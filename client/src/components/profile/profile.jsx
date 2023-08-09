@@ -3,13 +3,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "../Loading/Loading"
 import axios from "axios";
 import { useEffect } from "react"
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log(user)
       const info = async () => {
         const userData = {
           name: user.name?user.name:user.nickname,
@@ -21,12 +21,12 @@ export const Profile = () => {
           const response = await axios.post('http://localhost:3001/login', userData);
           console.log(response.data.message);
         } catch (error) {
-          console.error('Error al guardar los datos:', error);
+          // console.log('Error al guardar los datos:', error);
         }
       };
       info();
     }
-  }, [isAuthenticated, user.name, user.email]);
+  }, [isAuthenticated, user.name, user.email, user.email_verified, user.picture, user.nickname]);
 
   if (isLoading) {
     return <Spinner />;
@@ -35,12 +35,21 @@ export const Profile = () => {
   return (
     isAuthenticated && (
       <div>
-        <div className={style.img_container_prof}>
-          <img className={style.img_prof} src={user.picture} alt={user.name} />
+        <div>
+          <Link to={'/userProfile'}>
+          <img src={user.picture} alt={user.name} />
+          </Link>
         </div>
-        <h2>{user.name}</h2>
         <p>Email: {user.email}</p>
       </div>
     )
   );
 };
+
+
+// export const getProducts = () => {
+//       return dispatch({
+//           type: GET_USER,
+//           payload: user
+//       })
+// };

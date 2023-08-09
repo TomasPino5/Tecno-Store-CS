@@ -11,7 +11,6 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
-import { useEffect, useState } from "react";
 
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
