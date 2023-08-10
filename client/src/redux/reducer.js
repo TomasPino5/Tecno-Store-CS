@@ -22,7 +22,7 @@ const initialState = {
   filteredProductsCopy: [],
   brands: [],
   categories: [],
-  items: [],
+  items: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
   user: []
 };
 
@@ -121,51 +121,59 @@ const reducer = (state = initialState, action) => {
       };
     
 
-    case ADD_TO_CART:
-      const { id } = action.payload;
-      const productInCartIndex = state.items.findIndex(
-        (item) => item.id === id
-      );
-
-      if (productInCartIndex >= 0) {
-        const newState = [
-          ...state.items.slice(0, productInCartIndex),
-          {
-            ...state.items[productInCartIndex],
-            quantity: state.items[productInCartIndex].quantity + 1,
-          },
-          ...state.items.slice(productInCartIndex + 1),
-        ];
-
+      case ADD_TO_CART:
+        const { id } = action.payload;
+        const productInCartIndex = state.items.findIndex(
+          (item) => item.id === id
+        );
+      
+        if (productInCartIndex >= 0) {
+          const updatedItems = state.items.map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+          );
+      
+          // Actualiza el almacenamiento local con los elementos actualizados
+          localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+      
+          return {
+            ...state,
+            items: updatedItems,
+          };
+        }
+      
+        const newProduct = {
+          ...action.payload,
+          quantity: 1,
+        };
+      
+        // Actualiza el almacenamiento local con los elementos actualizados
+        localStorage.setItem('cartItems', JSON.stringify([...state.items, newProduct]));
+      
         return {
           ...state,
-          items: newState,
-        };
-        // updateLocalStorage(newState)
-      }
-
-      const newProduct = {
-        ...action.payload, // product
-        quantity: 1,
+          items: [...state.items, newProduct],
       };
 
-      return {
-        ...state,
-        items: [...state.items, newProduct],
+      
+      
+      case REMOVE_FROM_CART:
+        const updatedItems = state.items.filter((item) => item.id !== action.payload);
+      
+        // Actualiza el almacenamiento local con los elementos actualizados
+        localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+      
+        return {
+          ...state,
+          items: updatedItems,
       };
-      // updateLocalStorage(newState)
-
-
-    case REMOVE_FROM_CART:
-      return {
-        ...state,
-        items: state.items.filter(item => item.id !== id)
-      };
-
-    case CLEAR_CART:
-      return {
-        ...state,
-        items: []
+      
+      case CLEAR_CART:
+        // Limpia los elementos del carrito y también del almacenamiento local
+        localStorage.removeItem('cartItems');
+      
+        return {
+          ...state,
+          items: [],
       };
 
 

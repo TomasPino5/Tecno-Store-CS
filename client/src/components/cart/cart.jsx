@@ -11,6 +11,7 @@ export default function Cart() {
 
     const addToCartHandler = (product) => {
         dispatch(addToCart(product))
+        localStorage.setItem('cartItems', JSON.stringify([...items, product]));
     }
 
     const clearCartHandler = () => {
