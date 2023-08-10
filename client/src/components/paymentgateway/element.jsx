@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useSelector } from "react-redux";  
+import { useDispatch, useSelector } from "react-redux"; 
+import { clearCart } from "../../redux/actions";
+import styles from "./element.module.css" 
 
-const CheckoutForm = ({}) => {
+const CheckoutForm = () => {
+  
   const stripe = useStripe();
   const elements = useElements();
   const [mensaje, setMensaje] = useState("");
 
   const totalPrice = useSelector((state) => state.totalPrice);
+  const items = useSelector((state) => state.items);
 
+  const dispatch = useDispatch()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +30,7 @@ const CheckoutForm = ({}) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          producto: { nombre: "Auriculares", precio: totalPrice }, // Cambiar según tus productos
+          producto: { nombre: "producto", precio: totalPrice }, // Cambiar según tus productos
           cantidad: 1, // Cambiar según la cantidad
           token: token,
         }),
@@ -34,11 +39,24 @@ const CheckoutForm = ({}) => {
       const data = await response.json();
       setMensaje(data.mensaje);
     }
+    dispatch(clearCart(items));
   };
 
   return (
-    <div>
-      
+    // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
+    <div className={styles.div0}>
+      {items.map((item) => (
+        <div className={styles.div1} key={item.id}>
+          <p>Nombre: {item.name}</p>
+          <p>Precio: ${item.price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</p>
+          <p>Cantidad: {item.quantity}</p>
+          <p>brand: {item.brand}</p>
+          <p>category: {item.category}</p>
+          <img src={item.imageSrc} alt={item.imageAlt}/>
+          {/* <p>description={item.description}</p> */}
+          <hr style={{border: '1px solid black', margin: '20px 0'}}></hr>
+        </div>
+      ))}
       <div
         style={{
           display: "flex",
