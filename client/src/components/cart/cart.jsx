@@ -28,12 +28,12 @@ export default function Cart() {
             <li>
                 <img src={imageSrc} alt={imageAlt} />
                 <div>
-                    <strong>{name}</strong> - ${price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
+                    <strong className='name' >{name}</strong> - ${price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
                 </div>
                 <footer>
-                    <button onClick={() => removeFromCartHandler({ id, imageSrc, imageAlt, price, name, quantity })}>-</button>
-                    <small>Cant. {quantity}</small>
-                    <button onClick={() => addToCartHandler({ id, imageSrc, imageAlt, price, name, quantity })}>+</button>
+                    <button className='rest' onClick={() => removeFromCartHandler({ id, imageSrc, imageAlt, price, name, quantity })}>-</button>
+                    <small className='small' >Cant. {quantity}</small>
+                    <button className='add' onClick={() => addToCartHandler({ id, imageSrc, imageAlt, price, name, quantity })}>+</button>
                 </footer>
             </li>
         )
@@ -55,13 +55,13 @@ export default function Cart() {
                         />
                     ))}
                 </ul>
-                <div>Total: ${totalPrice.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</div>
+                <div className='TOTAL' >Total: ${totalPrice.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</div>
                 <NavLink
                     to={`/pay`}
                     style={{ textDecoration: "none", color: "inherit" }}> 
-                    <button>Buy</button>
+                    <button className='BUY'>Buy</button>
                 </NavLink>
-                <button onClick={clearCartHandler}> <ClearCartIcon /> </button>
+                <button className='CLEAR' onClick={clearCartHandler}> <ClearCartIcon /> </button>
             </aside>
         </>
     )
