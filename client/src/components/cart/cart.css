@@ -6,6 +6,8 @@
     right: 0px;
     top: 50px;
     width: 200px;
+    max-height: calc(110vh - 110px); /* 100px es la suma del padding y margen del contenedor */
+  overflow-y: auto;
   }
   
   .cart img {

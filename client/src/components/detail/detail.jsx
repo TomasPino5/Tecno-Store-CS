@@ -9,7 +9,9 @@ import {
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, clearDetail } from "../../redux/actions";
+
+import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
+
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
 

@@ -11,6 +11,7 @@ import {
   ADD_TO_CART, 
   REMOVE_FROM_CART, 
   CLEAR_CART,
+  GET_USER,
 } from "./action-types";
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   filteredProductsCopy: [],
   brands: [],
   categories: [],
-  items: []
+  items: [],
+  user: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -49,6 +51,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         productDetail: action.payload,
       };
+    case GET_USER:
+      return{
+        ...state,
+        user: action.payload
+      }  
 
     case CLEAR_DETAIL:
       return {

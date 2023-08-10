@@ -10,6 +10,7 @@ import Footer from "./components/footer/footer";
 import Cart from "./components/cart/cart";
 import "./App.css";
 import Carousel from "./components/carousel/Carouseel.jsx";
+import UserProfile from "./components/UserProfile/userProfile";
 
 const stripePromise = loadStripe(
   "sk_test_51NcvqGCNUAoI7WlfYdjceaTV47v9U1dGeTSVFPqhmgJ1fJF6vWO84ER7VQater3g88Xx4Gs4TayyCGDff2Au0h7T00nAgIEDyr"
@@ -34,6 +35,7 @@ function App() {
         <Route path="*" element={<Error />} />
         <Route path="/form" element={<Form />} />
         <Route path="/" element={<Carousel />} />
+        <Route path="/userProfile" element={<UserProfile />} />
       </Routes>
       <Footer />
     </div>

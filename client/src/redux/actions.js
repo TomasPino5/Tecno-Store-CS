@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {
-    GET_PRODUCTS, GET_PRODUCT_NAME,GET_DETAILS,
+    GET_PRODUCTS, GET_PRODUCT_NAME,GET_DETAILS,GET_USER,
     FILTER_BY_BRAND, FILTER_CREATED, FILTER_BY_CATEGORY,
     ORDER_BY_PRICE, CLEAR_DETAIL, CLEAR_FILTER, ADD_TO_CART, 
-    REMOVE_FROM_CART, CLEAR_CART,
+    REMOVE_FROM_CART, CLEAR_CART, PUT_USER
 } from "./action-types";
 
 // Obtener los productos desde la API 
@@ -48,6 +48,31 @@ export function getProductDetails(id) {
         }
     }
 };
+
+//action que trae el usuario
+export function getUser(email) { 
+    return async function (dispatch) {
+        const json = await axios.get(`http://localhost:3001/getuser/${email}`);
+        const data = json.data;
+        dispatch({
+            type: GET_USER,
+            payload: data
+        })
+    }
+}
+
+//modifica los datos del usuario en la db
+export function putUser(email, user) { 
+    return async function (dispatch) {
+        const json = await axios.put(`http://localhost:3001/modifyUser/${email}`, user);
+        const data = json.data;
+        dispatch({
+            type: PUT_USER,
+            payload: data
+        })
+    }
+}
+
 
 // Filtro para seleccionar productos por marca
 export function filterByBrand(brand) { 
