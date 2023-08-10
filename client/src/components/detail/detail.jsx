@@ -165,7 +165,7 @@ const Detail = () => {
                     <div className={style.button_wrapper}>
                       <button
                         className={style.buy__button}
-                        onClick={handleBuyNow}
+                        onClick={buyNow}
                       >
                         <div className={style.text}>Buy Now</div>
                         <span className={style.icon}>
