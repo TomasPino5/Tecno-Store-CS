@@ -4,15 +4,26 @@ import Spinner from "../Loading/Loading"
 import axios from "axios";
 import { useEffect } from "react"
 import { Link } from "react-router-dom";
+//
+import { getUser } from "../../redux/actions";
+import { useDispatch } from 'react-redux';
 
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  //
+  const email = user.email
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser(email));
+  }, [dispatch, email]);
+  //
 
   useEffect(() => {
     if (isAuthenticated) {
       const info = async () => {
         const userData = {
-          name: user.name?user.name:user.nickname,
+          name: user.name ? user.name : user.nickname,
           email: user.email,
           email_verified: user.email_verified,
           picture: user.picture,
@@ -37,7 +48,7 @@ export const Profile = () => {
       <div>
         <div>
           <Link to={'/userProfile'}>
-          <img src={user.picture} alt={user.name} />
+            <img src={user.picture} alt={user.name} />
           </Link>
         </div>
         <p>Email: {user.email}</p>
