@@ -35,7 +35,7 @@ router.put('/modifyUser/:email', modifyUser);
 router.post("/productos", postCreateProduct);
 
 //Ruta para crear un nuevo usuario
-router.post('/login', postUser);
+router.post("/login", postUser);
 
 //Ruta para agregar producto favorito (no funciona todavia)
 router.post("/productfav", postFavProducts);
@@ -63,5 +63,27 @@ router.post("/checkout", async (req, res) => {
     })
   );
 });
+
+// router.post("/api/checkout", async (req, res) => {
+//   // you can get more data to find in a database, and so on
+//   const { id, amount } = req.body;
+
+//   try {
+//     const payment = await stripe.paymentIntents.create({
+//       amount,
+//       currency: "USD",
+//       description: "Gaming Keyboard",
+//       payment_method: id,
+//       confirm: true, //confirm the payment at the same time
+//     });
+
+//     console.log(payment);
+
+//     return res.status(200).json({ message: "Successful Payment" });
+//   } catch (error) {
+//     console.log(error);
+//     return res.json({ message: error.raw.message });
+//   }
+// });
 
 module.exports = router;
