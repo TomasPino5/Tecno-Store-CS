@@ -124,56 +124,112 @@ const reducer = (state = initialState, action) => {
       };
     
 
-      case ADD_TO_CART:
-        const { id } = action.payload;
-        const productInCartIndex = state.items.findIndex(
-          (item) => item.id === id
-        );
-      
-        if (productInCartIndex >= 0) {
+    case ADD_TO_CART:
+      const { id } = action.payload;
+      const productInCart = state.items.find((item) => item.id === id);
+
+      if (productInCart) {
+        // Verifica si la cantidad en el carrito + 1 no excede el stock máximo
+        if (productInCart.quantity + 1 <= productInCart.stock) {
           const updatedItems = state.items.map((item) =>
             item.id === id ? { ...item, quantity: item.quantity + 1 } : item
           );
-      
+    
+          // Calcula el nuevo precio total sumando el precio del producto por su cantidad
+          const newTotalPrice = state.totalPrice + productInCart.price;
+    
           // Actualiza el almacenamiento local con los elementos actualizados
           localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-      
+          localStorage.setItem('cartTotalPrice', newTotalPrice);
+    
           return {
             ...state,
             items: updatedItems,
+            totalPrice: newTotalPrice,
           };
+        } else {
+          // Si la cantidad en el carrito ya alcanza el stock máximo, no hagas nada
+          return state;
         }
+      }
       
-        const newProduct = {
-          ...action.payload,
-          quantity: 1,
-        };
+      const newProduct = {
+        ...action.payload,
+        quantity: 1,
+      };
       
-        const newTotalPriceAdd = state.totalPrice + newProduct.price;
+      const newTotalPriceAdd = state.totalPrice + newProduct.price;
 
-        // Actualiza el almacenamiento local con los elementos actualizados
-        localStorage.setItem('cartItems', JSON.stringify([...state.items, newProduct]));
-        localStorage.setItem('cartTotalPrice', newTotalPriceAdd);
+      // Actualiza el almacenamiento local con los elementos actualizados
+      localStorage.setItem('cartItems', JSON.stringify([...state.items, newProduct]));
+      localStorage.setItem('cartTotalPrice', newTotalPriceAdd);
       
-        return {
-          ...state,
-          items: [...state.items, newProduct],
-          totalPrice: newTotalPriceAdd,
-        };
+      return {
+        ...state,
+        items: [...state.items, newProduct],
+        totalPrice: newTotalPriceAdd,
+      };
 
 
       
       
       case REMOVE_FROM_CART:
-        const updatedItems = state.items.filter((item) => item.id !== action.payload);
+        const productToRemove = state.items.find(
+          (item) => item.id === action.payload.id
+        );
       
-        // Actualiza el almacenamiento local con los elementos actualizados
-        localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+        if (productToRemove.quantity > 1) {
+          const updatedItemsAfterDecrement = state.items.map((item) =>
+            item.id === action.payload.id
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          );
       
-        return {
-          ...state,
-          items: updatedItems,
-      };
+          // Calcula el nuevo precio total restando el precio del producto
+          const newTotalPriceAfterDecrement =
+            state.totalPrice - productToRemove.price;
+      
+          // Actualiza el almacenamiento local con los elementos actualizados
+          localStorage.setItem(
+            "cartItems",
+            JSON.stringify(updatedItemsAfterDecrement)
+          );
+          localStorage.setItem(
+            "cartTotalPrice",
+            JSON.stringify(newTotalPriceAfterDecrement)
+          );
+      
+          return {
+            ...state,
+            items: updatedItemsAfterDecrement,
+            totalPrice: newTotalPriceAfterDecrement,
+          };
+        } else {
+          // Elimina el producto del carrito si la cantidad es 1
+          const updatedItemsAfterRemove = state.items.filter(
+            (item) => item.id !== action.payload.id
+          );
+      
+          // Calcula el nuevo precio total restando el precio del producto
+          const newTotalPriceAfterRemove =
+            state.totalPrice - productToRemove.price;
+      
+          // Actualiza el almacenamiento local con los elementos actualizados
+          localStorage.setItem("cartItems", JSON.stringify(updatedItemsAfterRemove));
+          localStorage.setItem(
+            "cartTotalPrice",
+            JSON.stringify(newTotalPriceAfterRemove)
+          );
+      
+          return {
+            ...state,
+            items: updatedItemsAfterRemove,
+            totalPrice: newTotalPriceAfterRemove,
+          };
+        }
+
+
+
       
       case CLEAR_CART:
         // Limpia los elementos del carrito y también del almacenamiento local

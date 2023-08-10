@@ -1,7 +1,7 @@
 import './cart.css'
 import { ClearCartIcon, CartIcon } from './icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { addToCart, clearCart } from '../../redux/actions'
+import { addToCart, clearCart, removeFromCart } from '../../redux/actions'
 import { NavLink } from 'react-router-dom'
 
 export default function Cart() {
@@ -13,11 +13,14 @@ export default function Cart() {
 
     const addToCartHandler = (product) => {
         dispatch(addToCart(product))
-        localStorage.setItem('cartItems', JSON.stringify([...items, product]));
     }
 
     const clearCartHandler = () => {
         dispatch(clearCart(items))
+    }
+
+    const removeFromCartHandler = (product) => {
+        dispatch(removeFromCart(product))
     }
 
     function CartItem({ id, imageSrc, imageAlt, price, name, quantity }) {
@@ -28,6 +31,7 @@ export default function Cart() {
                     <strong>{name}</strong> - ${price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
                 </div>
                 <footer>
+                    <button onClick={() => removeFromCartHandler({ id, imageSrc, imageAlt, price, name, quantity })}>-</button>
                     <small>Cant. {quantity}</small>
                     <button onClick={() => addToCartHandler({ id, imageSrc, imageAlt, price, name, quantity })}>+</button>
                 </footer>
