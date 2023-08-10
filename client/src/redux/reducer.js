@@ -14,6 +14,8 @@ import {
   GET_USER,
 } from "./action-types";
 
+const savedUserData = localStorage.getItem('userData');
+
 const initialState = {
   allProductsCopy: [],
   allProducts: [],
@@ -23,7 +25,7 @@ const initialState = {
   brands: [],
   categories: [],
   items: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
-  user: []
+  user: savedUserData ? JSON.parse(savedUserData) : [],
 };
 
 const reducer = (state = initialState, action) => {
