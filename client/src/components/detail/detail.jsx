@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
-  CardElement,
   useStripe,
   useElements,
+  CardElement,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
-import { useEffect, useState } from "react";
-
+import { getProductDetails, clearDetail } from "../../redux/actions";
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
 
@@ -82,7 +79,7 @@ const Detail = () => {
   //   }
   // }
   function buyNow() {
-    dispatch(addToCart(myProduct))
+    dispatch(addToCart(myProduct));
     alert(`¡Producto añadido al carrito!`);
   }
 
@@ -156,6 +153,9 @@ const Detail = () => {
                 <p className={style.N__D}>
                   Description: {myProduct?.description}
                 </p>
+              </div>
+              <div className={style.cart__container}>
+                <CardElement />
               </div>
               {myProduct?.price && (
                 <div className={style.btn__c}>
