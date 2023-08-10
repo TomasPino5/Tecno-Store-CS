@@ -25,6 +25,7 @@ const initialState = {
   brands: [],
   categories: [],
   items: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
+  totalPrice: localStorage.getItem('cartTotalPrice') ? JSON.parse(localStorage.getItem('cartTotalPrice')) : 0,
   user: savedUserData ? JSON.parse(savedUserData) : [],
 };
 
@@ -148,13 +149,18 @@ const reducer = (state = initialState, action) => {
           quantity: 1,
         };
       
+        const newTotalPriceAdd = state.totalPrice + newProduct.price;
+
         // Actualiza el almacenamiento local con los elementos actualizados
         localStorage.setItem('cartItems', JSON.stringify([...state.items, newProduct]));
+        localStorage.setItem('cartTotalPrice', newTotalPriceAdd);
       
         return {
           ...state,
           items: [...state.items, newProduct],
-      };
+          totalPrice: newTotalPriceAdd,
+        };
+
 
       
       
@@ -172,10 +178,12 @@ const reducer = (state = initialState, action) => {
       case CLEAR_CART:
         // Limpia los elementos del carrito y también del almacenamiento local
         localStorage.removeItem('cartItems');
+        localStorage.removeItem('cartTotalPrice');
       
         return {
           ...state,
           items: [],
+          totalPrice: 0,
       };
 
 
