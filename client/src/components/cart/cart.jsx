@@ -2,10 +2,12 @@ import './cart.css'
 import { ClearCartIcon, CartIcon } from './icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart, clearCart } from '../../redux/actions'
+import { NavLink } from 'react-router-dom'
 
 export default function Cart() {
 
     const items = useSelector((state) => state.items)
+    const totalPrice = useSelector((state) => state.totalPrice);
 
     const dispatch = useDispatch()
 
@@ -23,7 +25,7 @@ export default function Cart() {
             <li>
                 <img src={imageSrc} alt={imageAlt} />
                 <div>
-                    <strong>{name}</strong> - ${price}
+                    <strong>{name}</strong> - ${price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
                 </div>
                 <footer>
                     <small>Cant. {quantity}</small>
@@ -49,6 +51,12 @@ export default function Cart() {
                         />
                     ))}
                 </ul>
+                <div>Total: ${totalPrice.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</div>
+                <NavLink
+                    to={`/pay`}
+                    style={{ textDecoration: "none", color: "inherit" }}> 
+                    <button>Buy</button>
+                </NavLink>
                 <button onClick={clearCartHandler}> <ClearCartIcon /> </button>
             </aside>
         </>
