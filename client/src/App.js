@@ -7,13 +7,14 @@ import Nav from "./components/nav/nav";
 import Error from "./components/error/error";
 import Form from "./components/form/form";
 import Footer from "./components/footer/footer";
+import CheckoutForm from "./components/paymentgateway/element";
 import Cart from "./components/cart/cart";
 import "./App.css";
 import Carousel from "./components/carousel/Carouseel.jsx";
 import UserProfile from "./components/UserProfile/userProfile";
 
 const stripePromise = loadStripe(
-  "sk_test_51NcvqGCNUAoI7WlfYdjceaTV47v9U1dGeTSVFPqhmgJ1fJF6vWO84ER7VQater3g88Xx4Gs4TayyCGDff2Au0h7T00nAgIEDyr"
+  "pk_test_51NcvqGCNUAoI7WlfIAzV9QurX20Giym0Ec5S8e0yDCDiObFk80y5QGvliypiwWjXeLfWR7b5MSw8k3wmZnDuKkTR003LRj39wV"
 );
 
 function App() {
@@ -29,6 +30,14 @@ function App() {
           element={
             <Elements stripe={stripePromise}>
               <Detail />
+            </Elements>
+          }
+        />
+        <Route
+          path="/pay"
+          element={
+            <Elements stripe={stripePromise}>
+              <CheckoutForm />
             </Elements>
           }
         />
