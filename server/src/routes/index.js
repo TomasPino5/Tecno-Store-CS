@@ -6,8 +6,8 @@ const postCreateProduct = require("../controllers/postCreateProduct");
 const postUser = require("../controllers/postUser.js");
 const Stripe = require("stripe");
 const postFavProducts = require("../controllers/postFavProducts");
-const getUser = require('../controllers/getUser.js');
-const modifyUser = require('../controllers/modifyUser.js');
+const getUser = require("../controllers/getUser.js");
+const modifyUser = require("../controllers/modifyUser.js");
 
 const stripe = require("stripe")(
   "sk_test_51NcvqGCNUAoI7WlfYdjceaTV47v9U1dGeTSVFPqhmgJ1fJF6vWO84ER7VQater3g88Xx4Gs4TayyCGDff2Au0h7T00nAgIEDyr"
@@ -24,12 +24,11 @@ router.get("/productos/:id", getDetailHandler);
 //Ruta para llenar la base de datos con los productos se utiliza una sola vez
 router.get("/dbproducts", getDbProducts);
 
-
 //Ruta para traer un usuario
-router.get('/getuser/:email', getUser);
+router.get("/getuser/:email", getUser);
 
 //Ruta para modificar datos del usuario
-router.put('/modifyUser/:email', modifyUser);
+router.put("/modifyUser/:email", modifyUser);
 
 //Ruta para almacenar un nuevo producto al db
 router.post("/productos", postCreateProduct);
@@ -40,50 +39,21 @@ router.post("/login", postUser);
 //Ruta para agregar producto favorito (no funciona todavia)
 router.post("/productfav", postFavProducts);
 
-router.post("/checkout", async (req, res) => {
-  const items = req.body.items;
-  let arrayItems = [];
-  items.forEach((item) => {
-    arrayItems.push({
-      price: item.id,
-      quantity: item.quantity,
+router.post("/pago", async (req, res) => {
+  const { producto, cantidad, token } = req.body;
+
+  try {
+    const charge = await stripe.charges.create({
+      amount: producto.precio * cantidad * 100, // El precio se debe proporcionar en centavos
+      currency: "usd",
+      source: token.id,
+      description: `Compra de ${cantidad} ${producto.nombre}`,
     });
-  });
 
-  const session = await stripe.checkout.sessions.create({
-    line_items: arrayItems,
-    mode: "payment",
-    success_url: "http://localhost:3001/success",
-    cancel_url: "http://localhost:3001/cancel",
-  });
-
-  res.send(
-    JSON.stringify({
-      url: session.url,
-    })
-  );
+    res.json({ mensaje: "Pago exitoso", charge });
+  } catch (error) {
+    res.status(500).json({ mensaje: "Error en el pago", error: error.message });
+  }
 });
-
-// router.post("/api/checkout", async (req, res) => {
-//   // you can get more data to find in a database, and so on
-//   const { id, amount } = req.body;
-
-//   try {
-//     const payment = await stripe.paymentIntents.create({
-//       amount,
-//       currency: "USD",
-//       description: "Gaming Keyboard",
-//       payment_method: id,
-//       confirm: true, //confirm the payment at the same time
-//     });
-
-//     console.log(payment);
-
-//     return res.status(200).json({ message: "Successful Payment" });
-//   } catch (error) {
-//     console.log(error);
-//     return res.json({ message: error.raw.message });
-//   }
-// });
 
 module.exports = router;
