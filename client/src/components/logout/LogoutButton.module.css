@@ -1,4 +1,4 @@
-.LoginButton {
+.logoutButton {
     background-color: black;
     border: 1px solid #08ef56;
     color: #08ef56;
@@ -7,8 +7,9 @@
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
 
-  .LoginButton:hover {
+  .logoutButton:hover {
     background-color: #f3f4f6;
     color: #4b5563;
   }
+  
   
