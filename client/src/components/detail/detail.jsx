@@ -61,9 +61,10 @@ const Detail = () => {
   //   }
   // };
 
-  function buyNow() {
+  function buyNow(event) {
     dispatch(addToCart(myProduct));
     alert(`¡Producto añadido al carrito!`);
+    event.preventDefault();
   }
 
   //useEffect
