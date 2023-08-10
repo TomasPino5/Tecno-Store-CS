@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { putUser } from "../../redux/actions";
 import style from './userProfile.module.css'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserProfile = () => {
+
+    const { user } = useAuth0();
 
     const dispatch = useDispatch();
     const dataUser = useSelector((state) => state.user);
@@ -15,16 +18,16 @@ const UserProfile = () => {
         }
     }, [dataUser]);
 
-    const email = dataUser.email
+    const email = user?.email
 
     const handleModifyUserData = () => {
         dispatch(putUser(email, data));
     }
 
     const [data, setData] = useState({
-        name: dataUser.name ? dataUser.name : '',
-        direction: dataUser.direction ? dataUser.direction : '',
-        telefone: dataUser.telefone ? dataUser.telefone : '',
+        name: dataUser?.name ? dataUser.name : user.name,
+        direction: dataUser?.direction ? dataUser.direction : '',
+        telefone: dataUser?.telefone ? dataUser.telefone : '',
         //picture: dataUser.picture ? dataUser.picture : ''
     });
 
@@ -68,21 +71,21 @@ const UserProfile = () => {
         <div className={style.form__C}>
             <div className={style.card}>
                 <div className={style.img}>
-                    <img className={style.img} src={dataUser.picture} alt="" />
+                    <img className={style.img} src={dataUser?.picture ? dataUser?.picture : user.picture} alt="" />
                 </div>
                 <div>
                     <h1>Mis Datos</h1>
                     <div>
                         <h2>Datos de Cuenta:</h2>
-                        <p className={style.label}>Email: {dataUser.email}</p>
+                        <p className={style.label}>Email: {dataUser?.email ? dataUser?.email : user.email}</p>
                     </div>
 
                     {showForm === false ?
                         <div>
                             <h2>Datos personales:</h2>
-                            <p className={style.label}>Usuario: {dataUser.name}</p>
-                            <p className={style.label}>Direccion: {dataUser.direction ? dataUser.telefone : 'Todavia no tiene direccion personal...'}</p>
-                            <p className={style.label}>Telefono: {dataUser.telefone ? dataUser.telefone : 'Todavia no tiene numero de linea...'}</p>
+                            <p className={style.label}>Usuario: {dataUser?.name ? dataUser?.name : user.name}</p>
+                            <p className={style.label}>Direccion: {dataUser?.direction ? dataUser.direction : 'Todavia no tiene direccion personal...'}</p>
+                            <p className={style.label}>Telefono: {dataUser?.telefone ? dataUser.telefone : 'Todavia no tiene numero de linea...'}</p>
                         </div>
                         : null
                     }
