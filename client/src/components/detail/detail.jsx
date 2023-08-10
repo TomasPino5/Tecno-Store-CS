@@ -111,7 +111,7 @@ const Detail = () => {
                 >
                   <div className={style.button_wrapper}>
                     <button className={style.buy__button} onClick={buyNow}>
-                      <div className={style.text}>Buy Now</div>
+                      <div className={style.text}>Add To cart</div>
                       <span className={style.icon}>
                         <svg
                           viewBox="0 0 16 16"

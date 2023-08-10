@@ -33,14 +33,20 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ margin: "100px 100px 100px 100px" }}>
-      <CardElement />
-      <button type="submit" disabled={!stripe}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+    <form onSubmit={handleSubmit} style={{ width: "400px", padding: "20px", border: "1px solid #ccc", borderRadius: "5px", boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}>
+      <h2 style={{ marginBottom: "20px", textAlign: "center" }}>Pasarela de Pago</h2>
+      <div style={{ marginBottom: "20px" }}>
+        <CardElement />
+      </div>
+      <button type="submit" disabled={!stripe} style={{ width: "100%", padding: "10px", backgroundColor: "#007bff", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}>
         Pagar
       </button>
-      {mensaje && <p>{mensaje}</p>}
+      {mensaje && <p style={{ marginTop: "10px", textAlign: "center", color: mensaje.startsWith("Error") ? "red" : "green" }}>{mensaje}</p>}
     </form>
-  );
+  </div>
+);
+
 };
 
 export default CheckoutForm;
