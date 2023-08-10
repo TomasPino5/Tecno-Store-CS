@@ -9,6 +9,31 @@
     max-height: calc(110vh - 110px); /* 100px es la suma del padding y margen del contenedor */
   overflow-y: auto;
   }
+  .name{
+    color: #08ef56;
+  }
+  .rest{
+    color: #08ef56;
+    background-color: #000;
+  }
+  .add{
+    color: #08ef56;
+    background-color: #000;
+  }
+  .BUY{
+    color: #08ef56;
+    background-color: #000;
+  }
+  .CLEAR{
+    color: #08ef56;
+    background-color: #000;
+  }
+  .small{
+    color: #08ef56;
+  }
+  .TOTAL{
+    color: #08ef56;
+  }
   
   .cart img {
     aspect-ratio: 16/9;

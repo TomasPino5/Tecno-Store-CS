@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+// import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
@@ -31,35 +31,35 @@ const Detail = () => {
   //   }
   // }
 
-  const stripe = useStripe();
-  const elements = useElements();
-  const [mensaje, setMensaje] = useState("");
+  // const stripe = useStripe();
+  // const elements = useElements();
+  // const [mensaje, setMensaje] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
 
-    const { token, error } = await stripe.createToken(
-      elements.getElement(CardElement)
-    );
+  //   const { token, error } = await stripe.createToken(
+  //     elements.getElement(CardElement)
+  //   );
 
-    if (error) {
-      setMensaje(`Error: ${error.message}`);
-    } else {
-      // Enviar el token al backend para realizar el pago
-      const response = await fetch("http://localhost:3004/pago", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          producto: { nombre: myProduct.name, precio: myProduct.price }, // Cambiar según tus productos
-          cantidad: 1, // Cambiar según la cantidad
-          token: token,
-        }),
-      });
+  //   if (error) {
+  //     setMensaje(`Error: ${error.message}`);
+  //   } else {
+  //     // Enviar el token al backend para realizar el pago
+  //     const response = await fetch("http://localhost:3004/pago", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         producto: { nombre: myProduct.name, precio: myProduct.price }, // Cambiar según tus productos
+  //         cantidad: 1, // Cambiar según la cantidad
+  //         token: token,
+  //       }),
+  //     });
 
-      const data = await response.json();
-      setMensaje(data.mensaje);
-    }
-  };
+  //     const data = await response.json();
+  //     setMensaje(data.mensaje);
+  //   }
+  // };
 
   function buyNow() {
     dispatch(addToCart(myProduct));
@@ -83,7 +83,7 @@ const Detail = () => {
 
   // RENDER
   return (
-    <form onSubmit={handleSubmit} className={style.detail}>
+    <form  className={style.detail}>
       {!loading ? (
         <div className={style.detailContainer}>
           <div className={style.img__c}>
@@ -137,11 +137,11 @@ const Detail = () => {
             <div className={style.cart__container}>
               {/* <CardElement /> */}
               <br />
-              <button type="submit" disabled={!stripe}>
+              <button type="submit">
                 {" "}
                 comprar ya{" "}
               </button>
-              {mensaje && <p>{mensaje}</p>}
+              
             </div>
             {myProduct?.price && (
               <div className={style.btn__c}>
