@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 58px;
-  background-color: rgb(11, 11, 11);
+  background-color: rgb(0, 0, 0);
   display: flex;
   z-index: 999;
 }
@@ -104,6 +104,7 @@
   color: #08ef56;
   margin-bottom: 0px;
   font-size:small;
+  font-weight: 600;
   cursor: pointer;
 }
 

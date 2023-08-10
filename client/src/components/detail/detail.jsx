@@ -135,7 +135,7 @@ const Detail = () => {
               </p>
             </div>
             <div className={style.cart__container}>
-              <CardElement />
+              {/* <CardElement /> */}
               <br />
               <button type="submit" disabled={!stripe}>
                 {" "}
