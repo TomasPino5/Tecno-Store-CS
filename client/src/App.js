@@ -8,7 +8,6 @@ import Error from "./components/error/error";
 import Form from "./components/form/form";
 import Footer from "./components/footer/footer";
 import CheckoutForm from "./components/paymentgateway/element";
-import Cart from "./components/cart/cart";
 import "./App.css";
 import Carousel from "./components/carousel/Carouseel.jsx";
 import UserProfile from "./components/UserProfile/userProfile";
@@ -28,9 +27,9 @@ function App() {
         <Route
           path="/product/:id"
           element={
-            <Elements stripe={stripePromise}>
+            // <Elements stripe={stripePromise}>
               <Detail />
-            </Elements>
+            // </Elements>
           }
         />
         <Route
