@@ -2,15 +2,18 @@ const Users = require("../models/users.js");
 
 const modifyUser = async (req, res) => {
   const { email } = req.params;
-  const { name, direction, telefone, picture } = req.body;
+  console.log(email)
+  const { name, direction, telefone } = req.body; //, picture
+  console.log(name, direction, telefone)
   const user = await Users.findOne({where:{email}})
   const id = user.id;
+  console.log(id)
   try {
       const user = await Users.findByPk(id);
       user.name = name,
       user.direction = direction,
       user.telefone = telefone,
-      user.picture = picture,
+      //user.picture = picture,
       await user.save();
       res.json(user);
   } catch (error) {

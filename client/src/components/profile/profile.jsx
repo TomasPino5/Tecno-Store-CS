@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 //
 import { getUser } from "../../redux/actions";
 import { useDispatch } from 'react-redux';
+import style from './profile.module.css'
 
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -45,13 +46,13 @@ export const Profile = () => {
 
   return (
     isAuthenticated && (
-      <div>
-        <div>
+      <div  >
+        <div >
           <Link to={'/userProfile'}>
-            <img src={user.picture} alt={user.name} />
+            <img className={style.img} src={user.picture} alt={user.name} />
           </Link>
         </div>
-        <p>Email: {user.email}</p>
+        {/* <p>{user.email}</p> */}
       </div>
     )
   );
