@@ -35,7 +35,7 @@ const CheckoutForm = () => {
       setMensaje(`Error: ${error.message}`);
     } else {
       // Enviar el token al backend para realizar el pago
-      const response = await fetch("http://localhost:3001/pago", {
+      const response = await fetch("/pago", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -9,7 +9,7 @@ import {
 // Obtener los productos desde la API 
 export const getProducts = () => {
     return async function (dispatch) {
-        const json = await axios.get('http://localhost:3001/productos');
+        const json = await axios.get('/productos');
         return dispatch({
             type: GET_PRODUCTS,
             payload: json.data
@@ -21,7 +21,7 @@ export const getProducts = () => {
 export function getProductName(name) {
     return async function (dispatch) {
         try {
-            const json = await axios.get(`http://localhost:3001/productos?name=${name}`);
+            const json = await axios.get(`/productos?name=${name}`);
             return dispatch({
                 type: GET_PRODUCT_NAME,
                 payload: json.data
@@ -37,7 +37,7 @@ export function getProductDetails(id) {
     if (id) {
         return async function (dispatch) {
             try {
-                const detail = await axios.get(`http://localhost:3001/productos/${id}`);
+                const detail = await axios.get(`/productos/${id}`);
                 dispatch({
                     type: GET_DETAILS,
                     payload: detail.data
@@ -52,7 +52,7 @@ export function getProductDetails(id) {
 //action que trae el usuario
 export function getUser(email) { 
     return async function (dispatch) {
-        const json = await axios.get(`http://localhost:3001/getuser/${email}`);
+        const json = await axios.get(`/getuser/${email}`);
         const data = json.data;
         dispatch({
             type: GET_USER,
@@ -64,7 +64,7 @@ export function getUser(email) {
 //modifica los datos del usuario en la db
 export function putUser(email, user) { 
     return async function (dispatch) {
-        const json = await axios.put(`http://localhost:3001/modifyUser/${email}`, user);
+        const json = await axios.put(`/modifyUser/${email}`, user);
         const data = json.data;
         dispatch({
             type: PUT_USER,
@@ -100,7 +100,7 @@ export function orderByPrice(price) {
 // Para postear el producto
 export function postProduct(payload) {
     return async function (dispatch) {
-        const response = await axios.post('http://localhost:3001/productos', payload);
+        const response = await axios.post('/productos', payload);
         return response;
     }
 }
