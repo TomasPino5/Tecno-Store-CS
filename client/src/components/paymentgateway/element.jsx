@@ -46,16 +46,16 @@ const CheckoutForm = () => {
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
     <div className={styles.div0}>
       {items.map((item) => (
-        <div className={styles.div1} key={item.id}>
-          <p>Nombre: {item.name}</p>
-          <p>Precio: ${item.price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</p>
-          <p>Cantidad: {item.quantity}</p>
-          <p>brand: {item.brand}</p>
-          <p>category: {item.category}</p>
-          <img src={item.imageSrc} alt={item.imageAlt}/>
-          {/* <p>description={item.description}</p> */}
-          <hr style={{border: '1px solid black', margin: '20px 0'}}></hr>
-        </div>
+         <div className={styles.item} key={item.id}>
+         <img src={item.imageSrc} alt={item.imageAlt} className={styles.itemImage} />
+         <div className={styles.itemDetails}>
+           <p className={styles.itemName}>{item.name}</p>
+           <p className={styles.itemPrice}>Precio: ${item.price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</p>
+           <p>Cantidad: {item.quantity}</p>
+           <p>Marca: {item.brand}</p>
+           <p>Categoría: {item.category}</p>
+         </div>
+       </div>
       ))}
       <div
         style={{
@@ -65,17 +65,18 @@ const CheckoutForm = () => {
           height: "100vh",
         }}
       >
-        <form
+        <form 
           onSubmit={handleSubmit}
           style={{
             width: "400px",
             padding: "20px",
+            backgroundColor: "#f0ffff",
             border: "1px solid #ccc",
             borderRadius: "5px",
             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <h2 style={{ marginBottom: "20px", textAlign: "center" }}>
+          <h2 style={{ marginBottom: "20px", textAlign: "center", color: "#000000",}}>
             Pasarela de Pago
           </h2>
           <div style={{ marginBottom: "20px" }}>
