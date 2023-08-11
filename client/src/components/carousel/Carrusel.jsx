@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearDetail } from "../../redux/actions";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import img1 from "../../imag/Loading/1.jpg";
-import img2 from "../../imag/Loading/2.jpg";
+// import img2 from "../../imag/Loading/2.jpg";
 import img3 from "../../imag/Loading/3.webp";
 import img4 from "../../imag/Loading/4.jpg";
 import img5 from "../../imag/Loading/5.jpg";
@@ -23,6 +25,12 @@ const Carrusel = () => {
     autoplay: true,
     autoplaySpeed: 100,
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearDetail())
+  }, [dispatch]);
 
   return (
     <div className="div-construction pt-0 flex flex-col justify-start items-center">

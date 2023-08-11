@@ -1,7 +1,7 @@
 import './cart.css'
 import { ClearCartIcon, CartIcon } from './icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { addToCart, clearCart, removeFromCart } from '../../redux/actions'
+import { addToCart, clearCart, removeFromCart, clearDetail } from '../../redux/actions'
 import { NavLink } from 'react-router-dom'
 
 export default function Cart() {
@@ -21,6 +21,10 @@ export default function Cart() {
 
     const removeFromCartHandler = (product) => {
         dispatch(removeFromCart(product))
+    }
+
+    const clearDetailHandler = () => {
+        dispatch(clearDetail())
     }
 
     function CartItem({ id, imageSrc, imageAlt, price, name, quantity }) {
@@ -59,7 +63,7 @@ export default function Cart() {
                 <NavLink
                     to={`/pay`}
                     style={{ textDecoration: "none", color: "inherit" }}> 
-                    <button className='BUY'>Buy</button>
+                    <button onClick={clearDetailHandler} className='BUY'>Buy</button>
                 </NavLink>
                 <button className='CLEAR' onClick={clearCartHandler}> <ClearCartIcon /> </button>
             </aside>

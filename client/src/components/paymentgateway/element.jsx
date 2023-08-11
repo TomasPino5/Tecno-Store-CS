@@ -69,6 +69,7 @@ const CheckoutForm = () => {
           </div>
         </div>
       ))} </div>
+      {Object.keys(detail).length !== 0 && (
       <div className={styles.div0}>
         <div className={styles.item} key={detail.id}>
           <img src={detail.imageSrc} alt={detail.imageAlt} className={styles.itemImage} />
@@ -81,6 +82,7 @@ const CheckoutForm = () => {
           </div>
         </div>
       </div>
+      )}
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
          <h2 className={styles.title}>Pasarela de Pago</h2>
