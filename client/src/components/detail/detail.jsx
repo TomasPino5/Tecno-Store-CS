@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
+import { getProductDetails, addToCart } from "../../redux/actions";
 // import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
+
+import { useAuth0 } from "@auth0/auth0-react"; // Asegúrate de importar useAuth0
 
 const Detail = () => {
   const myProduct = useSelector((state) => state.productDetail);
@@ -16,6 +18,10 @@ const Detail = () => {
 
   // STATE
   const [loading, setLoading] = useState(false);
+
+  // Estado de autenticación
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
 
   // const [cartQuantity, setCartQuantity] = useState(1); // Estado para la cantidad en el carrito
 
@@ -61,11 +67,22 @@ const Detail = () => {
   //   }
   // };
 
-  function buyNow(event) {
-    dispatch(addToCart(myProduct));
-    alert(`¡Producto añadido al carrito!`);
+
+  function handleBuyNow(event) {
+    if (isAuthenticated) {
+      dispatch(addToCart(myProduct));
+      alert(`¡Producto añadido al carrito!`);
+    } else {
+      alert("Por favor inicia sesión para comprar.");
+      loginWithRedirect(); // Redirigir al usuario a la página de inicio de sesión
+    }
     event.preventDefault();
   }
+
+  // function buyNow(event) {
+  //   dispatch(getProductDetails())
+  //   event.preventDefault()
+  // }
 
   //useEffect
 
@@ -77,9 +94,9 @@ const Detail = () => {
     }, 1200);
     dispatch(getProductDetails(id));
 
-    return () => {
-      dispatch(clearDetail());
-    };
+    // return () => {
+    //   dispatch(clearDetail());
+    // };
   }, [dispatch, id]);
 
   // RENDER
@@ -138,10 +155,13 @@ const Detail = () => {
             <div className={style.cart__container}>
               {/* <CardElement /> */}
               <br />
-              <button type="submit">
-                {" "}
-                comprar ya{" "}
-              </button>
+              <NavLink
+                    to={`/pay`}
+                    style={{ textDecoration: "none", color: "inherit" }}>
+                <button>
+                  comprar ya
+                </button>
+              </NavLink>
               
             </div>
             {myProduct?.price && (
@@ -151,7 +171,9 @@ const Detail = () => {
                   className={style.button}
                 >
                   <div className={style.button_wrapper}>
-                    <button className={style.buy__button} onClick={buyNow}>
+
+                    <button className={style.buy__button} onClick={handleBuyNow}>
+
                       <div className={style.text}>Add To cart</div>
 
                       <span className={style.icon}>
