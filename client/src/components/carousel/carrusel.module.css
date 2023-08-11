@@ -27,13 +27,13 @@
 }
 .img {
   width: 100px;
-  height: 100px; 
-  border-style:double;
-  border-width: 5px ;
-  border-color: #9f897b; 
-  border-radius: 2px;  
+  height: 100px;
+  border-style: double;
+  border-width: 5px;
+  border-color: #9f897b;
+  border-radius: 2px;
   margin-bottom: 3rem;
-  margin-top: 2rem;;
+  margin-top: 2rem;
 }
 
 .img_carrucel img {
@@ -114,4 +114,12 @@
 }
 .aboutSectionDer {
   height: 200px;
+}
+
+.slider__position {
+  margin-bottom: 35px;
+}
+
+.over {
+  overflow: hidden;
 }

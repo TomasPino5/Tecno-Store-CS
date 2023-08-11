@@ -5,7 +5,6 @@ import { clearCart, clearDetail } from "../../redux/actions";
 import styles from "./element.module.css" 
 
 const CheckoutForm = () => {
-  
   const stripe = useStripe();
   const elements = useElements();
   const [mensaje, setMensaje] = useState("");
@@ -14,7 +13,7 @@ const CheckoutForm = () => {
   const items = useSelector((state) => state.items);
   const detail = useSelector((state) => state.productDetail)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {
@@ -58,10 +57,15 @@ const CheckoutForm = () => {
           <img src={item.imageSrc} alt={item.imageAlt} className={styles.itemImage} />
           <div className={styles.itemDetails}>
             <p className={styles.itemName}>{item.name}</p>
-            <p className={styles.itemPrice}>Precio: ${item.price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</p>
             <p>Cantidad: {item.quantity}</p>
             <p>Marca: {item.brand}</p>
             <p>Categoría: {item.category}</p>
+            <p className={styles.itemPrice}>
+              Precio: $
+              {item.price.toLocaleString("es-ES", {
+                minimumFractionDigits: 2,
+              })}
+            </p>
           </div>
         </div>
       ))} </div>
@@ -77,53 +81,22 @@ const CheckoutForm = () => {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <form 
-          onSubmit={handleSubmit}
-          style={{
-            width: "400px",
-            padding: "20px",
-            backgroundColor: "#f0ffff",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <h2 style={{ marginBottom: "20px", textAlign: "center", color: "#000000",}}>
-            Pasarela de Pago
-          </h2>
-          <div style={{ marginBottom: "20px" }}>
-            <CardElement />
+      <div className={styles.container}>
+        <form onSubmit={handleSubmit} className={styles.form}>
+         <h2 className={styles.title}>Pasarela de Pago</h2>
+          <div className={styles.cardElementContainer}>
+            <CardElement className={styles.cardElement} />
           </div>
-          <button
-            type="submit"
-            disabled={!stripe}
-            style={{
-              width: "100%",
-              padding: "10px",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
+          <button type="submit" disabled={!stripe} className={styles.payButton}>
             Pagar
           </button>
           {mensaje && (
             <p
-              style={{
-                marginTop: "10px",
-                textAlign: "center",
-                color: mensaje.startsWith("Error") ? "red" : "green",
-              }}
+              className={`${styles.message} ${
+                mensaje.startsWith("Error")
+                  ? styles.errorMessage
+                  : styles.successMessage
+              }`}
             >
               {mensaje}
             </p>
