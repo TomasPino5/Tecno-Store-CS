@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux"; 
-import { clearCart } from "../../redux/actions";
+import { clearCart, clearDetail } from "../../redux/actions";
 import styles from "./element.module.css" 
 
 const CheckoutForm = () => {
@@ -12,8 +12,15 @@ const CheckoutForm = () => {
 
   const totalPrice = useSelector((state) => state.totalPrice);
   const items = useSelector((state) => state.items);
+  const detail = useSelector((state) => state.productDetail)
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearDetail()); 
+    };
+  }, [dispatch]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,7 +37,7 @@ const CheckoutForm = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          producto: { nombre: "producto", precio: totalPrice }, // Cambiar según tus productos
+          producto: { nombre: "producto", precio: totalPrice || detail.price }, // Cambiar según tus productos
           cantidad: 1, // Cambiar según la cantidad
           token: token,
         }),
@@ -44,19 +51,32 @@ const CheckoutForm = () => {
 
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
+    <>
     <div className={styles.div0}>
       {items.map((item) => (
-         <div className={styles.item} key={item.id}>
-         <img src={item.imageSrc} alt={item.imageAlt} className={styles.itemImage} />
-         <div className={styles.itemDetails}>
-           <p className={styles.itemName}>{item.name}</p>
-           <p className={styles.itemPrice}>Precio: ${item.price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</p>
-           <p>Cantidad: {item.quantity}</p>
-           <p>Marca: {item.brand}</p>
-           <p>Categoría: {item.category}</p>
-         </div>
-       </div>
-      ))}
+        <div className={styles.item} key={item.id}>
+          <img src={item.imageSrc} alt={item.imageAlt} className={styles.itemImage} />
+          <div className={styles.itemDetails}>
+            <p className={styles.itemName}>{item.name}</p>
+            <p className={styles.itemPrice}>Precio: ${item.price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</p>
+            <p>Cantidad: {item.quantity}</p>
+            <p>Marca: {item.brand}</p>
+            <p>Categoría: {item.category}</p>
+          </div>
+        </div>
+      ))} </div>
+      <div className={styles.div0}>
+        <div className={styles.item} key={detail.id}>
+          <img src={detail.imageSrc} alt={detail.imageAlt} className={styles.itemImage} />
+          <div className={styles.itemDetails}>
+            <p className={styles.itemName}>{detail.name}</p>
+            <p className={styles.itemPrice}>Precio: ${detail.price}</p>
+            <p>Cantidad: {1}</p>
+            <p>Marca: {detail.brand}</p>
+            <p>Categoría: {detail.category}</p>
+          </div>
+        </div>
+      </div>
       <div
         style={{
           display: "flex",
@@ -110,7 +130,7 @@ const CheckoutForm = () => {
           )}
         </form>
       </div>
-    </div>
+      </>
   );
 };
 

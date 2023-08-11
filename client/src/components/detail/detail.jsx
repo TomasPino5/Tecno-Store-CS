@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, clearDetail, addToCart } from "../../redux/actions";
+import { getProductDetails, addToCart } from "../../redux/actions";
 // import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Loading from "../../components/Loading/Loading.jsx";
@@ -61,11 +61,16 @@ const Detail = () => {
   //   }
   // };
 
-  function buyNow(event) {
+  function buyCart(event) {
     dispatch(addToCart(myProduct));
     alert(`¡Producto añadido al carrito!`);
     event.preventDefault();
   }
+
+  // function buyNow(event) {
+  //   dispatch(getProductDetails())
+  //   event.preventDefault()
+  // }
 
   //useEffect
 
@@ -77,9 +82,9 @@ const Detail = () => {
     }, 1200);
     dispatch(getProductDetails(id));
 
-    return () => {
-      dispatch(clearDetail());
-    };
+    // return () => {
+    //   dispatch(clearDetail());
+    // };
   }, [dispatch, id]);
 
   // RENDER
@@ -138,10 +143,13 @@ const Detail = () => {
             <div className={style.cart__container}>
               {/* <CardElement /> */}
               <br />
-              <button type="submit">
-                {" "}
-                comprar ya{" "}
-              </button>
+              <NavLink
+                    to={`/pay`}
+                    style={{ textDecoration: "none", color: "inherit" }}>
+                <button>
+                  comprar ya
+                </button>
+              </NavLink>
               
             </div>
             {myProduct?.price && (
@@ -151,7 +159,7 @@ const Detail = () => {
                   className={style.button}
                 >
                   <div className={style.button_wrapper}>
-                    <button className={style.buy__button} onClick={buyNow}>
+                    <button className={style.buy__button} onClick={buyCart}>
                       <div className={style.text}>Add To cart</div>
 
                       <span className={style.icon}>
