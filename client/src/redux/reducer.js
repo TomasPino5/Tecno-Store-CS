@@ -19,7 +19,7 @@ const savedUserData = localStorage.getItem('userData');
 const initialState = {
   allProductsCopy: [],
   allProducts: [],
-  productDetail: [],
+  productDetail: localStorage.getItem('detail') ? JSON.parse(localStorage.getItem('detail')) : [],
   filteredProducts: [],
   filteredProductsCopy: [],
   brands: [],
@@ -50,6 +50,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case GET_DETAILS:
+      localStorage.setItem('detail', JSON.stringify(action.payload));
       return {
         ...state,
         productDetail: action.payload,
@@ -61,6 +62,7 @@ const reducer = (state = initialState, action) => {
       }  
 
     case CLEAR_DETAIL:
+      localStorage.removeItem('detail');
       return {
         ...state,
         productDetail: [],
