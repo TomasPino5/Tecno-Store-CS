@@ -9,7 +9,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import axios from 'axios'
 require('dotenv').config();
 //axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001/"; ya estaba/quimbay
-axios.defaults.baseURL ="http://localhost:3001";// es avisarle a axios que todas las peticiones empiezen o tengan una misma base url(front)para trabajar con el proyecto de forma local utilizamos este para las peticiones
+axios.defaults.baseURL ="tecno-store-cs-production.up.railway.app";// es avisarle a axios que todas las peticiones empiezen o tengan una misma base url(front)para trabajar con el proyecto de forma local utilizamos este para las peticiones
 //axios.defaults.baseURL = 'https://pokemonback-production.up.railway.app/';// conectar front con el back que ya deployamos// cuando queramos puchear o actualizar nuestro deploy del front  lo hacemos aca
 
 ReactDOM.render(
