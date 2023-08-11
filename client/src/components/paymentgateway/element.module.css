@@ -1,0 +1,51 @@
+.div0 {
+    margin-top: 90px;
+    background-color: black;
+    color: white;
+}
+
+.div1 {
+    margin-top: 50px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  
+  .itemList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .itemImage {
+    width: 10%;
+    max-height: 150px;
+    margin-bottom: 10px;
+  }
+  
+  .itemDetails {
+    text-align: center;
+  }
+  
+  .itemName {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .itemPrice {
+    margin-bottom: 5px;
+    color: #007bff;
+  }

@@ -27,8 +27,8 @@ export default function Cart() {
         return (
             <li>
                 <img src={imageSrc} alt={imageAlt} />
-                <div>
-                    <strong className='name' >{name}</strong> - ${price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
+                <div className='name'>
+                    <strong  >{name}</strong> - ${price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
                 </div>
                 <footer>
                     <button className='rest' onClick={() => removeFromCartHandler({ id, imageSrc, imageAlt, price, name, quantity })}>-</button>

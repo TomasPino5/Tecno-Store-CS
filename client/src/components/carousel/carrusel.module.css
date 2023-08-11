@@ -1,6 +1,7 @@
 .marg {
   margin-top: 30px;
 }
+
 .img_carrucel {
   width: 100%;
   max-height: 550px; /* Ajusta la altura máxima según tus preferencias */
@@ -23,6 +24,16 @@
   display: flex; /* Agregado */
   justify-content: center; /* Agregado */
   align-items: center; /* Agregado */
+}
+.img {
+  width: 100px;
+  height: 100px; 
+  border-style:double;
+  border-width: 5px ;
+  border-color: #9f897b; 
+  border-radius: 2px;  
+  margin-bottom: 3rem;
+  margin-top: 2rem;;
 }
 
 .img_carrucel img {

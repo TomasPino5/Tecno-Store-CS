@@ -20,7 +20,7 @@ const Users = sequelize.define('users',{
         allowNull: true
     },
     telefone:{
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: true
     },
     email_verified:{
