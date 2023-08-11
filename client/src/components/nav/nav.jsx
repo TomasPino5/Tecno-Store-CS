@@ -106,7 +106,8 @@ const Nav = () => {
         {isAuthenticated ? (
           <>
             <Profile />
-            <LogoutButton />
+            {location.pathname === "/userProfile" ? <LogoutButton /> : null}
+            {/* <LogoutButton /> */}
           </>
         ) : (
           <LoginButton />
