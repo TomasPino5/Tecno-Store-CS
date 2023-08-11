@@ -77,7 +77,16 @@ const UserProfile = () => {
                     <h1>Mis Datos</h1>
                     <div>
                         <h2>Datos de Cuenta:</h2>
-                        <p className={style.label}>Email: {dataUser?.email ? dataUser?.email : user.email}</p>
+
+                        <p className={style.label}>Email: {dataUser?.email ? dataUser?.email : user.email}  {user?.email_verified === true ? '✅'
+                            : '❌'}</p>
+                        {user?.email_verified === true ? null
+                            : <p className={style.noVerificado}>¡Verifique su email en su casilla de entrada!</p>}
+
+                    </div>
+                    <div>
+                        <p className={style.label}>Email: demostracionNoVerificado@gmail.com ❌</p>
+                        <p className={style.noVerificado}>¡Verifique su email en su casilla de entrada!</p>
                     </div>
 
                     {showForm === false ?
