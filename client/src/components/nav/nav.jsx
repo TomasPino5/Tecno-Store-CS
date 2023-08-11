@@ -72,18 +72,19 @@ const Nav = () => {
         </NavLink>
       </div> */}
 
-      {/* <div className={style.container}>
+      <div >
         <NavLink to="/products">
-          <button className={style.NuevosProd}>Nuestros productos</button>
+        {location.pathname === "/products" ? null : <button className={style.box} >Nuestros productos</button> }
         </NavLink>
-      </div> */}
+      </div>
 
       <div className={style.login}>
         {/* <button className={style.login} onClick={handleLoginButtonClick}>
             Login
           </button> */}
         <div className={style.cartpos}>
-          <Cart />
+        {location.pathname === "/pay" || location.pathname === "/userProfile" ? null : <Cart /> }
+          
         </div>
 
         {location.pathname === "/products" ? (
