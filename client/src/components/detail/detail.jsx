@@ -8,6 +8,8 @@ import { getProductDetails, addToCart } from "../../redux/actions";
 import Loading from "../../components/Loading/Loading.jsx";
 import style from "./detail.module.css";
 
+import { useAuth0 } from "@auth0/auth0-react"; // Asegúrate de importar useAuth0
+
 const Detail = () => {
   const myProduct = useSelector((state) => state.productDetail);
   // const items = useSelector((state) => state.items)
@@ -16,6 +18,10 @@ const Detail = () => {
 
   // STATE
   const [loading, setLoading] = useState(false);
+
+  // Estado de autenticación
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
 
   // const [cartQuantity, setCartQuantity] = useState(1); // Estado para la cantidad en el carrito
 
@@ -61,9 +67,15 @@ const Detail = () => {
   //   }
   // };
 
-  function buyCart(event) {
-    dispatch(addToCart(myProduct));
-    alert(`¡Producto añadido al carrito!`);
+
+  function handleBuyNow(event) {
+    if (isAuthenticated) {
+      dispatch(addToCart(myProduct));
+      alert(`¡Producto añadido al carrito!`);
+    } else {
+      alert("Por favor inicia sesión para comprar.");
+      loginWithRedirect(); // Redirigir al usuario a la página de inicio de sesión
+    }
     event.preventDefault();
   }
 
@@ -159,7 +171,9 @@ const Detail = () => {
                   className={style.button}
                 >
                   <div className={style.button_wrapper}>
-                    <button className={style.buy__button} onClick={buyCart}>
+
+                    <button className={style.buy__button} onClick={handleBuyNow}>
+
                       <div className={style.text}>Add To cart</div>
 
                       <span className={style.icon}>
