@@ -14,6 +14,22 @@ const Users = sequelize.define('users',{
     email:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    direction:{
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    telefone:{
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    email_verified:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    picture:{
+        type: DataTypes.TEXT,
+        allowNull: true
     }
 },{
     timestamps: false

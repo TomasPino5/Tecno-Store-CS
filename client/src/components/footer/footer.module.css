@@ -1,8 +1,9 @@
 footer {
-  margin-top: 5px;
+  margin-top: 15px;
+  padding: 20px 20px 0px 20px;
   bottom: 0px;
   width: 100%;
-  background-color: rgb(17, 17, 17);
+  background-color: rgb(0, 0, 0);
   color: white;
 }
 .Footer {
@@ -31,7 +32,8 @@ footer {
   grid-template-columns: 1fr 1fr;
 }
 .row {
-  margin-top: 20px;
+  margin-top: 10px;
+
   display: flex;
 }
 
@@ -67,6 +69,7 @@ footer {
 .container_footer {
   display: flex;
   justify-content: space-between;
+
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 3px;
@@ -88,4 +91,17 @@ footer {
 
 .link {
   text-decoration: none;
+}
+
+.column2 {
+  margin-bottom: 10px;
+}
+
+.img__logo {
+  margin-top: 20px;
+  height: 180px;
+  margin-left: 10px;
+}
+.ordenador {
+  display: flex;
 }

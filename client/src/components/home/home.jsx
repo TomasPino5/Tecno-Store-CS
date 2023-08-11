@@ -1,6 +1,7 @@
 import Cards from "../cards/cards";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// import { NavLink } from "react-router-dom";
 
 import {
   getProducts,
@@ -8,25 +9,27 @@ import {
   filterByBrand,
   filterByCategory,
   clearFilter,
+  clearDetail
 } from "../../redux/actions";
 import style from "./home.module.css";
+import Nav from "../nav/nav";
 
 const Home = () => {
   const products = useSelector((state) => state.allProducts);
   const brands = useSelector((state) => state.brands);
   const categories = useSelector((state) => state.categories);
 
-  console.log(products);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+    dispatch(clearDetail())
+  }, [dispatch]);
 
   //paginado
   const productsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
 
   const handleNextPage = () => {
     setCurrentPage((nextPage) => nextPage + 1);
@@ -39,7 +42,7 @@ const Home = () => {
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
 
-  const recipesToDisplay = products.slice(startIndex, endIndex);
+  const productsToDisplay = products.slice(startIndex, endIndex);
 
   //filtros
   const handleOrderByPrice = (event) => {
@@ -49,10 +52,12 @@ const Home = () => {
   const handleBrandFilter = (event) => {
     dispatch(filterByBrand(event.target.value));
     document.getElementById("categoryFilter").value = "";
+    document.getElementById("orderByPrice").value = "";
   };
 
   const handleCategoryFilter = (event) => {
     dispatch(filterByCategory(event.target.value));
+    document.getElementById("orderByPrice").value = "";
   };
 
   const handleClearFilters = () => {
@@ -70,14 +75,10 @@ const Home = () => {
 
         <div className={style.filtros}>
 
+          <Nav handleClearFilters={handleClearFilters}/>
+
           <div className={style.content}>
-            <select id="orderByPrice" onChange={handleOrderByPrice}>
-              <option value="">Price</option>
-              <option value="-+">Menor a Mayor</option>
-              <option value="+-">Mayor a Menor</option>
-            </select>
-
-
+            
             <select id="brandFilter" onChange={handleBrandFilter}>
               <option value="">Brands</option>
               {brands.map((brand) => (
@@ -91,6 +92,15 @@ const Home = () => {
               ))}
             </select>
 
+            <select id="orderByPrice" onChange={handleOrderByPrice}>
+              <option value="">Price</option>
+              <option value="-+">Menor a Mayor</option>
+              <option value="+-">Mayor a Menor</option>
+            </select>
+            {/* <NavLink to="/filter/brandfilter/Motorola" className={style.filterLink}>Filter by Motorola</NavLink> */}
+            {/* <NavLink to="/filter/brandfilter/Samsung" className={style.filterLink}>Filter by Samsung</NavLink>
+            <NavLink to="/filter/brandfilter/Apple" className={style.filterLink}>Filter by Apple</NavLink>
+            <NavLink to="/filter/brandfilter/Xiaomi" className={style.filterLink}>Filter by Xiaomi</NavLink> */}
           </div>
 
           <button className={style.limpiarF} onClick={handleClearFilters}>Limpiar Filtros</button>
@@ -98,7 +108,7 @@ const Home = () => {
         </div>
       
       <div>
-        <Cards products={recipesToDisplay} />
+        <Cards products={productsToDisplay} />
       </div>
 
       <div>
