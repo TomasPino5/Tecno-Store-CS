@@ -78,13 +78,7 @@ const Home = () => {
           <Nav handleClearFilters={handleClearFilters}/>
 
           <div className={style.content}>
-            <select id="orderByPrice" onChange={handleOrderByPrice}>
-              <option value="">Price</option>
-              <option value="-+">Menor a Mayor</option>
-              <option value="+-">Mayor a Menor</option>
-            </select>
-
-
+            
             <select id="brandFilter" onChange={handleBrandFilter}>
               <option value="">Brands</option>
               {brands.map((brand) => (
@@ -96,6 +90,12 @@ const Home = () => {
               {categories.map((category) => (
                 <option key={category} value={category}>{category}</option>
               ))}
+            </select>
+
+            <select id="orderByPrice" onChange={handleOrderByPrice}>
+              <option value="">Price</option>
+              <option value="-+">Menor a Mayor</option>
+              <option value="+-">Mayor a Menor</option>
             </select>
             {/* <NavLink to="/filter/brandfilter/Motorola" className={style.filterLink}>Filter by Motorola</NavLink> */}
             {/* <NavLink to="/filter/brandfilter/Samsung" className={style.filterLink}>Filter by Samsung</NavLink>
