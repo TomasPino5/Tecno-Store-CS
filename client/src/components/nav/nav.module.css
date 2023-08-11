@@ -77,7 +77,6 @@
   width: 100%; /* Asegura que ocupe todo el ancho disponible */
 }
 
-
 /* .carrito {
   background-color: black;
   border: 1px solid black;
@@ -85,7 +84,6 @@
   font-size: small;
   cursor: pointer;
 } */
-
 
 .container {
   display: flex;
@@ -97,13 +95,12 @@
   z-index: 213123;
 }
 
-
 .NuevosProd {
   background-color: black;
   border: 1px solid black;
   color: #08ef56;
   margin-bottom: 0px;
-  font-size:small;
+  font-size: small;
   font-weight: 600;
   cursor: pointer;
 }
@@ -117,7 +114,7 @@
   cursor: pointer;
 }
 
-.login{
+.login {
   display: flex;
   flex-direction: row;
   height: 45px;
@@ -127,7 +124,6 @@
   padding-right: 10px; /* Empuja los elementos hacia la derecha */
   z-index: 213123;
 }
-
 
 /* Note that you only needs to edit the config to customize the button! */
 
@@ -196,4 +192,13 @@
 .newProduct {
   background-color: black;
   border: 1px solid black;
+}
+.cartpos {
+  margin-top: 6px;
+  margin-right: 5px;
+}
+
+.navTS {
+  margin-top: 5px;
+  margin-left: 8px;
 }
