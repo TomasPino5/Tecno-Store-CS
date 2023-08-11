@@ -16,7 +16,11 @@ const Nav = () => {
 
   return (
     <nav className={style.navContainer}>
-      <NavLink to="/" style={{ textDecoration: "none", color: "inherit" }}>
+      <NavLink
+        className={style.navTS}
+        to="/"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
         <button className={style.button}>
           <span className={style.actualtext}>&nbsp;Tecno/Store&nbsp;</span>
           <span
@@ -43,8 +47,6 @@ const Nav = () => {
         {location.pathname === "/products" ? <SearchBar /> : null}
       </div>
 
-      <Cart />
-
       {/* <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <NavLink to="/cart">
           <a href="/cart">
@@ -70,16 +72,19 @@ const Nav = () => {
         </NavLink>
       </div> */}
 
-      <div className={style.container}>
+      {/* <div className={style.container}>
         <NavLink to="/products">
           <button className={style.NuevosProd}>Nuestros productos</button>
         </NavLink>
-      </div>
+      </div> */}
 
       <div className={style.login}>
         {/* <button className={style.login} onClick={handleLoginButtonClick}>
             Login
           </button> */}
+        <div className={style.cartpos}>
+          <Cart />
+        </div>
 
         {location.pathname === "/products" ? (
           <NavLink to="/form">

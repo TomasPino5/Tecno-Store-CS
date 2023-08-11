@@ -9,6 +9,7 @@ import {
   filterByBrand,
   filterByCategory,
   clearFilter,
+  clearDetail
 } from "../../redux/actions";
 import style from "./home.module.css";
 import Nav from "../nav/nav";
@@ -22,6 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(clearDetail())
   }, [dispatch]);
 
   //paginado

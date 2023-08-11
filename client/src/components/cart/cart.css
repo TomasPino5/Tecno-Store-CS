@@ -1,83 +1,83 @@
 .cart {
-    background: #000;
-    display: none;
-    padding: 32px;
-    position: fixed;
-    right: 0px;
-    top: 50px;
-    width: 200px;
-    max-height: calc(110vh - 110px); /* 100px es la suma del padding y margen del contenedor */
+  background: #000;
+  display: none;
+  padding: 32px;
+  position: fixed;
+  right: 0px;
+  top: 50px;
+  width: 200px;
+  max-height: calc(
+    110vh - 110px
+  ); /* 100px es la suma del padding y margen del contenedor */
   overflow-y: auto;
-  }
-  .name{
-    color: #08ef56;
-  }
-  .rest{
-    color: #08ef56;
-    background-color: #000;
-  }
-  .add{
-    color: #08ef56;
-    background-color: #000;
-  }
-  .BUY{
-    color: #08ef56;
-    background-color: #000;
-  }
-  .CLEAR{
-    color: #08ef56;
-    background-color: #000;
-  }
-  .small{
-    color: #08ef56;
-  }
-  .TOTAL{
-    color: #08ef56;
-  }
-  
-  .cart img {
-    aspect-ratio: 16/9;
-    width: 100%;
-  }
-  
-  .cart li {
-    border-bottom: 1px solid #444;
-    padding-bottom: 16px;
-  }
-  
-  .cart footer {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .cart footer button {
-    padding: 8px;
-  }
-  
-  .cart-button {
-    align-items: center;
-    background: #08ef56;
-    border-radius: 9999px;
-    cursor: pointer;
-    display: flex;
-    height: 32px;
-    justify-content: center;
-    padding: 4px;
-    position: absolute;
-    right: 250px;
-    top: 8px;
-    transition: all .3s ease;
-    width: 32px;
-    z-index: 9999;
-  }
-  
-  .cart-button:hover {
-    transform: scale (1.1);
-  }
-  
-  .cart-button ~ input:checked ~ .cart {
-    height: 100%;
-    display: block;
-  }
+}
+.name {
+  color: #08ef56;
+}
+.rest {
+  color: #08ef56;
+  background-color: #000;
+}
+.add {
+  color: #08ef56;
+  background-color: #000;
+}
+.BUY {
+  color: #08ef56;
+  background-color: #000;
+}
+.CLEAR {
+  color: #08ef56;
+  background-color: #000;
+}
+.small {
+  color: #08ef56;
+}
+.TOTAL {
+  color: #08ef56;
+}
+
+.cart img {
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+
+.cart li {
+  border-bottom: 1px solid #444;
+  padding-bottom: 16px;
+}
+
+.cart footer {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart footer button {
+  padding: 8px;
+}
+
+.cart-button {
+  align-items: center;
+  background: #08ef56;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  padding: 4px;
+  position: relative; /* Cambia a "fixed" en lugar de "absolute" */
+  transition: all 0.3s ease;
+  width: 32px;
+  z-index: 9999;
+}
+
+.cart-button:hover {
+  transform: scale (1.1);
+}
+
+.cart-button ~ input:checked ~ .cart {
+  height: 100%;
+  display: block;
+}
