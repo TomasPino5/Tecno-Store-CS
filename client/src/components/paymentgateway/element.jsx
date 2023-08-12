@@ -5,6 +5,10 @@ import { clearCart, clearDetail } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+
+import style from './element.module.css'
+
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
@@ -81,19 +85,19 @@ const CheckoutForm = () => {
           </div>
         ))}
       </div>
-       {Object.keys(detail).length !== 0 && (
-      <div className={styles.div0}>
-        <div className={styles.item} key={detail.id}>
-          <img src={detail.imageSrc} alt={detail.imageAlt} className={styles.itemImage} />
-          <div className={styles.itemDetails}>
-            <p className={styles.itemName}>{detail.name}</p>
-            <p className={styles.itemPrice}>Precio: ${detail.price}</p>
-            <p>Cantidad: {1}</p>
-            <p>Marca: {detail.brand}</p>
-            <p>Categoría: {detail.category}</p>
+      {Object.keys(detail).length !== 0 && (
+        <div className={styles.div0}>
+          <div className={styles.item} key={detail.id}>
+            <img src={detail.imageSrc} alt={detail.imageAlt} className={styles.itemImage} />
+            <div className={styles.itemDetails}>
+              <p className={styles.itemName}>{detail.name}</p>
+              <p className={styles.itemPrice}>Precio: ${detail.price}</p>
+              <p>Cantidad: {1}</p>
+              <p>Marca: {detail.brand}</p>
+              <p>Categoría: {detail.category}</p>
+            </div>
           </div>
         </div>
-      </div>
       )}
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -106,16 +110,20 @@ const CheckoutForm = () => {
           </button>
           {mensaje && (
             <p
-              className={`${styles.message} ${
-                mensaje.startsWith("Error")
+              className={`${styles.message} ${mensaje.startsWith("Error")
                   ? styles.errorMessage
                   : styles.successMessage
-              }`}
+                }`}
             >
               {mensaje}
             </p>
           )}
         </form>
+        <Link to="/products">
+          <button className={style.btnReturn} id="buttonReturn">
+            Cancelar
+          </button>
+        </Link>
       </div>
     </>
   );
