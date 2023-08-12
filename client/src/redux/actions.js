@@ -9,7 +9,7 @@ import {
 // Obtener los productos desde la API 
 export const getProducts = () => {
     return async function (dispatch) {
-        const json = await axios.get('/productos');
+        const json = await axios.get('tecno-store-cs-production.up.railway.app/productos');
         return dispatch({
             type: GET_PRODUCTS,
             payload: json.data
