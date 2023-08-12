@@ -6,11 +6,13 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom";
 //
 import { getUser } from "../../redux/actions";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import style from './profile.module.css'
 
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+
+  const dataUser = useSelector((state) => state.user);
   //
   const email = user.email
   const dispatch = useDispatch();
@@ -49,7 +51,7 @@ export const Profile = () => {
       <div  >
         <div >
           <Link to={'/userProfile'}>
-            <img className={style.img} src={user.picture} alt={user.name} />
+            <img className={style.img} src={dataUser?.picture ? dataUser.picture : user.picture} alt={user.name} />
           </Link>
         </div>
         {/* <p>{user.email}</p> */}
