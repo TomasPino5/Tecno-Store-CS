@@ -44,6 +44,8 @@ const Home = () => {
 
   const productsToDisplay = products.slice(startIndex, endIndex);
 
+  const totalPags = products.length / productsPerPage
+
   //filtros
   const handleOrderByPrice = (event) => {
     dispatch(orderByPrice(event.target.value));
@@ -111,9 +113,12 @@ const Home = () => {
         <Cards products={productsToDisplay} />
       </div>
 
-      <div>
+      <div className={style.conteinerNextPrev}>
 
         <button disabled={currentPage === 1} className={style.btnNextPrev} onClick={handlePreviousPage}>Prev</button>
+
+        <h3 className={style.inputPag}>- {currentPage} of {Math.ceil(totalPags)} -</h3>
+
         <button disabled={endIndex > products.length} className={style.btnNextPrev} onClick={handleNextPage}>Next</button>
         {/* {currentPage > 1 && (
           <button className={style.btnPrevious} onClick={handlePreviousPage}>Prev</button>

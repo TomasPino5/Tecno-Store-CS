@@ -7,9 +7,16 @@ import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+
 import style from './element.module.css'
 
 const CheckoutForm = () => {
+
+  const { user } = useAuth0();
+  const dataUser = useSelector((state) => state.user);
+
   const stripe = useStripe();
   const elements = useElements();
   const [mensaje, setMensaje] = useState("");
@@ -51,13 +58,56 @@ const CheckoutForm = () => {
 
       const data = await response.json();
       setMensaje(data.mensaje);
+
+      console.log(data.mensaje)
+      if (data.mensaje === 'Pago exitoso') {
+        enviarCorreo();
+      }
+
       // Retrasar la redirección durante 3 segundos
-      setTimeout(() => {
-        navigate("/userProfile");
-      }, 6000);
+      if (data.mensaje === 'Pago exitoso') {
+        setTimeout(() => {
+          navigate("/products");
+        }, 1000);
+        alert('Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma')
+      }
     }
     dispatch(clearCart(items));
   };
+
+  const productCartName = items.map((item) => (item.name))
+  const productCartQuantity = items.map((item) => (item.quantity))
+  const productCartBrand = items.map((item) => (item.brand))
+  const productCartPrice = items.map((item) => (item.price.toLocaleString("es-ES", {
+    minimumFractionDigits: 2,
+  })))
+  const productDetailName = detail.name
+  const productDetailQuantity = '1'
+  const productDetailBrand = detail.brand
+  const productDetailPrice = detail?.price
+
+  const productName = productCartName.length === 0 ? productDetailName : productCartName
+  const productQuantity = productCartQuantity.length === 0 ? productDetailQuantity : productCartQuantity
+  const productBrand = productCartBrand.length === 0 ? productDetailBrand : productCartBrand
+  const productPrice = productCartPrice.length === 0 ? productDetailPrice : productCartPrice
+
+  const enviarCorreo = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/send-email', {
+        destinatario: user.email,
+        asunto: 'Compra Exitosa',
+        mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}!
+            Tu compra de ${productName} fue exitosa, etaremos realizando tu envio en los proximos dias.
+            Cantidad:${productQuantity}
+            Marca: ${productBrand} 
+            Precio: $${productPrice}`,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error al enviar el correo electrónico', error);
+    }
+  };
+
 
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
@@ -111,8 +161,8 @@ const CheckoutForm = () => {
           {mensaje && (
             <p
               className={`${styles.message} ${mensaje.startsWith("Error")
-                  ? styles.errorMessage
-                  : styles.successMessage
+                ? styles.errorMessage
+                : styles.successMessage
                 }`}
             >
               {mensaje}
