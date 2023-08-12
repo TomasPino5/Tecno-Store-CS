@@ -60,11 +60,17 @@ export default function Cart() {
                     ))}
                 </ul>
                 <div className='TOTAL' >Total: ${totalPrice.toLocaleString('es-ES', { minimumFractionDigits: 2 })}</div>
-                <NavLink
-                    to={`/pay`}
-                    style={{ textDecoration: "none", color: "inherit" }}> 
-                    <button onClick={clearDetailHandler} className='BUY'>Buy</button>
-                </NavLink>
+                {items.length > 0 ? (
+                    <NavLink to={`/pay`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <button onClick={clearDetailHandler} className='BUY'>
+                            Buy
+                        </button>
+                    </NavLink>
+                ) : (
+                    <button onClick={() => alert('¡El carrito esta vacio!')} className='BUY'>
+                        Buy
+                    </button>
+                )}
                 <button className='CLEAR' onClick={clearCartHandler}> <ClearCartIcon /> </button>
             </aside>
         </>
