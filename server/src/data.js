@@ -301,7 +301,7 @@ module.exports = productsData = [
     },
     {
       id: 26,
-      name: 'Apple iPone 11',
+      name: 'Apple iPhone 11',
       href: '#',
       imageSrc: 'https://i.ibb.co/4Pg8rYN/Apple-i-Phone-11.webp',
       imageAlt: "Apple iPhone 11 (128 GB) ",
