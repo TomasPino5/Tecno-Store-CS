@@ -112,3 +112,21 @@
     background-color: rgb(172, 222, 168);
     align-items: center;
 }
+
+.formImg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 5px;
+    
+}
+
+.imgModify{
+    margin-left: 88px;
+    margin-top: 10px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    
+}
