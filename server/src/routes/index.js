@@ -9,6 +9,9 @@ const getUser = require("../controllers/getUser.js");
 const modifyUser = require("../controllers/modifyUser.js");
 const postPago = require("../controllers/postPago");
 const { sendMailCompraHandler } = require("../handlers/sendMailCompraHandler");
+const postUserPurchase = require("../controllers/postUserPurchase");
+const getUserPurchasesHandler = require("../handlers/getUserPurchasesHandler");
+
 
 
 const router = Router();
@@ -24,6 +27,9 @@ router.get("/dbproducts", getDbProducts);
 
 //Ruta para traer un usuario
 router.get("/getuser/:email", getUser);
+
+//Ruta para traer las compras de un usuario
+router.get("/getUserPurchases/:email", getUserPurchasesHandler);
 
 //Ruta para modificar datos del usuario
 router.put("/modifyUser/:email", modifyUser);
@@ -41,5 +47,8 @@ router.post("/pago", postPago);
 
 //Ruta para enviar mail de confirmacion de email
 router.post("/send-email", sendMailCompraHandler)
+
+//Ruta para guardar compra del usuario
+router.post("/userPurchase", postUserPurchase)
 
 module.exports = router;

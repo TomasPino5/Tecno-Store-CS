@@ -12,6 +12,12 @@ import img4 from "../../imag/Loading/4.jpg";
 import img5 from "../../imag/Loading/5.jpg";
 import img6 from "../../imag/Loading/6.jpg";
 
+import imgPublish1 from "../../imag/imgHome/envios.jpg";
+import imgPublish2 from "../../imag/imgHome/pagina.jpg";
+import imgPublish3 from "../../imag/imgHome/productos.jpg";
+import imgPublish4 from "../../imag/imgHome/tarjetas.webp";
+// import imgPublish5 from "../../imag/imgHome/envios.jpg";
+import FaqSection from "./QandA";
 import Hero from "../hero/hero";
 import style from "./carrusel.module.css";
 
@@ -29,7 +35,7 @@ const Carrusel = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(clearDetail())
+    dispatch(clearDetail());
   }, [dispatch]);
 
   return (
@@ -94,27 +100,104 @@ const Carrusel = () => {
             <p className={style.pp}>Mira todos nuestros productos</p>
           </Link>
         </div>
-        <div className={style.aboutSection}>
-          <p className={style.aboutText}>
+        <div className={style.globo}>
+          <img
+            className={style.imgPres}
+            src="https://img.freepik.com/free-photo/serious-thoughtful-dark-skinned-millennial-girl-with-afro-bushy-hair-points-away-copy-space_273609-45529.jpg?w=1060&t=st=1691789737~exp=1691790337~hmac=4afcddbc7196225178f251ac7a6de972df373509d8d8fe9b782d8a9b6f99f2b1"
+            alt=""
+          />
+          <p className={style.globoTexto}>
             Somos una empresa comprometida con la calidad y excelencia en la
             industria de la tecnología. Ofrecemos una amplia gama de productos
             de alta calidad que satisfacen las necesidades de nuestros clientes.
-          </p>
-        </div>
-        <div className={style.aboutSectionDer}>
-          <p className={style.aboutText}>
             Además, contamos con un equipo de profesionales capacitados que se
             dedican a brindar un servicio excepcional en la reparación y
-            mantenimiento de dispositivos móviles.
+            mantenimiento de dispositivos móviles. En Tecno Store CS, nos
+            esforzamos por ser líderes en la industria y proporcionar soluciones
+            confiables y eficientes para todos nuestros clientes.
           </p>
         </div>
-        <div className={style.aboutSection}>
-          <p className={style.aboutText}>
-            En Tecno Store CS, nos esforzamos por ser líderes en la industria y
-            proporcionar soluciones confiables y eficientes para todos nuestros
-            clientes.
-          </p>
+        <div>
+          <div className={style.container}>
+            <p className={style.globop}>
+              Descubre Nuestra Gama de Celulares Excepcionales Encuentra una
+              emocionante variedad de celulares que te cautivarán con su
+              innovación y estilo. Nuestros productos te ofrecen un mundo de
+              posibilidades para elegir y comprar. ¡Explora y elige el tuyo hoy
+              mismo!
+            </p>
+            <img
+              src="https://img.freepik.com/premium-photo/man-holding-smartphone_23-2148632180.jpg"
+              alt=""
+              className={style.imagen}
+            />
+          </div>
+
+          <div className={style.container}>
+            <img
+              className={style.imagen2}
+              src="https://img.freepik.com/free-photo/black-boy-posing-with-headphones_23-2148171577.jpg"
+              alt=""
+            />
+            <p className={style.globop2}>
+              Experimenta lo Último en Auriculares Eleva tus experiencias
+              auditivas con nuestra selección de auriculares de primera calidad.
+              Descubre un sonido envolvente y un diseño elegante que se adapta a
+              tu estilo de vida. ¡Hazte con los auriculares perfectos ahora!
+            </p>
+          </div>
+
+          <div className={style.flexContainer}>
+            <div className={style.globoP2L}>
+              <p>
+                Nuestro Local Te invitamos a sumergirte en la experiencia única
+                de visitar nuestra tienda física. Experimenta la tecnología de
+                vanguardia y recibe asesoramiento personalizado de nuestro
+                equipo experto. ¡Te esperamos con los brazos abiertos!
+              </p>
+            </div>
+            <img src={imgPublish2} alt="" className={style.centerImage} />
+            <div className={style.globoP2R}>
+              <p>
+                Explora Nuestros Productos Sumérgete en un mundo de opciones
+                emocionantes mientras navegas por nuestra amplia gama de
+                productos tecnológicos. Desde celulares de última generación
+                hasta accesorios de primera calidad, ¡encontrarás todo lo que
+                necesitas aquí!
+              </p>
+            </div>
+          </div>
+          <div className={style.container}>
+            <p className={style.globop3}>
+              Garantía al 100% Nuestra pasión por la calidad se refleja en cada
+              producto que ofrecemos. Con nuestra garantía al 100%, puedes
+              comprar con total tranquilidad sabiendo que estás obteniendo lo
+              mejor. ¡Experimenta la excelencia en cada compra!
+            </p>
+            <img className={style.imagen3} src={imgPublish3} alt="" />
+          </div>
+          <div div className={style.container}>
+            <img className={style.imagen5} src={imgPublish4} alt="" />
+            <p className={style.globop5}>
+              Aceptamos Todas las Tarjetas Simplifica tus compras con nosotros,
+              ya que aceptamos todas las tarjetas de crédito y débito
+              principales. Tu conveniencia es nuestra prioridad, y estamos aquí
+              para hacer que el proceso de pago sea fluido y sin complicaciones.
+            </p>
+          </div>
+          <div className={style.container}>
+            <p className={style.globop4}>
+              Experimenta la Comodidad Olvídate de las preocupaciones de ir de
+              compras. Te llevamos la tecnología directamente a tu puerta. Con
+              nuestra entrega confiable y segura, recibirás tus productos en la
+              comodidad de tu hogar. ¡Haz tu pedido ahora y espera lo mejor!
+            </p>
+            <img className={style.imagen3} src={imgPublish1} alt="" />
+          </div>
         </div>
+
+        <FaqSection />
+
         <div className={style.slider__position}>
           <Slider className="slider" {...settings}>
             <Link to="/products">

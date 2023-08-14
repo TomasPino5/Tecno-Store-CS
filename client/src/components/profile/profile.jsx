@@ -51,7 +51,7 @@ export const Profile = () => {
       <div  >
         <div >
           <Link to={'/userProfile'}>
-            <img className={style.img} src={dataUser?.picture ? dataUser.picture : user.picture} alt={user.name} />
+            <img className={style.img} src={dataUser?.picture ? dataUser.picture : user.picture} alt={''} />
           </Link>
         </div>
         {/* <p>{user.email}</p> */}
