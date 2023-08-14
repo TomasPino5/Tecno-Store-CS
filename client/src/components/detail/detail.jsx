@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import Swal from "sweetalert2";
 import { Link, useParams, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, addToCart } from "../../redux/actions";
@@ -69,13 +69,29 @@ const Detail = () => {
 
 
   function handleBuyNow(event) {
-    if (isAuthenticated) {
       dispatch(addToCart(myProduct));
-      alert(`¡Producto añadido al carrito!`);
-    } else {
-      alert("Por favor inicia sesión para comprar.");
-      loginWithRedirect(); // Redirigir al usuario a la página de inicio de sesión
-    }
+      Swal.fire({
+        title: 'Agregado',
+        text: '¡Producto añadido al carrito!',
+        icon: 'success',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#28a745'
+      })
+    event.preventDefault();
+  }
+
+  const handleBuy = (event)=>{
+    Swal.fire({
+      title: 'Inicie sesión',
+      text: 'Por favor inicia sesión para comprar.',
+      icon: 'warning',
+      confirmButtonText: 'Iniciar sesión',
+      confirmButtonColor: '#28a745',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        loginWithRedirect();
+      }
+    });
     event.preventDefault();
   }
 
@@ -184,13 +200,19 @@ const Detail = () => {
             <div className={style.cart__container}>
               {/* <CardElement /> */}
               <br />
-              <NavLink
+              {
+                isAuthenticated?
+                <NavLink
                 to={`/pay`}
                 style={{ textDecoration: "none", color: "inherit" }}>
                 <button className={style.buttonYa}>
                   Comprar
                 </button>
-              </NavLink>
+              </NavLink>:
+              <button className={style.buttonYa} onClick={handleBuy}>
+              Comprar
+              </button>
+                }
 
             </div>
             
