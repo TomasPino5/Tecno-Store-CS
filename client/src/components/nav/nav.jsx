@@ -74,7 +74,7 @@ const Nav = () => {
 
       <div >
         <NavLink to="/products">
-        {location.pathname === "/products" ? null : <button className={style.box} >Nuestros productos</button> }
+        {location.pathname === "/products" ? null : <button className={style.btnNP} >Nuestros productos</button> }
         </NavLink>
       </div>
 

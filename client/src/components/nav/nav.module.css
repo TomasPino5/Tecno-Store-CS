@@ -1,5 +1,6 @@
 .navContainer {
-  position: fixed; /* Agregamos position: fixed para que ocupe todo el ancho */
+  position: fixed;
+  /* Agregamos position: fixed para que ocupe todo el ancho */
   top: 0;
   left: 0;
   width: 100%;
@@ -8,6 +9,7 @@
   display: flex;
   z-index: 999;
 }
+
 /* #08ef56 */
 /* === removing default button style ===*/
 .button {
@@ -33,6 +35,7 @@
   color: transparent;
   -webkit-text-stroke: 1px var(--text-stroke-color);
 }
+
 /* this is the text, when you hover on button */
 .hovertext {
   position: absolute;
@@ -46,6 +49,7 @@
   transition: 0.5s;
   -webkit-text-stroke: 1px var(--animation-color);
 }
+
 /*! hover */
 .button:hover .hovertext {
   width: 100%;
@@ -71,10 +75,12 @@
 .SearchBarPosition {
   display: flex;
   align-items: center;
-  justify-content: center; /* Cambiado a 'center' */
+  justify-content: center;
+  /* Cambiado a 'center' */
   text-align: center;
   margin-top: 10px;
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  width: 100%;
+  /* Asegura que ocupe todo el ancho disponible */
 }
 
 /* .carrito {
@@ -89,9 +95,11 @@
   display: flex;
   flex-direction: row;
   padding-top: 5px;
-  justify-content: flex-end; /* Ancla los elementos al lado derecho */
+  justify-content: flex-end;
+  /* Ancla los elementos al lado derecho */
   margin-left: auto;
-  padding-right: 10px; /* Empuja los elementos hacia la derecha */
+  padding-right: 10px;
+  /* Empuja los elementos hacia la derecha */
   z-index: 213123;
 }
 
@@ -119,9 +127,11 @@
   flex-direction: row;
   height: 45px;
   margin-top: 5px;
-  justify-content: flex-end; /* Ancla los elementos al lado derecho */
+  justify-content: flex-end;
+  /* Ancla los elementos al lado derecho */
   margin-left: auto;
-  padding-right: 10px; /* Empuja los elementos hacia la derecha */
+  padding-right: 10px;
+  /* Empuja los elementos hacia la derecha */
   z-index: 213123;
 }
 
@@ -150,8 +160,7 @@
   right: 0;
   width: 0;
   height: 0;
-  border-width: 0 var(--plus_topRightTriangleSideLength)
-    var(--plus_topRightTriangleSideLength) 0;
+  border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
   border-style: solid;
   border-color: transparent #08ef56 transparent transparent;
   transition-timing-function: ease-in-out;
@@ -170,7 +179,7 @@
   --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
 }
 
-.plusButton > .plusIcon {
+.plusButton>.plusIcon {
   fill: #08ef56;
   width: calc(var(--plus_sideLength) * 0.7);
   height: calc(var(--plus_sideLength) * 0.7);
@@ -179,12 +188,12 @@
   transition-duration: 0.2s;
 }
 
-.plusButton:hover > .plusIcon {
+.plusButton:hover>.plusIcon {
   fill: black;
   transform: rotate(180deg);
 }
 
-.plusButton:focus-visible > .plusIcon {
+.plusButton:focus-visible>.plusIcon {
   fill: black;
   transform: rotate(180deg);
 }
@@ -193,6 +202,7 @@
   background-color: black;
   border: 1px solid black;
 }
+
 .cartpos {
   margin-top: 6px;
   margin-right: 5px;
@@ -201,4 +211,80 @@
 .navTS {
   margin-top: 5px;
   margin-left: 8px;
+}
+
+.btnNP {
+  position: relative;
+  margin-top: 7px;
+  margin-right: 8px;
+  padding: 3px 5px;
+  border-radius: 7px;
+  border: 1.5px solid #08ef56;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: transparent;
+  color: #08ef56;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.btnNP:hover {
+  color: black;
+  background: #32f874;
+  box-shadow: 0 0 30px 5px #01c58a;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.btnNP:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.btnNP::before {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 86%;
+  position: absolute;
+  top: 7%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #fff;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+.btnNP:active {
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
 }
