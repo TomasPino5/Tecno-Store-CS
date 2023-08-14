@@ -7,9 +7,16 @@ import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+
 import style from './element.module.css'
 
 const CheckoutForm = () => {
+
+  const { user } = useAuth0();
+  const dataUser = useSelector((state) => state.user);
+
   const stripe = useStripe();
   const elements = useElements();
   const [mensaje, setMensaje] = useState("");
@@ -27,6 +34,20 @@ const CheckoutForm = () => {
       dispatch(clearDetail());
     };
   }, [dispatch]);
+
+  const calculateTotalPrice = () => {
+    let total = 0;
+
+    if (totalPrice > 0) {
+      total += totalPrice
+    }
+  
+    if (detail && detail.price) {
+      total += detail.price;
+    }
+  
+    return total;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,13 +72,56 @@ const CheckoutForm = () => {
 
       const data = await response.json();
       setMensaje(data.mensaje);
+
+      console.log(data.mensaje)
+      if (data.mensaje === 'Pago exitoso') {
+        enviarCorreo();
+      }
+
       // Retrasar la redirección durante 3 segundos
-      setTimeout(() => {
-        navigate("/userProfile");
-      }, 6000);
+      if (data.mensaje === 'Pago exitoso') {
+        setTimeout(() => {
+          navigate("/products");
+        }, 1000);
+        alert('Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma')
+      }
     }
     dispatch(clearCart(items));
   };
+
+  const productCartName = items.map((item) => (item.name))
+  const productCartQuantity = items.map((item) => (item.quantity))
+  const productCartBrand = items.map((item) => (item.brand))
+  const productCartPrice = items.map((item) => (item.price.toLocaleString("es-ES", {
+    minimumFractionDigits: 2,
+  })))
+  const productDetailName = detail.name
+  const productDetailQuantity = '1'
+  const productDetailBrand = detail.brand
+  const productDetailPrice = detail?.price
+
+  const productName = productCartName.length === 0 ? productDetailName : productCartName
+  const productQuantity = productCartQuantity.length === 0 ? productDetailQuantity : productCartQuantity
+  const productBrand = productCartBrand.length === 0 ? productDetailBrand : productCartBrand
+  const productPrice = productCartPrice.length === 0 ? productDetailPrice : productCartPrice
+
+  const enviarCorreo = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/send-email', {
+        destinatario: user.email,
+        asunto: 'Compra Exitosa',
+        mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}!
+            Tu compra de ${productName} fue exitosa, estaremos realizando tu envio en los proximos dias.
+            Cantidad:${productQuantity}
+            Marca: ${productBrand} 
+            Precio: $${productPrice}`,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error al enviar el correo electrónico', error);
+    }
+  };
+
 
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
@@ -85,23 +149,38 @@ const CheckoutForm = () => {
           </div>
         ))}
       </div>
-      {Object.keys(detail).length !== 0 && (
-        <div className={styles.div0}>
+      <div className={styles.div0}>
+        {Object.keys(detail).length !== 0 && (
           <div className={styles.item} key={detail.id}>
             <img src={detail.imageSrc} alt={detail.imageAlt} className={styles.itemImage} />
             <div className={styles.itemDetails}>
               <p className={styles.itemName}>{detail.name}</p>
-              <p className={styles.itemPrice}>Precio: ${detail.price}</p>
-              <p>Cantidad: {1}</p>
+              <p>Cantidad: 1</p>
               <p>Marca: {detail.brand}</p>
               <p>Categoría: {detail.category}</p>
+              <p className={styles.itemPrice}>Precio: ${detail.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}</p>
             </div>
           </div>
+        )}
         </div>
-      )}
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <h2 className={styles.title}>Pasarela de Pago</h2>
+          <h2 className={styles.title}>Resumen de compra</h2>
+
+          <ul>
+            {items.map(item => (
+              <li key={item.id}>
+                <span><strong>{item.name}</strong> - x{item.quantity} - ${item.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}</span>
+              </li>
+            ))}
+            {detail && Object.keys(detail).length !== 0 && (
+              <li>
+                <span><strong>{detail.name}</strong> - x1 - ${detail.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}</span>
+              </li>
+            )}
+          </ul>
+          <p><strong>Total:</strong> ${calculateTotalPrice().toLocaleString("es-ES", { minimumFractionDigits: 2 })}</p>
+
           <div className={styles.cardElementContainer}>
             <CardElement className={styles.cardElement} />
           </div>
@@ -111,8 +190,8 @@ const CheckoutForm = () => {
           {mensaje && (
             <p
               className={`${styles.message} ${mensaje.startsWith("Error")
-                  ? styles.errorMessage
-                  : styles.successMessage
+                ? styles.errorMessage
+                : styles.successMessage
                 }`}
             >
               {mensaje}

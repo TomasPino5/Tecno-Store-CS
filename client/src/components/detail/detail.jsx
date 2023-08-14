@@ -101,7 +101,7 @@ const Detail = () => {
 
   // RENDER
   return (
-    <form  className={style.detail}>
+    <form className={style.detail}>
       {!loading ? (
         <div className={style.detailContainer}>
           <div className={style.img__c}>
@@ -152,18 +152,7 @@ const Detail = () => {
                 Description: {myProduct?.description}
               </p>
             </div>
-            <div className={style.cart__container}>
-              {/* <CardElement /> */}
-              <br />
-              <NavLink
-                    to={`/pay`}
-                    style={{ textDecoration: "none", color: "inherit" }}>
-                <button>
-                  comprar ya
-                </button>
-              </NavLink>
-              
-            </div>
+
             {myProduct?.price && (
               <div className={style.btn__c}>
                 <div
@@ -174,7 +163,7 @@ const Detail = () => {
 
                     <button className={style.buy__button} onClick={handleBuyNow}>
 
-                      <div className={style.text}>Add To cart</div>
+                      <div className={style.text}>Add to Cart</div>
 
                       <span className={style.icon}>
                         <svg
@@ -191,6 +180,20 @@ const Detail = () => {
                 </div>
               </div>
             )}
+
+            <div className={style.cart__container}>
+              {/* <CardElement /> */}
+              <br />
+              <NavLink
+                to={`/pay`}
+                style={{ textDecoration: "none", color: "inherit" }}>
+                <button className={style.buttonYa}>
+                  Comprar
+                </button>
+              </NavLink>
+
+            </div>
+            
           </div>
         </div>
       ) : (

@@ -8,6 +8,7 @@ const postFavProducts = require("../controllers/postFavProducts");
 const getUser = require("../controllers/getUser.js");
 const modifyUser = require("../controllers/modifyUser.js");
 const postPago = require("../controllers/postPago");
+const { sendMailCompraHandler } = require("../handlers/sendMailCompraHandler");
 
 
 const router = Router();
@@ -37,5 +38,8 @@ router.post("/login", postUser);
 router.post("/productfav", postFavProducts);
 
 router.post("/pago", postPago);
+
+//Ruta para enviar mail de confirmacion de email
+router.post("/send-email", sendMailCompraHandler)
 
 module.exports = router;
