@@ -87,7 +87,7 @@ const Nav = () => {
           
         </div>
 
-        {location.pathname === "/products" ? (
+        {location.pathname === "/admin" ? (
           <NavLink to="/form">
             <button className={style.newProduct}>
               <div tabIndex={0} className={style.plusButton}>
