@@ -35,6 +35,20 @@ const CheckoutForm = () => {
     };
   }, [dispatch]);
 
+  const calculateTotalPrice = () => {
+    let total = 0;
+
+    if (totalPrice > 0) {
+      total += totalPrice
+    }
+  
+    if (detail && detail.price) {
+      total += detail.price;
+    }
+  
+    return total;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -97,7 +111,7 @@ const CheckoutForm = () => {
         destinatario: user.email,
         asunto: 'Compra Exitosa',
         mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}!
-            Tu compra de ${productName} fue exitosa, etaremos realizando tu envio en los proximos dias.
+            Tu compra de ${productName} fue exitosa, estaremos realizando tu envio en los proximos dias.
             Cantidad:${productQuantity}
             Marca: ${productBrand} 
             Precio: $${productPrice}`,
@@ -135,23 +149,38 @@ const CheckoutForm = () => {
           </div>
         ))}
       </div>
-      {Object.keys(detail).length !== 0 && (
-        <div className={styles.div0}>
+      <div className={styles.div0}>
+        {Object.keys(detail).length !== 0 && (
           <div className={styles.item} key={detail.id}>
             <img src={detail.imageSrc} alt={detail.imageAlt} className={styles.itemImage} />
             <div className={styles.itemDetails}>
               <p className={styles.itemName}>{detail.name}</p>
-              <p className={styles.itemPrice}>Precio: ${detail.price}</p>
-              <p>Cantidad: {1}</p>
+              <p>Cantidad: 1</p>
               <p>Marca: {detail.brand}</p>
               <p>Categoría: {detail.category}</p>
+              <p className={styles.itemPrice}>Precio: ${detail.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}</p>
             </div>
           </div>
+        )}
         </div>
-      )}
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <h2 className={styles.title}>Pasarela de Pago</h2>
+          <h2 className={styles.title}>Resumen de compra</h2>
+
+          <ul>
+            {items.map(item => (
+              <li key={item.id}>
+                <span><strong>{item.name}</strong> - x{item.quantity} - ${item.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}</span>
+              </li>
+            ))}
+            {detail && Object.keys(detail).length !== 0 && (
+              <li>
+                <span><strong>{detail.name}</strong> - x1 - ${detail.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}</span>
+              </li>
+            )}
+          </ul>
+          <p><strong>Total:</strong> ${calculateTotalPrice().toLocaleString("es-ES", { minimumFractionDigits: 2 })}</p>
+
           <div className={styles.cardElementContainer}>
             <CardElement className={styles.cardElement} />
           </div>
