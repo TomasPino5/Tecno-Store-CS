@@ -218,8 +218,9 @@ const Form = () => {
               <strong className={style.card__content}>{imageSrc}</strong>
             )}
           </div> */}
-          <div >
+          <div className={style.imgCont}>
             <label className={style.label__form}>Imagen del producto: </label>
+
             <input
               type="file" // Cambia el tipo de entrada a "file" para permitir la selección de imágenes
               onChange={(e) => handleImageUpload(e)} // Llama a la función handleImageUpload cuando cambie la imagen
@@ -233,6 +234,7 @@ const Form = () => {
                 className={style.uploadedImage}
               />
             )}
+
           </div>
           {error.imageSrc && (
             <strong className={style.card__content}>{error.imageSrc}</strong>
