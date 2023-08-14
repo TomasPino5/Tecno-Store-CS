@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Elements } from "@stripe/react-stripe-js"; // Importa Elements aquí
 import { loadStripe } from "@stripe/stripe-js";
+import { useAuth0 } from "@auth0/auth0-react";
 import Home from "./components/home/home";
 import Detail from "./components/detail/detail";
 import Nav from "./components/nav/nav";
@@ -18,6 +19,7 @@ const stripePromise = loadStripe(
 
 function App() {
   const { pathname } = useLocation();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
   return (
     <div className="App">
       {pathname !== "*" && <Nav />}
@@ -44,7 +46,12 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/" element={<Carousel />} />
         <Route path="/userProfile" element={<UserProfile />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route
+          path="/admin"
+          element={
+            isAuthenticated ? <AdminDashboard /> : <p>Inicia sesión para acceder a esta página.</p>
+          }
+        />
       </Routes>
       <Footer />
     </div>

@@ -1,50 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const AdminDashboard = () => {
-  const [userCount, setUserCount] = useState(0);
-  const [emailsSentCount, setEmailsSentCount] = useState(0);
+  const navigate = useNavigate();
+  const { user } = useAuth0();
 
-  useEffect(() => {
-    fetchUserCount();
-    fetchEmailsSentCount();
-  }, []);
+  const allowedEmail = "menseguezmariano@gmail.com"||"cottiersolchu55@gmail.com" || "adlotorrez91@gmail.com";
+  const isAdmin = user?.email === allowedEmail;
 
-  const fetchUserCount = async () => {
-    try {
-      const response = await axios.get("/api/getUserCount");
-      setUserCount(response.data.userCount);
-    } catch (error) {
-      console.error("Error fetching user count:", error);
-    }
-  };
-
-  const fetchEmailsSentCount = async () => {
-    try {
-      const response = await axios.get("/api/getEmailsSentCount");
-      setEmailsSentCount(response.data.emailsSentCount);
-    } catch (error) {
-      console.error("Error fetching emails sent count:", error);
-    }
-  };
-
+  if (!isAdmin) {
+    setTimeout(() => {
+      alert("No estás autorizado a ingresar.");
+      navigate("/products");
+    }, 50);
+  }
+  
   return (
     <div>
-      <div>
-        <Link to="/form">
-          <img
-            src="ruta_a_tu_logo.png"
-            alt="Logo"
-          />
-        </Link>
-      </div>
-      <div>
-        <h2>Cantidad de Usuarios: {userCount}</h2>
-        <h2>Cantidad de Correos Enviados de Compra: {emailsSentCount}</h2>
-      </div>
+      {isAdmin ? (
+        <div>
+          <Link to="/form">
+            <img
+              src="ruta_a_tu_logo.png"
+              alt="Logo"
+            />
+          </Link>
+        </div>
+      ) : (
+        <p>Acceso no autorizado. Serás redirigido a los pro.</p>
+      )}
     </div>
   );
-}
+};
 
 export default AdminDashboard;
