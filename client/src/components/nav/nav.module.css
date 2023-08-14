@@ -225,7 +225,7 @@
   font-weight: 600;
   letter-spacing: 2px;
   background: transparent;
-  color: #fff;
+  color: #08ef56;
   overflow: hidden;
   box-shadow: 0 0 0 0 transparent;
   -webkit-transition: all 0.2s ease-in;
@@ -234,6 +234,7 @@
 }
 
 .btnNP:hover {
+  color: black;
   background: #32f874;
   box-shadow: 0 0 30px 5px #01c58a;
   -webkit-transition: all 0.2s ease-out;
