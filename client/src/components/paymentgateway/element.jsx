@@ -49,8 +49,25 @@ const CheckoutForm = () => {
     return total;
   };
 
+  const calculateQuantity = () => {
+    let totalQuantity = 0;
+    if (detail && detail.name) {
+      totalQuantity++; // If detail has a product, add 1 to the total quantity
+    }
+    if (items.length > 0) {
+      totalQuantity += items.reduce((total, item) => total + item.quantity, 0);
+    }
+    return totalQuantity;
+  }
+
+  console.log(calculateQuantity())
+  console.log(calculateTotalPrice());
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const calculatedTotalPrice = calculateTotalPrice();
+    const calculatedQuantity = calculateQuantity();
 
     const { token, error } = await stripe.createToken(
       elements.getElement(CardElement)
@@ -60,17 +77,13 @@ const CheckoutForm = () => {
       setMensaje(`Error: ${error.message}`);
     } else {
       // Enviar el token al backend para realizar el pago
-      const response = await fetch("http://localhost:3001/pago", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          producto: { nombre: "producto", precio: totalPrice || detail.price }, // Cambiar según tus productos
-          cantidad: 1, // Cambiar según la cantidad
-          token: token,
-        }),
+      const response = await axios.post("http://localhost:3001/pago", {
+        producto: { nombre: "producto(s)", precio: calculatedTotalPrice }, 
+        cantidad: calculatedQuantity, 
+        token: token,
       });
 
-      const data = await response.json();
+      const data = response.data;
       setMensaje(data.mensaje);
 
       console.log(data.mensaje)
@@ -84,9 +97,9 @@ const CheckoutForm = () => {
           navigate("/products");
         }, 1000);
         alert('Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma')
+        dispatch(clearCart(items));
       }
     }
-    dispatch(clearCart(items));
   };
 
   const productCartName = items.map((item) => (item.name))

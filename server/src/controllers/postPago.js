@@ -7,7 +7,7 @@ const postPago = async (req, res) => {
   console.log("Datos recibidos:", producto, cantidad, token);
   try {
     const charge = await stripe.charges.create({
-      amount: producto.precio * cantidad * 100, // El precio se debe proporcionar en centavos
+      amount: producto.precio * 100, // El precio se debe proporcionar en centavos
       currency: "usd",
       source: token.id,
       description: `Compra de ${cantidad} ${producto.nombre}`,
