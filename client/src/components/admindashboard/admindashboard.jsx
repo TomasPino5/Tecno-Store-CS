@@ -70,12 +70,6 @@ const AdminDashboard = () => {
           <button onClick={() => handleModifyProduct(products)} className="product-list-button">
             Modifica un producto
           </button>
-          <button  className="product-list-button">
-            Elimina un Producto
-          </button>
-          <button onClick={handleShowProductList} className="product-list-button">
-            Listado de Productos
-          </button>
 
           <button  className="product-list-button">
             Listado de Usuarios
