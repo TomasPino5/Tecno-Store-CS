@@ -1,0 +1,41 @@
+/* Estilos para el botón */
+.product-list-button {
+  margin-top: 20px; /* Ajusta el margen superior */
+  margin-bottom: 10px; /* Agrega margen inferior */
+  padding: 10px 20px;
+  background-color: #08ef56;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilos para la lista de productos */
+.product-list {
+  margin-top: 20px; /* Ajusta el margen superior */
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+}
+
+.product-item {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.admin-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+  margin-top: 100px;
+  padding: 10px 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+  

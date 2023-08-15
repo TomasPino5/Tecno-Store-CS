@@ -11,6 +11,9 @@ const postPago = require("../controllers/postPago");
 const { sendMailCompraHandler } = require("../handlers/sendMailCompraHandler");
 const postUserPurchase = require("../controllers/postUserPurchase");
 const getUserPurchasesHandler = require("../handlers/getUserPurchasesHandler");
+const modifyProduct = require("../controllers/modifyProduct");
+const deleteProductByName = require("../controllers/deleteProductByName");
+const deleteUser = require("../controllers/deleteUser.js");
 
 
 
@@ -21,6 +24,12 @@ router.get("/productos", getAllProductsHandler);
 
 //Ruta para mostrar el detalle de los productos
 router.get("/productos/:id", getDetailHandler);
+
+// Ruta para modificar un producto por ID
+router.put("/productos/:id", modifyProduct);
+
+// Ruta para eliminar un producto por su nombre
+router.delete("/productos/:name", deleteProductByName);
 
 //Ruta para llenar la base de datos con los productos se utiliza una sola vez
 router.get("/dbproducts", getDbProducts);
@@ -33,6 +42,9 @@ router.get("/getUserPurchases/:email", getUserPurchasesHandler);
 
 //Ruta para modificar datos del usuario
 router.put("/modifyUser/:email", modifyUser);
+
+// Ruta para eliminar un usuario por su correo electrónico
+router.delete("/user/:email", deleteUser);
 
 //Ruta para almacenar un nuevo producto al db
 router.post("/productos", postCreateProduct);
