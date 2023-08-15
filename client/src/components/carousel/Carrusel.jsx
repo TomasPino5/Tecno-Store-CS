@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearDetail } from "../../redux/actions";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -33,7 +33,8 @@ const Carrusel = () => {
   };
 
   const dispatch = useDispatch();
-
+  const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
+  // className={darkMode ? style.darkMode : style.lightMode}
   useEffect(() => {
     dispatch(clearDetail());
   }, [dispatch]);
@@ -66,7 +67,11 @@ const Carrusel = () => {
             </ul>
           </div>
         </div>
-        <div className={style.button_filter}>
+        <div
+          className={
+            darkMode ? style.button_filterdarkMode : style.button_filter
+          }
+        >
           <Link to={{ pathname: "/products" }}>
             <button>
               <img src="https://i.ibb.co/Z89607V/logo-motorola.jpg" alt="" />
@@ -95,7 +100,7 @@ const Carrusel = () => {
           <Link
             style={{ textDecoration: "none", color: "blue" }}
             to={{ pathname: "/products" }}
-            className={style.linkWrapper}
+            className={darkMode ? style.linkWrapperdarkMode : style.linkWrapper}
           >
             <p className={style.pp}>Mira todos nuestros productos</p>
           </Link>
@@ -106,7 +111,7 @@ const Carrusel = () => {
             src="https://img.freepik.com/free-photo/serious-thoughtful-dark-skinned-millennial-girl-with-afro-bushy-hair-points-away-copy-space_273609-45529.jpg?w=1060&t=st=1691789737~exp=1691790337~hmac=4afcddbc7196225178f251ac7a6de972df373509d8d8fe9b782d8a9b6f99f2b1"
             alt=""
           />
-          <p className={style.globoTexto}>
+          <p className={darkMode ? style.globoTextodarkMode : style.globoTexto}>
             Somos una empresa comprometida con la calidad y excelencia en la
             industria de la tecnología. Ofrecemos una amplia gama de productos
             de alta calidad que satisfacen las necesidades de nuestros clientes.
@@ -119,7 +124,7 @@ const Carrusel = () => {
         </div>
         <div>
           <div className={style.container}>
-            <p className={style.globop}>
+            <p className={darkMode ? style.globopdarkMode : style.globop}>
               Descubre Nuestra Gama de Celulares Excepcionales Encuentra una
               emocionante variedad de celulares que te cautivarán con su
               innovación y estilo. Nuestros productos te ofrecen un mundo de
@@ -139,7 +144,7 @@ const Carrusel = () => {
               src="https://img.freepik.com/free-photo/black-boy-posing-with-headphones_23-2148171577.jpg"
               alt=""
             />
-            <p className={style.globop2}>
+            <p className={darkMode ? style.globop2darkMode : style.globop2}>
               Experimenta lo Último en Auriculares Eleva tus experiencias
               auditivas con nuestra selección de auriculares de primera calidad.
               Descubre un sonido envolvente y un diseño elegante que se adapta a
@@ -148,7 +153,7 @@ const Carrusel = () => {
           </div>
 
           <div className={style.flexContainer}>
-            <div className={style.globoP2L}>
+            <div className={darkMode ? style.globoP2LdarkMode : style.globoP2L}>
               <p>
                 Nuestro Local Te invitamos a sumergirte en la experiencia única
                 de visitar nuestra tienda física. Experimenta la tecnología de
@@ -157,7 +162,7 @@ const Carrusel = () => {
               </p>
             </div>
             <img src={imgPublish2} alt="" className={style.centerImage} />
-            <div className={style.globoP2R}>
+            <div className={darkMode ? style.globoP2RdarkMode : style.globoP2R}>
               <p>
                 Explora Nuestros Productos Sumérgete en un mundo de opciones
                 emocionantes mientras navegas por nuestra amplia gama de
@@ -168,7 +173,7 @@ const Carrusel = () => {
             </div>
           </div>
           <div className={style.container}>
-            <p className={style.globop3}>
+            <p className={darkMode ? style.globop3darkMode : style.globop3}>
               Garantía al 100% Nuestra pasión por la calidad se refleja en cada
               producto que ofrecemos. Con nuestra garantía al 100%, puedes
               comprar con total tranquilidad sabiendo que estás obteniendo lo
@@ -178,7 +183,7 @@ const Carrusel = () => {
           </div>
           <div div className={style.container}>
             <img className={style.imagen5} src={imgPublish4} alt="" />
-            <p className={style.globop5}>
+            <p className={darkMode ? style.globop5darkMode : style.globop5}>
               Aceptamos Todas las Tarjetas Simplifica tus compras con nosotros,
               ya que aceptamos todas las tarjetas de crédito y débito
               principales. Tu conveniencia es nuestra prioridad, y estamos aquí
@@ -186,7 +191,7 @@ const Carrusel = () => {
             </p>
           </div>
           <div className={style.container}>
-            <p className={style.globop4}>
+            <p className={darkMode ? style.globop4darkMode : style.globop4}>
               Experimenta la Comodidad Olvídate de las preocupaciones de ir de
               compras. Te llevamos la tecnología directamente a tu puerta. Con
               nuestra entrega confiable y segura, recibirás tus productos en la

@@ -1,5 +1,6 @@
 .detail {
-  margin-top: 80px;
+  margin-top: 40px;
+  padding-top: 20px;
 }
 .detailContainer {
   height: auto;
@@ -7,6 +8,18 @@
   border: 1.3px solid rgb(171, 171, 171);
   border-radius: 5px;
   background-color: rgb(252, 252, 252);
+  margin: 20px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.detailContainerdarkmode {
+  height: auto;
+  width: auto;
+  border: 1.3px solid rgb(171, 171, 171);
+  border-radius: 5px;
+  background-color: rgb(30, 30, 30);
   margin: 20px;
   padding: 5px;
   display: flex;
@@ -22,6 +35,18 @@
   border: 1.3px solid #08ef56;
   border-radius: 8px;
   background-color: rgb(255, 255, 255);
+  margin: 20px;
+  padding-left: 20px;
+}
+.text__containerdarkmode {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  width: 400px;
+  border: 1.3px solid #08ef56;
+  border-radius: 8px;
+  background-color: rgb(30, 30, 30);
   margin: 20px;
   padding-left: 20px;
 }
@@ -61,6 +86,12 @@
   margin-bottom: -2px;
   margin-top: 2px;
 }
+.N__pdarkmode {
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  margin-bottom: -2px;
+  margin-top: 2px;
+}
 .N__Tc {
   display: flex;
   align-items: flex-start;
@@ -73,9 +104,24 @@
   margin-right: 16px;
   text-align: left;
 }
+.N__tdarkmode {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  margin-bottom: -2px;
+  margin-right: 16px;
+  text-align: left;
+}
 .N__Pr {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: #1b1b1b;
+  font-size: 40px;
+  margin-top: 20px;
+  margin-bottom: -5px;
+}
+.N__Prdarkmode {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: #ffffff;
   font-size: 40px;
   margin-top: 20px;
   margin-bottom: -5px;
@@ -98,9 +144,19 @@
   color: rgb(97, 97, 97);
   margin-bottom: -10px;
 }
+.ncdarkmode {
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  margin-bottom: -10px;
+}
 .N__ST {
   font-size: 20px;
   color: rgb(51, 51, 51);
+  margin-bottom: -10px;
+}
+.N__STdarkmode {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
   margin-bottom: -10px;
 }
 .N__Sp {
@@ -108,14 +164,30 @@
   color: rgb(183, 183, 183);
   margin-bottom: -2px;
 }
+.N__Spdarkmode {
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  margin-bottom: -2px;
+}
 .N__D {
   font-size: 18px;
   color: rgb(97, 97, 97);
   text-align: left;
 }
+.N__Ddarkmode {
+  font-size: 18px;
+  color: rgb(173, 173, 173);
+  text-align: left;
+}
 .N__cp {
   font-size: 20px;
+  margin-bottom: 2px;
   color: rgb(51, 51, 51);
+}
+.N__cpdarkmode {
+  font-size: 20px;
+  margin-bottom: 2px;
+  color: rgb(255, 255, 255);
 }
 .button {
   --width: 100px;
@@ -236,8 +308,12 @@
   margin-bottom: 3px;
 }
 .img__c {
-  height: 600px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
   margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: 80px;
   margin-right: -50px;
   border: 1.3px solid #08ef56;
@@ -245,9 +321,23 @@
   background-color: rgb(255, 255, 255);
   overflow: hidden;
 }
+.img__cdarkmode {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 80px;
+  margin-right: -50px;
+  border: 1.3px solid #08ef56;
+  border-radius: 8px;
+  background-color: rgb(30, 30, 30);
+  overflow: hidden;
+}
 .imgDetail {
   object-fit: cover;
-  height: 100%;
+  height: auto;
   width: auto;
   position: relative;
 }

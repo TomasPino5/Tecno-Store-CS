@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import style from "./QandA.module.css";
+import { useSelector } from "react-redux";
 
 const FaqSection = () => {
   const [expandedQuestion, setExpandedQuestion] = useState(null);
+  const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
+  // className={darkMode ? style.darkMode : style.lightMode}
 
   const questionsAndAnswers = [
     {
@@ -30,26 +33,38 @@ const FaqSection = () => {
   ];
 
   return (
-    <div className={style.faqSection}>
-      <div className={style.imageContainer}>
+    <div className={darkMode ? style.faqSection : style.faqSection}>
+      <div className={darkMode ? style.imageContainer : style.imageContainer}>
         <img
           src="https://img.freepik.com/foto-gratis/close-up-retrato-atractiva-joven-aislada_273609-36523.jpg"
           alt=""
         />
       </div>
-      <div className={style.questionsContainer}>
+      <div
+        className={
+          darkMode ? style.questionsContainerdarkMode : style.questionsContainer
+        }
+      >
         {questionsAndAnswers.map((item, index) => (
           <div
             key={index}
-            className={`${style.question} ${
-              expandedQuestion === index ? style.expanded : ""
-            }`}
+            className={
+              darkMode
+                ? `${style.questiondarkMode} ${
+                    expandedQuestion === index ? style.expanded : ""
+                  }`
+                : `${style.question} ${
+                    expandedQuestion === index ? style.expanded : ""
+                  }`
+            }
             onClick={() =>
               setExpandedQuestion(expandedQuestion === index ? null : index)
             }
           >
             <p>{item.question}</p>
-            <div className={style.answer}>{item.answer}</div>
+            <div className={darkMode ? style.answerdarkMode : style.answer}>
+              {item.answer}
+            </div>
           </div>
         ))}
       </div>
