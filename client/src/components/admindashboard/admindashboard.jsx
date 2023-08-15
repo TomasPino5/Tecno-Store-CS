@@ -54,10 +54,10 @@ const AdminDashboard = () => {
           <Link to="/form" className="create-product-button">
             <button className="product-list-button">Crear Producto</button>
           </Link>
-          <button onClick={handleShowProductList} className="product-list-button">
+          <button  className="product-list-button">
             Modifica un producto
           </button>
-          <button onClick={handleShowProductList} className="product-list-button">
+          <button  className="product-list-button">
             Elimina un Producto
           </button>
           <button onClick={handleShowProductList} className="product-list-button">
