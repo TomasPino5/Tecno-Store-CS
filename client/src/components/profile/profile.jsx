@@ -5,7 +5,7 @@ import axios from "axios";
 import { useEffect } from "react"
 import { Link } from "react-router-dom";
 //
-import { getUser } from "../../redux/actions";
+import { getUser, getUserPurchases } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import style from './profile.module.css'
 
@@ -19,6 +19,7 @@ export const Profile = () => {
 
   useEffect(() => {
     dispatch(getUser(email));
+    dispatch(getUserPurchases(email));
   }, [dispatch, email]);
   //
 

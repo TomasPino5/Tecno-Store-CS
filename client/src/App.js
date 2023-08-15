@@ -12,6 +12,7 @@ import CheckoutForm from "./components/paymentgateway/element";
 import "./App.css";
 import Carousel from "./components/carousel/Carouseel.jsx";
 import UserProfile from "./components/UserProfile/userProfile";
+import UserPurchases from "./components/userPurchases/userPurchases";
 import AdminDashboard from "./components/admindashboard/admindashboard";
 import { useSelector } from "react-redux";
 const stripePromise = loadStripe(
@@ -50,6 +51,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/" element={<Carousel />} />
         <Route path="/userProfile" element={<UserProfile />} />
+        <Route path="/userPurchases" element={<UserPurchases />} />
         <Route
           path="/admin"
           element={
