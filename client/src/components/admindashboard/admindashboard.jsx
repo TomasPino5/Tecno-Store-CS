@@ -13,17 +13,25 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useAuth0();
-  const [showProductList, setShowProductList] = useState(false); // Estado para mostrar/ocultar la lista de productos
-  const [showUserList, setShowUserList] = useState(false); // Estado para mostrar/ocultar la lista de usuarios
+  const [showProductList, setShowProductList] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null); // Estado para el producto seleccionado
 
-  const allowedEmail = "menseguezmariano@gmail.com" || "cottiersolchu55@gmail.com" || "adlotorrez91@gmail.com";
-  const isAdmin = user?.email === allowedEmail;
+  const allowedEmails = [
+    "menseguezmariano@gmail.com",
+    "cottiersolchu55@gmail.com",
+    "adlotorrez91@gmail.com",
+    "sebastianhnry@gmail.com",
+    "tomaspino.velez@gmail.com",
+    "tomasbaldi@gmail.com",
+    "kayita_y@hotmail.com"
+  ];
+  
+  const isAdmin = allowedEmails.includes(user?.email);
 
   useEffect(() => {
     if (isAdmin) {
-      dispatch(getProducts()); // Obtén la lista de productos al cargar el componente
-      dispatch(getUser(user.email)); // Obtén los datos del usuario
-      // Agrega aquí las acciones para obtener usuarios y compras si las tienes
+      dispatch(getProducts());
+      dispatch(getUser(user.email));
     } else {
       setTimeout(() => {
         alert("No estás autorizado a ingresar.");
@@ -36,32 +44,31 @@ const AdminDashboard = () => {
   const salesCount = useSelector((state) => state.salesCount);
 
   const handleShowProductList = () => {
-    setShowProductList((prevShowProductList) => !prevShowProductList); // Alternar el estado actual
-    setShowUserList(false); // Ocultar la lista de usuarios al mostrar la lista de productos
+    setShowProductList((prevShowProductList) => !prevShowProductList);
+    setSelectedProduct(null); // Limpiar el producto seleccionado al mostrar la lista de productos
   };
 
-  // const handleShowUserList = () => {
-  //   setShowUserList((prevShowUserList) => !prevShowUserList); // Alternar el estado actual
-  //   setShowProductList(false); // Ocultar la lista de productos al mostrar la lista de usuarios
-  // };
+  const handleModifyProduct = (product) => {
+    setSelectedProduct(product);
+  };
+
+  const handleSubmitChanges = (e) => {
+    e.preventDefault();
+    // Aquí implementa la lógica para enviar los cambios al backend y actualizar el estado en Redux
+    console.log("Cambios guardados:", selectedProduct);
+  };
 
   return (
     <div>
       {isAdmin ? (
         <div>
-           <h1 className="admin-title">Bienvenido a tu Panel Administrativo!</h1>
+          <h1 className="admin-title">Bienvenido a tu Panel Administrativo!</h1>
 
           <Link to="/form" className="create-product-button">
             <button className="product-list-button">Crear Producto</button>
           </Link>
-          <button  className="product-list-button">
+          <button onClick={() => handleModifyProduct(products)} className="product-list-button">
             Modifica un producto
-          </button>
-          <button  className="product-list-button">
-            Elimina un Producto
-          </button>
-          <button onClick={handleShowProductList} className="product-list-button">
-            Listado de Productos
           </button>
 
           <button  className="product-list-button">
@@ -74,12 +81,31 @@ const AdminDashboard = () => {
             Total de Compras: {salesCount}
           </button>
           
+          {selectedProduct && (
+            <div className="product-modify-form">
+              <h2>Modificar Producto</h2>
+              <form onSubmit={handleSubmitChanges}>
+                <label>Name:</label>
+                <input
+                  type="text"
+                  value={selectedProduct.name}
+                  onChange={(e) =>
+                    setSelectedProduct({
+                      ...selectedProduct,
+                      name: e.target.value,
+                    })
+                  }
+                />
+                {/* Repite el proceso para los demás campos */}
+                <button type="submit">Guardar Cambios</button>
+              </form>
+            </div>
+          )}
 
           {showProductList && (
             <div className="product-list">
               {products.map((product) => (
                 <div key={product.id}>{product.name}</div>
-                // Renderiza los detalles del producto como desees
               ))}
             </div>
           )}

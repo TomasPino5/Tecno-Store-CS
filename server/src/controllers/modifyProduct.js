@@ -1,9 +1,11 @@
 // controllers/modifyProduct.js
 const Products = require("../models/product.js");
 
+
+
 const modifyProduct = async (req, res) => {
   const productId = req.params.id;
-  const { name, href, imageSrc, imageAlt, price, stock, brand, category, description } = req.body;
+  const { name, href, imageSrc, imageAlt, price, stock, brand, category, description, isActive } = req.body;
 
   try {
     const product = await Products.findByPk(productId);
@@ -22,6 +24,7 @@ const modifyProduct = async (req, res) => {
     product.brand = brand;
     product.category = category;
     product.description = description;
+    product.isActive = isActive; // Agregar el valor de isActive
 
     await product.save();
 
