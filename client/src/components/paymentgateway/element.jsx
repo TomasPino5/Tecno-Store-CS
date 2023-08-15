@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, clearDetail } from "../../redux/actions";
+import { clearCart, clearDetail, incrementSales } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -88,6 +88,7 @@ const CheckoutForm = () => {
 
       console.log(data.mensaje)
       if (data.mensaje === 'Pago exitoso') {
+        dispatch(incrementSales());
         enviarCorreo();
       }
 
