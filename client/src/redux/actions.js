@@ -17,6 +17,7 @@ import {
   INCREMENT_SALES,
   MODIFY_PRODUCT,
   DELETE_USER_BY_EMAIL,
+  TOGGLE_DARK_MODE,
 } from "./action-types";
 
 // Obtener los productos desde la API
@@ -220,3 +221,7 @@ export function deleteUserByEmail(email) {
     }
   };
 }
+
+export const toggleDarkMode = () => ({
+  type: TOGGLE_DARK_MODE,
+});
