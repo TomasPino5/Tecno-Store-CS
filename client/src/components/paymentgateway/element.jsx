@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, clearDetail, incrementSales } from "../../redux/actions";
+import { clearCart, clearDetail, incrementSales, postUserPurchase } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -41,11 +41,11 @@ const CheckoutForm = () => {
     if (totalPrice > 0) {
       total += totalPrice
     }
-  
+
     if (detail && detail.price) {
       total += detail.price;
     }
-  
+
     return total;
   };
 
@@ -78,8 +78,8 @@ const CheckoutForm = () => {
     } else {
       // Enviar el token al backend para realizar el pago
       const response = await axios.post("http://localhost:3001/pago", {
-        producto: { nombre: "producto(s)", precio: calculatedTotalPrice }, 
-        cantidad: calculatedQuantity, 
+        producto: { nombre: "producto(s)", precio: calculatedTotalPrice },
+        cantidad: calculatedQuantity,
         token: token,
       });
 
@@ -90,6 +90,20 @@ const CheckoutForm = () => {
       if (data.mensaje === 'Pago exitoso') {
         dispatch(incrementSales());
         enviarCorreo();
+      }
+
+      if (data.mensaje === 'Pago exitoso') {
+        dispatch(postUserPurchase(
+          {
+            user: user.email,
+            picture: productPicture.toString(),
+            productName: productName.toString(),
+            productQuantity: productQuantity.toString(),
+            productBrand: productBrand.toString(),
+            productPrice: productPrice.toString(),
+            totalPurchase: calculatedTotalPrice
+          }
+        ));
       }
 
       // Retrasar la redirección durante 3 segundos
@@ -103,17 +117,21 @@ const CheckoutForm = () => {
     }
   };
 
+  const productCartPicture = items.map((item) => (item.imageSrc))
   const productCartName = items.map((item) => (item.name))
   const productCartQuantity = items.map((item) => (item.quantity))
   const productCartBrand = items.map((item) => (item.brand))
   const productCartPrice = items.map((item) => (item.price.toLocaleString("es-ES", {
     minimumFractionDigits: 2,
   })))
+
+  const productDetailPicture = detail.imageSrc
   const productDetailName = detail.name
   const productDetailQuantity = '1'
   const productDetailBrand = detail.brand
   const productDetailPrice = detail?.price
 
+  const productPicture = productCartPicture.length === 0 ? productDetailPicture : productCartPicture
   const productName = productCartName.length === 0 ? productDetailName : productCartName
   const productQuantity = productCartQuantity.length === 0 ? productDetailQuantity : productCartQuantity
   const productBrand = productCartBrand.length === 0 ? productDetailBrand : productCartBrand
@@ -135,7 +153,6 @@ const CheckoutForm = () => {
       console.error('Error al enviar el correo electrónico', error);
     }
   };
-
 
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
@@ -176,7 +193,7 @@ const CheckoutForm = () => {
             </div>
           </div>
         )}
-        </div>
+      </div>
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <h2 className={styles.title}>Resumen de compra</h2>

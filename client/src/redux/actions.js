@@ -17,8 +17,12 @@ import {
   INCREMENT_SALES,
   MODIFY_PRODUCT,
   DELETE_USER_BY_EMAIL,
+
+  GET_USER_PURCHASES,
+  CLEAR_USER_PURCHASES
   TOGGLE_DARK_MODE,
 } from "./action-types";
+
 
 // Obtener los productos desde la API
 export const getProducts = () => {
@@ -30,6 +34,28 @@ export const getProducts = () => {
     });
   };
 };
+
+
+// Obtener las compras del usuario desde la API
+export function getUserPurchases(email) {
+  return async function (dispatch) {
+    const json = await axios.get(`http://localhost:3001/getUserPurchases/${email}`);
+    const data = json.data;
+    dispatch({
+      type: GET_USER_PURCHASES,
+      payload: data,
+    });
+  };
+}
+
+
+// Para limpiar compras del usuario
+export function clearUserPurchases() {
+  return {
+    type: CLEAR_USER_PURCHASES,
+  };
+}
+
 
 //Buscar producto por nombre
 export function getProductName(name) {
@@ -48,6 +74,7 @@ export function getProductName(name) {
   };
 }
 
+
 // Obtener los productos desde la API por ID para obetener el detalle
 export function getProductDetails(id) {
   if (id) {
@@ -65,6 +92,7 @@ export function getProductDetails(id) {
   }
 }
 
+
 //action que trae el usuario
 export function getUser(email) {
   return async function (dispatch) {
@@ -76,6 +104,7 @@ export function getUser(email) {
     });
   };
 }
+
 
 //modifica los datos del usuario en la db
 export function putUser(email, user) {
@@ -92,6 +121,7 @@ export function putUser(email, user) {
   };
 }
 
+
 // Filtro para seleccionar productos por marca
 export function filterByBrand(brand) {
   return {
@@ -99,6 +129,8 @@ export function filterByBrand(brand) {
     payload: brand,
   };
 }
+
+
 // Filtro para seleccionar productos por CATEGORY/ CELULARES O ACCESORIOS
 export function filterByCategory(category) {
   return {
@@ -107,6 +139,7 @@ export function filterByCategory(category) {
   };
 }
 
+
 // Ordena por precio
 export function orderByPrice(price) {
   return {
@@ -114,6 +147,7 @@ export function orderByPrice(price) {
     payload: price,
   };
 }
+
 
 // Para postear el producto
 export function postProduct(payload) {
@@ -126,6 +160,19 @@ export function postProduct(payload) {
   };
 }
 
+
+// Para guardar la compra del usuario
+export function postUserPurchase(payload) {
+  return async function (dispatch) {
+    const response = await axios.post(
+      "http://localhost:3001/userPurchase",
+      payload
+    );
+    return response;
+  }
+}
+
+
 // Filtro para seleccionar si fue creado en la Base de datos o viene de la API
 export function filterCreated(payload) {
   //db
@@ -134,6 +181,8 @@ export function filterCreated(payload) {
     payload,
   };
 }
+
+
 // Para limpiar el detalle
 export function clearDetail() {
   //db
@@ -142,11 +191,13 @@ export function clearDetail() {
   };
 }
 
+
 export function clearFilter() {
   return {
     type: CLEAR_FILTER,
   };
 }
+
 
 //Cart
 export function addToCart(product) {
@@ -156,6 +207,7 @@ export function addToCart(product) {
   };
 }
 
+
 export function removeFromCart(product) {
   return {
     type: REMOVE_FROM_CART,
@@ -163,16 +215,21 @@ export function removeFromCart(product) {
   };
 }
 
+
 export function clearCart() {
   return {
     type: CLEAR_CART,
   };
 }
+
+
 export function incrementSales() {
   return {
     type: INCREMENT_SALES,
   };
 }
+
+
 export function modifyProduct(productId, updatedProduct) {
   return async function (dispatch) {
     try {
@@ -196,6 +253,7 @@ export function modifyProduct(productId, updatedProduct) {
   };
 }
 
+
 export function deleteProductByName(name) {
   return async function (dispatch) {
     try {
@@ -206,6 +264,7 @@ export function deleteProductByName(name) {
     }
   };
 }
+
 
 export function deleteUserByEmail(email) {
   return async function (dispatch) {
