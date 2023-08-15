@@ -157,7 +157,7 @@ const Form = () => {
       category: "",
       description: "",
     });
-    navigate("/products");
+    navigate("/admin");
   };
 
   const brands = useSelector((state) => state.brands);
@@ -439,8 +439,8 @@ const Form = () => {
         </form>
       </div>
       <div className={style.buttonReturn}>
-        <Link to="/products">
-          <button className={style.btnReturn}>Return</button>
+        <Link to="/admin">
+          <button className={style.btnReturn}>Return To Admin</button>
         </Link>
       </div>
     </div>

@@ -13,5 +13,10 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const CLEAR_CART = 'CLEAR_CART';
 export const GET_USER = 'GET_USER';
 export const PUT_USER = 'PUT_USER';
+export const INCREMENT_SALES = "INCREMENT_SALES";
+export const MODIFY_PRODUCT = "MODIFY_PRODUCT";
+export const DELETE_PRODUCT_BY_NAME = "DELETE_PRODUCT_BY_NAME";
+export const DELETE_USER_BY_EMAIL = "DELETE_USER_BY_EMAIL";
+
 
 
