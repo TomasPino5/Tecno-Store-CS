@@ -93,11 +93,35 @@
 .button_filter img {
   height: 100%;
 }
+.button_filterdarkMode {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.button_filterdarkMode button {
+  height: 200px;
+  border: 0px;
+  background-color: #111;
+}
+.button_filterdarkMode img {
+  height: 100%;
+}
 
 .p_p {
   font-size: 20px; /* Ajusta el valor según tu preferencia */
 }
 /* En tu archivo CSS o módulo de estilos */
+.linkWrapperdarkMode {
+  display: inline-block;
+}
+.linkWrapperdarkMode p {
+  margin: 0; /* Elimina el margen del párrafo para ajustar el área sensible */
+  margin-top: -20px;
+  margin-bottom: 20px;
+  font-size: 20px; /* Ajusta el valor según tu preferencia */
+  color: #08ef56;
+}
 .linkWrapper {
   display: inline-block;
 }
@@ -143,6 +167,18 @@
   font-size: 18px;
   line-height: 1.4;
 }
+.globoTextodarkMode {
+  position: absolute;
+  background-color: rgba(35, 35, 35, 0.331); /* Fondo transparente */
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 35%; /* Ajusta según el diseño deseado */
+  right: 120px;
+  top: 120px;
+  margin: 20px;
+  font-size: 18px;
+  line-height: 1.4;
+}
 .imgPres {
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -165,7 +201,23 @@
   justify-content: center;
   align-items: center;
 }
+.globopdarkMode {
+  background-color: rgba(35, 35, 35, 0.331);
+  padding: 20px;
+  margin-bottom: -2px;
+  margin-left: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 490px;
+  max-width: calc(100% - 400px); /* Ajusta según el diseño deseado */
+  font-size: 38px;
+  line-height: 1.6;
 
+  /* Agrega estas propiedades para centrar el texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .imagen {
   width: 400px; /* Ajusta el ancho de la imagen según tus necesidades */
   margin-right: 10px;
@@ -176,6 +228,23 @@
 
 .globop2 {
   background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  margin-bottom: -2px;
+  margin-right: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 490px;
+  max-width: calc(100% - 400px); /* Ajusta según el diseño deseado */
+  font-size: 38px;
+  line-height: 1.6;
+
+  /* Agrega estas propiedades para centrar el texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.globop2darkMode {
+  background-color: rgba(35, 35, 35, 0.331);
   padding: 20px;
   margin-bottom: -2px;
   margin-right: 10px;
@@ -226,8 +295,40 @@
   justify-content: center;
   align-items: center;
 }
+.globoP2LdarkMode {
+  background-color: rgba(35, 35, 35, 0.331);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: calc(50% - 20px); /* Divide el espacio en dos y resta el margen */
+  height: 80%;
+  font-size: 20px;
+  line-height: 1.6;
+  margin-right: 15px;
+
+  /* Agrega estas propiedades para centrar el texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .globoP2R {
   background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: calc(50% - 20px); /* Divide el espacio en dos y resta el margen */
+  height: 80%;
+  font-size: 20px;
+  line-height: 1.6;
+  margin-left: 15px;
+
+  /* Agrega estas propiedades para centrar el texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.globoP2RdarkMode {
+  background-color: rgba(35, 35, 35, 0.331);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -267,6 +368,24 @@
   justify-content: center;
   align-items: center;
 }
+.globop3darkMode {
+  background-color: rgba(35, 35, 35, 0.331);
+  padding: 20px;
+  margin-bottom: -2px;
+  margin-left: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: auto;
+  width: 50%;
+  font-size: 33px;
+  line-height: 1.6;
+
+  /* Agrega estas propiedades para centrar el texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .imagen3 {
   width: 50%; /* Ajusta el ancho de la imagen según tus necesidades */
   margin-right: 10px;
@@ -292,9 +411,43 @@
   justify-content: center;
   align-items: center;
 }
+.globop4darkMode {
+  background-color: rgba(35, 35, 35, 0.331);
+  padding: 20px;
+  margin-bottom: -2px;
+  margin-left: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 410px;
+  width: 50%;
+  font-size: 30px;
+  line-height: 1.6;
+
+  /* Agrega estas propiedades para centrar el texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .globop5 {
   background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  margin-bottom: -2px;
+  margin-right: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height: 540px;
+  max-width: calc(100% - 400px); /* Ajusta según el diseño deseado */
+  font-size: 40px;
+  line-height: 1.6;
+
+  /* Agrega estas propiedades para centrar el texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.globop5darkMode {
+  background-color: rgba(35, 35, 35, 0.331);
   padding: 20px;
   margin-bottom: -2px;
   margin-right: 10px;

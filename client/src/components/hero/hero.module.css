@@ -1,9 +1,7 @@
 /* styles.css */
 
-Clases generales
-.bgGray50 {
+Clases generales .bgGray50 {
   background-color: #f9fafb;
- 
 }
 
 .smPx6 {
@@ -116,4 +114,7 @@ Clases generales
 }
 
 /* Otros estilos específicos */
+.block {
+  color: white;
+}
 /* Agrega tus estilos específicos aquí */
