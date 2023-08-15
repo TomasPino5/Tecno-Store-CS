@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, clearDetail } from "../../redux/actions";
+import { clearCart, clearDetail, addToCart, removeFromCart } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -60,9 +60,6 @@ const CheckoutForm = () => {
     return totalQuantity;
   }
 
-  console.log(calculateQuantity())
-  console.log(calculateTotalPrice());
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -112,6 +109,7 @@ const CheckoutForm = () => {
   const productDetailQuantity = '1'
   const productDetailBrand = detail.brand
   const productDetailPrice = detail?.price
+  const quantityDeDetail = 1
 
   const productName = productCartName.length === 0 ? productDetailName : productCartName
   const productQuantity = productCartQuantity.length === 0 ? productDetailQuantity : productCartQuantity
@@ -135,6 +133,22 @@ const CheckoutForm = () => {
     }
   };
 
+  const addToCartHandler = (product) => {
+    dispatch(addToCart(product))
+  }
+
+  const removeFromCartHandler = (product) => {
+    dispatch(removeFromCart(product))
+  }
+
+  // const addToDetailHandler = () => {
+  //   dispatch(addToDetail(detail))
+  // }
+
+  // const removeFromDetailHandler = () => {
+  //   dispatch(removeFromDetail(detail));
+  // }
+
 
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
@@ -149,7 +163,7 @@ const CheckoutForm = () => {
             />
             <div className={styles.itemDetails}>
               <p className={styles.itemName}>{item.name}</p>
-              <p>Cantidad: {item.quantity}</p>
+              <p>Cantidad: {item.quantity}<button onClick={() => addToCartHandler(item)}>+</button><button onClick={() => removeFromCartHandler(item)}>-</button></p>
               <p>Marca: {item.brand}</p>
               <p>Categoría: {item.category}</p>
               <p className={styles.itemPrice}>
@@ -161,21 +175,20 @@ const CheckoutForm = () => {
             </div>
           </div>
         ))}
-      </div>
-      <div className={styles.div0}>
         {Object.keys(detail).length !== 0 && (
           <div className={styles.item} key={detail.id}>
             <img src={detail.imageSrc} alt={detail.imageAlt} className={styles.itemImage} />
             <div className={styles.itemDetails}>
               <p className={styles.itemName}>{detail.name}</p>
-              <p>Cantidad: 1</p>
+              <p>Cantidad: {quantityDeDetail}</p>
+              {/* <button onClick={addToDetailHandler}>+</button><button onClick={removeFromDetailHandler}>-</button> */}
               <p>Marca: {detail.brand}</p>
               <p>Categoría: {detail.category}</p>
               <p className={styles.itemPrice}>Precio: ${detail.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}</p>
             </div>
           </div>
         )}
-        </div>
+      </div>
       <div className={styles.container}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <h2 className={styles.title}>Resumen de compra</h2>
