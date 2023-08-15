@@ -1,11 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./redux/store.js";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
+
+const DarkModeApp = () => {
+  const darkMode = useSelector((state) => state.darkMode); // Obtiene el estado de darkMode
+
+  return (
+    <div className={darkMode ? "dark-mode" : ""}>
+      <App />
+    </div>
+  );
+};
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -15,7 +26,7 @@ ReactDOM.render(
           clientId="AxyouAj91cWCLc6Rp1nZf6loAAs2U0Pq"
           redirectUri={window.location.origin}
         >
-          <App />
+          <DarkModeApp /> {/* Renderiza DarkModeApp en lugar de App */}
         </Auth0Provider>
       </BrowserRouter>
     </Provider>

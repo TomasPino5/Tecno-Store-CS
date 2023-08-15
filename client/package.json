@@ -30,7 +30,7 @@
     "slick-carousel": "^1.8.1",
     "style-loader": "^3.3.3",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.7.22",
+    "sweetalert2": "^11.7.23",
     "web-vitals": "^2.1.4",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",

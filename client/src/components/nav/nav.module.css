@@ -160,7 +160,8 @@
   right: 0;
   width: 0;
   height: 0;
-  border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+  border-width: 0 var(--plus_topRightTriangleSideLength)
+    var(--plus_topRightTriangleSideLength) 0;
   border-style: solid;
   border-color: transparent #08ef56 transparent transparent;
   transition-timing-function: ease-in-out;
@@ -179,7 +180,7 @@
   --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
 }
 
-.plusButton>.plusIcon {
+.plusButton > .plusIcon {
   fill: #08ef56;
   width: calc(var(--plus_sideLength) * 0.7);
   height: calc(var(--plus_sideLength) * 0.7);
@@ -188,12 +189,12 @@
   transition-duration: 0.2s;
 }
 
-.plusButton:hover>.plusIcon {
+.plusButton:hover > .plusIcon {
   fill: black;
   transform: rotate(180deg);
 }
 
-.plusButton:focus-visible>.plusIcon {
+.plusButton:focus-visible > .plusIcon {
   fill: black;
   transform: rotate(180deg);
 }
@@ -249,7 +250,7 @@
 }
 
 .btnNP::before {
-  content: '';
+  content: "";
   display: block;
   width: 0px;
   height: 86%;
@@ -287,4 +288,11 @@
   -webkit-transition: box-shadow 0.2s ease-in;
   -moz-transition: box-shadow 0.2s ease-in;
   transition: box-shadow 0.2s ease-in;
+}
+
+.darkMode {
+  background-color: rgb(27, 53, 14);
+}
+.lightMode {
+  background-color: white;
 }
