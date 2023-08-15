@@ -12,7 +12,7 @@ const UsersPurchases = sequelize.define('usersPurchases', {
         allowNull: false
     },
     picture: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: true
     },
     productName: {
@@ -20,7 +20,7 @@ const UsersPurchases = sequelize.define('usersPurchases', {
         allowNull: false
     },
     productQuantity: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     productBrand: {
@@ -28,7 +28,7 @@ const UsersPurchases = sequelize.define('usersPurchases', {
         allowNull: false
     },
     productPrice: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false
     },
     totalPurchase: {
