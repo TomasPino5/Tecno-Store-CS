@@ -198,6 +198,9 @@ const UserProfile = () => {
                     <button className={style.btnForm} onClick={handleFormModify}> {showForm === false ? 'Editar Datos' : 'Cancelar'}</button>
 
                 </div>
+                <Link to="/userPurchases">
+                    <button className={style.btnForm} >Mis Compras</button>
+                </Link>
             </div>
             <div>
                 <Link to="/products">
