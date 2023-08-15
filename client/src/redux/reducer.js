@@ -16,6 +16,8 @@ import {
   MODIFY_PRODUCT,
   DELETE_PRODUCT_BY_NAME,
   DELETE_USER_BY_EMAIL,
+  GET_USER_PURCHASES,
+  CLEAR_USER_PURCHASES,
 } from "./action-types";
 
 const savedUserData = localStorage.getItem("userData");
@@ -38,6 +40,7 @@ const initialState = {
     : 0,
   user: savedUserData ? JSON.parse(savedUserData) : [],
   salesCount: 0,
+  userPurchases: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -70,17 +73,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         productDetail: action.payload,
       };
-    case GET_USER:
-      return {
-        ...state,
-        user: action.payload,
-      };
 
     case CLEAR_DETAIL:
       localStorage.removeItem("detail");
       return {
         ...state,
         productDetail: [],
+      };
+
+    case GET_USER_PURCHASES:
+      return {
+        ...state,
+        userPurchases: action.payload
+      }
+
+    case CLEAR_USER_PURCHASES:
+      return {
+        ...state,
+        userPurchases: [],
+      };
+
+    case GET_USER:
+      return {
+        ...state,
+        user: action.payload,
       };
 
     case POST_PRODUCT:

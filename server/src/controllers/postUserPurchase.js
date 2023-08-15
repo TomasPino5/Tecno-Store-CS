@@ -1,9 +1,9 @@
 const UsersPurchases = require("../models/usersPurchases");
 
 const postUserPurchase = async (req, res) => {
-    
-    const { user, picture, productName, productQuantity, productBrand, productPrice, totalPurchase } = req.body; //, picture
 
+    const { user, picture, productName, productQuantity, productBrand, productPrice, totalPurchase } = req.body; //, picture
+    //console.log(user, picture, productName, productQuantity, productBrand, productPrice, totalPurchase)
     try {
         await UsersPurchases.create({ user, picture, productName, productQuantity, productBrand, productPrice, totalPurchase });
         res.status(200).json({ message: 'Compra creada...' });
