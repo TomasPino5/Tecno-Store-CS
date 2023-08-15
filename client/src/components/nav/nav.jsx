@@ -1,11 +1,13 @@
 import SearchBar from "../searchbar/searchbar";
-import React from "react"; //{ useState }
+import React, { useEffect } from "react"; //{ useState }
 import { Profile } from "../profile/profile";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { LoginButton } from "../login/login";
 import { LogoutButton } from "../logout/logout";
 import { useAuth0 } from "@auth0/auth0-react";
+import { toggleDarkMode } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
 //import image from "../../imag/Home/Logo_arquitectura_corporativo_verde_mostaza.png";
 import style from "../nav/nav.module.css";
 import Cart from "../cart/cart";
@@ -13,6 +15,24 @@ import Cart from "../cart/cart";
 const Nav = () => {
   const location = useLocation();
   const { isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.darkMode);
+
+  useEffect(() => {
+    // Obtener el valor actual del modo oscuro desde localStorage
+    const savedDarkMode = localStorage.getItem("darkMode");
+    if (savedDarkMode === "true") {
+      dispatch(toggleDarkMode());
+      console.log(darkMode);
+    }
+  }, [dispatch]);
+
+  const handleToggleDarkMode = () => {
+    dispatch(toggleDarkMode());
+    // Cambiar el valor en localStorage
+    localStorage.setItem("darkMode", !darkMode);
+    console.log(darkMode);
+  };
 
   return (
     <nav className={style.navContainer}>
@@ -72,9 +92,11 @@ const Nav = () => {
         </NavLink>
       </div> */}
 
-      <div >
+      <div>
         <NavLink to="/products">
-        {location.pathname === "/products" ? null : <button className={style.btnNP} >Nuestros productos</button> }
+          {location.pathname === "/products" ? null : (
+            <button className={style.btnNP}>Nuestros productos</button>
+          )}
         </NavLink>
       </div>
 
@@ -82,9 +104,19 @@ const Nav = () => {
         {/* <button className={style.login} onClick={handleLoginButtonClick}>
             Login
           </button> */}
+        <div>
+          <button
+            className={darkMode ? style.darkMode : style.lightMode}
+            onClick={handleToggleDarkMode}
+          >
+            Cambiar Modo
+          </button>
+        </div>
         <div className={style.cartpos}>
-        {location.pathname === "/pay" || location.pathname === "/userProfile" ? null : <Cart /> }
-          
+          {location.pathname === "/pay" ||
+          location.pathname === "/userProfile" ? null : (
+            <Cart />
+          )}
         </div>
 
         {location.pathname === "/admin" ? (

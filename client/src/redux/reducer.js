@@ -16,13 +16,18 @@ import {
   MODIFY_PRODUCT,
   DELETE_PRODUCT_BY_NAME,
   DELETE_USER_BY_EMAIL,
+
   GET_USER_PURCHASES,
   CLEAR_USER_PURCHASES,
+
+  TOGGLE_DARK_MODE,
+
 } from "./action-types";
 
 const savedUserData = localStorage.getItem("userData");
 
 const initialState = {
+  darkMode: false,
   allProductsCopy: [],
   allProducts: [],
   productDetail: localStorage.getItem("detail")
@@ -154,6 +159,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: state.allProductsCopy,
+      };
+
+    case TOGGLE_DARK_MODE:
+      return {
+        ...state,
+        darkMode: !state.darkMode, // Cambiar el estado del modo oscuro
       };
 
     case ADD_TO_CART:

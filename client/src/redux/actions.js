@@ -17,8 +17,10 @@ import {
   INCREMENT_SALES,
   MODIFY_PRODUCT,
   DELETE_USER_BY_EMAIL,
+
   GET_USER_PURCHASES,
   CLEAR_USER_PURCHASES
+  TOGGLE_DARK_MODE,
 } from "./action-types";
 
 
@@ -278,3 +280,7 @@ export function deleteUserByEmail(email) {
     }
   };
 }
+
+export const toggleDarkMode = () => ({
+  type: TOGGLE_DARK_MODE,
+});

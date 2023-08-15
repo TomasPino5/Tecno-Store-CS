@@ -12,3 +12,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.dark-mode {
+  background-color: #111; /* Cambia el color de fondo a negro oscuro */
+  color: #fff; /* Cambia el color del texto a blanco */
+}
