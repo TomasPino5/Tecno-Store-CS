@@ -11,6 +11,7 @@ import {
 import Product from "../product/Product";
 import FormProduct from "../formProduct/formProduct";
 import Listusers from "../listusers/listusers";
+import ListCompras from "../listCompras/ListCompras";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -102,7 +103,7 @@ const AdminDashboard = () => {
               Modificar Usuario/PERFIL
             </button>
           </Link>
-          <button className="product-list-button">
+          <button className="product-list-button" onClick={() => handleComponent("compras")}>
             Total de Compras: {salesCount}
           </button>
           {component === "product" ? (
@@ -115,6 +116,7 @@ const AdminDashboard = () => {
             </div>
           ) : null}
           {component === "users" ? <Listusers /> : null}
+          {component === "compras"? <ListCompras/>:null}
 
           {showProductList && (
             <div className="product-list">

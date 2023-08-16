@@ -23,7 +23,8 @@ import {
   ADD_TO_FAVORITE,
   REMOVE_FROM_FAVORITE,
   GET_ALL_USERS,
-  USER_ACTIVE
+  USER_ACTIVE,
+  GET_COMPRAS
 } from "./action-types";
 
 
@@ -108,6 +109,17 @@ export function getUser(email) {
   };
 }
 
+//actiona para trar las compras del usuario
+export function getCompras(){
+  return async function(dispatch){
+    const response = await axios.get('http://localhost:3001/compras');
+    const compra = response.data;
+    dispatch({
+      type: GET_COMPRAS,
+      payload: compra
+    });
+  }
+}
 
 //modifica los datos del usuario en la db
 export function putUser(email, user) {

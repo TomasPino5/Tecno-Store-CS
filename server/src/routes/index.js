@@ -15,6 +15,7 @@ const modifyProduct = require("../controllers/modifyProduct");
 const deleteUser = require("../controllers/deleteUser.js");
 const allUser = require("../controllers/getAllUsers");
 const putUser = require('../controllers/putUser.js');
+const getCompras = require('../controllers/getCompras.js');
 
 const router = Router();
 
@@ -36,9 +37,13 @@ router.get("/getuser/:email", getUser);
 //Ruta para traer las compras de un usuario
 router.get("/getUserPurchases/:email", getUserPurchasesHandler);
 
+//Ruta para traer todas las compras de los usuarios
+router.get('/compras', getCompras);
+
 //Ruta para modificar datos del usuario
 router.put("/modifyUser/:email", modifyUser);
 
+//Ruta para modificar usuario
 router.put('/putuser/:id', putUser);
 
 // Ruta para eliminar un usuario por su correo electrónico
