@@ -292,21 +292,20 @@ const reducer = (state = initialState, action) => {
 
     case MODIFY_PRODUCT:
       // Encuentra el índice del producto a modificar en tu estado actual
-      const productIndex = state.allProducts.findIndex(
-        (product) => product.id === action.payload.id
-      );
+      // const productIndex = state.allProducts.findIndex(
+      //   (product) => product.id === action.payload.id
+      // );
 
-      // Si encontraste el producto, actualiza el estado
-      if (productIndex !== -1) {
-        const updatedProducts = [...state.allProducts];
-        updatedProducts[productIndex] = action.payload;
+      // // Si encontraste el producto, actualiza el estado
+      // if (productIndex !== -1) {
+      //   const updatedProducts = [...state.allProducts];
+      //   updatedProducts[productIndex] = action.payload;
 
         return {
           ...state,
-          allProducts: updatedProducts,
+          allProducts: [...action.payload]
           // Puedes manejar otros casos si es necesario
         };
-      }
 
       // Si no se encontró el producto, devuelve el estado sin cambios
       return state;

@@ -8,8 +8,11 @@ import {
   getUser,
   // Importa las acciones necesarias para obtener usuarios y compras si las tienes
 } from "../../redux/actions"; // Actualiza la ruta a tus acciones
+import Product from "../product/Product";
+import FormProduct from "../formProduct/formProduct";
 
 const AdminDashboard = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useAuth0();
@@ -58,6 +61,14 @@ const AdminDashboard = () => {
     console.log("Cambios guardados:", selectedProduct);
   };
 
+  const [mod, setMod] = useState(false);
+  const [idProduct, setIdProduct] = useState(null);
+
+  const handleModify = (id)=>{
+    setMod(true)
+    setIdProduct(id)
+  }
+  
   return (
     <div>
       {isAdmin ? (
@@ -80,7 +91,12 @@ const AdminDashboard = () => {
           <button className="product-list-button">
             Total de Compras: {salesCount}
           </button>
-          
+          <div className="font-container">
+          {
+            mod === true?(<FormProduct idProduct={idProduct} setMod={setMod}/>)
+            :<Product handleModify={handleModify} products ={products}/>
+          }
+          </div>
           {selectedProduct && (
             <div className="product-modify-form">
               <h2>Modificar Producto</h2>
