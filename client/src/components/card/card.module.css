@@ -99,3 +99,22 @@
   margin-left: 50px;
   margin-top: 1px;
 }
+
+.nameContainer {
+  display: grid;
+  /* grid-template-columns: auto 1fr auto;  */
+  align-items: center;
+  justify-items: end;
+}
+
+.botonFav {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.6s ease-in-out;
+}
+
+.botonFav:hover {
+  transform: scale(1.2);
+}

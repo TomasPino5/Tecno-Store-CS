@@ -14,6 +14,7 @@ import Carousel from "./components/carousel/Carouseel.jsx";
 import UserProfile from "./components/UserProfile/userProfile";
 import UserPurchases from "./components/userPurchases/userPurchases";
 import AdminDashboard from "./components/admindashboard/admindashboard";
+import Favorites from "./components/favorites/favorites";
 import { useSelector } from "react-redux";
 const stripePromise = loadStripe(
   "pk_test_51NcvqGCNUAoI7WlfIAzV9QurX20Giym0Ec5S8e0yDCDiObFk80y5QGvliypiwWjXeLfWR7b5MSw8k3wmZnDuKkTR003LRj39wV"
@@ -21,7 +22,7 @@ const stripePromise = loadStripe(
 
 function App() {
   const { pathname } = useLocation();
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
   const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
 
@@ -52,6 +53,7 @@ function App() {
         <Route path="/" element={<Carousel />} />
         <Route path="/userProfile" element={<UserProfile />} />
         <Route path="/userPurchases" element={<UserPurchases />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route
           path="/admin"
           element={
