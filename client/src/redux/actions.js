@@ -23,6 +23,7 @@ import {
   ADD_TO_FAVORITE,
   REMOVE_FROM_FAVORITE,
   GET_ALL_USERS,
+  USER_ACTIVE
 } from "./action-types";
 
 
@@ -118,6 +119,17 @@ export function putUser(email, user) {
     const data = json.data;
     dispatch({
       type: PUT_USER,
+      payload: data,
+    });
+  };
+}
+
+export function userActive(id) {
+  return async function (dispatch) {
+    const json = await axios.put(`http://localhost:3001/putuser/${id}`);
+    const data = json.data;
+    dispatch({
+      type: USER_ACTIVE,
       payload: data,
     });
   };
