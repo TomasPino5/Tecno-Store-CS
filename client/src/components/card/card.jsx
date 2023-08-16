@@ -37,7 +37,7 @@ export default function Card({
   }, [favorites]);
 
   const handleFavorite = (product) => {
-    if(isFav) {
+    if (isFav) {
       Swal.fire({
         title: 'Desea eliminar su producto de favoritos?',
         icon: 'warning',
@@ -46,7 +46,7 @@ export default function Card({
         cancelButtonText: 'Cancelar',
         confirmButtonColor: '#28a745'
       }).then((result) => {
-        if (result.isConfirmed) { 
+        if (result.isConfirmed) {
           setIsFav(false)
           dispatch(removeFromFavorite(product.id))
         }
@@ -71,25 +71,44 @@ export default function Card({
 
   return (
     <div className={darkMode ? style.carddarkMode : style.card}>
-        <div className={style.nameContainer}>
-          {isFav ? (
-            <button className={style.botonFav} onClick={() => handleFavorite({ id, name, imageSrc, imageAlt, price, stock, brand, category })}>❤️</button>
-            ) : (
-            <button className={style.botonFav} onClick={() => handleFavorite({ id, name, imageSrc, imageAlt, price, stock, brand, category })}>🤍</button>
-            )
+      {/* <div className={style.nameContainer}>
+        {isFav ? (
+          <button className={style.botonFav} onClick={() => handleFavorite({ id, name, imageSrc, imageAlt, price, stock, brand, category })}>❤️</button>
+        ) : (
+          <button className={style.botonFav} onClick={() => handleFavorite({ id, name, imageSrc, imageAlt, price, stock, brand, category })}>🤍</button>
+        )
+        }
+      </div> */}
+
+      <div
+        className={
+          darkMode ? style.img_containerdarkMode : style.img_container
+        }
+      >
+        <button
+          className={style.botonFav}
+          onClick={() =>
+            handleFavorite({
+              id,
+              name,
+              imageSrc,
+              imageAlt,
+              price,
+              stock,
+              brand,
+              category,
+            })
           }
-        </div>
+        >
+          {isFav ? "❤️" : "🤍"}
+        </button>
+        <img className={style.card__img} src={imageSrc} alt={imageAlt} />
+
+      </div>
       <NavLink
         to={`/product/${id}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <div
-          className={
-            darkMode ? style.img_containerdarkMode : style.img_container
-          }
-        >
-          <img className={style.card__img} src={imageSrc} alt={imageAlt} />
-        </div>
         <div className={style.container_name}>
           <p className={darkMode ? style.htdarkMode : style.ht}>{name}</p>
         </div>
@@ -105,6 +124,6 @@ export default function Card({
 
 
       </NavLink>
-    </div>
+    </div >
   );
 }
