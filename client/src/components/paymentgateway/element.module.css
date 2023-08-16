@@ -140,3 +140,15 @@
   background-color: rgb(172, 222, 168);
   align-items: center;
 }
+
+.cerrar {
+  border: solid 1px black;
+  background-color: rgb(202, 29, 29);
+  cursor: pointer;
+  border-radius: 3px;
+  transition:0.8s;
+}
+
+.cerrar:hover {
+  box-shadow: 2.5px 2.5px 2px 0px rgba(0,0,0,0.76);
+}

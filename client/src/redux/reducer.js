@@ -312,7 +312,7 @@ const reducer = (state = initialState, action) => {
       };
 
       // Si no se encontró el producto, devuelve el estado sin cambios
-      return state;
+      // return state;
 
     case DELETE_PRODUCT_BY_NAME:
       // Puedes implementar esta parte según la estructura de tu estado
