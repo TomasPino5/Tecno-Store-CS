@@ -1,10 +1,12 @@
 const server = require('./src/app');
 const sequelize = require('./src/db');
+require('dotenv').config();
 require('./src/models/product');
 require('./src/models/users');
+const port = process.env.PORT || 3001
 
 sequelize.sync({ force: false }).then(() => { //true
-  server.listen(3001, () => {
-    console.log('%s listening at 3001')
+  server.listen(port, () => {
+    console.log(`%s listening at ${port}`)
   });
 });
