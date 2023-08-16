@@ -30,7 +30,7 @@ import {
 // Obtener los productos desde la API
 export const getProducts = () => {
   return async function (dispatch) {
-    const json = await axios.get("http://localhost:3001/productos");
+    const json = await axios.get("/productos");
     return dispatch({
       type: GET_PRODUCTS,
       payload: json.data,
@@ -42,7 +42,7 @@ export const getProducts = () => {
 // Obtener las compras del usuario desde la API
 export function getUserPurchases(email) {
   return async function (dispatch) {
-    const json = await axios.get(`http://localhost:3001/getUserPurchases/${email}`);
+    const json = await axios.get(`/getUserPurchases/${email}`);
     const data = json.data;
     dispatch({
       type: GET_USER_PURCHASES,
@@ -65,7 +65,7 @@ export function getProductName(name) {
   return async function (dispatch) {
     try {
       const json = await axios.get(
-        `http://localhost:3001/productos?name=${name}`
+        `/productos?name=${name}`
       );
       return dispatch({
         type: GET_PRODUCT_NAME,
@@ -83,7 +83,7 @@ export function getProductDetails(id) {
   if (id) {
     return async function (dispatch) {
       try {
-        const detail = await axios.get(`http://localhost:3001/productos/${id}`);
+        const detail = await axios.get(`/productos/${id}`);
         dispatch({
           type: GET_DETAILS,
           payload: detail.data,
@@ -99,7 +99,7 @@ export function getProductDetails(id) {
 //action que trae el usuario
 export function getUser(email) {
   return async function (dispatch) {
-    const json = await axios.get(`http://localhost:3001/getuser/${email}`);
+    const json = await axios.get(`/getuser/${email}`);
     const data = json.data;
     dispatch({
       type: GET_USER,
@@ -113,7 +113,7 @@ export function getUser(email) {
 export function putUser(email, user) {
   return async function (dispatch) {
     const json = await axios.put(
-      `http://localhost:3001/modifyUser/${email}`,
+      `/modifyUser/${email}`,
       user
     );
     const data = json.data;
@@ -126,7 +126,7 @@ export function putUser(email, user) {
 
 export function userActive(id) {
   return async function (dispatch) {
-    const json = await axios.put(`http://localhost:3001/putuser/${id}`);
+    const json = await axios.put(`/putuser/${id}`);
     const data = json.data;
     dispatch({
       type: USER_ACTIVE,
@@ -167,7 +167,7 @@ export function orderByPrice(price) {
 export function postProduct(payload) {
   return async function (dispatch) {
     const response = await axios.post(
-      "http://localhost:3001/productos",
+      "/productos",
       payload
     );
     return response;
@@ -179,7 +179,7 @@ export function postProduct(payload) {
 export function postUserPurchase(payload) {
   return async function (dispatch) {
     const response = await axios.post(
-      "http://localhost:3001/userPurchase",
+      "/userPurchase",
       payload
     );
     return response;
@@ -248,7 +248,7 @@ export function modifyProduct(productId, updatedProduct) {
   return async function (dispatch) {
     try {
       const response = await axios.put(
-        `http://localhost:3001/productos/${productId}`,
+        `/productos/${productId}`,
         updatedProduct
       );
       const modifiedProduct = response.data;
@@ -270,7 +270,7 @@ export function modifyProduct(productId, updatedProduct) {
 export function deleteProductByName(name) {
   return async function (dispatch) {
     try {
-      await axios.delete(`http://localhost:3001/productos/${name}`);
+      await axios.delete(`/productos/${name}`);
       // You can dispatch an action here if needed after successful deletion
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -282,7 +282,7 @@ export function deleteProductByName(name) {
 export function deleteUserByEmail(email) {
   return async function (dispatch) {
     try {
-      await axios.delete(`http://localhost:3001/user/${email}`);
+      await axios.delete(`/user/${email}`);
       // Puedes despachar una acción si es necesario después de la eliminación exitosa
       dispatch({
         type: DELETE_USER_BY_EMAIL,
@@ -314,7 +314,7 @@ export function removeFromFavorite(product) {
 export const getAllUsers = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("http://localhost:3001/allusers");
+      const response = await axios.get("/allusers");
       const users = response.data;
 
       dispatch({
