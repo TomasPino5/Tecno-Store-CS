@@ -313,7 +313,22 @@
 }
 
 .darkMode {
-  background-color: rgb(27, 53, 14);
+  margin-top: 2px;
+  margin-right: 5px;
+  height: 43px;
+  padding-bottom: 2px;
+  background-color: black;
+  border: 1px solid #08ef56;
+  color: #08ef56;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-radius: 7px;
+}
+
+.darkMode:hover {
+  background-color: #08ef56;
+  color: black;
 }
 
 .lightMode {

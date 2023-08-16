@@ -100,7 +100,7 @@ export default function Card({
             })
           }
         >
-          {isFav ? "❤️" : "🤍"}
+          {isFav ? "💚" : "🤍"}
         </button>
         <img className={style.card__img} src={imageSrc} alt={imageAlt} />
 
