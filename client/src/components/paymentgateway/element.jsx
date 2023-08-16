@@ -179,6 +179,10 @@ const CheckoutForm = () => {
   //   dispatch(removeFromDetail(detail));
   // }
 
+  const clearDetailHandler = () => {
+    dispatch(clearDetail())
+  }
+
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
     <>
@@ -191,6 +195,7 @@ const CheckoutForm = () => {
               className={styles.itemImage}
             />
             <div className={styles.itemDetails}>
+              <button className={styles.cerrar} onClick={() => removeFromCartHandler(item)}>X</button>
               <p className={styles.itemName}>{item.name}</p>
               <p>
                 Cantidad: {item.quantity}
@@ -216,6 +221,7 @@ const CheckoutForm = () => {
               className={styles.itemImage}
             />
             <div className={styles.itemDetails}>
+              <button className={styles.cerrar} onClick={clearDetailHandler}>X</button>
               <p className={styles.itemName}>{detail.name}</p>
               <p>Cantidad: {quantityDeDetail}</p>
               {/* <button onClick={addToDetailHandler}>+</button><button onClick={removeFromDetailHandler}>-</button> */}
