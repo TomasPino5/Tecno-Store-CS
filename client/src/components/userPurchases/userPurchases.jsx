@@ -1,46 +1,46 @@
-//import { getUserPurchases } from "../../redux/actions";
 import { useSelector } from 'react-redux';
-//import { useAuth0 } from "@auth0/auth0-react";
-//import { useEffect } from "react"
 import style from './userPurchases.module.css'
+import { Link } from "react-router-dom";
+
 
 const UserPurchases = () => {
 
-    //const { user } = useAuth0();
-    //const dispatch = useDispatch()
-    //const email = user.email
-
-    // useEffect(() => {
-    //     dispatch(getUserPurchases(email));
-    //   }, [dispatch, email]);
-
     const purchases = useSelector((state) => state.userPurchases)
-    
+    console.log(purchases)
+
+    const prod = purchases.map(p => p.products)
+    //console.log(prod.flat())
+
+    const products = prod.flat()
+    //console.log(products)
 
     return (
         <div className={style.container}>
-            {purchases.map((purchase) => (
-          <div key={purchase.id}>
-            {/* <img
-              src={purchase.picture}
-              //alt={purchase.imageAlt}
-              //className={purchase.itemImage}
-            /> */}
-            <div className={style.purchasesDetails}>
-              <p className={style.purchasesName}>{purchase.productName}</p>
-              <p>Cantidad: {purchase.productQuantity}</p>
-              <p>Marca: {purchase.productBrand}</p>
-              <p className={style.purchasesPrice}>
-                Precio: $
-                {purchase.productPrice}
-              </p>
-              <p className={style.purchasesPrice}>
-                Total: $
-                {purchase.totalPurchase}
-              </p>
-            </div>
-          </div>
-        ))}
+            {products.map((purchase) => (
+                <div className={style.card} key={purchase.id}>
+                    <img
+                        src={purchase.imageSrc}
+                        //alt={purchase.imageAlt}
+                        className={style.itemImage}
+                    />
+                    <div className={style.purchasesDetails}>
+                        <p className={style.purchasesName}>{purchase.name}</p>
+                        <p>Cantidad: {purchase.quantity ? purchase.quantity : '1'}</p>
+                        <p>Marca: {purchase.brand}</p>
+                        <p className={style.price}>Precio: ${purchase.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}/u.</p>
+                        <p className={style.price}>Total: ${(Number(purchase.price) * Number(purchase.quantity ? purchase.quantity : '1')).toLocaleString("es-ES", { minimumFractionDigits: 2 })}/u.</p>
+                    </div>
+                    <div className={style.contBtnCal}>
+                    <button className={style.btnCalif}>Calificar</button>
+                    </div>
+                </div>               
+            ))}
+
+            <Link to="/userProfile">
+                <button className={style.btnReturn} id="buttonReturn">
+                    Back
+                </button>
+            </Link>
         </div>
     )
 }

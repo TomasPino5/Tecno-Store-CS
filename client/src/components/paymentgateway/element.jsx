@@ -90,17 +90,7 @@ const CheckoutForm = () => {
       }
 
       if (data.mensaje === 'Pago exitoso') {
-        dispatch(postUserPurchase(
-          {
-            user: user.email,
-            picture: productPicture.toString(),
-            productName: productName.toString(),
-            productQuantity: productQuantity.toString(),
-            productBrand: productBrand.toString(),
-            productPrice: productPrice.toString(),
-            totalPurchase: calculatedTotalPrice
-          }
-        ));
+        dispatch(postUserPurchase( { user: user.email, products: products }));
       }
 
       // Retrasar la redirección durante 3 segundos
@@ -114,7 +104,9 @@ const CheckoutForm = () => {
     }
   };
 
-  const productCartPicture = items.map((item) => (item.imageSrc))
+  const products = items.length === 0 ? [detail] : items.map((i)=> i) 
+
+  //const productCartPicture = items.map((item) => (item.imageSrc))
   const productCartName = items.map((item) => (item.name))
   const productCartQuantity = items.map((item) => (item.quantity))
   const productCartBrand = items.map((item) => (item.brand))
@@ -122,14 +114,14 @@ const CheckoutForm = () => {
     minimumFractionDigits: 2,
   })))
 
-  const productDetailPicture = detail.imageSrc
+  //const productDetailPicture = detail.imageSrc
   const productDetailName = detail.name
   const productDetailQuantity = '1'
   const productDetailBrand = detail.brand
   const productDetailPrice = detail?.price
   const quantityDeDetail = 1
 
-  const productPicture = productCartPicture.length === 0 ? productDetailPicture : productCartPicture
+  //const productPicture = productCartPicture.length === 0 ? productDetailPicture : productCartPicture
   const productName = productCartName.length === 0 ? productDetailName : productCartName
   const productQuantity = productCartQuantity.length === 0 ? productDetailQuantity : productCartQuantity
   const productBrand = productCartBrand.length === 0 ? productDetailBrand : productCartBrand
