@@ -239,15 +239,14 @@ export function modifyProduct(productId, updatedProduct) {
         updatedProduct
       );
       const modifiedProduct = response.data;
-
       // Aquí puedes manejar las actualizaciones necesarias en el estado
       dispatch({
         type: MODIFY_PRODUCT,
         payload: modifiedProduct,
       });
 
-      // También puedes actualizar los detalles del producto si es necesario
-      dispatch(getProductDetails(productId)); // Asegúrate de tener getProductDetails definido
+      // // También puedes actualizar los detalles del producto si es necesario
+      // dispatch(getProductDetails(productId)); // Asegúrate de tener getProductDetails definido
     } catch (error) {
       console.error("Error updating product:", error);
     }
