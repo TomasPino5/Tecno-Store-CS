@@ -3,7 +3,6 @@
   margin-bottom: -15px;
   padding-top: 1px;
 
-  
   color: white;
 }
 
@@ -70,11 +69,25 @@
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
+.formdarkMode {
+  width: 400px;
+  padding: 20px;
+  background-color: #2f362e;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 .title {
   margin-bottom: 20px;
   text-align: center;
   color: #000000;
+}
+
+.titledarkMode {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #ffffff;
 }
 
 .cardElementContainer {
