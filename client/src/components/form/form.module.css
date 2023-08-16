@@ -123,3 +123,11 @@
   border: 2px solid #333;
   color: black;
 }
+
+.uploadedImage {
+  height: 300px;
+  width: 200;
+  margin-top: 8px;
+  border: 2px solid #333;
+  border-radius: 10px;
+}

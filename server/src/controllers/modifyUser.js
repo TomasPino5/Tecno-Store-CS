@@ -3,7 +3,7 @@ const Users = require("../models/users.js");
 const modifyUser = async (req, res) => {
   const { email } = req.params;
   console.log(email)
-  const { name, direction, telefone } = req.body; //, picture
+  const { name, direction, telefone, picture } = req.body; //, picture
   console.log(name, direction, telefone)
   const user = await Users.findOne({where:{email}})
   const id = user.id;
@@ -13,7 +13,7 @@ const modifyUser = async (req, res) => {
       user.name = name,
       user.direction = direction,
       user.telefone = telefone,
-      //user.picture = picture,
+      user.picture = picture,
       await user.save();
       res.json(user);
   } catch (error) {

@@ -30,6 +30,11 @@ const Users = sequelize.define('users',{
     picture:{
         type: DataTypes.TEXT,
         allowNull: true
+    },
+    isActive:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true // Puedes establecer el valor predeterminado como "true" (activo)
     }
 },{
     timestamps: false

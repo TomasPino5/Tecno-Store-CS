@@ -9,8 +9,9 @@ import {
   filterByBrand,
   filterByCategory,
   clearFilter,
-  clearDetail
+  clearDetail,
 } from "../../redux/actions";
+import { toggleDarkMode } from "../../redux/actions";
 import style from "./home.module.css";
 import Nav from "../nav/nav";
 
@@ -18,18 +19,27 @@ const Home = () => {
   const products = useSelector((state) => state.allProducts);
   const brands = useSelector((state) => state.brands);
   const categories = useSelector((state) => state.categories);
+  const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
+  // className={darkMode ? style.darkMode : style.lightMode}
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    // Obtener el valor actual del modo oscuro desde localStorage
+    const savedDarkMode = localStorage.getItem("darkMode");
+    if (savedDarkMode === "true") {
+      dispatch(toggleDarkMode());
+      console.log(darkMode);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(clearDetail())
+    dispatch(clearDetail());
   }, [dispatch]);
 
   //paginado
   const productsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-
 
   const handleNextPage = () => {
     setCurrentPage((nextPage) => nextPage + 1);
@@ -43,6 +53,8 @@ const Home = () => {
   const endIndex = startIndex + productsPerPage;
 
   const productsToDisplay = products.slice(startIndex, endIndex);
+
+  const totalPags = products.length / productsPerPage;
 
   //filtros
   const handleOrderByPrice = (event) => {
@@ -71,57 +83,77 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className={style.homepG}>
+      <div className={style.filtros}>
+        <Nav handleClearFilters={handleClearFilters} />
 
-        <div className={style.filtros}>
+        <div className={darkMode ? style.contentdarkMode : style.content}>
+          <select id="brandFilter" onChange={handleBrandFilter}>
+            <option value="">Brands</option>
+            {brands.map((brand) => (
+              <option key={brand} value={brand}>
+                {brand}
+              </option>
+            ))}
+          </select>
+          <select id="categoryFilter" onChange={handleCategoryFilter}>
+            <option value="">Categories</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
 
-          <Nav handleClearFilters={handleClearFilters}/>
-
-          <div className={style.content}>
-            
-            <select id="brandFilter" onChange={handleBrandFilter}>
-              <option value="">Brands</option>
-              {brands.map((brand) => (
-                <option key={brand} value={brand}>{brand}</option>
-              ))}
-            </select>
-            <select id="categoryFilter" onChange={handleCategoryFilter}>
-              <option value="">Categories</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-
-            <select id="orderByPrice" onChange={handleOrderByPrice}>
-              <option value="">Price</option>
-              <option value="-+">Menor a Mayor</option>
-              <option value="+-">Mayor a Menor</option>
-            </select>
-            {/* <NavLink to="/filter/brandfilter/Motorola" className={style.filterLink}>Filter by Motorola</NavLink> */}
-            {/* <NavLink to="/filter/brandfilter/Samsung" className={style.filterLink}>Filter by Samsung</NavLink>
+          <select id="orderByPrice" onChange={handleOrderByPrice}>
+            <option value="">Price</option>
+            <option value="-+">Menor a Mayor</option>
+            <option value="+-">Mayor a Menor</option>
+          </select>
+          {/* <NavLink to="/filter/brandfilter/Motorola" className={style.filterLink}>Filter by Motorola</NavLink> */}
+          {/* <NavLink to="/filter/brandfilter/Samsung" className={style.filterLink}>Filter by Samsung</NavLink>
             <NavLink to="/filter/brandfilter/Apple" className={style.filterLink}>Filter by Apple</NavLink>
             <NavLink to="/filter/brandfilter/Xiaomi" className={style.filterLink}>Filter by Xiaomi</NavLink> */}
-          </div>
-
-          <button className={style.limpiarF} onClick={handleClearFilters}>Limpiar Filtros</button>
-          
         </div>
-      
+
+        <button
+          className={darkMode ? style.limpiarFdarkMode : style.limpiarF}
+          onClick={handleClearFilters}
+        >
+          Limpiar Filtros
+        </button>
+      </div>
+
       <div>
         <Cards products={productsToDisplay} />
       </div>
 
-      <div>
+      <div className={style.conteinerNextPrev}>
+        <button
+          disabled={currentPage === 1}
+          className={style.btnNextPrev}
+          onClick={handlePreviousPage}
+        >
+          Prev
+        </button>
 
-        <button disabled={currentPage === 1} className={style.btnNextPrev} onClick={handlePreviousPage}>Prev</button>
-        <button disabled={endIndex > products.length} className={style.btnNextPrev} onClick={handleNextPage}>Next</button>
+        <h3 className={style.inputPag}>
+          - {currentPage} of {Math.ceil(totalPags)} -
+        </h3>
+
+        <button
+          disabled={endIndex > products.length}
+          className={style.btnNextPrev}
+          onClick={handleNextPage}
+        >
+          Next
+        </button>
         {/* {currentPage > 1 && (
           <button className={style.btnPrevious} onClick={handlePreviousPage}>Prev</button>
         )}
         {endIndex < products.length && (
           <button className={style.btnNext} onClick={handleNextPage}>Next</button>
         )} */}
-
       </div>
     </div>
   );
