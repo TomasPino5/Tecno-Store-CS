@@ -13,8 +13,8 @@ const postUserPurchase = require("../controllers/postUserPurchase");
 const getUserPurchasesHandler = require("../handlers/getUserPurchasesHandler");
 const modifyProduct = require("../controllers/modifyProduct");
 const deleteUser = require("../controllers/deleteUser.js");
-
-
+const allUser = require("../controllers/getAllUsers");
+const putUser = require('../controllers/putUser.js');
 
 const router = Router();
 
@@ -26,8 +26,6 @@ router.get("/productos/:id", getDetailHandler);
 
 // Ruta para modificar un producto por ID
 router.put("/productos/:id", modifyProduct);
-
-
 
 //Ruta para llenar la base de datos con los productos se utiliza una sola vez
 router.get("/dbproducts", getDbProducts);
@@ -41,8 +39,13 @@ router.get("/getUserPurchases/:email", getUserPurchasesHandler);
 //Ruta para modificar datos del usuario
 router.put("/modifyUser/:email", modifyUser);
 
+router.put('/putuser/:id', putUser);
+
 // Ruta para eliminar un usuario por su correo electrónico
 router.delete("/user/:email", deleteUser);
+
+// Ruta para obtener todos los usuarios en base de datos
+router.get("/allusers", allUser);
 
 //Ruta para almacenar un nuevo producto al db
 router.post("/productos", postCreateProduct);
@@ -56,9 +59,9 @@ router.post("/productfav", postFavProducts);
 router.post("/pago", postPago);
 
 //Ruta para enviar mail de confirmacion de email
-router.post("/send-email", sendMailCompraHandler)
+router.post("/send-email", sendMailCompraHandler);
 
 //Ruta para guardar compra del usuario
-router.post("/userPurchase", postUserPurchase)
+router.post("/userPurchase", postUserPurchase);
 
 module.exports = router;

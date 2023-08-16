@@ -18,6 +18,7 @@ const Nav = () => {
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.darkMode);
   const { user } = useAuth0();
+
   const navigate = useNavigate()
 
   const handleFavNavigate = () =>{
@@ -37,14 +38,13 @@ const Nav = () => {
       "sebastianhnry@gmail.com",
       "tomaspino.velez@gmail.com",
       "tomasbaldi@gmail.com",
-      "kayita_y@hotmail.com"
+      "kayita_y@hotmail.com",
     ];
 
     return (
       isAuthenticated && allowedEmails.includes(user.email) // Verificar si el correo del usuario está en la lista
     );
   };
-
 
   useEffect(() => {
     // Obtener el valor actual del modo oscuro desde localStorage
@@ -53,7 +53,7 @@ const Nav = () => {
       dispatch(toggleDarkMode());
       console.log(darkMode);
     }
-  }, [dispatch, darkMode]);
+  }, [dispatch]);
 
   const handleToggleDarkMode = () => {
     dispatch(toggleDarkMode());
@@ -140,6 +140,7 @@ const Nav = () => {
         {location.pathname === "/favorites" ? null : (
             <button onClick={handleFavNavigate} className={style.btnFav} > ♡ </button>
           )}
+
         <div>
           <button
             className={darkMode ? style.darkMode : style.lightMode}
