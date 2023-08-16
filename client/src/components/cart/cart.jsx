@@ -22,7 +22,7 @@ export default function Cart() {
         if(items.length >0){
             Swal.fire({
                 title: 'Esta Seguro',
-                text: '!se eliminara su producto del carrito¡',
+                text: '!se eliminaran todos los productos de su carrito¡',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Si estoy seguro',

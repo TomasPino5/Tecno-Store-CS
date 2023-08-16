@@ -16,12 +16,11 @@ import {
   MODIFY_PRODUCT,
   DELETE_PRODUCT_BY_NAME,
   DELETE_USER_BY_EMAIL,
-
   GET_USER_PURCHASES,
   CLEAR_USER_PURCHASES,
-
   TOGGLE_DARK_MODE,
-
+  ADD_TO_FAVORITE,
+  REMOVE_FROM_FAVORITE
 } from "./action-types";
 
 const savedUserData = localStorage.getItem("userData");
@@ -45,7 +44,10 @@ const initialState = {
     : 0,
   user: savedUserData ? JSON.parse(savedUserData) : [],
   salesCount: 0,
-  userPurchases: []
+  userPurchases: [],
+  favorites: localStorage.getItem("favorites")
+    ? JSON.parse(localStorage.getItem("favorites"))
+    : []
 };
 
 const reducer = (state = initialState, action) => {
@@ -329,6 +331,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: updatedUsers,
+      };
+
+    case ADD_TO_FAVORITE:
+      const updatedFavoritesAdd = [...state.favorites, action.payload];
+      localStorage.setItem("favorites", JSON.stringify(updatedFavoritesAdd));
+      return {
+        ...state,
+        favorites: updatedFavoritesAdd
+      };
+        
+    case REMOVE_FROM_FAVORITE:
+      const updatedFavoritesRemove = state.favorites.filter(product => product.id !== action.payload);
+      localStorage.setItem("favorites", JSON.stringify(updatedFavoritesRemove));
+      return {
+        ...state,
+        favorites: updatedFavoritesRemove
       };
 
     default:

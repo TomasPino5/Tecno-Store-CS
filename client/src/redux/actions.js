@@ -20,6 +20,8 @@ import {
   GET_USER_PURCHASES,
   CLEAR_USER_PURCHASES,
   TOGGLE_DARK_MODE,
+  ADD_TO_FAVORITE,
+  REMOVE_FROM_FAVORITE
 } from "./action-types";
 
 
@@ -283,3 +285,17 @@ export function deleteUserByEmail(email) {
 export const toggleDarkMode = () => ({
   type: TOGGLE_DARK_MODE,
 });
+
+export function addToFavorite(product) {
+  return {
+    type: ADD_TO_FAVORITE,
+    payload: product,
+  };
+}
+
+export function removeFromFavorite(product) {
+  return {
+    type: REMOVE_FROM_FAVORITE,
+    payload: product,
+  };
+}

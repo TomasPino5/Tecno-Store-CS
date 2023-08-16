@@ -25,7 +25,7 @@ const Nav = () => {
       dispatch(toggleDarkMode());
       console.log(darkMode);
     }
-  }, [dispatch]);
+  }, [dispatch, darkMode]);
 
   const handleToggleDarkMode = () => {
     dispatch(toggleDarkMode());
@@ -104,6 +104,11 @@ const Nav = () => {
         {/* <button className={style.login} onClick={handleLoginButtonClick}>
             Login
           </button> */}
+          <NavLink to="/favorites">
+            {location.pathname === "/favorites" ? null : (
+              <button className={style.btnNP}>Favoritos</button>
+            )}
+          </NavLink>
         <div>
           <button
             className={darkMode ? style.darkMode : style.lightMode}

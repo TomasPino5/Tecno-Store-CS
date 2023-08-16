@@ -30,7 +30,7 @@ const Home = () => {
       dispatch(toggleDarkMode());
       console.log(darkMode);
     }
-  }, [dispatch]);
+  }, [dispatch, darkMode]);
 
   useEffect(() => {
     dispatch(getProducts());
