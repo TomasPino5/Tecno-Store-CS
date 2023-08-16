@@ -18,7 +18,7 @@ const AdminDashboard = () => {
   const { user } = useAuth0();
   const [showProductList, setShowProductList] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null); // Estado para el producto seleccionado
-  const [component, setComponent] = useState('');
+  const [component, setComponent] = useState("");
 
   const allowedEmails = [
     "menseguezmariano@gmail.com",
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
     setSelectedProduct(null); // Limpiar el producto seleccionado al mostrar la lista de productos
   };
   const handleComponent = (value) => {
-   setComponent(value)
+    setComponent(value);
   };
 
   const handleModifyProduct = (product) => {
@@ -74,7 +74,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       {isAdmin ? (
         <div>
           <h1 className="admin-title">Bienvenido a tu Panel Administrativo!</h1>
@@ -83,13 +83,18 @@ const AdminDashboard = () => {
             <button className="product-list-button">Crear Producto</button>
           </Link>
           <button
-            onClick={() => handleComponent('product')}
+            onClick={() => handleComponent("product")}
             className="product-list-button"
           >
             Modifica un producto
           </button>
 
-          <button onClick={()=>{handleComponent("users")}} className="product-list-button">
+          <button
+            onClick={() => {
+              handleComponent("users");
+            }}
+            className="product-list-button"
+          >
             Listado de Usuarios
           </button>
           <Link to="/userProfile" className="create-product-button">
@@ -100,16 +105,16 @@ const AdminDashboard = () => {
           <button className="product-list-button">
             Total de Compras: {salesCount}
           </button>
-          { component === 'product'?(
+          {component === "product" ? (
             <div className="font-container">
-            {mod === true ? (<FormProduct idProduct={idProduct} setMod={setMod} />)
-            :(<Product handleModify={handleModify} products={products} />)}
+              {mod === true ? (
+                <FormProduct idProduct={idProduct} setMod={setMod} />
+              ) : (
+                <Product handleModify={handleModify} products={products} />
+              )}
             </div>
-          ):null
-          }
-          {
-            component === 'users'?(<Listusers />):null
-          }
+          ) : null}
+          {component === "users" ? <Listusers /> : null}
 
           {showProductList && (
             <div className="product-list">

@@ -3,13 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postProduct } from "../../redux/actions";
 import style from "./form.module.css";
-import axios from 'axios';
+import axios from "axios";
 
 const Form = () => {
-
   const dispatch = useDispatch();
   let navigate = useNavigate();
-
+  const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
 
   const [form, setForm] = useState({
     name: "",
@@ -29,52 +28,49 @@ const Form = () => {
     href: "¡Se requiere #!",
     imageSrc: "¡Se requiere la imagen!",
     imageAlt: "¡Se requiere el imageAlt!",
-    price: '¡Por favor ingresa un precio válido!',
+    price: "¡Por favor ingresa un precio válido!",
     brand: "¡Se requiere el brand!",
     min: "¡Se requiere el min!",
     stock: "¡Se requiere el stock!",
     category: "¡Por favor ingresa una category!",
-    description: "¡Por favor ingresa una description!"
-  })
-
+    description: "¡Por favor ingresa una description!",
+  });
 
   function validate(form) {
-    const error = {}
+    const error = {};
     if (form.name.length < 5) {
-      error.name = '¡Ingrese un name valido!'
+      error.name = "¡Ingrese un name valido!";
     }
     if (!form.imageSrc) {
-      error.imageSrc = '¡Inserte imagen!'
+      error.imageSrc = "¡Inserte imagen!";
     }
     if (form.href.length < 1) {
-      error.href = '¡Se requiere el href!'
+      error.href = "¡Se requiere el href!";
     }
 
     if (form.imageAlt !== form.name) {
-      error.imageAlt = '¡Debe ser igual al name!'
+      error.imageAlt = "¡Debe ser igual al name!";
     }
     if (isNaN(form.price) === true || form.price < 1) {
-      error.price = '¡Por favor ingresa un precio válido!'
+      error.price = "¡Por favor ingresa un precio válido!";
     }
     if (form.brand === "" || form.brand === null) {
-      error.brand = '¡Se requiere el brand!'
+      error.brand = "¡Se requiere el brand!";
     }
     if (isNaN(form.min) === true || form.min < 1) {
-      error.min = '¡Debe ser un numero mayor a 0!'
+      error.min = "¡Debe ser un numero mayor a 0!";
     }
     if (isNaN(form.stock) === true || form.stock < 1) {
-      error.stock = '¡Debe ser un numero mayor a 0!'
+      error.stock = "¡Debe ser un numero mayor a 0!";
     }
     if (form.category === "" || form.brand === null) {
-      error.category = '¡Por favor ingresa una category!'
+      error.category = "¡Por favor ingresa una category!";
     }
     if (form.description.length < 10) {
-      error.description = '¡La descripcion debe ser mas larga!'
+      error.description = "¡La descripcion debe ser mas larga!";
     }
-    return error
+    return error;
   }
-
-
 
   // Carga imagen ibb
   const handleImageUpload = async (e) => {
@@ -84,22 +80,26 @@ const Form = () => {
     formData.append("key", "ccc0eb65a71efd80b4352eda77e05470"); // Replace with your ImgBB API key
 
     try {
-      const response = await axios.post("https://api.imgbb.com/1/upload", formData);
+      const response = await axios.post(
+        "https://api.imgbb.com/1/upload",
+        formData
+      );
       const imageUrl = response.data.data.url;
-      console.log(imageUrl)
+      console.log(imageUrl);
       setForm({
         ...form,
-        imageSrc: imageUrl
+        imageSrc: imageUrl,
       });
-      setError(validate({
-        ...form,
-        imageSrc: imageUrl
-      }));
+      setError(
+        validate({
+          ...form,
+          imageSrc: imageUrl,
+        })
+      );
       //setImageSrcError(""); // Clear the imageSrc error if any
     } catch (error) {
       // console.error("Error uploading image:", error);
       //setImageSrcError("Failed to upload image. Please try again.");
-
     }
   };
 
@@ -107,39 +107,43 @@ const Form = () => {
   const handleSelectBrand = (event) => {
     setForm({
       ...form,
-      brand: event.target.value
+      brand: event.target.value,
     });
-    setError(validate({
-      ...form,
-      brand: event.target.value
-    }));
-  }
+    setError(
+      validate({
+        ...form,
+        brand: event.target.value,
+      })
+    );
+  };
 
   // funcion select category
   const handleSelectCategory = (event) => {
     setForm({
       ...form,
-      category: event.target.value
+      category: event.target.value,
     });
-    setError(validate({
-      ...form,
-      category: event.target.value
-    }));
-  }
+    setError(
+      validate({
+        ...form,
+        category: event.target.value,
+      })
+    );
+  };
 
   const changeHandler = (event) => {
     setForm({
       ...form,
-      [event.target.name]: event.target.value
-
-    })
-    setError(validate({
-      ...form,
-      [event.target.name]: event.target.value
-    }))
-  }
-  console.log(form.imageSrc)
-
+      [event.target.name]: event.target.value,
+    });
+    setError(
+      validate({
+        ...form,
+        [event.target.name]: event.target.value,
+      })
+    );
+  };
+  console.log(form.imageSrc);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -168,23 +172,23 @@ const Form = () => {
 
   const handleInputBrand = () => {
     setNewbrand(true);
-  }
+  };
 
   const handleInputBrand2 = () => {
     setNewbrand(false);
-  }
+  };
 
   const handleInputCategory = () => {
     setNewCategory(true);
-  }
+  };
 
   const handleInputCategory2 = () => {
     setNewCategory(false);
-  }
+  };
 
   return (
     <div className={style.form__C}>
-      <div className={style.card}>
+      <div className={darkMode ? style.carddarkMode : style.card}>
         <span className={style.card__title} id="title">
           Add your new product
         </span>
@@ -203,7 +207,6 @@ const Form = () => {
           {error.name && (
             <strong className={style.card__content}>{error.name}</strong>
           )}
-
 
           {/* <div className={style.card__form}>
             <label className={style.label__form}>Image of product: </label>
@@ -234,13 +237,10 @@ const Form = () => {
                 className={style.uploadedImage}
               />
             )}
-
           </div>
           {error.imageSrc && (
             <strong className={style.card__content}>{error.imageSrc}</strong>
           )}
-
-
 
           <div className={style.card__form}>
             <label className={style.label__form}>Price: </label>
@@ -256,8 +256,6 @@ const Form = () => {
             <strong className={style.card__content}>{error.price}</strong>
           )}
 
-
-
           <div className={style.card__form}>
             <label className={style.label__form}>Stock: </label>
             <input
@@ -271,8 +269,6 @@ const Form = () => {
           {error.stock && (
             <strong className={style.card__content}>{error.stock}</strong>
           )}
-
-
 
           {/* <div className={style.card__form}>
             <label className={style.label__form}>Brand: </label>
@@ -290,26 +286,39 @@ const Form = () => {
 
           <div className={style.card__form}>
             <label className={style.label__form}>Brand: </label>
-            {
-              newbrand === false ? <select className={style.selectBrandCategory} onChange={handleSelectBrand}>
+            {newbrand === false ? (
+              <select
+                className={style.selectBrandCategory}
+                onChange={handleSelectBrand}
+              >
                 <option value="">Brands</option>
-                {brands.map(brand => (<option value={brand}>{brand}</option>))}
-              </select> : null
-            }
-            {
-              newbrand === true ? <input type="text" name="brand" value={form.value}
-                onChange={(e) => changeHandler(e)} placeholder="Add new brand..." /> : null
-            }
+                {brands.map((brand) => (
+                  <option value={brand}>{brand}</option>
+                ))}
+              </select>
+            ) : null}
+            {newbrand === true ? (
+              <input
+                type="text"
+                name="brand"
+                value={form.value}
+                onChange={(e) => changeHandler(e)}
+                placeholder="Add new brand..."
+              />
+            ) : null}
           </div>
-          {
-            newbrand === false ?
-              <div className={style.addBrandCategory} onClick={handleInputBrand}>-Click Here to new add Brand-</div>
-              : <div className={style.addBrandCategory} onClick={handleInputBrand2}>-Back to Select Brand-</div>
-          }
+          {newbrand === false ? (
+            <div className={style.addBrandCategory} onClick={handleInputBrand}>
+              -Click Here to new add Brand-
+            </div>
+          ) : (
+            <div className={style.addBrandCategory} onClick={handleInputBrand2}>
+              -Back to Select Brand-
+            </div>
+          )}
           {error.brand && (
             <strong className={style.card__content}>{error.brand}</strong>
           )}
-
 
           {/* <div className={style.card__form}>
             <label className={style.label__form}>Category: </label>
@@ -325,30 +334,48 @@ const Form = () => {
             )}
           </div> */}
 
-          <div className={style.card__form} >
+          <div className={style.card__form}>
             <label className={style.label__form}>Category: </label>
-            {
-              newcategory === false ? <select className={style.selectBrandCategory} onChange={handleSelectCategory}>
+            {newcategory === false ? (
+              <select
+                className={style.selectBrandCategory}
+                onChange={handleSelectCategory}
+              >
                 <option value="">Category</option>
-                {categories.map(category => (<option value={category}>{category}</option>))}
-              </select> : null
-            }
+                {categories.map((category) => (
+                  <option value={category}>{category}</option>
+                ))}
+              </select>
+            ) : null}
 
-            {
-              newcategory === true ? <input type="text" name="category" value={form.value}
-                onChange={(e) => changeHandler(e)} placeholder="Add new Category..." /> : null
-            }
+            {newcategory === true ? (
+              <input
+                type="text"
+                name="category"
+                value={form.value}
+                onChange={(e) => changeHandler(e)}
+                placeholder="Add new Category..."
+              />
+            ) : null}
           </div>
-          {
-            newcategory === false ?
-              <div className={style.addBrandCategory} onClick={handleInputCategory}>-Click Here to add new Category-</div>
-              : <div className={style.addBrandCategory} onClick={handleInputCategory2}>-Back to Select Category-</div>
-          }
+          {newcategory === false ? (
+            <div
+              className={style.addBrandCategory}
+              onClick={handleInputCategory}
+            >
+              -Click Here to add new Category-
+            </div>
+          ) : (
+            <div
+              className={style.addBrandCategory}
+              onClick={handleInputCategory2}
+            >
+              -Back to Select Category-
+            </div>
+          )}
           {error.category && (
             <strong className={style.card__content}>{error.category}</strong>
           )}
-
-
 
           <div className={style.card__form}>
             <label className={style.label__form}>Description: </label>
@@ -361,9 +388,7 @@ const Form = () => {
             />
           </div>
           {error.description && (
-            <strong className={style.card__content}>
-              {error.description}
-            </strong>
+            <strong className={style.card__content}>{error.description}</strong>
           )}
 
           {/* ACA VAN LAS 3 PROPIEDADES FALTANTES  */}
@@ -383,7 +408,6 @@ const Form = () => {
             <strong className={style.card__content}>{error.href}</strong>
           )}
 
-
           {/* imageAlt */}
           <div className={style.card__form}>
             <label className={style.label__form}>ImageAlt: </label>
@@ -398,7 +422,6 @@ const Form = () => {
           {error.imageAlt && (
             <strong className={style.card__content}>{error.imageAlt}</strong>
           )}
-
 
           {/* min */}
           <div className={style.card__form}>
@@ -415,8 +438,19 @@ const Form = () => {
             <strong className={style.card__content}>{error.min}</strong>
           )}
 
-
-          {error.imageSrc || error.name || error.price || error.category || error.brand || error.description || error.imageAlt || error.href || error.min ? null : <button className={style.btn} type='submit'>Create product</button>}
+          {error.imageSrc ||
+          error.name ||
+          error.price ||
+          error.category ||
+          error.brand ||
+          error.description ||
+          error.imageAlt ||
+          error.href ||
+          error.min ? null : (
+            <button className={style.btn} type="submit">
+              Create product
+            </button>
+          )}
           {/* <div calssName={style.btn}>
 
             <button
