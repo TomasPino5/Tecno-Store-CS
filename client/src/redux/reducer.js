@@ -16,12 +16,12 @@ import {
   MODIFY_PRODUCT,
   DELETE_PRODUCT_BY_NAME,
   DELETE_USER_BY_EMAIL,
-
   GET_USER_PURCHASES,
   CLEAR_USER_PURCHASES,
-
   TOGGLE_DARK_MODE,
-
+  ADD_TO_FAVORITE,
+  REMOVE_FROM_FAVORITE,
+  GET_ALL_USERS,
 } from "./action-types";
 
 const savedUserData = localStorage.getItem("userData");
@@ -45,7 +45,11 @@ const initialState = {
     : 0,
   user: savedUserData ? JSON.parse(savedUserData) : [],
   salesCount: 0,
-  userPurchases: []
+  userPurchases: [],
+  favorites: localStorage.getItem("favorites")
+    ? JSON.parse(localStorage.getItem("favorites"))
+    : [],
+  getallusers: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -89,8 +93,8 @@ const reducer = (state = initialState, action) => {
     case GET_USER_PURCHASES:
       return {
         ...state,
-        userPurchases: action.payload
-      }
+        userPurchases: action.payload,
+      };
 
     case CLEAR_USER_PURCHASES:
       return {
@@ -292,21 +296,20 @@ const reducer = (state = initialState, action) => {
 
     case MODIFY_PRODUCT:
       // Encuentra el índice del producto a modificar en tu estado actual
-      const productIndex = state.allProducts.findIndex(
-        (product) => product.id === action.payload.id
-      );
+      // const productIndex = state.allProducts.findIndex(
+      //   (product) => product.id === action.payload.id
+      // );
 
-      // Si encontraste el producto, actualiza el estado
-      if (productIndex !== -1) {
-        const updatedProducts = [...state.allProducts];
-        updatedProducts[productIndex] = action.payload;
+      // // Si encontraste el producto, actualiza el estado
+      // if (productIndex !== -1) {
+      //   const updatedProducts = [...state.allProducts];
+      //   updatedProducts[productIndex] = action.payload;
 
-        return {
-          ...state,
-          allProducts: updatedProducts,
-          // Puedes manejar otros casos si es necesario
-        };
-      }
+      return {
+        ...state,
+        allProducts: [...action.payload],
+        // Puedes manejar otros casos si es necesario
+      };
 
       // Si no se encontró el producto, devuelve el estado sin cambios
       return state;
@@ -329,6 +332,29 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: updatedUsers,
+      };
+
+    case ADD_TO_FAVORITE:
+      const updatedFavoritesAdd = [...state.favorites, action.payload];
+      localStorage.setItem("favorites", JSON.stringify(updatedFavoritesAdd));
+      return {
+        ...state,
+        favorites: updatedFavoritesAdd,
+      };
+
+    case REMOVE_FROM_FAVORITE:
+      const updatedFavoritesRemove = state.favorites.filter(
+        (product) => product.id !== action.payload
+      );
+      localStorage.setItem("favorites", JSON.stringify(updatedFavoritesRemove));
+      return {
+        ...state,
+        favorites: updatedFavoritesRemove,
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        getallusers: [...action.payload],
       };
 
     default:

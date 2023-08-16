@@ -17,6 +17,25 @@ const Nav = () => {
   const { isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.darkMode);
+  const { user} = useAuth0();
+
+  const isAdmin = () => {
+    // Array de direcciones de correo electrónico permitidas para acceder a la ruta de administrador
+    const allowedEmails = [
+      "menseguezmariano@gmail.com",
+      "cottiersolchu55@gmail.com",
+      "adlotorrez91@gmail.com",
+      "sebastianhnry@gmail.com",
+      "tomaspino.velez@gmail.com",
+      "tomasbaldi@gmail.com",
+      "kayita_y@hotmail.com"
+    ];
+
+    return (
+      isAuthenticated && allowedEmails.includes(user.email) // Verificar si el correo del usuario está en la lista
+    );
+  };
+
 
   useEffect(() => {
     // Obtener el valor actual del modo oscuro desde localStorage
@@ -25,7 +44,7 @@ const Nav = () => {
       dispatch(toggleDarkMode());
       console.log(darkMode);
     }
-  }, [dispatch]);
+  }, [dispatch, darkMode]);
 
   const handleToggleDarkMode = () => {
     dispatch(toggleDarkMode());
@@ -104,6 +123,11 @@ const Nav = () => {
         {/* <button className={style.login} onClick={handleLoginButtonClick}>
             Login
           </button> */}
+          <NavLink to="/favorites">
+            {location.pathname === "/favorites" ? null : (
+              <button className={style.btnNP}>Favoritos</button>
+            )}
+          </NavLink>
         <div>
           <button
             className={darkMode ? style.darkMode : style.lightMode}
@@ -146,6 +170,11 @@ const Nav = () => {
           <LoginButton />
         )}
       </div>
+      {isAdmin() && (
+        <NavLink to="/admin">
+          <button className={style.btnNP}>Configuración</button>
+        </NavLink>
+      )}
     </nav>
   );
 };

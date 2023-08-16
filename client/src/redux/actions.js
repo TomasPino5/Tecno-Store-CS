@@ -20,6 +20,9 @@ import {
   GET_USER_PURCHASES,
   CLEAR_USER_PURCHASES,
   TOGGLE_DARK_MODE,
+  ADD_TO_FAVORITE,
+  REMOVE_FROM_FAVORITE,
+  GET_ALL_USERS,
 } from "./action-types";
 
 
@@ -237,15 +240,14 @@ export function modifyProduct(productId, updatedProduct) {
         updatedProduct
       );
       const modifiedProduct = response.data;
-
       // Aquí puedes manejar las actualizaciones necesarias en el estado
       dispatch({
         type: MODIFY_PRODUCT,
         payload: modifiedProduct,
       });
 
-      // También puedes actualizar los detalles del producto si es necesario
-      dispatch(getProductDetails(productId)); // Asegúrate de tener getProductDetails definido
+      // // También puedes actualizar los detalles del producto si es necesario
+      // dispatch(getProductDetails(productId)); // Asegúrate de tener getProductDetails definido
     } catch (error) {
       console.error("Error updating product:", error);
     }
@@ -283,3 +285,32 @@ export function deleteUserByEmail(email) {
 export const toggleDarkMode = () => ({
   type: TOGGLE_DARK_MODE,
 });
+
+export function addToFavorite(product) {
+  return {
+    type: ADD_TO_FAVORITE,
+    payload: product,
+  };
+}
+
+export function removeFromFavorite(product) {
+  return {
+    type: REMOVE_FROM_FAVORITE,
+    payload: product,
+  };
+}
+export const getAllUsers = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("http://localhost:3001/allusers");
+      const users = response.data;
+
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: users,
+      });
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+};

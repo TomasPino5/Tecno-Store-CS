@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector, useDispatch } from "react-redux";
-import "./admindashboard.css"; 
+import "./admindashboard.css";
 import {
   getProducts,
   getUser,
   // Importa las acciones necesarias para obtener usuarios y compras si las tienes
 } from "../../redux/actions"; // Actualiza la ruta a tus acciones
+import Product from "../product/Product";
+import FormProduct from "../formProduct/formProduct";
+import Listusers from "../listusers/listusers";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -15,6 +18,7 @@ const AdminDashboard = () => {
   const { user } = useAuth0();
   const [showProductList, setShowProductList] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null); // Estado para el producto seleccionado
+  const [component, setComponent] = useState("");
 
   const allowedEmails = [
     "menseguezmariano@gmail.com",
@@ -23,9 +27,9 @@ const AdminDashboard = () => {
     "sebastianhnry@gmail.com",
     "tomaspino.velez@gmail.com",
     "tomasbaldi@gmail.com",
-    "kayita_y@hotmail.com"
+    "kayita_y@hotmail.com",
   ];
-  
+
   const isAdmin = allowedEmails.includes(user?.email);
 
   useEffect(() => {
@@ -47,6 +51,9 @@ const AdminDashboard = () => {
     setShowProductList((prevShowProductList) => !prevShowProductList);
     setSelectedProduct(null); // Limpiar el producto seleccionado al mostrar la lista de productos
   };
+  const handleComponent = (value) => {
+   setComponent(value)
+  };
 
   const handleModifyProduct = (product) => {
     setSelectedProduct(product);
@@ -58,6 +65,14 @@ const AdminDashboard = () => {
     console.log("Cambios guardados:", selectedProduct);
   };
 
+  const [mod, setMod] = useState(false);
+  const [idProduct, setIdProduct] = useState(null);
+
+  const handleModify = (id) => {
+    setMod(true);
+    setIdProduct(id);
+  };
+
   return (
     <div>
       {isAdmin ? (
@@ -67,20 +82,34 @@ const AdminDashboard = () => {
           <Link to="/form" className="create-product-button">
             <button className="product-list-button">Crear Producto</button>
           </Link>
-          <button onClick={() => handleModifyProduct(products)} className="product-list-button">
+          <button
+            onClick={() => handleModifyProduct(products)}
+            className="product-list-button"
+          >
             Modifica un producto
           </button>
 
-          <button  className="product-list-button">
+          <button onClick={()=>{handleComponent("users")}} className="product-list-button">
             Listado de Usuarios
           </button>
           <Link to="/userProfile" className="create-product-button">
-            <button className="product-list-button">Modificar Usuario/PERFIL</button>
+            <button className="product-list-button">
+              Modificar Usuario/PERFIL
+            </button>
           </Link>
           <button className="product-list-button">
             Total de Compras: {salesCount}
           </button>
-          
+          {
+            component === "users" ? (<Listusers />):null
+          }
+          <div className="font-container">
+            {mod === true ? (
+              <FormProduct idProduct={idProduct} setMod={setMod} />
+            ) : (
+              <Product handleModify={handleModify} products={products} />
+            )}
+          </div>
           {selectedProduct && (
             <div className="product-modify-form">
               <h2>Modificar Producto</h2>

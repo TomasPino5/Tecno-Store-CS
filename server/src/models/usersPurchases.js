@@ -11,30 +11,34 @@ const UsersPurchases = sequelize.define('usersPurchases', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    picture: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    productName: {
-        type: DataTypes.STRING,
+    products: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
         allowNull: false
-    },
-    productQuantity: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    productBrand: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    productPrice: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    totalPurchase: {
-        type: DataTypes.FLOAT,
-        allowNull: true
     }
+    // picture: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true
+    // },
+    // productName: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
+    // productQuantity: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
+    // productBrand: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
+    // productPrice: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
+    // totalPurchase: {
+    //     type: DataTypes.FLOAT,
+    //     allowNull: true
+    // }
 
 }, { timestamps: false });
 

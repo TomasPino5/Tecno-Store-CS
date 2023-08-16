@@ -15,20 +15,38 @@ const modifyProduct = async (req, res) => {
     }
 
     // Modificar los atributos del producto
-    product.name = name;
-    product.href = href;
-    product.imageSrc = imageSrc;
-    product.imageAlt = imageAlt;
-    product.price = price;
-    product.stock = stock;
-    product.brand = brand;
-    product.category = category;
-    product.description = description;
+    if(name !== ''){
+      product.name = name;
+    }
+    if(href !== ''){
+      product.href = href;
+    }
+    if(imageSrc !== ''){
+      product.imageSrc = imageSrc;
+    }
+    if(imageAlt !== ''){
+      product.imageAlt = imageAlt;
+    }
+    if(price !== 0){
+      product.price = price;
+    }
+    if(stock !== 0){
+      product.stock = stock;
+    }
+    if(brand !== ''){
+      product.brand = brand;
+    }
+    if(category !== ''){
+      product.category = category;
+    }
+    if(description !== ''){
+      product.description = description;
+    }
     product.isActive = isActive; // Agregar el valor de isActive
 
     await product.save();
-
-    return res.status(200).json({ message: "Product updated successfully", product });
+    const prod = await Products.findAll();
+    return res.status(200).json(prod);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
