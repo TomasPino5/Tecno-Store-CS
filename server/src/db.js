@@ -11,9 +11,8 @@ const {
 // });
 
 const sequelize = new Sequelize(DB_DEPLOY, {
-  host: 'localhost',
-  dialect: 'postgres',
-  logging: false
+  logging: false,
+  native: false,
 });
 
 
