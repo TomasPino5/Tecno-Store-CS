@@ -33,7 +33,7 @@ export const Profile = () => {
           picture: user.picture,
         };
         try {
-          const response = await axios.post('http://localhost:3001/login', userData);
+          const response = await axios.post('/login', userData);
           console.log(response.data.message);
         } catch (error) {
           // console.log('Error al guardar los datos:', error);
