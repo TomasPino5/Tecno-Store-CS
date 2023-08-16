@@ -18,7 +18,7 @@ const AdminDashboard = () => {
   const { user } = useAuth0();
   const [showProductList, setShowProductList] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null); // Estado para el producto seleccionado
-  const [component, setComponent] = useState("");
+  const [component, setComponent] = useState('');
 
   const allowedEmails = [
     "menseguezmariano@gmail.com",
@@ -83,7 +83,7 @@ const AdminDashboard = () => {
             <button className="product-list-button">Crear Producto</button>
           </Link>
           <button
-            onClick={() => handleModifyProduct(products)}
+            onClick={() => handleComponent('product')}
             className="product-list-button"
           >
             Modifica un producto
@@ -100,36 +100,16 @@ const AdminDashboard = () => {
           <button className="product-list-button">
             Total de Compras: {salesCount}
           </button>
-          {
-            component === "users" ? (<Listusers />):null
-          }
-          <div className="font-container">
-            {mod === true ? (
-              <FormProduct idProduct={idProduct} setMod={setMod} />
-            ) : (
-              <Product handleModify={handleModify} products={products} />
-            )}
-          </div>
-          {selectedProduct && (
-            <div className="product-modify-form">
-              <h2>Modificar Producto</h2>
-              <form onSubmit={handleSubmitChanges}>
-                <label>Name:</label>
-                <input
-                  type="text"
-                  value={selectedProduct.name}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      name: e.target.value,
-                    })
-                  }
-                />
-                {/* Repite el proceso para los demás campos */}
-                <button type="submit">Guardar Cambios</button>
-              </form>
+          { component === 'product'?(
+            <div className="font-container">
+            {mod === true ? (<FormProduct idProduct={idProduct} setMod={setMod} />)
+            :(<Product handleModify={handleModify} products={products} />)}
             </div>
-          )}
+          ):null
+          }
+          {
+            component === 'users'?(<Listusers />):null
+          }
 
           {showProductList && (
             <div className="product-list">
