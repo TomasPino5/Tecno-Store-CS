@@ -21,7 +21,8 @@ import {
   CLEAR_USER_PURCHASES,
   TOGGLE_DARK_MODE,
   ADD_TO_FAVORITE,
-  REMOVE_FROM_FAVORITE
+  REMOVE_FROM_FAVORITE,
+  GET_ALL_USERS,
 } from "./action-types";
 
 
@@ -298,3 +299,18 @@ export function removeFromFavorite(product) {
     payload: product,
   };
 }
+export const getAllUsers = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("http://localhost:3001/allusers");
+      const users = response.data;
+
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: users,
+      });
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+};
