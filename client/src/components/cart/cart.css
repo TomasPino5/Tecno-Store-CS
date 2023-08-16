@@ -7,12 +7,14 @@
   position: fixed;
   right: 0px;
   top: 58px;
-  width: 183px;
+  max-width: 183px;
   max-height: calc(
     110vh - 110px
   ); /* 100px es la suma del padding y margen del contenedor */
+
   overflow-y: auto;
 }
+
 .carts {
   background-color: rgb(29, 29, 29);
   margin-bottom: 15px;
@@ -172,6 +174,10 @@
   z-index: 990;
 }
 
+.list2 {
+  padding-top: 10px;
+  padding-right: 19px;
+}
 .list {
   padding-top: 10px;
 }
