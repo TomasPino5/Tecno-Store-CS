@@ -83,7 +83,7 @@ const CheckoutForm = () => {
       setMensaje(`Error: ${error.message}`);
     } else {
       // Enviar el token al backend para realizar el pago
-      const response = await axios.post("http://localhost:3001/pago", {
+      const response = await axios.post("/pago", {
         producto: { nombre: "producto(s)", precio: calculatedTotalPrice },
         cantidad: calculatedQuantity,
         token: token,
@@ -148,7 +148,7 @@ const CheckoutForm = () => {
 
   const enviarCorreo = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/send-email", {
+      const response = await axios.post("/send-email", {
         destinatario: user.email,
         asunto: "Compra Exitosa",
         mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}!
