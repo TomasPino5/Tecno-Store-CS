@@ -44,7 +44,7 @@ const Nav = () => {
     ];
 
     return (
-      isAuthenticated && dataUser.admin === true || allowedEmails.includes(dataUser.email)// Verificar si el correo del usuario está en la lista
+      isAuthenticated && dataUser?.admin === true || allowedEmails.includes(dataUser?.email)// Verificar si el correo del usuario está en la lista
     );
   };
 
