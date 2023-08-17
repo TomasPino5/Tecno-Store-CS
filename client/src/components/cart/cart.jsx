@@ -26,10 +26,10 @@ export default function Cart() {
     if (items.length > 0) {
       Swal.fire({
         title: "Esta Seguro",
-        text: "!se eliminaran todos los productos de su carrito¡",
+        text: "¡Se eliminaran todos los productos de su carrito!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Si estoy seguro",
+        confirmButtonText: "Si, estoy seguro",
         cancelButtonText: "Cancelar",
         confirmButtonColor: "#28a745",
       }).then((result) => {
@@ -51,7 +51,6 @@ export default function Cart() {
         confirmButtonText: "Eliminar",
         cancelButtonText: "Cancelar",
         confirmButtonColor: "#d33",
-        cancelButtonColor: "#08ef56",
       }).then((result) => {
         if (result.isConfirmed) {
           dispatch(removeFromCart(product));
@@ -173,7 +172,7 @@ export default function Cart() {
                   title: "¡El carrito esta vacio!",
                   text: "Por favor agregue un producto al carrito",
                   icon: "warning",
-                  confirmButtonText: "ok",
+                  confirmButtonText: "Ok",
                   confirmButtonColor: "#28a745",
                 })
               }
