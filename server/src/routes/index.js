@@ -19,7 +19,7 @@ const getCompras = require('../controllers/getCompras.js');
 const getUserRating = require('../controllers/getUserRating');
 const modifyUserRating = require('../controllers/modifyUserRating');
 const postUserRating = require('../controllers/postUserRating');
-
+const postNewStock = require('../controllers/postNewStock');
 
 const router = Router();
 
@@ -81,5 +81,8 @@ router.post("/userPurchase", postUserPurchase);
 
 //Ruta para guardar calificacion de producto
 router.post("/rateProduct", postUserRating)
+
+//Ruta para guardar calificacion de producto
+router.post("/actualizarStock", postNewStock)
 
 module.exports = router;
