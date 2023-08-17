@@ -27,7 +27,7 @@ ReactDOM.render(
       <BrowserRouter>
         <Auth0Provider
           domain="dev-njrrk6wlytkekvbb.us.auth0.com"
-          clientId="AxyouAj91cWCLc6Rp1nZf6loAAs2U0Pq"
+          clientId="ZI2vEIvX5UON3TFBf1acm5MsXcT3n9P4"
           redirectUri={window.location.origin}
         >
           <DarkModeApp /> {/* Renderiza DarkModeApp en lugar de App */}
