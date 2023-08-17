@@ -35,6 +35,11 @@ const Users = sequelize.define('users',{
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true // Puedes establecer el valor predeterminado como "true" (activo)
+    },
+    admin:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 },{
     timestamps: false

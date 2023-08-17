@@ -25,6 +25,7 @@ import {
   GET_ALL_USERS,
   USER_ACTIVE,
   GET_COMPRAS,
+  USER_ADMIN
 } from "./action-types";
 
 
@@ -145,6 +146,17 @@ export function userActive(id) {
       payload: data,
     });
   };
+}
+
+export function userAdmin(id){
+  return async function(dispatch){
+    const json = await axios.put(`/putadmin/${id}`);
+    const data = json.data;
+    dispatch({
+      type: USER_ADMIN,
+      payload: data
+    })
+  }
 }
 
 

@@ -1,3 +1,5 @@
+import './product.css';
+
 const Product = ({handleModify, products})=>{
     products.sort((a, b) => a.id - b.id);
 

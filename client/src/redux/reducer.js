@@ -23,7 +23,9 @@ import {
   REMOVE_FROM_FAVORITE,
   GET_ALL_USERS,
   USER_ACTIVE,
-  GET_COMPRAS
+  GET_COMPRAS,
+  PUT_USER,
+  USER_ADMIN
 } from "./action-types";
 
 const savedUserData = localStorage.getItem("userData");
@@ -318,13 +320,18 @@ const reducer = (state = initialState, action) => {
       case USER_ACTIVE:
         return{
           ...state,
-          allProducts: [...action.payload]
+          getallusers: [...action.payload]
         }
 
       case GET_COMPRAS:
         return{
           ...state,
           getCompras: [...action.payload]
+        }  
+      case USER_ADMIN:
+        return{
+          ...state,
+          getallusers: [...action.payload]
         }  
 
     case DELETE_PRODUCT_BY_NAME:

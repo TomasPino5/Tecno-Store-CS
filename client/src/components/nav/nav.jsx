@@ -29,6 +29,8 @@ const Nav = () => {
     navigate("/admin")
   }
 
+  const dataUser = useSelector((state) => state.user);
+
   const isAdmin = () => {
     // Array de direcciones de correo electrónico permitidas para acceder a la ruta de administrador
     const allowedEmails = [
@@ -42,7 +44,7 @@ const Nav = () => {
     ];
 
     return (
-      isAuthenticated && allowedEmails.includes(user.email) // Verificar si el correo del usuario está en la lista
+      isAuthenticated && dataUser.admin === true || allowedEmails.includes(dataUser.email)// Verificar si el correo del usuario está en la lista
     );
   };
 
