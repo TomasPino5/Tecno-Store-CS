@@ -7,7 +7,7 @@ const StarRating = ({ value, onChange }) => {
                 <span
                     key={star}
                     onClick={() => onChange(star)}
-                    style={{ cursor: 'pointer', color: star <= value ? 'gold' : 'gray' }}
+                    style={{ cursor: 'pointer', color: star <= value ? 'gold' : 'gray', fontSize: '24px', }}
                 >
                     &#9733;
                 </span>
