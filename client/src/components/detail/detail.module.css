@@ -397,3 +397,31 @@
   font-family: "Arial";
   transition: background 0.3s;
 }
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.ratingP {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  font-weight: 50;
+  color: rgb(23, 23, 23);
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+.ratingPN {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: #1b1b1b;
+  font-weight: 50;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.star {
+  margin-bottom: 15px;
+}

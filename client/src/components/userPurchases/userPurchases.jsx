@@ -6,7 +6,7 @@ import StarRating from '../starRating/starRating';
 import axios from 'axios'
 import { useAuth0 } from "@auth0/auth0-react";
 import { modifyUserRating, rateProduct } from "../../redux/actions";
-
+import Swal from "sweetalert2";
 
 const UserPurchases = () => {
 
@@ -14,7 +14,7 @@ const UserPurchases = () => {
     const { user } = useAuth0();
     const email = user?.email
     const purchases = useSelector((state) => state.userPurchases)
-    console.log(purchases)
+    //console.log(purchases)
 
     const prod = purchases.map(p => p.products)
     //console.log(prod.flat())
@@ -34,13 +34,20 @@ const UserPurchases = () => {
         try {
             const response = await axios.get(`/getRating/?userEmail=${email}&productId=${productId}`);
             const existingRating = response.data
-            console.log(existingRating)
+            //console.log(existingRating)
 
             if (existingRating.length !== 0) {
                 //await axios.put(`/modifyUserRating?email=${email}&productId=${productId}`, { rating: rating })
                 dispatch(modifyUserRating(email, productId, { rating: rating }))
                 console.log("Has modificado la calificacion de este producto.");
-                return alert("Has modificado la calificacion de este producto.");
+                //return alert("Has modificado la calificacion de este producto.");
+                Swal.fire({
+                    title: "Modificado",
+                    text: "Has modificado la calificacion de este producto.",
+                    icon: "success",
+                    confirmButtonText: "Ok",
+                    confirmButtonColor: "#28a745",
+                  });
             }
 
 
@@ -55,14 +62,21 @@ const UserPurchases = () => {
                         productId: productId,
                         rating: rating,
                     }))
-                alert("Has agregado calificacion a este producto.")
+                //alert("Has agregado calificacion a este producto.")
+                Swal.fire({
+                    title: "Agregado",
+                    text: "Has agregado calificacion a este producto.",
+                    icon: "success",
+                    confirmButtonText: "Ok",
+                    confirmButtonColor: "#28a745",
+                  });
             }
 
         } catch (error) {
             console.error(error);
         }
     };
-    console.log(ratings)
+    //console.log(ratings)
 
     return (
         <div className={style.container}>

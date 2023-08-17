@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { Link, useParams, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, addToCart } from "../../redux/actions";
+import { getProductDetails, addToCart, productRatings } from "../../redux/actions";
 // import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Loading from "../../components/Loading/Loading.jsx";
@@ -10,11 +10,20 @@ import style from "./detail.module.css";
 
 import { useAuth0 } from "@auth0/auth0-react"; // Asegúrate de importar useAuth0
 
+import StarRating from '../starRating/starRating';
+
 const Detail = () => {
   const myProduct = useSelector((state) => state.productDetail);
   // const items = useSelector((state) => state.items)
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(productRatings(id));
+  }, [dispatch, id]);
+
+  const ratings = useSelector((state) => state.productRatings)
+  console.log(ratings)
 
   // STATE
   const [loading, setLoading] = useState(false);
@@ -130,6 +139,21 @@ const Detail = () => {
               src={myProduct?.imageSrc}
               alt="img not found"
             />
+            <h2>Product reviews:</h2>
+            {ratings.length === 0 ? <h1>Todavia no hay ninguna review</h1> : null}
+            {ratings.map((r) => (
+              <div className={style.rating} key={r.id}>
+                <p className={style.ratingP}>{r.user}</p>
+                <p className={style.ratingPN}>{r.rating}</p>
+                <div className={style.star}>
+                  <StarRating
+                    value={r.rating} // Valor actual de calificación
+                    onChange={() => { }}
+                  />
+                </div>
+              </div>
+            ))}
+
           </div>
           <div
             className={
