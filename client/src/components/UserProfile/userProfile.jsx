@@ -153,12 +153,12 @@ const UserProfile = () => {
             )}
           </div>
           <div>
-            <p className={style.label}>
+            {/* <p className={style.label}>
               Email: demostracionNoVerificado@gmail.com ❌
             </p>
             <p className={style.noVerificado}>
               ¡Verifique su email en su casilla de entrada!
-            </p>
+            </p> */}
           </div>
 
           {showForm === false ? (

@@ -12,6 +12,7 @@ import {
 } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 import { Link } from "react-router-dom";
 
@@ -114,10 +115,12 @@ const CheckoutForm = () => {
       if (data.mensaje === "Pago exitoso") {
         setTimeout(() => {
           navigate("/products");
-        }, 1000);
-        alert(
-          "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma"
-        );
+        }, 3000);
+        Swal.fire({
+          title: "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma",
+          icon: 'success',
+          
+        })
         dispatch(clearCart(items));
       }
     }
