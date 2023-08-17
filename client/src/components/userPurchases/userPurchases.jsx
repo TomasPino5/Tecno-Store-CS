@@ -1,14 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import style from './userPurchases.module.css'
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import StarRating from '../starRating/starRating';
 import axios from 'axios'
 import { useAuth0 } from "@auth0/auth0-react";
+import { modifyUserRating, rateProduct } from "../../redux/actions";
 
 
 const UserPurchases = () => {
 
+    const dispatch = useDispatch();
     const { user } = useAuth0();
     const email = user?.email
     const purchases = useSelector((state) => state.userPurchases)
@@ -30,24 +32,30 @@ const UserPurchases = () => {
         }));
 
         try {
-            const response = await axios.get(`http://localhost:3001/getRating/?userEmail=${email}&productId=${productId}`);
+            const response = await axios.get(`/getRating/?userEmail=${email}&productId=${productId}`);
             const existingRating = response.data
             console.log(existingRating)
 
             if (existingRating.length !== 0) {
-                await axios.put(`http://localhost:3001/modifyUserRating?email=${email}&productId=${productId}`, { rating: rating })
+                //await axios.put(`/modifyUserRating?email=${email}&productId=${productId}`, { rating: rating })
+                dispatch(modifyUserRating(email, productId, { rating: rating }))
                 console.log("Has modificado la calificacion de este producto.");
                 return alert("Has modificado la calificacion de este producto.");
             }
 
 
             else {
-                await axios.post('http://localhost:3001/rateProduct', {
-                    user: email,
-                    productId: productId,
-                    rating: rating,
-                });
-                alert("Has sgregado calificacion a este producto.")
+                // await axios.post('/rateProduct', {
+                //     user: email,
+                //     productId: productId,
+                //     rating: rating,
+                // });
+                dispatch(rateProduct({
+                        user: email,
+                        productId: productId,
+                        rating: rating,
+                    }))
+                alert("Has agregado calificacion a este producto.")
             }
 
         } catch (error) {
