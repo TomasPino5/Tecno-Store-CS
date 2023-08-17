@@ -2,6 +2,7 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT_NAME,
   GET_DETAILS,
+  GET_PRODUCT_RATINGS,
   FILTER_BY_BRAND,
   FILTER_BY_CATEGORY,
   ORDER_BY_PRICE,
@@ -54,7 +55,8 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("favorites"))
     : [],
   getallusers: [],
-  getCompras: []
+  getCompras: [],
+  productRatings: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -93,6 +95,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         productDetail: [],
+      };
+
+    case GET_PRODUCT_RATINGS:
+      return {
+        ...state,
+        productRatings: action.payload,
       };
 
     case GET_USER_PURCHASES:
@@ -315,6 +323,7 @@ const reducer = (state = initialState, action) => {
         allProducts: [...action.payload],
         // Puedes manejar otros casos si es necesario
       };
+
 
       // Si no se encontró el producto, devuelve el estado sin cambios
       case USER_ACTIVE:

@@ -4,6 +4,7 @@ import {
   GET_PRODUCT_NAME,
   GET_DETAILS,
   GET_USER,
+  GET_PRODUCT_RATINGS,
   FILTER_BY_BRAND,
   FILTER_CREATED,
   FILTER_BY_CATEGORY,
@@ -250,6 +251,20 @@ export function modifyUserRating(email, productId, payload) {
     return response;
   }
 }
+
+// Para trer las calificaciones del producto
+export function productRatings(productId) {
+return async function (dispatch) {
+  const json = await axios.get(`/getRating?productId=${productId}`);
+  const data = json.data;
+  dispatch({
+    type: GET_PRODUCT_RATINGS,
+    payload: data,
+  });
+};
+}
+
+
 
 
 // Filtro para seleccionar si fue creado en la Base de datos o viene de la API
