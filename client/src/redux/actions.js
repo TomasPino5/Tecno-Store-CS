@@ -206,6 +206,17 @@ export function postUserPurchase(payload) {
   }
 }
 
+// Modifica stock con la compra
+export function postNewStock(payload) {
+  return async function (dispatch) {
+    const response = await axios.post(
+      "http://localhost:3001/actualizarStock",
+      payload
+    );
+    return response;
+  }
+}
+
 
 // Filtro para seleccionar si fue creado en la Base de datos o viene de la API
 export function filterCreated(payload) {

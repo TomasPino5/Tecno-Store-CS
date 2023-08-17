@@ -8,6 +8,7 @@ import {
   removeFromCart,
   incrementSales,
   postUserPurchase,
+  postNewStock,
 } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
@@ -100,6 +101,13 @@ const CheckoutForm = () => {
 
       if (data.mensaje === "Pago exitoso") {
         dispatch(postUserPurchase({ user: user.email, products: products }));
+        if (items.length === 0) {
+          dispatch(postNewStock({ productId: detail.id, quantity: '1' }))
+        } else {
+          for (const item of products) {
+            dispatch(postNewStock({ productId: item.id, quantity: item.quantity, }))
+          }
+        }
       }
 
       // Retrasar la redirección durante 3 segundos
@@ -283,11 +291,10 @@ const CheckoutForm = () => {
           </button>
           {mensaje && (
             <p
-              className={`${styles.message} ${
-                mensaje.startsWith("Error")
-                  ? styles.errorMessage
-                  : styles.successMessage
-              }`}
+              className={`${styles.message} ${mensaje.startsWith("Error")
+                ? styles.errorMessage
+                : styles.successMessage
+                }`}
             >
               {mensaje}
             </p>
