@@ -112,7 +112,7 @@ export function getUser(email) {
 //actiona para trar las compras del usuario
 export function getCompras() {
   return async function (dispatch) {
-    const response = await axios.get('http://localhost:3001/compras');
+    const response = await axios.get('/compras');
     const compra = response.data;
     dispatch({
       type: GET_COMPRAS,
@@ -189,7 +189,7 @@ export function postProduct(payload) {
 // Para postear el un usuario
 export function postUser(userData) {
   return async function (dispatch) {
-    const response = await axios.post('http://localhost:3001/login', userData);
+    const response = await axios.post('/login', userData);
     return response;
   };
 }
