@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { modifyProduct } from "../../redux/actions";
 import { useState } from "react";
+import './formproduct.css';
 
 const FormProduct = ({idProduct, setMod})=>{
 

@@ -1,19 +1,22 @@
-.container-users{
+.products-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr); /* 5 columnas iguales */
     gap: 10px; /* Espacio entre las celdas */
     max-width: 900px; /* Ancho máximo del contenedor */
     margin: 0 auto; /* Centrar el contenedor horizontalmente */
-}
-.users{
+  }
+  
+  .product {
     background-color: #f5f5f5;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: grid;
-    grid-template-columns: 200px 250px 100px 100px 100px 100px;
-}
-.users p{
+    grid-template-columns: 50px 500px 50px 100px 50px 100px;
+  }
+  
+  /* Estilos específicos para cada p dentro de .product */
+  .product p {
     box-shadow: 1px 1px 5px black;
     margin: 5px 0;
     background-color: rgb(243, 239, 239);
@@ -26,7 +29,17 @@
     height: 25px;
     display: flex;
     justify-content: center;
-}
-.users p:last-child {
+  }
+  
+  /* Estilo para las celdas en la última columna */
+  .product p:last-child {
     font-weight: bold;
-}
+  }
+  .modify {
+    background-color: rgb(97, 248, 37);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    height: 25px;
+    margin-top: 5px;
+  }

@@ -25,4 +25,6 @@ export const REMOVE_FROM_FAVORITE = "REMOVE_FROM_FAVORITE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const USER_ACTIVE = "USER_ACTIVE";
 export const GET_COMPRAS = "GET_COMPRAS";
+export const USER_ADMIN = "USER_ADMIN";
 export const GET_PRODUCT_RATINGS = "GET_PRODUCT_RATINGS";
+

@@ -32,16 +32,20 @@ const AdminDashboard = () => {
   ];
 
   const isAdmin = allowedEmails.includes(user?.email);
+  const dataUser = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (isAdmin) {
+    // if (isAdmin) {
       dispatch(getProducts());
       dispatch(getUser(user.email));
-    } else {
-      setTimeout(() => {
-        alert("No estás autorizado a ingresar.");
-        navigate("/products");
-      }, 50);
+    // } else {
+    //   setTimeout(() => {
+    //     alert("No estás autorizado a ingresar.");
+    //     navigate("/products");
+    //   }, 50);
+    // }
+    if(dataUser.admin !==true && dataUser.email !== "adlotorrez91@gmail.com"){
+      navigate("/products")
     }
   }, [dispatch, isAdmin, navigate, user.email]);
 
@@ -76,7 +80,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="container">
-      {isAdmin ? (
         <div>
           <h1 className="admin-title">Bienvenido a tu Panel Administrativo!</h1>
 
@@ -107,13 +110,8 @@ const AdminDashboard = () => {
             Total de Compras: {salesCount}
           </button>
           {component === "product" ? (
-            <div className="font-container">
-              {mod === true ? (
-                <FormProduct idProduct={idProduct} setMod={setMod} />
-              ) : (
-                <Product handleModify={handleModify} products={products} />
-              )}
-            </div>
+              mod === true ? (<FormProduct idProduct={idProduct} setMod={setMod} />)
+              :(<Product handleModify={handleModify} products={products} />)
           ) : null}
           {component === "users" ? <Listusers /> : null}
           {component === "compras"? <ListCompras/>:null}
@@ -126,9 +124,6 @@ const AdminDashboard = () => {
             </div>
           )}
         </div>
-      ) : (
-        <p>Acceso no autorizado. Serás redirigido a los productos.</p>
-      )}
     </div>
   );
 };
