@@ -189,6 +189,7 @@
   margin-bottom: 2px;
   color: rgb(255, 255, 255);
 }
+
 .button {
   --width: 100px;
   --height: 35px;
@@ -303,6 +304,7 @@
 .button:hover:before {
   bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
 }
+
 .btn__c {
   margin-left: 140px;
   margin-bottom: 3px;
@@ -403,6 +405,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: solid rgba(7, 7, 0, 0.329) 2px;
+  border-radius: 0.45em;
+  width: 450px;
+  margin: 5px 5px 5px 100px;
+  background-color: #08ef5546;
 }
 
 .ratingP {
