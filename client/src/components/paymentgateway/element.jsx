@@ -104,9 +104,10 @@ const CheckoutForm = () => {
         dispatch(postUserPurchase({ user: user.email, products: products }));
         if (items.length === 0) {
           dispatch(postNewStock({ productId: detail.id, quantity: '1' }))
-        } else {
+        }
+        else {
           for (const item of products) {
-            dispatch(postNewStock({ productId: item.id, quantity: item.quantity, }))
+            dispatch(postNewStock({ productId: item.id, quantity: item.quantity }))
           }
         }
       }
@@ -119,43 +120,63 @@ const CheckoutForm = () => {
         Swal.fire({
           title: "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma",
           icon: 'success',
-          
+
         })
         dispatch(clearCart(items));
       }
     }
   };
 
-  const products = items.length === 0 ? [detail] : items.map((i) => i);
+  const productsItem = items.map((i) => i);
+
+  let products = []
+
+  if (items.length === 0) products = [detail]
+  else if (detail.name === undefined) products = productsItem.flat()
+  else products = productsItem.concat([detail])
+
+  //console.log(products)
+
+  const p = products.map(p => ` ${p.quantity ? p.quantity : '1'} ${p.name} por ${p.price?.toLocaleString("es-ES", {
+    minimumFractionDigits: 2,
+  })}$`)
+  const total = calculateTotalPrice().toLocaleString("es-ES", {
+    minimumFractionDigits: 2,
+  })
+  const p2 = p.toString()
+  //console.log(p)
+  //console.log(p2)
+  //console.log(total)
+
 
   //const productCartPicture = items.map((item) => (item.imageSrc))
-  const productCartName = items.map((item) => item.name);
-  const productCartQuantity = items.map((item) => item.quantity);
-  const productCartBrand = items.map((item) => item.brand);
-  const productCartPrice = items.map((item) =>
-    item.price.toLocaleString("es-ES", {
-      minimumFractionDigits: 2,
-    })
-  );
+  // const productCartName = items.map((item) => item.name);
+  // const productCartQuantity = items.map((item) => item.quantity);
+  // const productCartBrand = items.map((item) => item.brand);
+  // const productCartPrice = items.map((item) =>
+  //   item.price.toLocaleString("es-ES", {
+  //     minimumFractionDigits: 2,
+  //   })
+  // );
 
   //const productDetailPicture = detail.imageSrc
-  const productDetailName = detail.name;
-  const productDetailQuantity = "1";
-  const productDetailBrand = detail.brand;
-  const productDetailPrice = detail?.price;
+  // const productDetailName = detail.name;
+  // const productDetailQuantity = "1";
+  // const productDetailBrand = detail.brand;
+  // const productDetailPrice = detail?.price;
   const quantityDeDetail = 1;
 
   //const productPicture = productCartPicture.length === 0 ? productDetailPicture : productCartPicture
-  const productName =
-    productCartName.length === 0 ? productDetailName : productCartName;
-  const productQuantity =
-    productCartQuantity.length === 0
-      ? productDetailQuantity
-      : productCartQuantity;
-  const productBrand =
-    productCartBrand.length === 0 ? productDetailBrand : productCartBrand;
-  const productPrice =
-    productCartPrice.length === 0 ? productDetailPrice : productCartPrice;
+  // const productName =
+  //   productCartName.length === 0 ? productDetailName : productCartName;
+  // const productQuantity =
+  //   productCartQuantity.length === 0
+  //     ? productDetailQuantity
+  //     : productCartQuantity;
+  // const productBrand =
+  //   productCartBrand.length === 0 ? productDetailBrand : productCartBrand;
+  // const productPrice =
+  //   productCartPrice.length === 0 ? productDetailPrice : productCartPrice;
 
   const enviarCorreo = async () => {
     try {
@@ -163,10 +184,7 @@ const CheckoutForm = () => {
         destinatario: user.email,
         asunto: "Compra Exitosa",
         mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}!
-            Tu compra de ${productName} fue exitosa, estaremos realizando tu envio en los proximos dias.
-            Cantidad:${productQuantity}
-            Marca: ${productBrand} 
-            Precio: $${productPrice}`,
+            Tu compra de ${p2}, por un total de ${total}$ fue exitosa, estaremos realizando tu envio en los proximos dias.`
       });
       console.log(response.data);
     } catch (error) {
@@ -212,7 +230,7 @@ const CheckoutForm = () => {
     dispatch(clearDetail())
   }
 
-  if(items.length === 0 && Object.keys(detail).length === 0) {
+  if (items.length === 0 && Object.keys(detail).length === 0) {
     navigate("/products");
   }
 
