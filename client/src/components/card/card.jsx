@@ -54,7 +54,7 @@ export default function Card({
     } else {
       Swal.fire({
         title: '¡Producto añadido a favoritos!',
-        icon: 'warning',
+        icon: 'success',
         confirmButtonText: 'ok',
         confirmButtonColor: '#28a745'
       })

@@ -41,7 +41,26 @@ export default function Cart() {
   };
 
   const removeFromCartHandler = (product) => {
-    dispatch(removeFromCart(product));
+    if (product.quantity === 1) {
+      // Mostrar el SweetAlert para confirmar la eliminación
+      Swal.fire({
+        title: "¿Estás seguro?",
+        text: "El producto se eliminará del carrito.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#08ef56",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(removeFromCart(product));
+        }
+      });
+    } else {
+      // Si la cantidad es mayor a 1, elimina directamente el producto
+      dispatch(removeFromCart(product));
+    }
   };
 
   const clearDetailHandler = () => {
