@@ -15,6 +15,11 @@ const modifyProduct = require("../controllers/modifyProduct");
 const deleteUser = require("../controllers/deleteUser.js");
 const allUser = require("../controllers/getAllUsers");
 const putUser = require('../controllers/putUser.js');
+const getCompras = require('../controllers/getCompras.js');
+const getUserRating = require('../controllers/getUserRating');
+const modifyUserRating = require('../controllers/modifyUserRating');
+const postUserRating = require('../controllers/postUserRating');
+
 
 const router = Router();
 
@@ -36,10 +41,20 @@ router.get("/getuser/:email", getUser);
 //Ruta para traer las compras de un usuario
 router.get("/getUserPurchases/:email", getUserPurchasesHandler);
 
+//Ruta para traer todas las compras de los usuarios
+router.get('/compras', getCompras);
+
+//Ruta para obtener Rating del usuario
+router.get("/getRating", getUserRating);
+
 //Ruta para modificar datos del usuario
 router.put("/modifyUser/:email", modifyUser);
 
+//Ruta para modificar usuario
 router.put('/putuser/:id', putUser);
+
+//Ruta para modificar la calificacion del usuario
+router.put("/modifyUserRating", modifyUserRating);
 
 // Ruta para eliminar un usuario por su correo electrónico
 router.delete("/user/:email", deleteUser);
@@ -63,5 +78,8 @@ router.post("/send-email", sendMailCompraHandler);
 
 //Ruta para guardar compra del usuario
 router.post("/userPurchase", postUserPurchase);
+
+//Ruta para guardar calificacion de producto
+router.post("/rateProduct", postUserRating)
 
 module.exports = router;

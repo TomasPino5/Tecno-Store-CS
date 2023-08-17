@@ -22,7 +22,8 @@ import {
   ADD_TO_FAVORITE,
   REMOVE_FROM_FAVORITE,
   GET_ALL_USERS,
-  USER_ACTIVE
+  USER_ACTIVE,
+  GET_COMPRAS
 } from "./action-types";
 
 const savedUserData = localStorage.getItem("userData");
@@ -51,6 +52,7 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("favorites"))
     : [],
   getallusers: [],
+  getCompras: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -313,12 +315,17 @@ const reducer = (state = initialState, action) => {
       };
 
       // Si no se encontró el producto, devuelve el estado sin cambios
-      return state;
       case USER_ACTIVE:
         return{
           ...state,
           allProducts: [...action.payload]
         }
+
+      case GET_COMPRAS:
+        return{
+          ...state,
+          getCompras: [...action.payload]
+        }  
 
     case DELETE_PRODUCT_BY_NAME:
       // Puedes implementar esta parte según la estructura de tu estado
