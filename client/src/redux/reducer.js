@@ -333,6 +333,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           getallusers: [...action.payload]
         }  
+        case PUT_USER:
+          return{
+            ...state,
+            user: [...action.payload]
+          }
 
     case DELETE_PRODUCT_BY_NAME:
       // Puedes implementar esta parte según la estructura de tu estado
