@@ -191,6 +191,10 @@ const CheckoutForm = () => {
     dispatch(clearDetail())
   }
 
+  if(items.length === 0 && Object.keys(detail).length === 0) {
+    navigate("/products");
+  }
+
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
     <>
