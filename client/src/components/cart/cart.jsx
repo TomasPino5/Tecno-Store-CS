@@ -51,7 +51,7 @@ export default function Cart() {
         confirmButtonText: "Eliminar",
         cancelButtonText: "Cancelar",
         confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
+        cancelButtonColor: "#08ef56",
       }).then((result) => {
         if (result.isConfirmed) {
           dispatch(removeFromCart(product));
