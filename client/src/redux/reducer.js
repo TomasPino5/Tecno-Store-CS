@@ -2,6 +2,7 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT_NAME,
   GET_DETAILS,
+  GET_PRODUCT_RATINGS,
   FILTER_BY_BRAND,
   FILTER_BY_CATEGORY,
   ORDER_BY_PRICE,
@@ -52,7 +53,8 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("favorites"))
     : [],
   getallusers: [],
-  getCompras: []
+  getCompras: [],
+  productRatings: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -91,6 +93,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         productDetail: [],
+      };
+
+    case GET_PRODUCT_RATINGS:
+      return {
+        ...state,
+        productRatings: action.payload,
       };
 
     case GET_USER_PURCHASES:
@@ -314,18 +322,18 @@ const reducer = (state = initialState, action) => {
         // Puedes manejar otros casos si es necesario
       };
 
-      // Si no se encontró el producto, devuelve el estado sin cambios
-      case USER_ACTIVE:
-        return{
-          ...state,
-          allProducts: [...action.payload]
-        }
+    // Si no se encontró el producto, devuelve el estado sin cambios
+    case USER_ACTIVE:
+      return {
+        ...state,
+        allProducts: [...action.payload]
+      }
 
-      case GET_COMPRAS:
-        return{
-          ...state,
-          getCompras: [...action.payload]
-        }  
+    case GET_COMPRAS:
+      return {
+        ...state,
+        getCompras: [...action.payload]
+      }
 
     case DELETE_PRODUCT_BY_NAME:
       // Puedes implementar esta parte según la estructura de tu estado
