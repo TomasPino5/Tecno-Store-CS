@@ -1,11 +1,11 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "../Loading/Loading"
-import axios from "axios";
+//import axios from "axios";
 import { useEffect } from "react"
 import { Link } from "react-router-dom";
 //
-import { getUser, getUserPurchases } from "../../redux/actions";
+import { getUser, getUserPurchases, postUser } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import style from './profile.module.css'
 
@@ -33,8 +33,9 @@ export const Profile = () => {
           picture: user.picture,
         };
         try {
-          const response = await axios.post('http://localhost:3001/login', userData);
-          console.log(response.data.message);
+          // const response = await axios.post('http://localhost:3001/login', userData);
+          // console.log(response.data.message);
+          dispatch(postUser(userData))
         } catch (error) {
           // console.log('Error al guardar los datos:', error);
         }

@@ -64,7 +64,7 @@ export default function Cart() {
 
   function CartItem({ id, imageSrc, imageAlt, price, name, quantity }) {
     return (
-      <li className="list">
+      <li className={items.length > 1 ? "list2" : "list"}>
         <div className="img-container">
           <img src={imageSrc} alt={imageAlt} />
         </div>
