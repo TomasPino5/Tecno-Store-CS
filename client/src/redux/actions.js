@@ -24,7 +24,7 @@ import {
   REMOVE_FROM_FAVORITE,
   GET_ALL_USERS,
   USER_ACTIVE,
-  GET_COMPRAS
+  GET_COMPRAS,
 } from "./action-types";
 
 
@@ -110,8 +110,8 @@ export function getUser(email) {
 }
 
 //actiona para trar las compras del usuario
-export function getCompras(){
-  return async function(dispatch){
+export function getCompras() {
+  return async function (dispatch) {
     const response = await axios.get('http://localhost:3001/compras');
     const compra = response.data;
     dispatch({
@@ -182,6 +182,14 @@ export function postProduct(payload) {
       "http://localhost:3001/productos",
       payload
     );
+    return response;
+  };
+}
+
+// Para postear el un usuario
+export function postUser(userData) {
+  return async function (dispatch) {
+    const response = await axios.post('http://localhost:3001/login', userData);
     return response;
   };
 }

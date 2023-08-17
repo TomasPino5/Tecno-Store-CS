@@ -10,7 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const UserPurchases = () => {
 
     const { user } = useAuth0();
-    const email = user.email
+    const email = user?.email
     const purchases = useSelector((state) => state.userPurchases)
     console.log(purchases)
 
@@ -30,86 +30,26 @@ const UserPurchases = () => {
         }));
 
         try {
-            const existingRating = await axios.get(`http://localhost:3001/getRating/?userEmail=${email}&productId=${productId}`);
+            const response = await axios.get(`http://localhost:3001/getRating/?userEmail=${email}&productId=${productId}`);
+            const existingRating = response.data
+            console.log(existingRating)
 
-            // //Ruta para obtener Rating del usuario
-            // router.get("/getRating", getUserRating);
-            // //Controller
-            // const Ratings = require("../models/ratings.js");
-
-            // const getUserRating = async (req, res) => {
-            //     const { email, productId } = req.query;
-            //     if (email && productId) {
-            //         try {
-            //             const ratings = await Ratings.findOne({ where: { user: email, productId: productId } })
-            //             res.status(200).jason(ratings)
-            //         }
-            //         catch (error) {
-            //             res.status(500).jason(error.message)
-            //         }
-            //     } else {
-            //         try {
-            //             const allRatings = await Ratings.findAll({ where: { productId: productId } })
-            //             res.status(200).jason(allRatings)
-            //         } catch (error) {
-            //             res.status(500).jason({ message: 'Todavia no hay reviews' })
-            //         }
-            //     }
-            // }
-
-            // module.exports = getUserRating;
+            if (existingRating.length !== 0) {
+                await axios.put(`http://localhost:3001/modifyUserRating?email=${email}&productId=${productId}`, { rating: rating })
+                console.log("Has modificado la calificacion de este producto.");
+                return alert("Has modificado la calificacion de este producto.");
+            }
 
 
-            // /////////
-            // if (existingRating !== 'Todavia no hay rating') {
-            //     await axios.put(`http://localhost:3001/modifyUserRating/?userEmail=${email}&productId=${productId}`, { rating: rating })
-            //     console.log("Has modificado la calificacion de este producto.");
-            //     return;
-            // }
+            else {
+                await axios.post('http://localhost:3001/rateProduct', {
+                    user: email,
+                    productId: productId,
+                    rating: rating,
+                });
+                alert("Has sgregado calificacion a este producto.")
+            }
 
-            // //Ruta para modificar datos del usuario
-            // router.put("/modifyUserRating/:email", modifyUserRating);
-
-            // //controller
-            // const Ratings = require("../models/ratings.js");
-
-            // const modifyUserRating = async (req, res) => {
-            //     const { email, productId } = req.query;
-            //     const { rating } = req.body;
-            //     try {
-            //         const ratings = await Ratings.findOne({ where: { user: email, productId: productId } })
-            //         ratings.rating = rating
-            //         await ratings.save();
-            //         res.status(200).send('Se ha actualizado la calificacion')
-            //     } catch (error) {
-            //         res.status(500).jason({ message: 'Hubo un error al actualizar la calificacion' })
-            //     }
-            // }
-
-            // ///////////////
-            // await axios.post('http://localhost:3001/rateProduct', {
-            //     user: email,
-            //     productId: productId,
-            //     rating: rating,
-            // });
-
-            // //Ruta para guardar calificacion de producto
-            // router.post("/rateProduct", postUserRating)
-
-            // //controller
-            // const Ratings = require("../models/ratings.js");
-
-            // const postUserRating = async (req, res) => {
-            //     const { user, productId, rating } = req.body
-            //     try {
-            //         const rating = await Ratings.create({ user, productId, rating });
-            //         res.status(200).json({message: 'Calificacion cargada correctamente'});
-            //     } catch (error) {
-            //         res.status(500).json({message: error.message});
-            //     }
-            // }
-
-            // ////////////
         } catch (error) {
             console.error(error);
         }
@@ -118,9 +58,9 @@ const UserPurchases = () => {
 
     return (
         <div className={style.container}>
+            <h2>Mis Compras</h2>
             {products.map((purchase) => (
                 <div className={style.card} key={purchase.id}>
-                    <p>{purchase.id}</p>
                     <img
                         src={purchase.imageSrc}
                         alt=''
@@ -139,9 +79,9 @@ const UserPurchases = () => {
                                 value={ratings[purchase.id] || 0} // Valor actual de calificación
                                 onChange={(rating) => handleRatingChange(purchase.id, rating)}
                             />
-                            <button className={style.btnCalif} onClick={() => handleRatingChange(purchase.id, ratings[purchase.id] || 0)}>
+                            {/* <button className={style.btnCalif} onClick={() => handleRatingChange(purchase.id, ratings[purchase.id] || 0)}>
                                 Calificar
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>
