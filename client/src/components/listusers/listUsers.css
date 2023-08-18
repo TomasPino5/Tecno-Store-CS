@@ -26,7 +26,13 @@
     height: 25px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .users p:last-child {
     font-weight: bold;
+}
+.users .modify{
+    background-color: red;
+    width: 100px;
+    color: white;
 }
