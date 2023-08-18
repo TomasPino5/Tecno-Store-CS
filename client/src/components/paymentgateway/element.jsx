@@ -127,7 +127,7 @@ const CheckoutForm = () => {
         dispatch(clearCart(items));
       }
     }
-  };
+  }
 
   const productsItem = items.map((i) => i);
 
