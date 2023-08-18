@@ -24,6 +24,16 @@ const getUserRating = async (req, res) => {
             res.status(500).send('Todavia no hay reviews')
         }
     }
+    else if (email) {
+        try {
+            const allRatings = await Ratings.findAll({ where: { user: email } })
+            if (allRatings) {
+                res.status(200).json(allRatings)
+            }
+        } catch (error) {
+            res.status(500).send('Todavia no hay reviews')
+        }
+    }
     else { res.status(500).send('Todavia no hay reviews') }
 }
 

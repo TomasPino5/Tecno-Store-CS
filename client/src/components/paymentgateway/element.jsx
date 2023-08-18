@@ -12,14 +12,13 @@ import {
 } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 import { Link } from "react-router-dom";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import emailjs from '@emailjs/browser'
-
+import emailjs from "@emailjs/browser";
 
 import style from "./element.module.css";
 
@@ -105,11 +104,12 @@ const CheckoutForm = () => {
       if (data.mensaje === "Pago exitoso") {
         dispatch(postUserPurchase({ user: user.email, products: products }));
         if (items.length === 0) {
-          dispatch(postNewStock({ productId: detail.id, quantity: '1' }))
-        }
-        else {
+          dispatch(postNewStock({ productId: detail.id, quantity: "1" }));
+        } else {
           for (const item of products) {
-            dispatch(postNewStock({ productId: item.id, quantity: item.quantity }))
+            dispatch(
+              postNewStock({ productId: item.id, quantity: item.quantity })
+            );
           }
         }
       }
@@ -120,48 +120,57 @@ const CheckoutForm = () => {
           navigate("/products");
         }, 3000);
         Swal.fire({
-          title: "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma",
-          icon: 'success',
-
-        })
+          title:
+            "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma",
+          icon: "success",
+        });
         dispatch(clearCart(items));
       }
     }
-  }
+  };
 
   const productsItem = items.map((i) => i);
 
-  let products = []
+  let products = [];
 
-  if (items.length === 0) products = [detail]
-  else if (detail.name === undefined) products = productsItem.flat()
-  else products = productsItem.concat([detail])
+  if (items.length === 0) products = [detail];
+  else if (detail.name === undefined) products = productsItem.flat();
+  else products = productsItem.concat([detail]);
 
   //console.log(products)
 
-  const p = products.map(p => ` ${p.quantity ? p.quantity : '1'} ${p.name} por ${p.price?.toLocaleString("es-ES", {
-    minimumFractionDigits: 2,
-  })}$`)
+  const p = products.map(
+    (p) =>
+      ` ${p.quantity ? p.quantity : "1"} ${
+        p.name
+      } por ${p.price?.toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+      })}$`
+  );
   const total = calculateTotalPrice().toLocaleString("es-ES", {
     minimumFractionDigits: 2,
-  })
-  const p2 = p.toString()
-
+  });
+  const p2 = p.toString();
 
   const quantityDeDetail = 1;
 
   const enviarCorreo = () => {
     try {
-    emailjs.send("service_msfv3yo", "template_e7czlci", {
-      user_name: dataUser?.name ? dataUser?.name : user.name,
-      from_name: "Tecno-Store",
-      mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}! 
+      emailjs.send(
+        "service_msfv3yo",
+        "template_e7czlci",
+        {
+          user_name: dataUser?.name ? dataUser?.name : user.name,
+          from_name: "Tecno-Store",
+          mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}! 
       Tu compra de ${p2}, por un total de ${total}$ fue exitosa, estaremos realizando tu envio en los proximos dias.`,
-      user_email: user.email,
-    }, "-aO0hCX-QmP7DcXnq") 
-  } catch (error) {
-    console.error("Error al enviar el correo electrónico", error);
-  }
+          user_email: user.email,
+        },
+        "-aO0hCX-QmP7DcXnq"
+      );
+    } catch (error) {
+      console.error("Error al enviar el correo electrónico", error);
+    }
     // try {
     //   const response = await axios.post("/send-email", {
     //     destinatario: user.email,
@@ -210,8 +219,8 @@ const CheckoutForm = () => {
   // }
 
   const clearDetailHandler = () => {
-    dispatch(clearDetail())
-  }
+    dispatch(clearDetail());
+  };
 
   if (items.length === 0 && Object.keys(detail).length === 0) {
     navigate("/products");
@@ -220,21 +229,43 @@ const CheckoutForm = () => {
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
     <>
-      <div className={styles.div0}>
+      <div className={darkMode ? style.div0darkmode : styles.div0}>
         {items.map((item) => (
-          <div className={styles.item} key={item.id}>
+          <div
+            className={darkMode ? style.itemdarkmode : styles.item}
+            key={item.id}
+          >
+            <button
+              className={styles.cerrar}
+              onClick={() => removeFromCartHandler(item)}
+            >
+              X
+            </button>
             <img
               src={item.imageSrc}
               alt={item.imageAlt}
               className={styles.itemImage}
             />
-            <div className={styles.itemDetails}>
-              <button className={styles.cerrar} onClick={() => removeFromCartHandler(item)}>X</button>
+            <div
+              className={
+                darkMode ? style.itemDetailsdarkmode : styles.itemDetails
+              }
+            >
               <p className={styles.itemName}>{item.name}</p>
               <p>
                 Cantidad: {item.quantity}
-                <button onClick={() => addToCartHandler(item)}>+</button>
-                <button onClick={() => removeFromCartHandler(item)}>-</button>
+                <button
+                  className={style.btnmas}
+                  onClick={() => addToCartHandler(item)}
+                >
+                  +
+                </button>
+                <button
+                  className={style.btnmas}
+                  onClick={() => removeFromCartHandler(item)}
+                >
+                  -
+                </button>
               </p>
               <p>Marca: {item.brand}</p>
               <p>Categoría: {item.category}</p>
@@ -255,7 +286,9 @@ const CheckoutForm = () => {
               className={styles.itemImage}
             />
             <div className={styles.itemDetails}>
-              <button className={styles.cerrar} onClick={clearDetailHandler}>X</button>
+              <button className={styles.cerrar} onClick={clearDetailHandler}>
+                X
+              </button>
               <p className={styles.itemName}>{detail.name}</p>
               <p>Cantidad: {quantityDeDetail}</p>
               {/* <button onClick={addToDetailHandler}>+</button><button onClick={removeFromDetailHandler}>-</button> */}
@@ -317,10 +350,11 @@ const CheckoutForm = () => {
           </button>
           {mensaje && (
             <p
-              className={`${styles.message} ${mensaje.startsWith("Error")
-                ? styles.errorMessage
-                : styles.successMessage
-                }`}
+              className={`${styles.message} ${
+                mensaje.startsWith("Error")
+                  ? styles.errorMessage
+                  : styles.successMessage
+              }`}
             >
               {mensaje}
             </p>
