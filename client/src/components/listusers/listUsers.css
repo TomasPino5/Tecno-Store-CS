@@ -1,5 +1,4 @@
 .container-users{
-    background-color: red;
     display: grid;
     grid-template-columns: repeat(1, 1fr); /* 5 columnas iguales */
     gap: 10px; /* Espacio entre las celdas */
@@ -12,7 +11,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: grid;
-    grid-template-columns: 200px 250px 50px 300px 100px;
+    grid-template-columns: 200px 250px 100px 100px 100px 100px;
 }
 .users p{
     box-shadow: 1px 1px 5px black;
@@ -27,7 +26,13 @@
     height: 25px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .users p:last-child {
     font-weight: bold;
+}
+.users .modify{
+    background-color: red;
+    width: 100px;
+    color: white;
 }

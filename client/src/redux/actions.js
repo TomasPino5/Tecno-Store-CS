@@ -4,6 +4,8 @@ import {
   GET_PRODUCT_NAME,
   GET_DETAILS,
   GET_USER,
+  GET_PRODUCT_RATINGS,
+  GET_USER_RATINGS,
   FILTER_BY_BRAND,
   FILTER_CREATED,
   FILTER_BY_CATEGORY,
@@ -25,6 +27,7 @@ import {
   GET_ALL_USERS,
   USER_ACTIVE,
   GET_COMPRAS,
+  USER_ADMIN
 } from "./action-types";
 
 
@@ -147,6 +150,17 @@ export function userActive(id) {
   };
 }
 
+export function userAdmin(id){
+  return async function(dispatch){
+    const json = await axios.put(`/putadmin/${id}`);
+    const data = json.data;
+    dispatch({
+      type: USER_ADMIN,
+      payload: data
+    })
+  }
+}
+
 
 // Filtro para seleccionar productos por marca
 export function filterByBrand(brand) {
@@ -205,6 +219,64 @@ export function postUserPurchase(payload) {
     return response;
   }
 }
+
+// Modifica stock con la compra
+export function postNewStock(payload) {
+  return async function (dispatch) {
+    const response = await axios.post(
+      "/actualizarStock",
+      payload
+    );
+    return response;
+  }
+}
+
+// Para guardar la calificacion del usuario
+export function rateProduct(payload) {
+  return async function (dispatch) {
+    const response = await axios.post(
+      "/rateProduct",
+      payload
+    );
+    return response;
+  }
+}
+
+// Para modificar la calificacion del usuario
+export function modifyUserRating(email, productId, payload) {
+  return async function (dispatch) {
+    const response = await axios.put(
+      `/modifyUserRating?email=${email}&productId=${productId}`,
+      payload
+    );
+    return response;
+  }
+}
+
+// Para trer las calificaciones del producto
+export function productRatings(productId) {
+return async function (dispatch) {
+  const json = await axios.get(`/getRating?productId=${productId}`);
+  const data = json.data;
+  dispatch({
+    type: GET_PRODUCT_RATINGS,
+    payload: data,
+  });
+};
+}
+
+
+// Para trer las calificaciones del usuario
+export function getUserRatings(email) {
+  return async function (dispatch) {
+    const json = await axios.get(`/getRating?email=${email}`);
+    const data = json.data;
+    dispatch({
+      type: GET_USER_RATINGS,
+      payload: data,
+    });
+  };
+  }
 
 
 // Filtro para seleccionar si fue creado en la Base de datos o viene de la API

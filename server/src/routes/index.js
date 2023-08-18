@@ -19,7 +19,8 @@ const getCompras = require('../controllers/getCompras.js');
 const getUserRating = require('../controllers/getUserRating');
 const modifyUserRating = require('../controllers/modifyUserRating');
 const postUserRating = require('../controllers/postUserRating');
-
+const postNewStock = require('../controllers/postNewStock');
+const putAdmin = require('../controllers/putAdmin.js');
 
 const router = Router();
 
@@ -31,6 +32,9 @@ router.get("/productos/:id", getDetailHandler);
 
 // Ruta para modificar un producto por ID
 router.put("/productos/:id", modifyProduct);
+
+//Ruta para poner como admin a un usuario
+router.put('/putadmin/:id', putAdmin);
 
 //Ruta para llenar la base de datos con los productos se utiliza una sola vez
 router.get("/dbproducts", getDbProducts);
@@ -81,5 +85,8 @@ router.post("/userPurchase", postUserPurchase);
 
 //Ruta para guardar calificacion de producto
 router.post("/rateProduct", postUserRating)
+
+//Ruta para guardar calificacion de producto
+router.post("/actualizarStock", postNewStock)
 
 module.exports = router;

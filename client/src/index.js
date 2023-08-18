@@ -8,8 +8,10 @@ import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:3001'
-axios.defaults.baseURL = 'https://tecno-store-cs-production.up.railway.app/'
+axios.defaults.baseURL = 'http://localhost:3001'
+
+//railway
+// axios.defaults.baseURL = 'https://tecno-store-cs-production.up.railway.app/'
 
 const DarkModeApp = () => {
   const darkMode = useSelector((state) => state.darkMode); // Obtiene el estado de darkMode

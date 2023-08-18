@@ -32,51 +32,65 @@ const Home = () => {
     }
   }, [dispatch]);
 
+  
+  //paginado
+  const productsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const handleNextPage = () => {
+    setCurrentPage((nextPage) => nextPage + 1);
+  };
+  
+  const handlePreviousPage = () => {
+    setCurrentPage((previousPage) => previousPage - 1);
+  };
+  
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  
+  const productsToDisplay = products.slice(startIndex, endIndex);
+  
+  const totalPags = products.length / productsPerPage;
+  
   useEffect(() => {
+    const savedPage = localStorage.getItem("currentPage");
+    if (savedPage) {
+      setCurrentPage(parseInt(savedPage, 10));
+    }
     dispatch(getProducts());
     dispatch(clearDetail());
   }, [dispatch]);
 
-  //paginado
-  const productsPerPage = 8;
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const handleNextPage = () => {
-    setCurrentPage((nextPage) => nextPage + 1);
-  };
-
-  const handlePreviousPage = () => {
-    setCurrentPage((previousPage) => previousPage - 1);
-  };
-
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-
-  const productsToDisplay = products.slice(startIndex, endIndex);
-
-  const totalPags = products.length / productsPerPage;
+  useEffect(() => {
+    // Guardar el valor actual de la página en localStorage
+    localStorage.setItem("currentPage", currentPage.toString());
+  }, [currentPage]);
 
   //filtros
   const handleOrderByPrice = (event) => {
     dispatch(orderByPrice(event.target.value));
+    setCurrentPage(1);
   };
 
   const handleBrandFilter = (event) => {
     dispatch(filterByBrand(event.target.value));
+    setCurrentPage(1);
     document.getElementById("categoryFilter").value = "";
     document.getElementById("orderByPrice").value = "";
   };
 
   const handleCategoryFilter = (event) => {
     dispatch(filterByCategory(event.target.value));
+    setCurrentPage(1);
     document.getElementById("orderByPrice").value = "";
   };
 
   const handleClearFilters = () => {
     dispatch(clearFilter());
 
-    // Devuelve el valor de los select al origen
+    setCurrentPage(1);
 
+    // Devuelve el valor de los select al origen
     document.getElementById("orderByPrice").value = "";
     document.getElementById("brandFilter").value = "";
     document.getElementById("categoryFilter").value = "";

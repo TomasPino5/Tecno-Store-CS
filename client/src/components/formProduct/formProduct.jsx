@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { modifyProduct } from "../../redux/actions";
 import { useState } from "react";
+import './formproduct.css';
 
 const FormProduct = ({idProduct, setMod})=>{
 
@@ -8,6 +9,10 @@ const FormProduct = ({idProduct, setMod})=>{
 
     const onChangeInput = (event)=>{
         setProduct({...product, [event.target.name]:event.target.value});
+    }
+
+    const handleInput = (value)=>{
+        setProduct({...product, isActive:value});
     }
 
     const handleInfo = (event)=>{
@@ -28,31 +33,58 @@ const FormProduct = ({idProduct, setMod})=>{
         description: "",
         isActive: true
       })
-
+      console.log(product)
     return(
         <form action="" className="formulario" onSubmit={handleInfo}>
+                <div>
                 <label htmlFor="">Name</label>
                 <input type="text" placeholder="nombre del producto" name="name" value={product.name} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">Href</label>
                 <input type="text" placeholder="#" name="href" value={product.href} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">imageSrc</label>
                 <input type="text" placeholder="imagen del producto..." name="imageSrc" value={product.imageSrc} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">imageAlt</label>
                 <input type="text" placeholder="imagen alternativo" name="imageAlt" value={product.imageAlt} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">Price</label>
                 <input type="number" placeholder="precio del producto" name="price" value={product.price} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">Stock</label>
                 <input type="number" placeholder="stock" name="stock" value={product.stock} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">Brand</label>
                 <input type="text" name="brand" value={product.brand} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">Category</label>
                 <input type="text" placeholder="categoria" name="category" value={product.category} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">Description</label>
                 <input type="text" placeholder="descripcion del producto" name="description" value={product.description} onChange={onChangeInput}/>
+                </div>
+                <div>
                 <label htmlFor="">isActive</label>
-                <input type="text" name="isActive" value={product.isActive} onChange={onChangeInput}/>
+                <div className="isActive">  
+                <p onClick={()=>{handleInput(true)}}>Activar</p>
+                <p onClick={()=>{handleInput(false)}}>Desactivar</p>
+                </div>
+                </div>
+                <div>
                 <button type="submit">Enviar</button>
+                </div>
+                <div>
                 <button onClick={()=>{setMod(false)}}>Cancelar</button>
+                </div>
               </form>
     )
 }

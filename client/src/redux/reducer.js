@@ -2,6 +2,8 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT_NAME,
   GET_DETAILS,
+  GET_PRODUCT_RATINGS,
+  GET_USER_RATINGS,
   FILTER_BY_BRAND,
   FILTER_BY_CATEGORY,
   ORDER_BY_PRICE,
@@ -23,7 +25,9 @@ import {
   REMOVE_FROM_FAVORITE,
   GET_ALL_USERS,
   USER_ACTIVE,
-  GET_COMPRAS
+  GET_COMPRAS,
+  PUT_USER,
+  USER_ADMIN
 } from "./action-types";
 
 const savedUserData = localStorage.getItem("userData");
@@ -52,7 +56,9 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("favorites"))
     : [],
   getallusers: [],
-  getCompras: []
+  getCompras: [],
+  productRatings: [],
+  userRatings: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -91,6 +97,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         productDetail: [],
+      };
+
+    case GET_PRODUCT_RATINGS:
+      return {
+        ...state,
+        productRatings: action.payload,
+      };
+
+    case GET_USER_RATINGS:
+      return {
+        ...state,
+        userRatings: action.payload,
       };
 
     case GET_USER_PURCHASES:
@@ -314,18 +332,29 @@ const reducer = (state = initialState, action) => {
         // Puedes manejar otros casos si es necesario
       };
 
-      // Si no se encontró el producto, devuelve el estado sin cambios
-      case USER_ACTIVE:
-        return{
-          ...state,
-          allProducts: [...action.payload]
-        }
 
-      case GET_COMPRAS:
-        return{
-          ...state,
-          getCompras: [...action.payload]
-        }  
+    // Si no se encontró el producto, devuelve el estado sin cambios
+    case USER_ACTIVE:
+      return {
+        ...state,
+        getallusers: [...action.payload]
+      }
+
+    case GET_COMPRAS:
+      return {
+        ...state,
+        getCompras: [...action.payload]
+      }
+    case USER_ADMIN:
+      return {
+        ...state,
+        getallusers: [...action.payload]
+      }
+    case PUT_USER:
+      return {
+        ...state,
+        user: [...action.payload]
+      }
 
     case DELETE_PRODUCT_BY_NAME:
       // Puedes implementar esta parte según la estructura de tu estado

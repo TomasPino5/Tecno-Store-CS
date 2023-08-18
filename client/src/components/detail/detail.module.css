@@ -189,6 +189,7 @@
   margin-bottom: 2px;
   color: rgb(255, 255, 255);
 }
+
 .button {
   --width: 100px;
   --height: 35px;
@@ -303,6 +304,7 @@
 .button:hover:before {
   bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
 }
+
 .btn__c {
   margin-left: 140px;
   margin-bottom: 3px;
@@ -396,4 +398,37 @@
   border-radius: 0.45em;
   font-family: "Arial";
   transition: background 0.3s;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: solid rgba(7, 7, 0, 0.329) 2px;
+  border-radius: 0.45em;
+  width: 450px;
+  margin: 5px 5px 5px 100px;
+  background-color: #08ef5546;
+}
+
+.ratingP {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  font-weight: 50;
+  color: rgb(23, 23, 23);
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+.ratingPN {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: #1b1b1b;
+  font-weight: 50;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.star {
+  margin-bottom: 15px;
 }
