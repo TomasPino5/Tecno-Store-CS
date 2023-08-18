@@ -27,4 +27,5 @@ export const USER_ACTIVE = "USER_ACTIVE";
 export const GET_COMPRAS = "GET_COMPRAS";
 export const USER_ADMIN = "USER_ADMIN";
 export const GET_PRODUCT_RATINGS = "GET_PRODUCT_RATINGS";
+export const GET_USER_RATINGS = "GET_USER_RATINGS";
 

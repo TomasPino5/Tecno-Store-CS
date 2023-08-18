@@ -3,6 +3,7 @@ import {
   GET_PRODUCT_NAME,
   GET_DETAILS,
   GET_PRODUCT_RATINGS,
+  GET_USER_RATINGS,
   FILTER_BY_BRAND,
   FILTER_BY_CATEGORY,
   ORDER_BY_PRICE,
@@ -56,7 +57,8 @@ const initialState = {
     : [],
   getallusers: [],
   getCompras: [],
-  productRatings: []
+  productRatings: [],
+  userRatings: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -101,6 +103,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         productRatings: action.payload,
+      };
+
+    case GET_USER_RATINGS:
+      return {
+        ...state,
+        userRatings: action.payload,
       };
 
     case GET_USER_PURCHASES:
@@ -325,29 +333,29 @@ const reducer = (state = initialState, action) => {
       };
 
 
-      // Si no se encontró el producto, devuelve el estado sin cambios
-      case USER_ACTIVE:
-        return{
-          ...state,
-          getallusers: [...action.payload]
-        }
+    // Si no se encontró el producto, devuelve el estado sin cambios
+    case USER_ACTIVE:
+      return {
+        ...state,
+        getallusers: [...action.payload]
+      }
 
-      case GET_COMPRAS:
-        return{
-          ...state,
-          getCompras: [...action.payload]
-        }  
-      case USER_ADMIN:
-        return{
-          ...state,
-          getallusers: [...action.payload]
-        }  
-        case PUT_USER:
-          return{
-            ...state,
-            user: [...action.payload]
-          }
-          
+    case GET_COMPRAS:
+      return {
+        ...state,
+        getCompras: [...action.payload]
+      }
+    case USER_ADMIN:
+      return {
+        ...state,
+        getallusers: [...action.payload]
+      }
+    case PUT_USER:
+      return {
+        ...state,
+        user: [...action.payload]
+      }
+
     case DELETE_PRODUCT_BY_NAME:
       // Puedes implementar esta parte según la estructura de tu estado
       // Por ejemplo, si almacenas los productos como un array en tu estado

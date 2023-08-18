@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import style from './userPurchases.module.css'
 import { Link } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StarRating from '../starRating/starRating';
 import axios from 'axios'
 import { useAuth0 } from "@auth0/auth0-react";
-import { modifyUserRating, rateProduct } from "../../redux/actions";
+import { modifyUserRating, rateProduct, getUserRatings } from "../../redux/actions";
 import Swal from "sweetalert2";
 
 const UserPurchases = () => {
@@ -13,6 +13,14 @@ const UserPurchases = () => {
     const dispatch = useDispatch();
     const { user } = useAuth0();
     const email = user?.email
+
+    useEffect(() => {
+        dispatch(getUserRatings(email))
+    }, [dispatch, email]) 
+
+    const userRatings = useSelector((state) => state.userRatings)
+    console.log(userRatings)
+
     const purchases = useSelector((state) => state.userPurchases)
     //console.log(purchases)
 
