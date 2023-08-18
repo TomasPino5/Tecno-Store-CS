@@ -15,9 +15,11 @@ const Favorites = () => {
       <h2>Favorites</h2>
       <div className={style.divisor}>
         {favorites.map((product) => (
-          <div
-            className={darkMode ? style.carddarkMode : style.card}
+          <NavLink
             key={product.id}
+            to={`/product/${product.id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+            className={darkMode ? style.carddarkMode : style.card}
           >
             <div
               className={
@@ -30,26 +32,21 @@ const Favorites = () => {
                 alt={product.imageAlt}
               />
             </div>
-            <NavLink
-              to={`/product/${product.id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div className={style.container_name}>
-                <h3 className={darkMode ? style.htdarkMode : style.ht}>
-                  {product.name}
-                </h3>
-              </div>
-              <div className={style.container_data}>
-                <p className={darkMode ? style.pricedarkMode : style.price}>
-                  ${formatPriceWithDots(product.price)}
-                </p>
-                <p className={style.texts}>{product.brand}</p>
-                <p className={style.texts}>{product.category}</p>
-              </div>
-              <p className={style.stock}>Stock: {product.stock}</p>
-            </NavLink>
+            <div className={style.container_name}>
+              <h3 className={darkMode ? style.htdarkMode : style.ht}>
+                {product.name}
+              </h3>
+            </div>
+            <div className={style.container_data}>
+              <p className={darkMode ? style.pricedarkMode : style.price}>
+                ${formatPriceWithDots(product.price)}
+              </p>
+              <p className={style.texts}>{product.brand}</p>
+              <p className={style.texts}>{product.category}</p>
+            </div>
+            <p className={style.stock}>Stock: {product.stock}</p>
             {/* You can add more information or customize the rendering here */}
-          </div>
+          </NavLink>
         ))}
       </div>
     </div>

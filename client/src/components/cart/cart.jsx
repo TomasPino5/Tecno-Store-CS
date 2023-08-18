@@ -48,8 +48,9 @@ export default function Cart() {
         text: "El producto se eliminará del carrito.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Eliminar",
         cancelButtonText: "Cancelar",
+        confirmButtonText: "Eliminar",
+        cancelButtonColor: "#08ef56",
         confirmButtonColor: "#d33",
       }).then((result) => {
         if (result.isConfirmed) {
