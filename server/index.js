@@ -15,7 +15,7 @@ const port = process.env.PORT || 3001;
 // });
 
 //railway
-sequelize.sync({ force: true }).then(() => { //true
+sequelize.sync({ force: false }).then(() => { //true
    server.listen(port, () => {
      console.log(`%s listening at ${port}`)
    });
