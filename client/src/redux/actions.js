@@ -5,6 +5,7 @@ import {
   GET_DETAILS,
   GET_USER,
   GET_PRODUCT_RATINGS,
+  GET_USER_RATINGS,
   FILTER_BY_BRAND,
   FILTER_CREATED,
   FILTER_BY_CATEGORY,
@@ -265,6 +266,17 @@ return async function (dispatch) {
 }
 
 
+// Para trer las calificaciones del usuario
+export function getUserRatings(email) {
+  return async function (dispatch) {
+    const json = await axios.get(`/getRating?email=${email}`);
+    const data = json.data;
+    dispatch({
+      type: GET_USER_RATINGS,
+      payload: data,
+    });
+  };
+  }
 
 
 // Filtro para seleccionar si fue creado en la Base de datos o viene de la API
