@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,14 +12,11 @@ import {
 } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
 
 import { Link } from "react-router-dom";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import emailjs from '@emailjs/browser'
-
 
 import style from "./element.module.css";
 
@@ -106,10 +103,9 @@ const CheckoutForm = () => {
         dispatch(postUserPurchase({ user: user.email, products: products }));
         if (items.length === 0) {
           dispatch(postNewStock({ productId: detail.id, quantity: '1' }))
-        }
-        else {
+        } else {
           for (const item of products) {
-            dispatch(postNewStock({ productId: item.id, quantity: item.quantity }))
+            dispatch(postNewStock({ productId: item.id, quantity: item.quantity, }))
           }
         }
       }
@@ -118,61 +114,61 @@ const CheckoutForm = () => {
       if (data.mensaje === "Pago exitoso") {
         setTimeout(() => {
           navigate("/products");
-        }, 3000);
-        Swal.fire({
-          title: "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma",
-          icon: 'success',
-
-        })
+        }, 1000);
+        alert(
+          "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma"
+        );
         dispatch(clearCart(items));
       }
     }
   };
 
-  const productsItem = items.map((i) => i);
+  const products = items.length === 0 ? [detail] : items.map((i) => i);
 
-  let products = []
+  //const productCartPicture = items.map((item) => (item.imageSrc))
+  const productCartName = items.map((item) => item.name);
+  const productCartQuantity = items.map((item) => item.quantity);
+  const productCartBrand = items.map((item) => item.brand);
+  const productCartPrice = items.map((item) =>
+    item.price.toLocaleString("es-ES", {
+      minimumFractionDigits: 2,
+    })
+  );
 
-  if (items.length === 0) products = [detail]
-  else if (detail.name === undefined) products = productsItem.flat()
-  else products = productsItem.concat([detail])
-
-  //console.log(products)
-
-  const p = products.map(p => ` ${p.quantity ? p.quantity : '1'} ${p.name} por ${p.price?.toLocaleString("es-ES", {
-    minimumFractionDigits: 2,
-  })}$`)
-  const total = calculateTotalPrice().toLocaleString("es-ES", {
-    minimumFractionDigits: 2,
-  })
-  const p2 = p.toString()
-
-
+  //const productDetailPicture = detail.imageSrc
+  const productDetailName = detail.name;
+  const productDetailQuantity = "1";
+  const productDetailBrand = detail.brand;
+  const productDetailPrice = detail?.price;
   const quantityDeDetail = 1;
 
-  const enviarCorreo = () => {
+  //const productPicture = productCartPicture.length === 0 ? productDetailPicture : productCartPicture
+  const productName =
+    productCartName.length === 0 ? productDetailName : productCartName;
+  const productQuantity =
+    productCartQuantity.length === 0
+      ? productDetailQuantity
+      : productCartQuantity;
+  const productBrand =
+    productCartBrand.length === 0 ? productDetailBrand : productCartBrand;
+  const productPrice =
+    productCartPrice.length === 0 ? productDetailPrice : productCartPrice;
+
+  const enviarCorreo = async () => {
     try {
-    emailjs.send("service_msfv3yo", "template_e7czlci", {
-      user_name: dataUser?.name ? dataUser?.name : user.name,
-      from_name: "Tecno-Store",
-      mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}! 
-      Tu compra de ${p2}, por un total de ${total}$ fue exitosa, estaremos realizando tu envio en los proximos dias.`,
-      user_email: user.email,
-    }, "-aO0hCX-QmP7DcXnq") 
-  } catch (error) {
-    console.error("Error al enviar el correo electrónico", error);
-  }
-    // try {
-    //   const response = await axios.post("/send-email", {
-    //     destinatario: user.email,
-    //     asunto: "Compra Exitosa",
-    //     mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}!
-    //         Tu compra de ${p2}, por un total de ${total}$ fue exitosa, estaremos realizando tu envio en los proximos dias.`
-    //   });
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error("Error al enviar el correo electrónico", error);
-    // }
+      const response = await axios.post("/send-email", {
+        destinatario: user.email,
+        asunto: "Compra Exitosa",
+        mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}!
+            Tu compra de ${productName} fue exitosa, estaremos realizando tu envio en los proximos dias.
+            Cantidad:${productQuantity}
+            Marca: ${productBrand} 
+            Precio: $${productPrice}`,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error al enviar el correo electrónico", error);
+    }
   };
 
   const addToCartHandler = (product) => {
@@ -180,25 +176,7 @@ const CheckoutForm = () => {
   };
 
   const removeFromCartHandler = (product) => {
-    if (product.quantity === 1) {
-      // Mostrar el SweetAlert para confirmar la eliminación
-      Swal.fire({
-        title: "¿Estás seguro?",
-        text: "El producto se eliminará del carrito.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
-        confirmButtonColor: "#d33",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          dispatch(removeFromCart(product));
-        }
-      });
-    } else {
-      // Si la cantidad es mayor a 1, elimina directamente el producto
-      dispatch(removeFromCart(product));
-    }
+    dispatch(removeFromCart(product));
   };
 
   // const addToDetailHandler = () => {
@@ -213,7 +191,7 @@ const CheckoutForm = () => {
     dispatch(clearDetail())
   }
 
-  if (items.length === 0 && Object.keys(detail).length === 0) {
+  if(items.length === 0 && Object.keys(detail).length === 0) {
     navigate("/products");
   }
 
