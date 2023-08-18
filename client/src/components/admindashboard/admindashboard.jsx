@@ -44,7 +44,7 @@ const AdminDashboard = () => {
     //     navigate("/products");
     //   }, 50);
     // }
-    if(dataUser.admin !==true && dataUser.email !== "adlotorrez91@gmail.com"){
+    if(dataUser.admin !==true && !allowedEmails.includes(dataUser.email)){
       navigate("/products")
     }
   }, [dispatch, isAdmin, navigate, user.email]);
