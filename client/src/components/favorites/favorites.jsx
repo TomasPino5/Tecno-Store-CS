@@ -13,7 +13,9 @@ const Favorites = () => {
   return (
     <div>
       <h2>Favorites</h2>
+      <h1>💚</h1>
       <div className={style.divisor}>
+        
         {favorites.map((product) => (
           <NavLink
             key={product.id}
