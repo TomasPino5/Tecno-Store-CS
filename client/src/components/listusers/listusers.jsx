@@ -10,7 +10,7 @@ const Listusers = () => {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [dispatch, getAllUsers]);
+  }, [dispatch]);
 
   const handleModidyUser = (id)=>{
     dispatch(userActive(id));
@@ -30,8 +30,12 @@ const Listusers = () => {
               <p>{user.email}</p>
               <p>{user.isActive === true? 'true':'false'}</p>
               <p>{user.admin === true? 'true':'false'}</p>
+              <p>
               <button className="modify" onClick={()=>{handleModidyUser(user.id)}}>{user.isActive === true? 'Desactivar':'Activar'}</button>
+              </p>
+              <p>
               <button className="modify" onClick={()=>{handleUserAdmin(user.id)}}>admin</button>
+              </p>
             </div>
           )
         })
