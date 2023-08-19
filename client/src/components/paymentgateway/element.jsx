@@ -14,7 +14,7 @@ import {
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
@@ -301,6 +301,9 @@ const CheckoutForm = () => {
                   minimumFractionDigits: 2,
                 })}
               </p>
+              <NavLink to={`/product/${item.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+              <button className={styles.viewD}>View Detail</button>
+              </NavLink>
             </div>
           </div>
         ))}
@@ -329,9 +332,13 @@ const CheckoutForm = () => {
                   minimumFractionDigits: 2,
                 })}
               </p>
+              <NavLink to={`/product/${detail.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+              <button className={styles.viewD}>View Detail</button>
+              </NavLink>
             </div>
           </div>
         )}
+        
       </div>
       <div className={styles.container}>
         <form
