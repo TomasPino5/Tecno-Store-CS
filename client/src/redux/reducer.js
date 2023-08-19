@@ -27,7 +27,8 @@ import {
   USER_ACTIVE,
   GET_COMPRAS,
   PUT_USER,
-  USER_ADMIN
+  USER_ADMIN,
+  DELETE_CART_PAY
 } from "./action-types";
 
 const savedUserData = localStorage.getItem("userData");
@@ -393,11 +394,37 @@ const reducer = (state = initialState, action) => {
         ...state,
         favorites: updatedFavoritesRemove,
       };
+
     case GET_ALL_USERS:
       return {
         ...state,
         getallusers: [...action.payload],
       };
+
+      case DELETE_CART_PAY:
+        const productToDelete = state.items.find(
+          (item) => item.id === action.payload.id
+        );
+      
+        // Elimina el producto del carrito
+        const updatedItemsAfterDelete = state.items.filter(
+          (item) => item.id !== action.payload.id
+        );
+      
+        // Calcula el nuevo precio total restando el precio del producto eliminado
+        const newTotalPriceAfterDelete =
+          state.totalPrice - productToDelete.price * productToDelete.quantity;
+      
+        // Actualiza el almacenamiento local con los elementos actualizados
+        localStorage.setItem("cartItems", JSON.stringify(updatedItemsAfterDelete));
+        localStorage.setItem("cartTotalPrice", JSON.stringify(newTotalPriceAfterDelete));
+      
+        return {
+          ...state,
+          items: updatedItemsAfterDelete,
+          totalPrice: newTotalPriceAfterDelete,
+        };
+     
 
     default:
       return {
