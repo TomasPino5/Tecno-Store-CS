@@ -102,11 +102,13 @@ const UserPurchases = () => {
                 return (
 
                     <div className={style.card} key={purchase.id}>
-                        <img
-                            src={purchase.imageSrc}
-                            alt=''
-                            className={style.itemImage}
-                        />
+                        <div className={style.imgCont}>
+                            <img
+                                src={purchase.imageSrc}
+                                alt=''
+                                className={style.itemImage}
+                            />
+                        </div>
                         <div className={style.purchasesDetails}>
                             <p className={style.purchasesName}>{purchase.name}</p>
                             <p>Cantidad: {purchase.quantity ? purchase.quantity : '1'}</p>
@@ -115,7 +117,7 @@ const UserPurchases = () => {
                             <p className={style.price}>Total: ${(Number(purchase.price) * Number(purchase.quantity ? purchase.quantity : '1')).toLocaleString("es-ES", { minimumFractionDigits: 2 })}/u.</p>
                         </div>
                         <div className={style.contBtnCal}>
-                            <div className={style.contBtnCal}>
+                            <div >
                                 {productRatings.length !== 0 ?
                                     <div>
                                         {productRatings.map((r) => (
@@ -132,7 +134,7 @@ const UserPurchases = () => {
                                     </div>
                                     :
 
-                                    <div>
+                                    <div className={style.rating}>
                                         <StarRating
                                             value={ratings[purchase.id] || 0} // Valor actual de calificación
                                             onChange={(rating) => handleRatingChange(purchase.id, rating)}
