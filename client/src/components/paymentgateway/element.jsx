@@ -139,8 +139,7 @@ const CheckoutForm = () => {
 
   const p = products.map(
     (p) =>
-      ` ${p.quantity ? p.quantity : "1"} ${
-        p.name
+      ` ${p.quantity ? p.quantity : "1"} ${p.name
       } por ${p.price?.toLocaleString("es-ES", {
         minimumFractionDigits: 2,
       })}$`
@@ -277,7 +276,8 @@ const CheckoutForm = () => {
               }
             >
               <p className={styles.itemName}>{item.name}</p>
-              <p>
+
+              <p className={styles.itemQ}>
                 Cantidad: {item.quantity}
                 <button
                   className={style.btnmas}
@@ -292,6 +292,7 @@ const CheckoutForm = () => {
                   -
                 </button>
               </p>
+
               <p>Marca: {item.brand}</p>
               <p>Categoría: {item.category}</p>
               <p className={styles.itemPrice}>
@@ -304,16 +305,19 @@ const CheckoutForm = () => {
           </div>
         ))}
         {Object.keys(detail).length !== 0 && (
-          <div className={styles.item} key={detail.id}>
+          <div className={darkMode ? style.itemdarkmode : styles.item} key={detail.id}>
+            <button className={styles.cerrar} onClick={clearDetailHandler}>
+              X
+            </button>
             <img
               src={detail.imageSrc}
               alt={detail.imageAlt}
               className={styles.itemImage}
             />
-            <div className={styles.itemDetails}>
-              <button className={styles.cerrar} onClick={clearDetailHandler}>
-                X
-              </button>
+            <div className={
+              darkMode ? style.itemDetailsdarkmode : styles.itemDetails
+            }>
+
               <p className={styles.itemName}>{detail.name}</p>
               <p>Cantidad: {quantityDeDetail}</p>
               {/* <button onClick={addToDetailHandler}>+</button><button onClick={removeFromDetailHandler}>-</button> */}
@@ -375,11 +379,10 @@ const CheckoutForm = () => {
           </button>
           {mensaje && (
             <p
-              className={`${styles.message} ${
-                mensaje.startsWith("Error")
+              className={`${styles.message} ${mensaje.startsWith("Error")
                   ? styles.errorMessage
                   : styles.successMessage
-              }`}
+                }`}
             >
               {mensaje}
             </p>
