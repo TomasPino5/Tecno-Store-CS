@@ -19,11 +19,17 @@
     width: 1000px;
 }
 
+.imgCont {
+    border-right: 1px solid #ccc;
+    padding-right: 50px;
+    height: 230px;
+}
+
 .itemImage {
     display: flex;
     align-items: flex-start;
     border-radius: 5px;
-    max-height: 250px;
+    max-height: 225px;
     margin-top: 2px;
     margin-bottom: 2px;
     margin-right: 10px;
@@ -45,6 +51,9 @@
 
 .contBtnCal {
     align-items: flex-end;
+    border-left: 1px solid #ccc;
+    padding-left: 50px;
+    height: 230px;
 }
 
 .btnCalif {
@@ -86,4 +95,8 @@
     transition-duration: 1s;
     background-color: rgb(172, 222, 168);
     align-items: center;
+}
+
+.rating {
+    margin-top: 80px;
 }
