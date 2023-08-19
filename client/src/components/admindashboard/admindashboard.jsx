@@ -19,9 +19,6 @@ const AdminDashboard = () => {
   const { user } = useAuth0();
   const [showProductList, setShowProductList] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null); // Estado para el producto seleccionado
-  const [showProductComponent, setShowProductComponent] = useState(false); // Estado para mostrar el componente de productos
-  const [showUserComponent, setShowUserComponent] = useState(false); // Estado para mostrar el componente de usuarios
-  
   const [component, setComponent] = useState("");
 
   const allowedEmails = [
@@ -38,19 +35,12 @@ const AdminDashboard = () => {
   const dataUser = useSelector((state) => state.user);
 
   useEffect(() => {
-    // if (isAdmin) {
     dispatch(getProducts());
     dispatch(getUser(user.email));
-    // } else {
-    //   setTimeout(() => {
-    //     alert("No estás autorizado a ingresar.");
-    //     navigate("/products");
-    //   }, 50);
-    // }
     if (dataUser.admin !== true && !allowedEmails.includes(dataUser.email)) {
       navigate("/products");
     }
-  }, [dispatch, isAdmin, navigate, user.email]);
+  }, [dispatch, navigate, user.email]);
 
   const products = useSelector((state) => state.allProducts);
   const salesCount = useSelector((state) => state.salesCount);
@@ -60,16 +50,7 @@ const AdminDashboard = () => {
     setSelectedProduct(null); // Limpiar el producto seleccionado al mostrar la lista de productos
   };
   const handleComponent = (value) => {
-    if (value === component) {
-      // Si se hace clic nuevamente en el mismo botón, cierra el componente
-      setComponent("");
-      setShowProductComponent(false);
-      setShowUserComponent(false);
-    } else {
-      setComponent(value);
-      setShowProductComponent(value === "product");
-      setShowUserComponent(value === "users");
-    }
+    setComponent(value);
   };
 
   // const handleModifyProduct = (product) => {
@@ -97,7 +78,6 @@ const AdminDashboard = () => {
           <span className="admin-title-main">Bienvenido a tu</span>
           <span className="admin-title-sub">Panel Administrativo</span>
         </h1>
-
         <Link to="/form" className="create-product-button">
           <button className="product-list-button">Crear Producto</button>
         </Link>
@@ -107,7 +87,6 @@ const AdminDashboard = () => {
         >
           Modifica un producto
         </button>
-
         <button
           onClick={() => {
             handleComponent("users");
@@ -126,7 +105,7 @@ const AdminDashboard = () => {
           onClick={() => handleComponent("compras")}
         >
           Total de Compras: {salesCount}
-        </button>
+        </button>{" "}
         {component === "product" ? (
           mod === true ? (
             <FormProduct idProduct={idProduct} setMod={setMod} />
@@ -134,11 +113,8 @@ const AdminDashboard = () => {
             <Product handleModify={handleModify} products={products} />
           )
         ) : null}
-        {showProductComponent && <Product handleModify={handleModify} products={products} />}
-        {showUserComponent && <Listusers />}
         {component === "users" ? <Listusers /> : null}
         {component === "compras" ? <ListCompras /> : null}
-
         {showProductList && (
           <div className="product-list">
             {products.map((product) => (
