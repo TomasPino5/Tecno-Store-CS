@@ -5,12 +5,13 @@
   padding-bottom: 40px;
 }
 .product-list-button {
-  margin-top: 20px; /* Ajusta el margen superior */
-  margin-bottom: 10px; /* Agrega margen inferior */
+  /* Ajusta los márgenes para crear espacio entre los botones */
+  margin-top: 30px; /* Ajusta el espacio superior */
+  margin-bottom: 30px; /* Ajusta el espacio inferior */
   padding: 10px 20px;
   background-color: #08ef56;
   color: #fff;
-  border: none;
+  border: solid black;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -33,6 +34,9 @@
 }
 
 .admin-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 2.5rem;
   font-weight: bold;
   color: #333;
@@ -41,4 +45,17 @@
   padding: 10px 20px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.admin-title-main {
+  background-color: #08ef56;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.admin-title-sub {
+  background-color: #08ef56;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
