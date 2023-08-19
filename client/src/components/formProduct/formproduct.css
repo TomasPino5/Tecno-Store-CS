@@ -1,57 +1,71 @@
 .formulario {
-    background-color: #212e36;
-    position: relative;
-    top: 15px;
-    left: 280px;
-    padding: 10px;
-    padding-left: 30px;
-    width: 600px;
-    color: rgb(214, 210, 223);
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    padding-bottom: 30px;
-  }
-  .formulario div{
-    margin-top: 20px;
-  }
-  .formulario div label{
-    display: flex;
-    justify-content: start;
-  }
-  .formulario div input {
-    display: flex;
-    border: none;
-    background-color: #28353e;
-    outline: none;
-    border-radius: 5px;
-    color: rgb(207, 208, 209);
-    padding: 5px;
-    width: 270px;
-  }
-  .font-container {
-    background-color: white;
-    height: 100%;
-  }
-  .formulario div button{
-    background-color: rgb(26, 231, 43);
-    border: none;
-    width: 150px;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-    font-size: 20px;
-  }
-  .isActive{
-    display: flex;
-    position: relative;
-    top: -15px;
-  }
-  .isActive p{
-    padding: 5px;
-    margin-left: 5px;
-    background-color: rgb(165, 11, 11);
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100px;
-  }
+  background-color: #212e36;
+  position: relative;
+  top: 15px;
+  left: 280px;
+  padding: 10px;
+  padding-left: 30px;
+  width: 600px;
+  color: rgb(214, 210, 223);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding-bottom: 30px;
+}
+.formulario div {
+  margin-top: 20px;
+}
+.formulario div label {
+  display: flex;
+  justify-content: start;
+}
+.formulario div input {
+  display: flex;
+  border: none;
+  background-color: #28353e;
+  outline: none;
+  border-radius: 5px;
+  color: rgb(207, 208, 209);
+  padding: 5px;
+  width: 270px;
+}
+.font-container {
+  background-color: white;
+  height: 100%;
+}
+.formulario div button {
+  background-color: rgb(26, 231, 43);
+  border: none;
+  width: 150px;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+}
+.isActive {
+  display: flex;
+  position: relative;
+  top: -15px;
+}
+.isActive p {
+  display: flex;
+  position: relative;
+  margin-bottom: 5px;
+  padding: 5px;
+  margin-left: 5px;
+  background-color: rgb(165, 11, 11);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+.isActive p:hover {
+  transform: scale(1.1); /* Escala 10% más grande en el hover */
+  transition: transform 0.2s ease-in-out; /* Agrega una transición suave */
+}
+.formulario div.button-container {
+  margin-bottom: 10px; /* Ajusta este valor según sea necesario */
+}
+button:hover {
+  transform: scale(1.1); /* Escala 10% más grande en el hover */
+  transition: transform 0.2s ease-in-out; /* Agrega una transición suave */
+}
