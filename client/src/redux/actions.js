@@ -27,7 +27,8 @@ import {
   GET_ALL_USERS,
   USER_ACTIVE,
   GET_COMPRAS,
-  USER_ADMIN
+  USER_ADMIN,
+  DELETE_CART_PAY
 } from "./action-types";
 
 
@@ -403,6 +404,7 @@ export function removeFromFavorite(product) {
     payload: product,
   };
 }
+
 export const getAllUsers = () => {
   return async (dispatch) => {
     try {
@@ -418,3 +420,11 @@ export const getAllUsers = () => {
     }
   };
 };
+
+
+export const deleteCartPay = (product) => {
+  return {
+    type: DELETE_CART_PAY,
+    payload: product,
+  };
+}

@@ -9,17 +9,15 @@ import {
   incrementSales,
   postUserPurchase,
   postNewStock,
+  deleteCartPay
 } from "../../redux/actions";
 import styles from "./element.module.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
 import { Link } from "react-router-dom";
-
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
-
 import style from "./element.module.css";
 
 const CheckoutForm = () => {
@@ -157,8 +155,8 @@ const CheckoutForm = () => {
   const enviarCorreo = () => {
     try {
       emailjs.send(
-        "service_msfv3yo",
-        "template_e7czlci",
+        "service_l56v90i",
+        "template_04lcr08",
         {
           user_name: dataUser?.name ? dataUser?.name : user.name,
           from_name: "Tecno-Store",
@@ -166,25 +164,23 @@ const CheckoutForm = () => {
       Tu compra de ${p2}, por un total de ${total}$ fue exitosa, estaremos realizando tu envio en los proximos dias.`,
           user_email: user.email,
         },
-        "-aO0hCX-QmP7DcXnq"
+        "9kbwr2X6xsrF-k49R"
       );
     } catch (error) {
       console.error("Error al enviar el correo electrónico", error);
     }
-    // try {
-    //   const response = await axios.post("/send-email", {
-    //     destinatario: user.email,
-    //     asunto: "Compra Exitosa",
-    //     mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}!
-    //         Tu compra de ${p2}, por un total de ${total}$ fue exitosa, estaremos realizando tu envio en los proximos dias.`
-    //   });
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.error("Error al enviar el correo electrónico", error);
-    // }
   };
 
   const addToCartHandler = (product) => {
+    if (product.quantity + 1 > product.stock) {
+      Swal.fire({
+        title: "Usted alcanzó la cantidad de stock maxima para este producto",
+        icon: "warning",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#808080",
+      })
+      return;
+    }
     dispatch(addToCart(product));
   };
 
@@ -219,12 +215,41 @@ const CheckoutForm = () => {
   // }
 
   const clearDetailHandler = () => {
-    dispatch(clearDetail());
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "El producto se eliminará de su lista de compras.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(clearDetail());
+      }
+    });
   };
+
+  const deleteFromCartHandler = (product) => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "El producto se eliminará del carrito.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteCartPay(product))
+      }
+    });
+  }
 
   if (items.length === 0 && Object.keys(detail).length === 0) {
     navigate("/products");
   }
+
 
   return (
     // los estilos se los dejamos a alguien que sepa (guiño guiño seba)
@@ -237,7 +262,7 @@ const CheckoutForm = () => {
           >
             <button
               className={styles.cerrar}
-              onClick={() => removeFromCartHandler(item)}
+              onClick={() => deleteFromCartHandler(item)}
             >
               X
             </button>
