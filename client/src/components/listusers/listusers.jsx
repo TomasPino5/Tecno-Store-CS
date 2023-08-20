@@ -14,7 +14,7 @@ const Listusers = () => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  const handleModidyUser = (id) => {
+  const handleModifyUser = (id) => {
     swal({
       title: "Confirmar",
       text: "¿Estás seguro de que quieres cambiar el estado del usuario?",
@@ -27,10 +27,13 @@ const Listusers = () => {
       }
     });
   };
-  const handleUserAdmin = (id) => {
+
+  const handleToggleAdmin = (id, isAdmin) => {
     swal({
       title: "Confirmar",
-      text: "¿Estás seguro de que quieres cambiar el rol del usuario a admin?",
+      text: `¿Estás seguro de que quieres ${
+        isAdmin ? "quitar el rol de administrador" : "hacer administrador"
+      } al usuario?`,
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -41,28 +44,38 @@ const Listusers = () => {
     });
   };
 
-  return(
+  return (
     <div className="container-users">
-      {
-        allusers.map((user, key)=>{
-          return(
-            <div className="users" key={key}>
-              <p>{user.name}</p>
-              <p>{user.email}</p>
-              <p>{user.isActive === true? 'true':'false'}</p>
-              <p>{user.admin === true? 'true':'false'}</p>
-              <p>
-              <button className="modify" onClick={()=>{handleModidyUser(user.id)}}>{user.isActive === true? 'Desactivar':'Activar'}</button>
-              </p>
-              <p>
-              <button className="modify" onClick={()=>{handleUserAdmin(user.id)}}>admin</button>
-              </p>
-            </div>
-          )
-        })
-      }
+      {allusers.map((user, key) => (
+        <div className="users" key={key}>
+          <p>{user.name}</p>
+          <p>{user.email}</p>
+          <p>{user.isActive ? "Activo" : "Inactivo"}</p>
+          <p>{user.admin ? "Admin" : "Usuario Normal"}</p>
+          <p>
+            <button
+              className="modify"
+              onClick={() => {
+                handleModifyUser(user.id);
+              }}
+            >
+              {user.isActive ? "Desactivar" : "Activar"}
+            </button>
+          </p>
+          <p>
+            <button
+              className="modify"
+              onClick={() => {
+                handleToggleAdmin(user.id, user.admin);
+              }}
+            >
+              {user.admin ? "Quitar Admin" : "Hacer Admin"}
+            </button>
+          </p>
+        </div>
+      ))}
     </div>
-  )
+  );
 };
 
 export default Listusers;
