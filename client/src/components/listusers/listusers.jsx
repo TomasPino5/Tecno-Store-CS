@@ -15,7 +15,7 @@ const Listusers = () => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  const handleModidyUser = (id) => {
+  const handleModifyUser = (id) => {
     swal({
       title: "Confirmar",
       text: "¿Estás seguro de que quieres cambiar el estado del usuario?",
@@ -28,10 +28,13 @@ const Listusers = () => {
       }
     });
   };
-  const handleUserAdmin = (id) => {
+
+  const handleToggleAdmin = (id, isAdmin) => {
     swal({
       title: "Confirmar",
-      text: "¿Estás seguro de que quieres cambiar el rol del usuario a admin?",
+      text: `¿Estás seguro de que quieres ${
+        isAdmin ? "quitar el rol de administrador" : "hacer administrador"
+      } al usuario?`,
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -67,13 +70,11 @@ const Listusers = () => {
                 onClick={() => {
                   handleUserAdmin(user.id);
                 }}
-              >
-                admin
-              </button>
-            </p>
-          </div>
-        );
-      })}
+              >{user.admin ? "Quitar Admin" : "Hacer Admin"}
+            </button>
+          </p>
+        </div>
+      ))}
     </div>
   );
 };

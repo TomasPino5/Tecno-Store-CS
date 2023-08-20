@@ -35,19 +35,12 @@ const AdminDashboard = () => {
   const dataUser = useSelector((state) => state.user);
 
   useEffect(() => {
-    // if (isAdmin) {
-      dispatch(getProducts());
-      dispatch(getUser(user.email));
-    // } else {
-    //   setTimeout(() => {
-    //     alert("No estás autorizado a ingresar.");
-    //     navigate("/products");
-    //   }, 50);
-    // }
-    if(dataUser.admin !==true && !allowedEmails.includes(dataUser.email)){
-      navigate("/products")
+    dispatch(getProducts());
+    dispatch(getUser(user.email));
+    if (dataUser.admin !== true && !allowedEmails.includes(dataUser.email)) {
+      navigate("/products");
     }
-  }, [dispatch, isAdmin, navigate, user.email]);
+  }, [dispatch, navigate, user.email]);
 
   const products = useSelector((state) => state.allProducts);
   const salesCount = useSelector((state) => state.salesCount);
@@ -60,15 +53,15 @@ const AdminDashboard = () => {
     setComponent(value);
   };
 
-  const handleModifyProduct = (product) => {
-    setSelectedProduct(product);
-  };
+  // const handleModifyProduct = (product) => {
+  //   setSelectedProduct(product);
+  // };
 
-  const handleSubmitChanges = (e) => {
-    e.preventDefault();
-    // Aquí implementa la lógica para enviar los cambios al backend y actualizar el estado en Redux
-    console.log("Cambios guardados:", selectedProduct);
-  };
+  // const handleSubmitChanges = (e) => {
+  //   e.preventDefault();
+  //   // Aquí implementa la lógica para enviar los cambios al backend y actualizar el estado en Redux
+  //   console.log("Cambios guardados:", selectedProduct);
+  // };
 
   const [mod, setMod] = useState(false);
   const [idProduct, setIdProduct] = useState(null);
@@ -80,50 +73,56 @@ const AdminDashboard = () => {
 
   return (
     <div className="container">
-        <div>
-          <h1 className="admin-title">Bienvenido a tu Panel Administrativo!</h1>
-
-          <Link to="/form" className="create-product-button">
-            <button className="product-list-button">Crear Producto</button>
-          </Link>
-          <button
-            onClick={() => handleComponent("product")}
-            className="product-list-button"
-          >
-            Modifica un producto
+      <div>
+        <h1 className="admin-title">
+          <span className="admin-title-main">Bienvenido a tu</span>
+          <span className="admin-title-sub">Panel Administrativo</span>
+        </h1>
+        <Link to="/form" className="create-product-button">
+          <button className="product-list-button">Crear Producto</button>
+        </Link>
+        <button
+          onClick={() => handleComponent("product")}
+          className="product-list-button"
+        >
+          Modifica un producto
+        </button>
+        <button
+          onClick={() => {
+            handleComponent("users");
+          }}
+          className="product-list-button"
+        >
+          Listado de Usuarios
+        </button>
+        <Link to="/userProfile" className="create-product-button">
+          <button className="product-list-button">
+            Modificar Usuario/PERFIL
           </button>
-
-          <button
-            onClick={() => {
-              handleComponent("users");
-            }}
-            className="product-list-button"
-          >
-            Listado de Usuarios
-          </button>
-          <Link to="/userProfile" className="create-product-button">
-            <button className="product-list-button">
-              Modificar Usuario/PERFIL
-            </button>
-          </Link>
-          <button className="product-list-button" onClick={() => handleComponent("compras")}>
-            Total de Compras: {salesCount}
-          </button>
-          {component === "product" ? (
-              mod === true ? (<FormProduct idProduct={idProduct} setMod={setMod} />)
-              :(<Product handleModify={handleModify} products={products} />)
-          ) : null}
-          {component === "users" ? <Listusers /> : null}
-          {component === "compras"? <ListCompras/>:null}
-
-          {showProductList && (
-            <div className="product-list">
-              {products.map((product) => (
-                <div key={product.id}>{product.name}</div>
-              ))}
-            </div>
-          )}
-        </div>
+        </Link>
+        <button
+          className="product-list-button"
+          onClick={() => handleComponent("compras")}
+        >
+          Total de Compras: {salesCount}
+        </button>{" "}
+        {component === "product" ? (
+          mod === true ? (
+            <FormProduct idProduct={idProduct} setMod={setMod} />
+          ) : (
+            <Product handleModify={handleModify} products={products} />
+          )
+        ) : null}
+        {component === "users" ? <Listusers /> : null}
+        {component === "compras" ? <ListCompras /> : null}
+        {showProductList && (
+          <div className="product-list">
+            {products.map((product) => (
+              <div key={product.id}>{product.name}</div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
