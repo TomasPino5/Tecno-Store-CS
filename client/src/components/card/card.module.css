@@ -125,3 +125,28 @@
 .botonFav:hover {
   transform: scale(1.2);
 }
+
+.botonAddCart {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 12.5px;
+  left: 8px;
+  background-color: #06b941;
+  border-radius: 50%;
+  color: white;
+  border: 1.5px solid #0000001d;
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.botonAddCart svg {
+  justify-content: center;
+  align-self: center;
+  margin-bottom: 2px;
+  margin-left: -4px;
+}
+.botonAddCart:hover {
+  transform: scale(1);
+}

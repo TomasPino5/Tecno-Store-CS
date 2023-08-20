@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { Link, useParams, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, addToCart, productRatings } from "../../redux/actions";
+import {
+  getProductDetails,
+  addToCart,
+  productRatings,
+} from "../../redux/actions";
 // import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Loading from "../../components/Loading/Loading.jsx";
@@ -10,10 +14,11 @@ import style from "./detail.module.css";
 
 import { useAuth0 } from "@auth0/auth0-react"; // Asegúrate de importar useAuth0
 
-import StarRating from '../starRating/starRating';
+import StarRating from "../starRating/starRating";
 
 const Detail = () => {
   const myProduct = useSelector((state) => state.productDetail);
+  console.log(myProduct);
   // const items = useSelector((state) => state.items)
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -22,8 +27,8 @@ const Detail = () => {
     dispatch(productRatings(id));
   }, [dispatch, id]);
 
-  const ratings = useSelector((state) => state.productRatings)
-  console.log(ratings)
+  const ratings = useSelector((state) => state.productRatings);
+  console.log(ratings);
 
   // STATE
   const [loading, setLoading] = useState(false);
@@ -140,7 +145,9 @@ const Detail = () => {
               alt="img not found"
             />
             <h2>Product reviews:</h2>
-            {ratings.length === 0 ? <h1>Todavia no hay ninguna review</h1> : null}
+            {ratings.length === 0 ? (
+              <h1>Todavia no hay ninguna review</h1>
+            ) : null}
             {ratings.map((r) => (
               <div className={style.rating} key={r.id}>
                 <p className={style.ratingP}>{r.user}</p>
@@ -148,12 +155,11 @@ const Detail = () => {
                 <div className={style.star}>
                   <StarRating
                     value={r.rating} // Valor actual de calificación
-                    onChange={() => { }}
+                    onChange={() => {}}
                   />
                 </div>
               </div>
             ))}
-
           </div>
           <div
             className={
@@ -237,12 +243,22 @@ const Detail = () => {
                       <div className={style.text}>Add to Cart</div>
 
                       <span onClick={handleBuyNow} className={style.icon}>
-                        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' strokeWidth='1' stroke='currentColor' fill='none' strokeLinecap='round' strokeLinejoin='round'>
-                          <path stroke='none' d='M0 0h24v24H0z' fill='none' />
-                          <path d='M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' />
-                          <path d='M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' />
-                          <path d='M17 17h-11v-14h-2' />
-                          <path d='M6 5l14 1l-1 7h-13' />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                          <path d="M17 17h-11v-14h-2" />
+                          <path d="M6 5l14 1l-1 7h-13" />
                         </svg>
                       </span>
                     </button>
@@ -250,7 +266,6 @@ const Detail = () => {
                 </div>
               </div>
             )}
-
 
             <div className={style.cart__container}>
               {/* <CardElement /> */}
