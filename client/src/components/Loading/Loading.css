@@ -5,15 +5,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 24%;
-    bottom: 30%;
+    /* position: fixed; */
+    /* top: 24%;
+    bottom: 30%; */
+    /* top: -5px; */
+    margin-top: -2px;
     width: 100vw;
   }
   .lds-roller {
     display: inline-block;
     position: relative;
-    margin-top: 200px;
+    margin-top: 600px;
     width: 80px;
     height: 80px;
     bottom: 50%;

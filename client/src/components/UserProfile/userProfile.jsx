@@ -28,10 +28,10 @@ const UserProfile = () => {
   };
 
   const [data, setData] = useState({
+    picture: dataUser?.picture ? dataUser.picture : user.picture,
     name: dataUser?.name ? dataUser.name : user.name,
     direction: dataUser?.direction ? dataUser.direction : "",
     telefone: dataUser?.telefone ? dataUser.telefone : "",
-    picture: dataUser?.picture ? dataUser.picture : user.picture,
   });
 
   const [error, setError] = useState({

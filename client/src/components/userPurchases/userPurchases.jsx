@@ -86,68 +86,66 @@ const UserPurchases = () => {
     };
     //console.log(ratings)
 
-    const [Calif, setCalif] = useState(false)
-
-    const handleModifyCal = () => {
-    }
 
     return (
         <div className={style.container}>
             <h2>Mis Compras</h2>
+            {purchases.length === 0 ? <h1 className={style.vacio}>No ha realizado ninguna compra</h1> : null}
             {products.map((purchase) => {
 
                 const productRatings = userRatings.filter((r) => r.productId === purchase.id);
-                console.log(productRatings)
 
                 return (
-
-                    <div className={style.card} key={purchase.id}>
-                        <div className={style.imgCont}>
-                            <img
-                                src={purchase.imageSrc}
-                                alt=''
-                                className={style.itemImage}
-                            />
-                        </div>
-                        <div className={style.purchasesDetails}>
-                            <p className={style.purchasesName}>{purchase.name}</p>
-                            <p>Cantidad: {purchase.quantity ? purchase.quantity : '1'}</p>
-                            <p>Marca: {purchase.brand}</p>
-                            <p className={style.price}>Precio: ${purchase.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}/u.</p>
-                            <p className={style.price}>Total: ${(Number(purchase.price) * Number(purchase.quantity ? purchase.quantity : '1')).toLocaleString("es-ES", { minimumFractionDigits: 2 })}/u.</p>
-                        </div>
-                        <div className={style.contBtnCal}>
-                            <div >
-                                {productRatings.length !== 0 ?
-                                    <div>
-                                        {productRatings.map((r) => (
-                                            <div className={style.rating} key={r.id}>
-                                                {/* <p className={style.ratingPN}>{r.rating}</p> */}
-                                                <div className={style.star}>
-                                                    <StarRating
-                                                        value={r.rating} // Valor actual de calificación
-                                                        onChange={() => { }}
-                                                    />
+                    <div>
+                        
+                        < div className={style.card} key={purchase.id} >
+                            <div className={style.imgCont}>
+                                <img
+                                    src={purchase.imageSrc}
+                                    alt=''
+                                    className={style.itemImage}
+                                />
+                            </div>
+                            <div className={style.purchasesDetails}>
+                                <p className={style.purchasesName}>{purchase.name}</p>
+                                <p>Cantidad: {purchase.quantity ? purchase.quantity : '1'}</p>
+                                <p>Marca: {purchase.brand}</p>
+                                <p className={style.price}>Precio: ${purchase.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}/u.</p>
+                                <p className={style.price}>Total: ${(Number(purchase.price) * Number(purchase.quantity ? purchase.quantity : '1')).toLocaleString("es-ES", { minimumFractionDigits: 2 })}/u.</p>
+                            </div>
+                            <div className={style.contBtnCal}>
+                                <div >
+                                    {productRatings.length !== 0 ?
+                                        <div>
+                                            {productRatings.map((r) => (
+                                                <div className={style.rating} key={r.id}>
+                                                    {/* <p className={style.ratingPN}>{r.rating}</p> */}
+                                                    <div className={style.star}>
+                                                        <StarRating
+                                                            value={r.rating} // Valor actual de calificación
+                                                            onChange={() => { }}
+                                                        />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    :
+                                            ))}
+                                        </div>
+                                        :
 
-                                    <div className={style.rating}>
-                                        <StarRating
-                                            value={ratings[purchase.id] || 0} // Valor actual de calificación
-                                            onChange={(rating) => handleRatingChange(purchase.id, rating)}
-                                        />
-                                    </div>
-                                }
+                                        <div className={style.rating}>
+                                            <StarRating
+                                                value={ratings[purchase.id] || 0} // Valor actual de calificación
+                                                onChange={(rating) => handleRatingChange(purchase.id, rating)}
+                                            />
+                                        </div>
+                                    }
 
-                                {/* {productRatings.length !== 0  ?
+                                    {/* {productRatings.length !== 0  ?
                                     <button className={style.btnCalif} onClick={handleModifyCal}>
                                         Modificar
                                     </button>
                                     : null} */}
 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -159,7 +157,7 @@ const UserPurchases = () => {
                     Back
                 </button>
             </Link>
-        </div>
+        </div >
     )
 }
 
