@@ -120,7 +120,9 @@
 
 .cart-button {
   align-items: center;
-  background: #08ef56;
+  background: black;
+  color: #08ef56;
+  border: 1.5px solid #08ef56;
   border-radius: 9999px;
   cursor: pointer;
   display: flex;
@@ -134,8 +136,15 @@
 }
 
 .cart-button:hover {
-  transform: scale (1.1);
+  background-color: #08ef56;
+  color: black;
+  transform: scale(1.1);
+
 }
+
+/* .cart-button:hover {
+  transform: scale (1.1);
+} */
 
 .cart-button ~ input:checked ~ .cart {
   height: 100%;
