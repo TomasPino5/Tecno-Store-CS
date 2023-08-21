@@ -66,6 +66,11 @@ const AdminDashboard = () => {
   const [mod, setMod] = useState(false);
   const [idProduct, setIdProduct] = useState(null);
 
+  const dataP = () => {
+    let dataProd = products.filter((p)=> p.id === idProduct)
+    return dataProd
+  }
+
   const handleModify = (id) => {
     setMod(true);
     setIdProduct(id);
@@ -95,11 +100,11 @@ const AdminDashboard = () => {
         >
           Listado de Usuarios
         </button>
-        <Link to="/userProfile" className="create-product-button">
+        {/* <Link to="/userProfile" className="create-product-button">
           <button className="product-list-button">
             Modificar Usuario/PERFIL
           </button>
-        </Link>
+        </Link> */}
         <button
           className="product-list-button"
           onClick={() => handleComponent("compras")}
@@ -108,7 +113,7 @@ const AdminDashboard = () => {
         </button>{" "}
         {component === "product" ? (
           mod === true ? (
-            <FormProduct idProduct={idProduct} setMod={setMod} />
+            <FormProduct dataProd={dataP()} idProduct={idProduct} setMod={setMod} />
           ) : (
             <Product handleModify={handleModify} products={products} />
           )

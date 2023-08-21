@@ -5,7 +5,7 @@ import "./formproduct.css";
 import swal from 'sweetalert';
 
 
-const FormProduct = ({ idProduct, setMod }) => {
+const FormProduct = ({ dataProd, idProduct, setMod }) => {
   const dispatch = useDispatch();
 
   const onChangeInput = (event) => {
@@ -42,26 +42,28 @@ const FormProduct = ({ idProduct, setMod }) => {
   });
 };
 
+const dataP = dataProd[0]
+console.log(dataP)
   const [product, setProduct] = useState({
-    name: "",
-    href: "",
-    imageSrc: "",
-    imageAlt: "",
-    price: 0,
-    brand: "",
-    stock: 0,
-    category: "",
-    description: "",
-    isActive: true,
+    name: dataP.name,
+    href: dataP.href,
+    imageSrc: dataP.imageSrc,
+    imageAlt: dataP.imageAlt,
+    price: dataP.price,
+    brand: dataP.brand,
+    stock: dataP.stock,
+    category: dataP.category,
+    description: dataP.description,
+    isActive: dataP.isActive,
   });
-  console.log(product);
+  //console.log(product);
   return (
     <form action="" className="formulario" onSubmit={handleInfo}>
       <div>
         <label htmlFor="">Name</label>
         <input
           type="text"
-          placeholder="nombre del producto"
+          // placeholder="nombre del producto"
           name="name"
           value={product.name}
           onChange={onChangeInput}
