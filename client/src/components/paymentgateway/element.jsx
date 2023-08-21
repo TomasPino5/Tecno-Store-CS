@@ -32,7 +32,7 @@ const CheckoutForm = () => {
 
   const totalPrice = useSelector((state) => state.totalPrice);
   const items = useSelector((state) => state.items);
-  const detail = useSelector((state) => state.productDetail);
+  // const detail = useSelector((state) => state.productDetail);
 
   const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
   // className={darkMode ? style.darkmode : style.lightMode}
@@ -52,18 +52,18 @@ const CheckoutForm = () => {
       total += totalPrice;
     }
 
-    if (detail && detail.price) {
-      total += detail.price;
-    }
+    // if (detail && detail.price) {
+    //   total += detail.price;
+    // }
 
     return total;
   };
 
   const calculateQuantity = () => {
     let totalQuantity = 0;
-    if (detail && detail.name) {
-      totalQuantity++; // If detail has a product, add 1 to the total quantity
-    }
+    // if (detail && detail.name) {
+    //   totalQuantity++; // If detail has a product, add 1 to the total quantity
+    // }
     if (items.length > 0) {
       totalQuantity += items.reduce((total, item) => total + item.quantity, 0);
     }
@@ -101,14 +101,14 @@ const CheckoutForm = () => {
 
       if (data.mensaje === "Pago exitoso") {
         dispatch(postUserPurchase({ user: user.email, products: products }));
-        if (items.length === 0) {
-          dispatch(postNewStock({ productId: detail.id, quantity: "1" }));
-        } else {
+        // if (items.length === 0) {
+        //   dispatch(postNewStock({ productId: detail.id, quantity: "1" }));
+        // } else {
           for (const item of products) {
             dispatch(
               postNewStock({ productId: item.id, quantity: item.quantity })
             );
-          }
+          //}
         }
       }
 
@@ -129,27 +129,28 @@ const CheckoutForm = () => {
 
   const productsItem = items.map((i) => i);
 
-  let products = [];
+  // let products = [];
 
-  if (items.length === 0) products = [detail];
-  else if (detail.name === undefined) products = productsItem.flat();
-  else products = productsItem.concat([detail]);
+  // if (items.length === 0) products = [detail];
+  // else if (detail.name === undefined) products = productsItem.flat();
+  // else products = productsItem.concat([detail]);
 
   //console.log(products)
+  const products = productsItem.flat()
 
   const p = products.map(
     (p) =>
       ` ${p.quantity ? p.quantity : "1"} ${p.name
       } por ${p.price?.toLocaleString("es-ES", {
         minimumFractionDigits: 2,
-      })}$`
+      })}$/u.`
   );
   const total = calculateTotalPrice().toLocaleString("es-ES", {
     minimumFractionDigits: 2,
   });
   const p2 = p.toString();
 
-  const quantityDeDetail = 1;
+  //const quantityDeDetail = 1;
 
   const enviarCorreo = () => {
     try {
@@ -213,21 +214,21 @@ const CheckoutForm = () => {
   //   dispatch(removeFromDetail(detail));
   // }
 
-  const clearDetailHandler = () => {
-    Swal.fire({
-      title: "¿Estás seguro?",
-      text: "El producto se eliminará de su lista de compras.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Eliminar",
-      cancelButtonText: "Cancelar",
-      confirmButtonColor: "#d33",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(clearDetail());
-      }
-    });
-  };
+  // const clearDetailHandler = () => {
+  //   Swal.fire({
+  //     title: "¿Estás seguro?",
+  //     text: "El producto se eliminará de su lista de compras.",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Eliminar",
+  //     cancelButtonText: "Cancelar",
+  //     confirmButtonColor: "#d33",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       dispatch(clearDetail());
+  //     }
+  //   });
+  // };
 
   const deleteFromCartHandler = (product) => {
     Swal.fire({
@@ -245,7 +246,7 @@ const CheckoutForm = () => {
     });
   }
 
-  if (items.length === 0 && Object.keys(detail).length === 0) {
+  if (items.length === 0 ) { //&& Object.keys(detail).length === 0
     navigate("/products");
   }
 
@@ -307,7 +308,7 @@ const CheckoutForm = () => {
             </div>
           </div>
         ))}
-        {Object.keys(detail).length !== 0 && (
+        {/* {Object.keys(detail).length !== 0 && (
           <div className={darkMode ? style.itemdarkmode : styles.item} key={detail.id}>
             <button className={styles.cerrar} onClick={clearDetailHandler}>
               X
@@ -323,7 +324,7 @@ const CheckoutForm = () => {
 
               <p className={styles.itemName}>{detail.name}</p>
               <p>Cantidad: {quantityDeDetail}</p>
-              {/* <button onClick={addToDetailHandler}>+</button><button onClick={removeFromDetailHandler}>-</button> */}
+              <button onClick={addToDetailHandler}>+</button><button onClick={removeFromDetailHandler}>-</button>
               <p>Marca: {detail.brand}</p>
               <p>Categoría: {detail.category}</p>
               <p className={styles.itemPrice}>
@@ -337,7 +338,7 @@ const CheckoutForm = () => {
               </NavLink>
             </div>
           </div>
-        )}
+        )} */}
         
       </div>
       <div className={styles.container}>
@@ -360,7 +361,7 @@ const CheckoutForm = () => {
                 </span>
               </li>
             ))}
-            {detail && Object.keys(detail).length !== 0 && (
+            {/* {detail && Object.keys(detail).length !== 0 && (
               <li>
                 <span>
                   <strong>{detail.name}</strong> - x1 - $
@@ -369,7 +370,7 @@ const CheckoutForm = () => {
                   })}
                 </span>
               </li>
-            )}
+            )} */}
           </ul>
           <p>
             <strong>Total:</strong> $

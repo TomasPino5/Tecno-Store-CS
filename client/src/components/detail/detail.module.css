@@ -295,6 +295,7 @@
   height: 100%;
   left: 0;
   color: #fff;
+  cursor: pointer;
 }
 
 .text {
@@ -500,4 +501,5 @@
   color: #1b1b1b00;
   background-color: #1b1b1b00;
   border: 1px solid #1b1b1b00;
+  cursor: pointer;
 }
