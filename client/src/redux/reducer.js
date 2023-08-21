@@ -199,7 +199,7 @@ const reducer = (state = initialState, action) => {
 
       if (productInCart) {
         // Verifica si la cantidad en el carrito + 1 no excede el stock máximo
-        if (productInCart.quantity <= productInCart.stock) { // productInCart.quantity + 1
+        if (productInCart.quantity + 1 <= productInCart.stock) {
           const updatedItems = state.items.map((item) =>
             item.id === id ? { ...item, quantity: item.quantity + 1 } : item
           );
