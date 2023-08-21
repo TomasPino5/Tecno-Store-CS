@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { Link, useParams, NavLink } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom"; // NavLink,
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProductDetails,
@@ -17,6 +17,8 @@ import { useAuth0 } from "@auth0/auth0-react"; // Asegúrate de importar useAuth
 import StarRating from "../starRating/starRating";
 
 const Detail = () => {
+
+  const navigate = useNavigate()
   const myProduct = useSelector((state) => state.productDetail);
   console.log(myProduct);
   // const items = useSelector((state) => state.items)
@@ -92,6 +94,12 @@ const Detail = () => {
       confirmButtonColor: "#28a745",
     });
     event.preventDefault();
+  }
+
+  function handleBuyNow1(event) {
+    event.preventDefault();
+    dispatch(addToCart(myProduct));
+    navigate(`/pay`)
   }
 
   const handleBuy = (event) => {
@@ -235,11 +243,11 @@ const Detail = () => {
                   data-tooltip={`$${myProduct.price}`}
                   className={style.button}
                 >
-                  <div className={style.button_wrapper}>
-                    <button
+                  <div className={style.button_wrapper} onClick={handleBuyNow}>
+                    {/* <button
                       className={style.buy__button}
                       onClick={handleBuyNow}
-                    >
+                    > */}
                       <div className={style.text}>Add to Cart</div>
 
                       <span onClick={handleBuyNow} className={style.icon}>
@@ -261,7 +269,7 @@ const Detail = () => {
                           <path d="M6 5l14 1l-1 7h-13" />
                         </svg>
                       </span>
-                    </button>
+                    {/* </button> */}
                   </div>
                 </div>
               </div>
@@ -271,12 +279,12 @@ const Detail = () => {
               {/* <CardElement /> */}
               <br />
               {isAuthenticated ? (
-                <NavLink
-                  to={`/pay`}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <button className={style.buttonYa}>Comprar</button>
-                </NavLink>
+                // <NavLink
+                //   to={`/pay`}
+                //   style={{ textDecoration: "none", color: "inherit" }}
+                // >
+                  <button className={style.buttonYa} onClick={handleBuyNow1}>Comprar</button>
+                // </NavLink>
               ) : (
                 <button className={style.buttonYa} onClick={handleBuy}>
                   Comprar
