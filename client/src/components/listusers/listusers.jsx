@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllUsers, userActive, userAdmin } from "../../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./listUsers.css";
 import swal from "sweetalert";
 
@@ -13,6 +14,19 @@ const ListUsers = () => {
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
+
+  const { user } = useAuth0();
+  const usuario = user.email;
+
+  const allowedEmails = [
+    "menseguezmariano@gmail.com",
+    "cottiersolchu55@gmail.com",
+    "adlotorrez91@gmail.com",
+    "sebastianhnry@gmail.com",
+    "tomaspino.velez@gmail.com",
+    "tomasbaldi@gmail.com",
+    "kayita_y@hotmail.com",
+  ];
 
   const handleModifyUser = (id) => {
     swal({
@@ -45,7 +59,13 @@ const ListUsers = () => {
   };
 
   return (
-    <div className="container-users">
+    <div className={darkMode ? "users-containerdark" : "container-users"}>
+      <div className={darkMode ? "user-namedark" : "user-name"}>
+        <p>USER ↑↓</p>
+        <p>EMAIL ↑↓</p>
+        <p>ACTIVE ↑↓</p>
+        <p>ADMIN ↑↓</p>
+      </div>
       {allusers.map((user, key) => (
         <div className={darkMode ? "usersdark" : "users"} key={key}>
           <p>{user.name}</p>
@@ -63,14 +83,17 @@ const ListUsers = () => {
             </button>
           </p>
           <p>
-            <button
+            {
+              allowedEmails.includes(usuario)?
+              <button
               className="modify"
               onClick={() => {
                 handleToggleAdmin(user.id, user.admin);
               }}
             >
               {user.admin ? "Quitar Admin" : "Hacer Admin"}
-            </button>
+            </button>:null
+            }
           </p>
         </div>
       ))}
