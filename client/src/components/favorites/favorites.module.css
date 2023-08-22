@@ -134,3 +134,7 @@
 .botonFav:hover {
   transform: scale(1.2);
 }
+
+.vacio {
+  margin-top: 50px;
+}
