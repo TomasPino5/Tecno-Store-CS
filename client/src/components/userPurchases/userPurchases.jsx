@@ -97,7 +97,7 @@ const UserPurchases = () => {
 
                 return (
                     <div>
-                        
+
                         < div className={style.card} key={purchase.id} >
                             <div className={style.imgCont}>
                                 <img
@@ -115,29 +115,33 @@ const UserPurchases = () => {
                             </div>
                             <div className={style.contBtnCal}>
                                 <div >
-                                    {productRatings.length !== 0 ?
-                                        <div>
-                                            {productRatings.map((r) => (
-                                                <div className={style.rating} key={r.id}>
-                                                    {/* <p className={style.ratingPN}>{r.rating}</p> */}
-                                                    <div className={style.star}>
-                                                        <StarRating
-                                                            value={r.rating} // Valor actual de calificación
-                                                            onChange={() => { }}
-                                                        />
-                                                    </div>
+                                    {/* {productRatings.length !== 0 ? */}
+                                    <div>
+                                        {productRatings.map((r) => (
+                                            <div className={style.rating} key={r.id}>
+                                                {/* <p className={style.ratingPN}>{r.rating}</p> */}
+                                                <p>Calificacion Antigua:</p>
+                                                <div className={style.star}>
+                                               
+                                                    <StarRating
+                                                        value={r.rating} // Valor actual de calificación
+                                                        onChange={() => { }}
+                                                    />
                                                 </div>
-                                            ))}
-                                        </div>
-                                        :
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {/* : */}
 
-                                        <div className={style.rating}>
-                                            <StarRating
-                                                value={ratings[purchase.id] || 0} // Valor actual de calificación
-                                                onChange={(rating) => handleRatingChange(purchase.id, rating)}
-                                            />
-                                        </div>
-                                    }
+                                    <p className={style.newC}>Nueva Calificacion:</p>
+                                    <div className={style.rating2}>
+                                    
+                                        <StarRating
+                                            value={ratings[purchase.id] || 0} // Valor actual de calificación
+                                            onChange={(rating) => handleRatingChange(purchase.id, rating)}
+                                        />
+                                    </div>
+                                    {/* } */}
 
                                     {/* {productRatings.length !== 0  ?
                                     <button className={style.btnCalif} onClick={handleModifyCal}>

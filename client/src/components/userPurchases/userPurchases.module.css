@@ -98,9 +98,24 @@
 }
 
 .rating {
-    margin-top: 80px;
+    margin-top: 60px;
+    margin-right: 10px;
+}
+
+.star {
+    margin-top: -1.5em;
+    margin-right: 10px;
+}
+
+.rating2 {
+    margin-top: -1.5em;
+    margin-right: 10px;
 }
 
 .vacio {
     margin-top: 50px;
+}
+
+.newC {
+    margin-right: 10px;
 }
