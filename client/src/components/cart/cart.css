@@ -2,8 +2,12 @@
   background: rgb(29, 29, 29);
   border-left: 2px solid#08ef56;
   display: none;
-  padding: 32px;
-  padding-top: -50px;
+  /* padding: 32px;
+  padding-top: -50px; */
+  padding-top: 32px;
+  /* padding-right: 32px; */
+  padding-bottom: 32px;
+  padding-left: 32px;
   position: fixed;
   right: 0px;
   top: 58px;
