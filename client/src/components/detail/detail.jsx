@@ -85,21 +85,40 @@ const Detail = () => {
   // };
 
   function handleBuyNow(event) {
-    dispatch(addToCart(myProduct));
-    Swal.fire({
-      title: "Agregado",
-      text: "¡Producto añadido al carrito!",
-      icon: "success",
-      confirmButtonText: "Ok",
-      confirmButtonColor: "#28a745",
-    });
+    if (myProduct.stock > 0) {
+      dispatch(addToCart(myProduct));
+      Swal.fire({
+        title: "Agregado",
+        text: "¡Producto añadido al carrito!",
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#28a745",
+      });
     event.preventDefault();
+    } else {
+      Swal.fire({
+        title: "Lo sentimos",
+        text: "No hay stock para este producto",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
+    }
   }
 
   function handleBuyNow1(event) {
-    event.preventDefault();
-    dispatch(addToCart(myProduct));
-    navigate(`/pay`)
+    if (myProduct.stock > 0) {
+      event.preventDefault();
+      dispatch(addToCart(myProduct));
+      navigate(`/pay`)
+    } else {
+      event.preventDefault();
+      Swal.fire({
+        title: "Lo sentimos",
+        text: "No hay stock para este producto",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
+    }
   }
 
   const handleBuy = (event) => {
