@@ -35,8 +35,9 @@ const Favorites = () => {
     <div>
       <h2>Favorites</h2>
       <h1>💚</h1>
+      {favorites.length === 0 ? <h1 className={style.vacio}>Agregue productos a favoritos...</h1> : null}
       <div className={style.divisor}>
-
+        
         {favorites.map((product) => (
           <div
             key={product.id}
