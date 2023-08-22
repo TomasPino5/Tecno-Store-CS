@@ -72,7 +72,6 @@ export default function Card({
         showCancelButton: true,
         confirmButtonText: "Si estoy seguro",
         cancelButtonText: "Cancelar",
-        cancelButtonColor: "#008000",
         confirmButtonColor: "#ff0000",
       }).then((result) => {
         if (result.isConfirmed) {
@@ -84,7 +83,7 @@ export default function Card({
       Swal.fire({
         title: "¡Producto añadido a favoritos!",
         icon: "success",
-        confirmButtonText: "ok",
+        confirmButtonText: "Ok",
         confirmButtonColor: "#28a745",
       });
       setIsFav(true);
