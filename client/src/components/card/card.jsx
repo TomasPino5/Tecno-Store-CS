@@ -40,28 +40,37 @@ export default function Card({
   }, [favorites]);
 
   function handleBuyNow(event) {
-    dispatch(
-      addToCart({
-        id: id,
-        name: name,
-        href: href,
-        imageSrc: imageSrc,
-        imageAlt: imageAlt,
-        price: price,
-        stock: stock,
-        brand: brand,
-        category: category,
-        description: description,
-      })
-    );
-    Swal.fire({
-      title: "Agregado",
-      text: "¡Producto añadido al carrito!",
-      icon: "success",
-      confirmButtonText: "Ok",
-      confirmButtonColor: "#28a745",
-    });
-    event.preventDefault();
+    if(stock > 0) {
+      dispatch(
+        addToCart({
+          id: id,
+          name: name,
+          href: href,
+          imageSrc: imageSrc,
+          imageAlt: imageAlt,
+          price: price,
+          stock: stock,
+          brand: brand,
+          category: category,
+          description: description,
+        })
+      );
+      Swal.fire({
+        title: "Agregado",
+        text: "¡Producto añadido al carrito!",
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#28a745",
+      });
+      event.preventDefault();
+    } else {
+      Swal.fire({
+        title: "Lo sentimos",
+        text: "No hay stock para este producto",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
+    }
   }
 
   const handleFavorite = (product) => {
@@ -154,7 +163,7 @@ export default function Card({
             <p className={style.texts}>{brand}</p>
             <p className={style.texts}>{category}</p>
           </div>
-          <p className={style.stock}>Stock disponible {stock}</p>
+          {stock > 0 ? <p className={style.stock}>Stock disponible {stock}</p> : <p className={style.sinStock}>Sin stock</p>}
         </NavLink>
       </div>
     </div>
