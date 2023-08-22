@@ -3,8 +3,8 @@ const Ratings = require("../models/ratings.js");
 const modifyUserRating = async (req, res) => {
     const { email, productId } = req.query;
     const { rating } = req.body;
-    console.log(email, productId)
-    console.log(rating)
+    //console.log(email, productId, 'modify')
+    //console.log(rating)
     try {
         const ratings = await Ratings.findOne({ where: { user: email, productId: productId } });
         if (!ratings) {

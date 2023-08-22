@@ -2,13 +2,15 @@ const Ratings = require("../models/ratings.js");
 
 const getUserRating = async (req, res) => {
     const { email, productId } = req.query;
-    //console.log(email, productId)
+    //console.log(email, productId, 'get')
     if (email && productId) {
         try {
             const ratings = await Ratings.findOne({ where: { user: email, productId: productId } })
+            console.log(ratings)
             if (ratings) {
                 res.status(200).json(ratings)
             }
+            else res.send('Todavia no posee calif')
         }
         catch (error) {
             res.status(500).json(error.message)
