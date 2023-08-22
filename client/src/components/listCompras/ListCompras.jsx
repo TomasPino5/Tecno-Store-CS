@@ -13,7 +13,7 @@ const ListCompras = () => {
     dispatch(getCompras());
   }, []);
   return (
-    <div className="container-compras">
+    <div className={darkMode ? "compras-containerdark " : "container-compras"}>
       {compras.map((prop, key) => {
         return (
           <div key={key} className={darkMode ? "comprasdark" : "compras"}>
