@@ -19,7 +19,7 @@ const UserPurchases = () => {
     }, [dispatch, email])
 
     const userRatings = useSelector((state) => state.userRatings)
-    console.log(userRatings)
+    //console.log(userRatings)
 
     const purchases = useSelector((state) => state.userPurchases)
     //console.log(purchases)
@@ -40,11 +40,11 @@ const UserPurchases = () => {
         }));
 
         try {
-            const response = await axios.get(`/getRating/?userEmail=${email}&productId=${productId}`);
+            const response = await axios.get(`/getRating/?email=${email}&productId=${productId}`);
             const existingRating = response.data
             //console.log(existingRating)
 
-            if (existingRating.length !== 0) {
+            if (existingRating !== 'Todavia no posee calif') {
                 //await axios.put(`/modifyUserRating?email=${email}&productId=${productId}`, { rating: rating })
                 dispatch(modifyUserRating(email, productId, { rating: rating }))
                 console.log("Has modificado la calificacion de este producto.");

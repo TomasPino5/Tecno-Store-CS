@@ -2,7 +2,7 @@ const Ratings = require("../models/ratings.js");
 
 const postUserRating = async (req, res) => {
     const { user, productId, rating } = req.body
-    console.log(user, productId, rating)
+    //console.log(user, productId, rating, 'post')
     try {
         await Ratings.create({ user, productId, rating });
         res.status(200).json({ message: 'Calificacion cargada correctamente' });
