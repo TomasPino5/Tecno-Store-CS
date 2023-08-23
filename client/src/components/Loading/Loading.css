@@ -10,7 +10,7 @@
     bottom: 30%; */
     /* top: -5px; */
     margin-top: -2px;
-    width: 100vw;
+    width: 100%;
   }
   .lds-roller {
     display: inline-block;

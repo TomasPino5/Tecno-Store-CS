@@ -49,7 +49,7 @@ const Footer = () => {
               href="https://mail.google.com/mail/u/1/#inbox"
               target="_blank"
             >
-              tecnostorecs55@gmail.com
+              tecnostorecs6@gmail.com
             </a>
           </div>
         </div>
@@ -66,12 +66,6 @@ const Footer = () => {
               <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
               <a href="https://github.com/TomasPino5" target="_blank">
                 Tomas Pino
-              </a>
-            </div>
-            <div className={style.row}>
-              <img src="https://i.ibb.co/ynz3ySx/ico-github.png" alt="" />
-              <a href="https://github.com/KayitaC2024" target="_blank">
-                Claudia Torres
               </a>
             </div>
             <div className={style.row}>
