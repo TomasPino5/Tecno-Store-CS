@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getProductName } from "../../redux/actions";
 import style from "../searchbar/searchbar.module.css";
 
-export default function SearchBar() {
+export default function SearchBar({ setCurrentPage }) {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -15,6 +15,7 @@ export default function SearchBar() {
 
   const handleSubmit = () => {
     dispatch(getProductName(name));
+    setCurrentPage(1)
     setName("");
   };
 

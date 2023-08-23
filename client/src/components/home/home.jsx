@@ -99,7 +99,7 @@ const Home = () => {
   return (
     <div className={style.homepG}>
       <div className={style.filtros}>
-        <Nav handleClearFilters={handleClearFilters} />
+        <Nav setCurrentPage={setCurrentPage} />
 
         <div className={darkMode ? style.contentdarkMode : style.content}>
           <select id="brandFilter" onChange={handleBrandFilter}>
