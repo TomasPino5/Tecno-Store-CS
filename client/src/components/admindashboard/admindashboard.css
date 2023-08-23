@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.product-list-button.active {
+  background-color: blue;
+}
+
 /* Estilos para la lista de productos */
 .product-list {
   margin-top: 20px; /* Ajusta el margen superior */
