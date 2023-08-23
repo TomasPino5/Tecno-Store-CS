@@ -155,14 +155,7 @@ const Form = () => {
         confirmButtonText: "Ok",
       })
     } else {
-      event.preventDefault();
       dispatch(postProduct(form));
-      Swal.fire({
-        title: "¡Producto creado correctamente!",
-        icon: "success",
-        confirmButtonText: "Ok",
-        confirmButtonColor: "#28a745",
-      });
       setForm({
         name: "",
         href: "",
@@ -174,6 +167,17 @@ const Form = () => {
         stock: "",
         category: "",
         description: "",
+      });
+      
+      Swal.fire({
+        title: "¡Producto creado correctamente!",
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#28a745",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
       });
     };
   }

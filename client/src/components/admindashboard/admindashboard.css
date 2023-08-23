@@ -14,10 +14,21 @@
   border: solid black;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 2s;
+}
+
+.product-list-button:hover {
+  background-color: #34804d;
+  transition: background-color 1s;
+  transform: none;
 }
 
 .product-list-button.active {
   background-color: blue;
+}
+
+.product-list-button.active:hover {
+  background-color: rgb(84, 84, 219);
 }
 
 /* Estilos para la lista de productos */
