@@ -30,9 +30,10 @@ const AdminDashboard = () => {
     "tomasbaldi@gmail.com",
     "kayita_y@hotmail.com",
   ];
-
+  
   const isAdmin = allowedEmails.includes(user?.email);
   const dataUser = useSelector((state) => state.user);
+  const compras = useSelector((state) => state.getCompras);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -52,6 +53,7 @@ const AdminDashboard = () => {
   const handleComponent = (value) => {
     setComponent(value);
   };
+
 
   // const handleModifyProduct = (product) => {
   //   setSelectedProduct(product);
@@ -109,7 +111,7 @@ const AdminDashboard = () => {
           className="product-list-button"
           onClick={() => handleComponent("compras")}
         >
-          Total de Compras: {salesCount}
+          Total de Compras: {compras.length}
         </button>{" "}
         {component === "product" ? (
           mod === true ? (
