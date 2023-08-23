@@ -50,7 +50,6 @@ export default function Cart() {
         showCancelButton: true,
         cancelButtonText: "Cancelar",
         confirmButtonText: "Eliminar",
-        cancelButtonColor: "#08ef56",
         confirmButtonColor: "#d33",
       }).then((result) => {
         if (result.isConfirmed) {

@@ -22,7 +22,6 @@ const Favorites = () => {
       showCancelButton: true,
       confirmButtonText: "Si estoy seguro",
       cancelButtonText: "Cancelar",
-      cancelButtonColor: "#008000",
       confirmButtonColor: "#ff0000",
     }).then((result) => {
       if (result.isConfirmed) {
