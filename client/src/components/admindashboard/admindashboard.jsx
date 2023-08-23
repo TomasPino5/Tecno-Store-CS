@@ -28,6 +28,7 @@ const AdminDashboard = () => {
     "cottiersolchu55@gmail.com",
     "adlotorrez91@gmail.com",
     "sebastianhnry@gmail.com",
+    "tomaspino.velez@gmail.com",
     "tomasbaldi@gmail.com",
   ];
   
