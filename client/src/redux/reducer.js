@@ -53,9 +53,10 @@ const initialState = {
   user: savedUserData ? JSON.parse(savedUserData) : [],
   salesCount: 0,
   userPurchases: [],
-  favorites: localStorage.getItem("favorites")
-    ? JSON.parse(localStorage.getItem("favorites"))
-    : [],
+  // favorites: localStorage.getItem("favorites")
+  //   ? JSON.parse(localStorage.getItem("favorites"))
+  //   : [],
+  favorites: [],
   getallusers: [],
   getCompras: [],
   productRatings: [],
@@ -378,21 +379,21 @@ const reducer = (state = initialState, action) => {
       };
 
     case ADD_TO_FAVORITE:
-      const updatedFavoritesAdd = [...state.favorites, action.payload];
-      localStorage.setItem("favorites", JSON.stringify(updatedFavoritesAdd));
+      // const updatedFavoritesAdd = [...state.favorites, action.payload];
+      // localStorage.setItem("favorites", JSON.stringify(updatedFavoritesAdd));
       return {
         ...state,
-        favorites: updatedFavoritesAdd,
+        favorites: action.payload,
       };
 
     case REMOVE_FROM_FAVORITE:
-      const updatedFavoritesRemove = state.favorites.filter(
-        (product) => product.id !== action.payload
-      );
-      localStorage.setItem("favorites", JSON.stringify(updatedFavoritesRemove));
+      // const updatedFavoritesRemove = state.favorites.filter(
+      //   (product) => product.id !== action.payload
+      // );
+      // localStorage.setItem("favorites", JSON.stringify(updatedFavoritesRemove));
       return {
         ...state,
-        favorites: updatedFavoritesRemove,
+        favorites: action.payload,
       };
 
     case GET_ALL_USERS:
