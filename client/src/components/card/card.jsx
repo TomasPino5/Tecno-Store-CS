@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import style from "./card.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   addToCart,
-  addToFavorite,
+  postFav,
   removeFromFavorite,
+  getUserFavs,
 } from "../../redux/actions";
 import Swal from "sweetalert2";
 // import { useDispatch } from "react-redux";
@@ -24,23 +26,27 @@ export default function Card({
   description,
 }) {
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.favorites);
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+  const email = user?.email
+
   const [isFav, setIsFav] = useState(false);
 
-  useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    if (storedFavorites.some((product) => product.id === id)) {
-      setIsFav(true);
-    }
-  }, [id]);
+  
+
+  // useEffect(() => {
+  //   const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  //   if (storedFavorites.some((product) => product.id === id)) {
+  //     setIsFav(true);
+  //   }
+  // }, [id]);
 
   // Update localStorage when favorites change
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+  // useEffect(() => {
+  //   localStorage.setItem("favorites", JSON.stringify(favorites));
+  // }, [favorites]);
 
   function handleBuyNow(event) {
-    if(stock > 0) {
+    if (stock > 0) {
       dispatch(
         addToCart({
           id: id,
@@ -73,7 +79,8 @@ export default function Card({
     }
   }
 
-  const handleFavorite = (product) => {
+  const handleFavorite = async (product) => {
+ 
     if (isFav) {
       Swal.fire({
         title: "Desea eliminar su producto de favoritos?",
@@ -82,10 +89,10 @@ export default function Card({
         confirmButtonText: "Si estoy seguro",
         cancelButtonText: "Cancelar",
         confirmButtonColor: "#ff0000",
-      }).then((result) => {
+      }).then(async (result) => {
         if (result.isConfirmed) {
+          await dispatch(removeFromFavorite(email, product.id));
           setIsFav(false);
-          dispatch(removeFromFavorite(product.id));
         }
       });
     } else {
@@ -95,10 +102,28 @@ export default function Card({
         confirmButtonText: "Ok",
         confirmButtonColor: "#28a745",
       });
-      setIsFav(true);
-      dispatch(addToFavorite(product));
+      dispatch(postFav({ user: email, productId: product.id, product: product }));
+      setIsFav(true)
     }
   };
+
+  useEffect(() => {
+    dispatch(getUserFavs(email));
+  }, [dispatch, email]);
+
+  const favorites = useSelector((state) => state.favorites);
+  const prod = favorites?.flat()
+  const prodFav = prod.map(p => p.products)
+  //console.log(prodFav)
+  
+
+  useEffect(() => {
+    prodFav.flat().forEach((fav) => {
+      if (fav.id === id) {
+        setIsFav(true);
+      }
+    });
+  }, [id, prodFav]);
 
   const formatPriceWithDots = (price) => {
     return price.toLocaleString();
@@ -106,11 +131,27 @@ export default function Card({
   const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
   // className={darkMode ? style.darkMode : style.lightMode}
 
+  const handlelogIn = (event) => {
+    Swal.fire({
+      title: "Inicie sesión",
+      text: "Por favor inicia sesión para agregar productos a favoritos.",
+      icon: "warning",
+      confirmButtonText: "Iniciar sesión",
+      confirmButtonColor: "#28a745",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        loginWithRedirect();
+      }
+    });
+    event.preventDefault();
+  };
+
   return (
     <div className={darkMode ? style.carddarkMode : style.card}>
       <div
         className={darkMode ? style.img_containerdarkMode : style.img_container}
       >
+        {isAuthenticated ? 
         <button
           className={style.botonFav}
           onClick={(e) => {
@@ -129,6 +170,10 @@ export default function Card({
         >
           {isFav ? "💚" : "🤍"}
         </button>
+        :
+        <button className={style.botonFav} onClick={handlelogIn}>{"🤍"}</button>
+      }
+
         <button className={style.botonAddCart} onClick={handleBuyNow}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

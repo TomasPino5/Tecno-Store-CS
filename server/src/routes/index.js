@@ -21,6 +21,9 @@ const modifyUserRating = require('../controllers/modifyUserRating');
 const postUserRating = require('../controllers/postUserRating');
 const postNewStock = require('../controllers/postNewStock');
 const putAdmin = require('../controllers/putAdmin.js');
+const postFav = require('../controllers/postFav');
+const getUserFavs = require('../controllers/getUserFavs')
+const deleteUserFav = require('../controllers/deleteUserFav')
 
 const router = Router();
 
@@ -45,6 +48,9 @@ router.get("/getuser/:email", getUser);
 //Ruta para traer las compras de un usuario
 router.get("/getUserPurchases/:email", getUserPurchasesHandler);
 
+//Ruta para traer los favs de un usuario
+router.get("/getUserFavs/:email", getUserFavs);
+
 //Ruta para traer todas las compras de los usuarios
 router.get('/compras', getCompras);
 
@@ -62,6 +68,9 @@ router.put("/modifyUserRating", modifyUserRating);
 
 // Ruta para eliminar un usuario por su correo electrónico
 router.delete("/user/:email", deleteUser);
+
+//ruta para eliminar fav
+router.delete("/deleteUserFav", deleteUserFav)
 
 // Ruta para obtener todos los usuarios en base de datos
 router.get("/allusers", allUser);
@@ -88,5 +97,8 @@ router.post("/rateProduct", postUserRating)
 
 //Ruta para guardar calificacion de producto
 router.post("/actualizarStock", postNewStock)
+
+//Ruta para guardar favorito de producto
+router.post("/postFav", postFav)
 
 module.exports = router;
