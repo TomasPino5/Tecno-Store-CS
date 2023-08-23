@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postProduct } from "../../redux/actions";
 import style from "./form.module.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -146,23 +147,40 @@ const Form = () => {
   console.log(form.imageSrc);
 
   const submitHandler = (event) => {
-    event.preventDefault();
-    dispatch(postProduct(form));
-    alert("Has creado un nuevo producto");
-    setForm({
-      name: "",
-      href: "",
-      imageSrc: "",
-      imageAlt: "",
-      price: "",
-      brand: "",
-      min: "",
-      stock: "",
-      category: "",
-      description: "",
-    });
-    navigate("/admin");
-  };
+    if (Object.values(error).some((value) => value !== "")) {
+      Swal.fire({
+        title: "¡No se pudo crear el producto!",
+        text: "Por favor llene las casillas vacias o revise sus errores",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      })
+    } else {
+      dispatch(postProduct(form));
+      setForm({
+        name: "",
+        href: "",
+        imageSrc: "",
+        imageAlt: "",
+        price: "",
+        brand: "",
+        min: "",
+        stock: "",
+        category: "",
+        description: "",
+      });
+      
+      Swal.fire({
+        title: "¡Producto creado correctamente!",
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#28a745",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      });
+    };
+  }
 
   const brands = useSelector((state) => state.brands);
   const categories = useSelector((state) => state.categories);
@@ -438,7 +456,7 @@ const Form = () => {
             <strong className={style.card__content}>{error.min}</strong>
           )}
 
-          {error.imageSrc ||
+          {/* {error.imageSrc ||
           error.name ||
           error.price ||
           error.category ||
@@ -446,11 +464,9 @@ const Form = () => {
           error.description ||
           error.imageAlt ||
           error.href ||
-          error.min ? null : (
-            <button className={style.btn} type="submit">
-              Create product
-            </button>
-          )}
+          error.min ? null : ( */}
+            
+          {/* )} */}
           {/* <div calssName={style.btn}>
 
             <button
@@ -471,12 +487,15 @@ const Form = () => {
             </button>
           </div> */}
         </form>
+        <button className={style.btn} type="submit" onClick={submitHandler}>
+          Create product
+        </button>
       </div>
-      <div className={style.buttonReturn}>
+      {/* <div className={style.buttonReturn}>
         <Link to="/admin">
           <button className={style.btnReturn}>Return To Admin</button>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import style from "../nav/nav.module.css";
 import Cart from "../cart/cart";
 
-const Nav = () => {
+const Nav = ({ setCurrentPage }) => {
   const location = useLocation();
   const { isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
@@ -94,7 +94,7 @@ const Nav = () => {
       </div> */}
 
       <div className={style.SearchBarPosition}>
-        {location.pathname === "/products" ? <SearchBar /> : null}
+        {location.pathname === "/products" ? <SearchBar setCurrentPage={setCurrentPage} /> : null}
       </div>
 
       {/* <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

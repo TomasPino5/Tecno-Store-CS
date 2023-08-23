@@ -1,5 +1,5 @@
 .form__C {
-  margin-top: 40px;
+  margin-top: -40px;
   padding-top: 40px;
   display: flex;
   flex-direction: column;
@@ -114,7 +114,7 @@
 }
 
 .btnReturn:hover {
-  border-radius: 8px;
+  /* border-radius: 8px; */
   transition-duration: 1s;
   background-color: rgb(172, 222, 168);
   align-items: center;

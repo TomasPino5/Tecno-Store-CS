@@ -159,9 +159,7 @@ const CheckoutForm = () => {
         "template_04lcr08",
         {
           user_name: dataUser?.name ? dataUser?.name : user.name,
-          from_name: "Tecno-Store",
-          mensaje: `Hola ${dataUser?.name ? dataUser?.name : user.name}! 
-      Tu compra de ${p2}, por un total de ${total}$ fue exitosa, estaremos realizando tu envio en los proximos dias.`,
+          mensaje: `Tu compra de ${p2}, por un total de ${total}$ fue exitosa, estaremos realizando tu envio en los proximos dias.`,
           user_email: user.email,
         },
         "9kbwr2X6xsrF-k49R"

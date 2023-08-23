@@ -12,27 +12,25 @@ import Product from "../product/Product";
 import FormProduct from "../formProduct/formProduct";
 import Listusers from "../listusers/listusers";
 import ListCompras from "../listCompras/ListCompras";
+import Form from "../form/form";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useAuth0();
   const [showProductList, setShowProductList] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null); // Estado para el producto seleccionado
+  // const [selectedProduct, setSelectedProduct] = useState(null); // Estado para el producto seleccionado
+  const [activeButton, setActiveButton] = useState(null);
   const [component, setComponent] = useState("");
 
   const allowedEmails = [
-    "menseguezmariano@gmail.com",
-    "cottiersolchu55@gmail.com",
     "adlotorrez91@gmail.com",
-    "sebastianhnry@gmail.com",
     "tomaspino.velez@gmail.com",
-    "tomasbaldi@gmail.com",
-    "kayita_y@hotmail.com",
   ];
-
+  
   const isAdmin = allowedEmails.includes(user?.email);
   const dataUser = useSelector((state) => state.user);
+  const compras = useSelector((state) => state.getCompras);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -47,11 +45,12 @@ const AdminDashboard = () => {
 
   const handleShowProductList = () => {
     setShowProductList((prevShowProductList) => !prevShowProductList);
-    setSelectedProduct(null); // Limpiar el producto seleccionado al mostrar la lista de productos
+    // setSelectedProduct(null); // Limpiar el producto seleccionado al mostrar la lista de productos
   };
   const handleComponent = (value) => {
     setComponent(value);
   };
+
 
   // const handleModifyProduct = (product) => {
   //   setSelectedProduct(product);
@@ -83,20 +82,30 @@ const AdminDashboard = () => {
           <span className="admin-title-main">Bienvenido a tu</span>
           <span className="admin-title-sub">Panel Administrativo</span>
         </h1>
-        <Link to="/form" className="create-product-button">
-          <button className="product-list-button">Crear Producto</button>
-        </Link>
+          <button 
+          onClick={() => {
+            handleComponent("newProduct")
+            setActiveButton("newProduct");
+          }}
+          className={`product-list-button ${activeButton === "newProduct" ? "active" : ""}`}
+          >
+            Crear Producto
+          </button>
         <button
-          onClick={() => handleComponent("product")}
-          className="product-list-button"
+          onClick={() => {
+            handleComponent("product")
+            setActiveButton("product");
+          }}
+          className={`product-list-button ${activeButton === "product" ? "active" : ""}`}
         >
           Modifica un producto
         </button>
         <button
           onClick={() => {
             handleComponent("users");
+            setActiveButton("users");
           }}
-          className="product-list-button"
+          className={`product-list-button ${activeButton === "users" ? "active" : ""}`}
         >
           Listado de Usuarios
         </button>
@@ -106,10 +115,13 @@ const AdminDashboard = () => {
           </button>
         </Link> */}
         <button
-          className="product-list-button"
-          onClick={() => handleComponent("compras")}
+          className={`product-list-button ${activeButton === "compras" ? "active" : ""}`}
+          onClick={() => {
+            handleComponent("compras");
+            setActiveButton("compras");
+          }}
         >
-          Total de Compras: {salesCount}
+          Total de Compras: {compras.length}
         </button>{" "}
         {component === "product" ? (
           mod === true ? (
@@ -118,6 +130,7 @@ const AdminDashboard = () => {
             <Product handleModify={handleModify} products={products} />
           )
         ) : null}
+        {component === "newProduct" ? <Form /> : null}
         {component === "users" ? <Listusers /> : null}
         {component === "compras" ? <ListCompras /> : null}
         {showProductList && (

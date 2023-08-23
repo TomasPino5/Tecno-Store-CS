@@ -19,7 +19,7 @@ const UserPurchases = () => {
     }, [dispatch, email])
 
     const userRatings = useSelector((state) => state.userRatings)
-    console.log(userRatings)
+    //console.log(userRatings)
 
     const purchases = useSelector((state) => state.userPurchases)
     //console.log(purchases)
@@ -40,11 +40,11 @@ const UserPurchases = () => {
         }));
 
         try {
-            const response = await axios.get(`/getRating/?userEmail=${email}&productId=${productId}`);
+            const response = await axios.get(`/getRating/?email=${email}&productId=${productId}`);
             const existingRating = response.data
             //console.log(existingRating)
 
-            if (existingRating.length !== 0) {
+            if (existingRating !== 'Todavia no posee calif') {
                 //await axios.put(`/modifyUserRating?email=${email}&productId=${productId}`, { rating: rating })
                 dispatch(modifyUserRating(email, productId, { rating: rating }))
                 console.log("Has modificado la calificacion de este producto.");
@@ -97,7 +97,7 @@ const UserPurchases = () => {
 
                 return (
                     <div>
-                        
+
                         < div className={style.card} key={purchase.id} >
                             <div className={style.imgCont}>
                                 <img
@@ -115,29 +115,33 @@ const UserPurchases = () => {
                             </div>
                             <div className={style.contBtnCal}>
                                 <div >
-                                    {productRatings.length !== 0 ?
-                                        <div>
-                                            {productRatings.map((r) => (
-                                                <div className={style.rating} key={r.id}>
-                                                    {/* <p className={style.ratingPN}>{r.rating}</p> */}
-                                                    <div className={style.star}>
-                                                        <StarRating
-                                                            value={r.rating} // Valor actual de calificación
-                                                            onChange={() => { }}
-                                                        />
-                                                    </div>
+                                    {/* {productRatings.length !== 0 ? */}
+                                    <div>
+                                        {productRatings.map((r) => (
+                                            <div className={style.rating} key={r.id}>
+                                                {/* <p className={style.ratingPN}>{r.rating}</p> */}
+                                                <p>Calificacion Antigua:</p>
+                                                <div className={style.star}>
+                                               
+                                                    <StarRating
+                                                        value={r.rating} // Valor actual de calificación
+                                                        onChange={() => { }}
+                                                    />
                                                 </div>
-                                            ))}
-                                        </div>
-                                        :
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {/* : */}
 
-                                        <div className={style.rating}>
-                                            <StarRating
-                                                value={ratings[purchase.id] || 0} // Valor actual de calificación
-                                                onChange={(rating) => handleRatingChange(purchase.id, rating)}
-                                            />
-                                        </div>
-                                    }
+                                    <p className={style.newC}>Nueva Calificacion:</p>
+                                    <div className={style.rating2}>
+                                    
+                                        <StarRating
+                                            value={ratings[purchase.id] || 0} // Valor actual de calificación
+                                            onChange={(rating) => handleRatingChange(purchase.id, rating)}
+                                        />
+                                    </div>
+                                    {/* } */}
 
                                     {/* {productRatings.length !== 0  ?
                                     <button className={style.btnCalif} onClick={handleModifyCal}>

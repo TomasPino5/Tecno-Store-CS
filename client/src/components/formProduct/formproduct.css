@@ -34,7 +34,7 @@
   height: 100%;
 }
 .formulario div button {
-  background-color: rgb(26, 231, 43);
+  background-color: rgb(21, 153, 32);
   border: none;
   width: 150px;
   border-radius: 5px;
@@ -50,17 +50,21 @@
 .isActive p {
   display: flex;
   position: relative;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 5px;
   padding: 5px;
   margin-left: 5px;
   background-color: rgb(165, 11, 11);
+  transition: background-color 2s;
   border-radius: 5px;
   cursor: pointer;
   width: 100px;
 }
 .isActive p:hover {
-  transform: scale(1.1); /* Escala 10% más grande en el hover */
-  transition: transform 0.2s ease-in-out; /* Agrega una transición suave */
+  transform: scale(1); /* Escala 10% más grande en el hover */
+  background-color: rgb(192, 69, 69);
+  transition: background-color 1s;
 }
 .formulario div.button-container {
   margin-bottom: 10px; /* Ajusta este valor según sea necesario */

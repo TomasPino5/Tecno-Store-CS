@@ -151,8 +151,8 @@ export function userActive(id) {
   };
 }
 
-export function userAdmin(id){
-  return async function(dispatch){
+export function userAdmin(id) {
+  return async function (dispatch) {
     const json = await axios.put(`/putadmin/${id}`);
     const data = json.data;
     dispatch({
@@ -256,14 +256,14 @@ export function modifyUserRating(email, productId, payload) {
 
 // Para trer las calificaciones del producto
 export function productRatings(productId) {
-return async function (dispatch) {
-  const json = await axios.get(`/getRating?productId=${productId}`);
-  const data = json.data;
-  dispatch({
-    type: GET_PRODUCT_RATINGS,
-    payload: data,
-  });
-};
+  return async function (dispatch) {
+    const json = await axios.get(`/getRating?productId=${productId}`);
+    const data = json.data;
+    dispatch({
+      type: GET_PRODUCT_RATINGS,
+      payload: data,
+    });
+  };
 }
 
 
@@ -277,7 +277,7 @@ export function getUserRatings(email) {
       payload: data,
     });
   };
-  }
+}
 
 
 // Filtro para seleccionar si fue creado en la Base de datos o viene de la API
@@ -391,19 +391,53 @@ export const toggleDarkMode = () => ({
   type: TOGGLE_DARK_MODE,
 });
 
-export function addToFavorite(product) {
-  return {
-    type: ADD_TO_FAVORITE,
-    payload: product,
+// export function addToFavorite(product) {
+//   return {
+//     type: ADD_TO_FAVORITE,
+//     payload: product,
+//   };
+// }
+
+// Para guardar la fav del usuario
+export function postFav(payload) {
+  return async function (dispatch) {
+    const response = await axios.post(
+      "/postFav",
+      payload
+    );
+    return response;
+  }
+}
+
+// Obtener los favs del usuario desde la db
+export function getUserFavs(email) {
+  return async function (dispatch) {
+    const json = await axios.get(`/getUserFavs/${email}`);
+    const data = json.data;
+    dispatch({
+      type: ADD_TO_FAVORITE,
+      payload: data,
+    });
   };
 }
 
-export function removeFromFavorite(product) {
-  return {
-    type: REMOVE_FROM_FAVORITE,
-    payload: product,
+// export function removeFromFavorite(product) {
+//   return {
+//     type: REMOVE_FROM_FAVORITE,
+//     payload: product,
+//   };
+// }
+
+export const removeFromFavorite = (email, id) => {
+  return async function (dispatch) {
+    const json = await axios.delete(`/deleteUserFav?email=${email}&productId=${id}`);
+    const data = json.data;
+    dispatch({
+      type: REMOVE_FROM_FAVORITE,
+      payload: data,
+    });
   };
-}
+};
 
 export const getAllUsers = () => {
   return async (dispatch) => {

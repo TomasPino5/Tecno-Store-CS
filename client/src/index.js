@@ -9,10 +9,10 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import axios from 'axios';
 
 //localhost
-// axios.defaults.baseURL = 'http://localhost:3001'
+axios.defaults.baseURL = 'http://localhost:3001'
 
 //railway
-axios.defaults.baseURL = 'https://tecno-store-cs-production.up.railway.app/'
+//axios.defaults.baseURL = 'https://tecno-store-cs-production.up.railway.app/'
 
 const DarkModeApp = () => {
   const darkMode = useSelector((state) => state.darkMode); // Obtiene el estado de darkMode
@@ -30,7 +30,7 @@ ReactDOM.render(
       <BrowserRouter>
         <Auth0Provider
           domain="dev-njrrk6wlytkekvbb.us.auth0.com"
-          clientId="ZI2vEIvX5UON3TFBf1acm5MsXcT3n9P4"
+          clientId="AxyouAj91cWCLc6Rp1nZf6loAAs2U0Pq"
           redirectUri={window.location.origin}
         >
           <DarkModeApp /> {/* Renderiza DarkModeApp en lugar de App */}

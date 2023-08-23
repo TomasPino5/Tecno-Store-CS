@@ -13,13 +13,19 @@ const ListCompras = () => {
     dispatch(getCompras());
   }, []);
   return (
-    <div className="container-compras">
+    <div className={darkMode ? "compras-containerdark " : "container-compras"}>
+      <div className={darkMode ? "compras-namedark" : "compras-name"}>
+        <p>USER ↑↓</p>
+        <p>DIRECTION ↑↓</p>
+        <p>PHONE ↑↓</p>
+        <p>PRODUCT NAME ↑↓</p>
+      </div>
       {compras.map((prop, key) => {
         return (
           <div key={key} className={darkMode ? "comprasdark" : "compras"}>
             <p>{prop.user.email}</p>
-            <p>{prop.user.direction}</p>
-            <p>{prop.user.telefone}</p>
+            <p>{prop.user.direction?prop.user.direction:'sin datos'}</p>
+            <p>{prop.user.telefone?prop.user.telefone:'sin datos'}</p>
             <p>{prop.products[0].name}</p>
           </div>
         );

@@ -3,7 +3,7 @@ import style from "./cards.module.css";
 
 function Cards({ products }) {
   // Filtra los productos activos antes de renderizarlos
-  const activeProducts = products.filter(product => product.isActive);
+  const activeProducts = products.filter((product) => product.isActive);
 
   return (
     <div className={style.ordenador}>

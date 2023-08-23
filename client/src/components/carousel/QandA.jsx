@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 
 const FaqSection = () => {
   const [expandedQuestion, setExpandedQuestion] = useState(null);
-  const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
-  // className={darkMode ? style.darkMode : style.lightMode}
+  const darkMode = useSelector((state) => state.darkMode);
 
   const questionsAndAnswers = [
     {
@@ -61,7 +60,7 @@ const FaqSection = () => {
               setExpandedQuestion(expandedQuestion === index ? null : index)
             }
           >
-            <p>{item.question}</p>
+            <p><strong>{item.question}</strong></p>
             <div className={darkMode ? style.answerdarkMode : style.answer}>
               {item.answer}
             </div>

@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./favorites.module.css";
 import { NavLink } from "react-router-dom";
-import { removeFromFavorite } from "../../redux/actions";
+import { removeFromFavorite, getUserFavs } from "../../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 
 const Favorites = () => {
 
   const dispatch = useDispatch();
+  const { user } = useAuth0();
+  const email = user?.email
+
+  useEffect(() => {
+    dispatch(getUserFavs(email));
+  }, [dispatch, email]);
+
   const favorites = useSelector((state) => state.favorites);
+  const prod = favorites.flat()
+  const prodFav = prod.map(p=> p.products)
+  //console.log(prodFav.flat())
   const darkMode = useSelector((state) => state.darkMode); // Agrega esta línea
   // className={darkMode ? style.darkMode : style.lightMode}
   const formatPriceWithDots = (price) => {
@@ -22,14 +33,15 @@ const Favorites = () => {
       showCancelButton: true,
       confirmButtonText: "Si estoy seguro",
       cancelButtonText: "Cancelar",
-      cancelButtonColor: "#008000",
       confirmButtonColor: "#ff0000",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(removeFromFavorite(id));
+        dispatch(removeFromFavorite(email, id));
       }
     });
   }
+
+
 
   return (
     <div>
@@ -38,7 +50,7 @@ const Favorites = () => {
       {favorites.length === 0 ? <h1 className={style.vacio}>Agregue productos a favoritos...</h1> : null}
       <div className={style.divisor}>
         
-        {favorites.map((product) => (
+        {prodFav.flat().map((product) => (
           <div
             key={product.id}
             style={{ textDecoration: "none", color: "inherit" }}
@@ -81,7 +93,6 @@ const Favorites = () => {
                 <p className={style.texts}>{product.category}</p>
               </div>
               <p className={style.stock}>Ver Detalle</p>
-              {/* You can add more information or customize the rendering here */}
             </NavLink>
           </div>
         ))}
