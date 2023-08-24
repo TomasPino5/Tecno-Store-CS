@@ -133,8 +133,8 @@ const UserPurchases = () => {
                                     </div>
                                     {/* : */}
 
-                                    <p className={style.newC}>Nueva Calificacion:</p>
-                                    <div className={style.rating2}>
+                                    <p className={productRatings.length !== 0 ? style.newC : style.rating3}>Nueva Calificacion:</p>
+                                    <div  className={ style.rating2 }>
                                     
                                         <StarRating
                                             value={ratings[purchase.id] || 0} // Valor actual de calificación
