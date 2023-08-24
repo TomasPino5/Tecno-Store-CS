@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import {
   GET_PRODUCTS,
   GET_PRODUCT_NAME,
@@ -77,9 +78,16 @@ export function getProductName(name) {
         payload: json.data,
       });
     } catch (error) {
-      alert("Product not found");
-    }
-  };
+      //alert("Product not found");
+      Swal.fire({
+        title: "No Existe!",
+        text: "No se ha encontrado producto con ese nombre.",
+        icon: "warning",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "#28a745",
+      })
+    };
+  }
 }
 
 

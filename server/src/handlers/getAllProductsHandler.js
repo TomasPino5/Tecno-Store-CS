@@ -12,7 +12,9 @@ const getAllProductsHandler = async (req, res) => {
     if (name) {
       const product = await getProductByName(name);
       console.log(product);
-      return res.status(200).json(product);
+      if (product.length !== 0) {
+        return res.status(200).json(product);
+      } else res.status(400).send(error)
     }
     // si no muestra todos los productos
     else {
