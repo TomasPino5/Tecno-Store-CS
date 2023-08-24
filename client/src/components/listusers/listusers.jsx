@@ -39,20 +39,20 @@ const ListUsers = () => {
       }
     });
   };
-
+console.log(allusers)
   return (
     <div className={darkMode ? "users-containerdark" : "container-users"}>
       <div className={darkMode ? "user-namedark" : "user-name"}>
         <p>USER ↑↓</p>
         <p>EMAIL ↑↓</p>
-        <p>ACTIVE ↑↓</p>
+        <p>DIRECTION ↑↓</p>
         <p>ADMIN ↑↓</p>
       </div>
       {allusers.map((user, key) => (
         <div className={darkMode ? "usersdark" : "users"} key={key}>
           <p>{user.name}</p>
           <p>{user.email}</p>
-          <p>{user.isActive === true ? "true" : "false"}</p>
+          <p>{user.direction?user.direction:'sin datos'}</p>
           <p>{user.admin === true ? "true" : "false"}</p>
           <p>
             {
