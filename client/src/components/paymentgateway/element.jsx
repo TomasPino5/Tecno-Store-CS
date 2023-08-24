@@ -76,6 +76,16 @@ const CheckoutForm = () => {
     const calculatedTotalPrice = calculateTotalPrice();
     const calculatedQuantity = calculateQuantity();
 
+    if (calculatedTotalPrice > 999999) {
+      Swal.fire({
+        title: "Error en la compra",
+        text: "El precio total de su compra no puede exceder el total de $1.000.000",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      })
+      return;
+    }
+
     const { token, error } = await stripe.createToken(
       elements.getElement(CardElement)
     );
@@ -117,12 +127,17 @@ const CheckoutForm = () => {
         setTimeout(() => {
           navigate("/products");
         }, 3000);
-        Swal.fire({
-          title:
-            "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma",
-          icon: "success",
-        });
         dispatch(clearCart(items));
+        Swal.fire({
+          title: "Su compra ha sido procesada con exito, le llegara un mail con informacion de la misma",
+          icon: "success",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#28a745",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
       }
     }
   };
