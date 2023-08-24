@@ -24,7 +24,7 @@
   border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
   display: grid;
-  grid-template-columns: 250px 300px 100px 100px 100px 100px;
+  grid-template-columns: 250px 300px 150px 100px 100px;
 }
 .usersdark {
   background-color: #262626;
@@ -32,7 +32,7 @@
   border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
   display: grid;
-  grid-template-columns: 250px 300px 100px 100px 100px 100px;
+  grid-template-columns: 250px 300px 150px 100px 100px;
 }
 .users p {
   margin: 5px 0;
@@ -84,7 +84,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: grid;
-  grid-template-columns: 250px 300px 100px 100px 100px 100px;
+  grid-template-columns: 220px 300px 150px 100px 100px;
   font-weight: bold;
   justify-content: center;
   align-items: center;
@@ -95,7 +95,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: grid;
-  grid-template-columns: 250px 300px 100px 100px 100px 100px;
+  grid-template-columns: 220px 300px 150px 100px 100px;
   font-weight: bold;
   justify-content: center;
   align-items: center;
