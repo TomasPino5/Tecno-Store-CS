@@ -19,28 +19,10 @@ const ListUsers = () => {
   const usuario = user.email;
 
   const allowedEmails = [
-    "menseguezmariano@gmail.com",
-    "cottiersolchu55@gmail.com",
+    "tomaspino.velez@gmail.com",
     "adlotorrez91@gmail.com",
     "sebastianhnry@gmail.com",
-    "tomaspino.velez@gmail.com",
-    "tomasbaldi@gmail.com",
-    "kayita_y@hotmail.com",
   ];
-
-  const handleModifyUser = (id) => {
-    swal({
-      title: "Confirmar",
-      text: "¿Estás seguro de que quieres cambiar el estado del usuario?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((confirm) => {
-      if (confirm) {
-        dispatch(userActive(id));
-      }
-    });
-  };
 
   const handleToggleAdmin = (id, isAdmin) => {
     swal({
@@ -57,31 +39,21 @@ const ListUsers = () => {
       }
     });
   };
-
+console.log(allusers)
   return (
     <div className={darkMode ? "users-containerdark" : "container-users"}>
       <div className={darkMode ? "user-namedark" : "user-name"}>
         <p>USER ↑↓</p>
         <p>EMAIL ↑↓</p>
-        <p>ACTIVE ↑↓</p>
+        <p>DIRECTION ↑↓</p>
         <p>ADMIN ↑↓</p>
       </div>
       {allusers.map((user, key) => (
         <div className={darkMode ? "usersdark" : "users"} key={key}>
           <p>{user.name}</p>
           <p>{user.email}</p>
-          <p>{user.isActive === true ? "true" : "false"}</p>
+          <p>{user.direction?user.direction:'sin datos'}</p>
           <p>{user.admin === true ? "true" : "false"}</p>
-          <p>
-            <button
-              className="modify"
-              onClick={() => {
-                handleModifyUser(user.id);
-              }}
-            >
-              {user.isActive === true ? "Desactivar" : "Activar"}
-            </button>
-          </p>
           <p>
             {
               allowedEmails.includes(usuario)?

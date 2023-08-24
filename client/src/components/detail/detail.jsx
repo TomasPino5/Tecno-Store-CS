@@ -269,7 +269,7 @@ const Detail = () => {
                     > */}
                       <div className={style.text}>Add to Cart</div>
 
-                      <span onClick={handleBuyNow} className={style.icon}>
+                      <span className={style.icon}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
