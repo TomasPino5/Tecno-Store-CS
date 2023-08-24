@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProductName } from "../../redux/actions";
 import style from "../searchbar/searchbar.module.css";
+import { useLocation } from "react-router-dom";
 
 export default function SearchBar({ setCurrentPage }) {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [name, setName] = useState("");
 
@@ -15,7 +17,9 @@ export default function SearchBar({ setCurrentPage }) {
 
   const handleSubmit = () => {
     dispatch(getProductName(name));
-    setCurrentPage(1)
+    if (location.pathname !== "/admin") {
+      setCurrentPage(1)
+    }
     setName("");
   };
 
