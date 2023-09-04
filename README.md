@@ -1,6 +1,8 @@
 # **Tecno Store CS**
 
-<img src="https://tecno-store-cs.vercel.app/static/media/Logo_arquitectura_corporativo_verde_mostaza.3cc6f4e1d9413f1644f1.png" alt="tscs" width="220vw" display="block" margin="0 auto"/>
+<center>
+    <img src="https://tecno-store-cs.vercel.app/static/media/Logo_arquitectura_corporativo_verde_mostaza.3cc6f4e1d9413f1644f1.png" alt="tscs" width="220vw" />
+</center>
 
 ## **📌 OBJETIVOS**
 
