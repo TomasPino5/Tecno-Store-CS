@@ -12,13 +12,21 @@ diversas funcionalidades⚙️, la aplicación permitirá a los usuarios explora
 tienda y realizar compras🛍️ de manera eficiente. 
 
 ✅Amplia gama de productos.
+
 ✅Modo oscuro.
-✅Gestión de favoritos
+
+✅Gestión de favoritos.
+
 ✅Carrito de compras.
+
 ✅Proceso de compra simplificado.
+
 ✅Autenticación de usuarios.
+
 ✅Filtros y ordenamientos.
+
 ✅Paginación eficiente.
+
 ✅Integración de pago seguro.
 
 ## **Tecnologias utilizadas💻**
