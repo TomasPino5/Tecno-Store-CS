@@ -12,9 +12,8 @@ const {
 // });
 
 //railway
-const sequelize = new Sequelize(DB_DEPLOY, {
-  logging: false,
-  native: false,
+const sequelize = new Sequelize({
+  connectionString: DB_DEPLOY + "?sslmode=require",
 }); 
 
 
