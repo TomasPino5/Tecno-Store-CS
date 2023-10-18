@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const {
-  POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, DB_PORT, POSTGRES_DATABASE
+  DB_USER, DB_PASSWORD, DB_DEPLOY,
 } = process.env;
 
 //localhost
@@ -12,18 +12,10 @@ const {
 // });
 
 //railway
-const sequelize = new Sequelize(POSTGRES_DATABASE, POSTGRES_USER, POSTGRES_PASSWORD, {
-  host: POSTGRES_HOST,
-  port: 5432,
-  dialect: 'postgres',
+const sequelize = new Sequelize(DB_DEPLOY, {
   logging: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false // Puedes necesitar ajustar esto basándote en tu configuración de Vercel
-    }
-  }
-});
+  native: false,
+}); 
 
 
 module.exports =  sequelize ;
