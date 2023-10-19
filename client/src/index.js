@@ -12,7 +12,7 @@ import axios from 'axios';
 // axios.defaults.baseURL = 'http://localhost:3001'
 
 //railway
-axios.defaults.baseURL = 'https://tecno-store-cs-vp2f.vercel.app/'
+axios.defaults.baseURL = 'https://tecno-server.onrender.com/'
 
 const DarkModeApp = () => {
   const darkMode = useSelector((state) => state.darkMode); // Obtiene el estado de darkMode
